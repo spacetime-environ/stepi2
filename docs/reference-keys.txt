@@ -1,9 +1,9 @@
-tab:unnamed-chunk-9
 tab:unnamed-chunk-10
 tab:unnamed-chunk-11
 tab:unnamed-chunk-12
 tab:unnamed-chunk-13
 tab:unnamed-chunk-14
+tab:unnamed-chunk-15
 why
 basics
 uncertainty
@@ -13,6 +13,10 @@ tactics
 Strategies
 trusted
 Disease
+example-9.6-fitting-a-leroux-model-using-nimble-stan-and-carbayes
+nimble-3
+stan-3
+carbayes
 hazards
 Time
 exposure
