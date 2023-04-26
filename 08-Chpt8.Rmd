@@ -37,7 +37,7 @@ library(sp)
 library(ggplot2)
 ```
 
-Assuming the data is held in the file `BlackSmokePrefData.csv` in a `/data` directory:
+This example uses the [BlackSmokePrefData.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/BlackSmokePrefData.csv) file. 
 
 ```{r data clean and standardize}
 

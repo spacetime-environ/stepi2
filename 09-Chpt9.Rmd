@@ -11,6 +11,9 @@ This chapter introduces disease mapping and contains the theory for spatial latt
 
 ## Example 9.1: Empirical Bayes and Bayes smoothing of COPD mortality for 2010 {-}
 
+This example uses the [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityobserved.csv), and
+[copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityexpected.csv) datasets from Chapter 6. 
+
 ### Nimble {-}
 
 Following Example 6.2 we look back at the hospital admission rates for COPD, in England for 2010. We can implement the same model we used on Example 6.2 using `nimble`.
@@ -44,12 +47,11 @@ Example9_1Nimble <- nimbleCode({
     mu[i] <- E[i]*exp(beta0)* theta[i]
     #mu[i] <- E[i]* theta[i]
     # REVIEW: Same as before, the example in the book has theta[i] ~ Ga(a,a)
-    theta[i] ~ dgamma(a, b)
+    theta[i] ~ dgamma(a, a)
     Y.fit[i] ~ dpois(mu[i])
   }
   # Priors
-  a ~ dexp(lambda_a)
-  b ~ dexp(lambda_b)
+  a ~ dgamma(1,1)
   beta0 ~ dnorm(0, 10)
 
 })
@@ -61,16 +63,10 @@ y <- observed$Y2010
 # offset
 E <- expected$E2010
 N <- length(y)
-# parameter of exponential prior for a
-lambda_a <- 1
-# parameter of exponential prior for b
-lambda_b <- 1
 # constants list
 constants <- list(
   N = N,
-  E = E,
-  lambda_a = lambda_a,
-  lambda_b = lambda_b
+  E = E
 )
 # data list
 ex.data <- list(Y = y)
@@ -78,13 +74,12 @@ ex.data <- list(Y = y)
 inits <-
     list(
       theta = rgamma(N, 1, 1),
-      a = rexp(1, lambda_a),
-      b = rexp(1, lambda_b),
+      a = rgamma(1, 1),
       beta0 = 0,
       Y.fit = rpois(N, E)
     )
 # parameters to monitor
-params <- c("theta", "a", "b", "beta0", "Y.fit")
+params <- c("theta", "a", "beta0", "Y.fit")
 
 # Run model in nimble
 mcmc.out <- nimbleMCMC(
@@ -116,8 +111,6 @@ mvSamples <- mcmc.out$samples
 
 # trace plot of a
 plot(mvSamples[, c("a")], bty = "n")
-# trace plot of b
-plot(mvSamples[, c("b")], bty = "n")
 # trace plot of beta0
 plot(mvSamples[, c("beta0")], bty = "n")
 # trace plots of theta
@@ -131,7 +124,7 @@ Now that we have checked the convergence of the chains we can plot the posterior
 
 ```{r Ex 9.1 nimble posterior summary}
 # Print posterior summary for parameters a and b
-summary(mvSamples[, c("a", "b", "beta0")])
+summary(mvSamples[, c("a", "beta0")])
 # posterior summaries of theta_i
 post_summary <- mcmc.out$summary$all.chains |> as.data.frame() |>
   tibble::rownames_to_column("variable")
@@ -176,9 +169,6 @@ abline(a = 0, b = 1)
 
 ### Stan {-}
 
-Load necessary libraries and data.  
-
-
 ```{r Ex 9.1 clean, include = FALSE}
 rm(list=ls())
 ```
@@ -221,9 +211,7 @@ N <- length(y)
 ex.data <- list(
   N = length(y),
   Y = y,
-  E = E,
-  lambda_a = 1,
-  lambda_b = 1
+  E = E
 )
 # Run the model in Stan
 Ex9_1Stan <- stan(
@@ -236,7 +224,7 @@ Ex9_1Stan <- stan(
   # QUESTION: should we explain this?
   control = list(adapt_delta = 0.8, max_treedepth = 15),
   init = "random",
-  pars = c("a", "b", "theta", "log_lik", "yfit"),
+  pars = c("a", "theta", "log_lik", "yfit"),
   include = TRUE
 )
 
@@ -251,7 +239,7 @@ waic0 <- waic(loglik0)
 waic0
 
 # traceplots of parameters a and b
-rstan::traceplot(Ex9_1Stan, pars = c("a", "b"))
+rstan::traceplot(Ex9_1Stan, pars = c("a"))
 # traceplots of parameter theta
 rstan::traceplot(Ex9_1Stan, pars = c("theta[1]", "theta[2]", "theta[3]"))
 
@@ -302,6 +290,9 @@ abline(a = 0, b = 1)
 ```
 
 ## Example 9.3: Fitting a conditional spatial model in `nimble` and `stan` {-}
+
+This example uses the [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityobserved.csv), and
+[copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityexpected.csv) datasets from Chapter 6. 
 
 ### Nimble {-}
 
@@ -494,6 +485,10 @@ ggplot() +
 ### Stan {-}
 
 Here, we implement the CAR model using `stan`.
+
+This example uses the [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityobserved.csv), and
+[copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityexpected.csv) datasets from Chapter 6. 
+
 
 ```{r Ex 9.3 stan clean, include = FALSE}
 rm(list=ls())
@@ -704,7 +699,7 @@ ggplot() +
 rm(list=ls())
 ```
 
-Load the necessary libraries and the COPD data. As in example 5.2 `englandlocalauthority.shp` and it's related files contain the location, shape, and attributes of English local authorities. 
+Load the necessary libraries and the COPD data:  [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityobserved.csv), and [copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityexpected.csv) datasets from Chapter 6. 
 
 
 ```{r Ex 9.4 carbayes load, message=FALSE, warning=FALSE, message= FALSE}
@@ -820,6 +815,9 @@ ggplot() +
 
 ## Example 9.5: Fitting a conditional model using INLA {-}
 
+This example uses the [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityobserved.csv), and
+[copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityexpected.csv) datasets from Chapter 6. 
+
 
 ```{r Ex 9.5 clean, include = FALSE}
 rm(list = ls())
@@ -907,6 +905,9 @@ ggplot() +
 ```
 
 ## Example 9.6: Fitting a Leroux Model using Nimble, Stan and CARBayes
+
+This example uses the [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityobserved.csv), and
+[copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityexpected.csv) datasets from Chapter 6. 
 
 ### Nimble
 

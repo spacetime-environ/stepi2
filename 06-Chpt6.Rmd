@@ -11,13 +11,14 @@ This chapter describes methods for implementing Bayesian models when their compl
 
 
 ## Example 6.2: Chronic obstructive pulmonary disease (COPD) in England {-} 
+
 We now look at example into the hospital admission rates for chronic obstructive pulmonary disease (COPD) in England between 2001–2010. 
 
 In England, there are 324 local authority administrative areas each with an observed and expected number of cases. The expected numbers were calculated using indirect standardization by applying the age–sex specific rates for the whole of England to the age–sex population profile of each of
 the areas.
 
 
-For this example, the following packages are needed `ggplot2` and  `sf`.
+For this example, the following packages are needed `ggplot2` and  `sf`. 
 
 Load the necessary packages.
 
@@ -30,9 +31,9 @@ library(sf)
 
 To create SMR maps, we need to read in the relevant shapefiles. 
 
-- `englandlocalauthority.shp` and `englandlocalauthority.dbf` contain the location, shape, and attributes of English local authorities. The function `read_sf()` from the `sf` package  will read these shapefiles into `R`.
-- `copdmortalityobserved.csv` contains the **observed**  number of hospital admissions in England by local authority.
-- `copdmortalityexpected.csv` contains the **expected** number of hospital admissions in England by local authority.
+- [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/englandlocalauthority.shp) and [englandlocalauthority.dbf](https://github.com/spacetime-environ/stepi2/blob/main/data/englandlocalauthority.dbf) contain the location, shape, and attributes of English local authorities. The function `read_sf()` from the `sf` package  will read these shapefiles into `R`.
+- [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityobserved.csv) contains the **observed**  number of hospital admissions in England by local authority. You can find this data by clicking.
+- [copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityexpected.csv) contains the **expected** number of hospital admissions in England by local authority. 
 
 ```{r Ex 6.2 read files, class.source = 'foldable' }
 # Reading in borders

@@ -16,10 +16,82 @@ This chapter contains the basic theory for spatial processes and a number of app
 
 <!-- NOTE: Unlike some of the other chapters you have to run this code sequentially -->
 
+## Example 10.1 Spatial patterns in lead concentrations in the soil of the
+Meuse River flood plain {-}
 
-## Example 10.1 Spatial patterns of benzene concentrations in Montreal, QC, Canada {-}
+```{r Ex 10.1 meuse river, results='hide'}
+library(geoR)
+library(ggmap)
+library(sp)
+
+# Load data
+data(meuse) 
+coordinates(meuse)<-~x+y # convert to SPDF 
+
+# Assign Netherlands reference system 
+proj4string(meuse) <- CRS('+init=epsg:28992') 
+
+# Convert to longlat reference system 
+meuse_geo <- spTransform(meuse,CRS("+proj=longlat +datum=WGS84"))
+meuse_df <- as.data.frame(meuse_geo)
+```
+
+Plot Figure 10.1 Bubble map
+
+```{r Figure 10.1 bubble map, cache = TRUE}
+latLongBox = bbox(meuse_geo)
+location = c(latLongBox[1, 1] - 0.01,
+             latLongBox[2, 1] - 0.01,
+             latLongBox[1, 2] + 0.01,
+             latLongBox[2, 2] + 0.01)
+# create map with location dots marked on it in
+MeuseMap <-
+  get_stamenmap(bbox =  location,
+                zoom = 14)
+ggmap(MeuseMap) + geom_point(
+  data = meuse_df,
+  aes(x = x,
+      y = y,
+      size = lead),
+  col = "#011f4b",
+  alpha = 0.45
+) + theme_void()
+```
+
+```{r Figure 10.2}
+
+meuse_geodata <- as.geodata(as.data.frame(meuse), coords.col = 1:2, data.col = 5)
+plot(meuse_geodata)
+
+```
+
+
+## Example 10.2: Examining the log concentrations of lead in the Meuse River
+flood plain
+
+```{r Figure 10.3}
+
+par(mfrow = c(1, 2))
+log_histogram <-
+  hist(log(meuse$lead), main = "", xlab = "log(lead)")
+qqnorm(log(meuse$lead), bty = "n")
+qqline(log(meuse$lead))
+
+
+```
+
+```{r Figure 10.4}
+meuse_df <-  as.data.frame(meuse)
+coplot( lead ~ y | x, data = meuse_df)
+```
+
+
+
+## EXTRA: Example 10.1: Spatial patterns of benzene concentrations in Montreal, QC, Canada {-}
 
 Map the locations of the monitoring stations in Montreal.
+
+This example uses the [montreal_benzene_apr.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/montreal_benzene_apr.csv)
 
 ```{r Ex 10.1 load data, message = FALSE, warning=FALSE, error=FALSE}
 library(cowplot)
@@ -77,7 +149,7 @@ plot(benzene_geodata)
 ```
 
 
-## Example 10.2: Examining the log concentrations of benzene in Montreal {-}
+## EXTRA: Example 10.2: Examining the log concentrations of benzene in Montreal {-}
 
 ```{r Ex 10.2 plot hist and qqplot log}
 # Histogram for the log of the benzene concentration
@@ -89,8 +161,10 @@ qqline(log(benzene$Benzene))
 
 ```
 <!-- NOTE: I don't know how to generate the plot in Figure 9.4 -->
-
 ## Example 10.3: Mapping the locations of ozone monitoring sites in New York State {-}
+
+This example uses the coordinates in the [NY_metadata.txt](https://github.com/spacetime-environ/stepi2/blob/main/data/NY_metadata.txt) file.
+
 
 ```{r Ex 10.3 plot ozone sites NY, message = FALSE, warning=FALSE, error=FALSE}
 # Load the metadata giving the site coordinates 
@@ -204,6 +278,8 @@ plot_grid(krig_pred, krig_var, labels = "auto")
 
 
 ## Example 10.9 Spatial modelling of Benzene in Montreal {-}
+
+This example uses the [montreal_benzene_apr.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/montreal_benzene_apr.csv)
 
 ### Nimble {-}
 
@@ -621,11 +697,11 @@ plot_grid(stan_pred, stan_var, labels = "auto")
 
 ## Example 10.10: Spatial predictions {-}
 
-NOTE: To Alex, I just added the spatial predictions for nimble, do we want it for Stan too?
-Also note that I am just doing for 5 locations (please double-check my equations) and it instead of running in 2 minutes it runs in 6 (in case you want to highlight that). But we should discuss the order of this cause I am doing the predictions with Paritosh's code in the previous section.
 
 ### Nimble {-}
 ```{r Ex 10.10 nimble prediction mcmc}
+# NOTE: I am just doing for 5 locations (please double-check my equations) and it instead of running in 2 minutes it runs in 6 (in case you want to highlight that). But we should discuss the order of this cause I am doing the predictions with Paritosh's code in the previous section.
+
 # Obtain coordinates for predictions 
 # note that we are using the same coordinates as the one generated for 
 # the kriging example
@@ -858,6 +934,8 @@ summary_exp_stan$summary
 
 ## Example 10.11: INLA, creating a mesh {-}
 
+This example uses the [montreal_benzene_apr.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/montreal_benzene_apr.csv)
+
 ```{r Ex 10.11 load data for INLA, message = FALSE, warning=FALSE, error=FALSE}
 library(geoR)
 library(INLA)
@@ -941,7 +1019,7 @@ rm(list=ls())
 
 Note: There might be a warning when loading the $\texttt{raster}$ package, if necessary, uninstall and re-install the package. 
 
-For this example we are using the same $\texttt{gambia}$ data set from the $\texttt{geoR}$ package but an $\texttt{id_area}$ column was added using QGIS to differentiate the different areas as in the original paper.
+For this example we are using the same $\texttt{gambia}$ data set from the $\texttt{geoR}$ package but an $\texttt{id_area}$ column was added using QGIS to differentiate the different areas as in the original paper. Therefore, we need to load the [gambia_area.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/gambia_area.csv) file.
 
 ```{r Ex 10.14 load libraries and data, message = FALSE, warning=FALSE, error=FALSE}
 
