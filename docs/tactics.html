@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 Tactics-implementing uncertainty models | Spatio-temporal methods in environmental epidemiology</title>
   <meta name="description" content="Chapter 6 Tactics-implementing uncertainty models | Spatio-temporal methods in environmental epidemiology" />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 Tactics-implementing uncertainty models | Spatio-temporal methods in environmental epidemiology" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Gavin Shaddick, James V. Zidek, and Alexandra M. Schmidt" />
 
 
-<meta name="date" content="2023-04-09" />
+<meta name="date" content="2023-04-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -133,7 +133,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Spatio-temporal methods in environmental epidemiology</a></li>
+<li><a href="./">Spatio-temporal methods in environmental epidemiology using R</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
@@ -192,9 +192,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10" data-path="hazards.html"><a href="hazards.html"><i class="fa fa-check"></i><b>10</b> Environmental hazards-spatial models</a>
 <ul>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.1-spatial-patterns-of-benzene-concentrations-in-montreal-qc-canada"><i class="fa fa-check"></i>Example 10.1 Spatial patterns of benzene concentrations in Montreal, QC, Canada</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.2-examining-the-log-concentrations-of-benzene-in-montreal"><i class="fa fa-check"></i>Example 10.2: Examining the log concentrations of benzene in Montreal</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.3-mapping-the-locations-of-ozone-monitoring-sites-in-new-york-state"><i class="fa fa-check"></i>Example 10.3: Mapping the locations of ozone monitoring sites in New York State</a></li>
+<li class="chapter" data-level="10.1" data-path="hazards.html"><a href="hazards.html#example-10.1-spatial-patterns-in-lead-concentrations-in-the-soil-of-the"><i class="fa fa-check"></i><b>10.1</b> Example 10.1 Spatial patterns in lead concentrations in the soil of the</a></li>
+<li class="chapter" data-level="10.2" data-path="hazards.html"><a href="hazards.html#example-10.2-examining-the-log-concentrations-of-lead-in-the-meuse-river"><i class="fa fa-check"></i><b>10.2</b> Example 10.2: Examining the log concentrations of lead in the Meuse River</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-example-10.1-spatial-patterns-of-benzene-concentrations-in-montreal-qc-canada"><i class="fa fa-check"></i>EXTRA: Example 10.1: Spatial patterns of benzene concentrations in Montreal, QC, Canada</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-example-10.2-examining-the-log-concentrations-of-benzene-in-montreal"><i class="fa fa-check"></i>EXTRA: Example 10.2: Examining the log concentrations of benzene in Montreal</a></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.5-variogram"><i class="fa fa-check"></i>Example 10.5: Variogram</a></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.6-basic-spatial-modelling-and-prediction-of-benzene-in-montreal"><i class="fa fa-check"></i>Example 10.6 Basic spatial modelling and prediction of benzene in Montreal</a></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.9-spatial-modelling-of-benzene-in-montreal"><i class="fa fa-check"></i>Example 10.9 Spatial modelling of Benzene in Montreal</a>
@@ -234,7 +235,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#solutions-to-selected-exercises-1"><i class="fa fa-check"></i>Solutions to Selected Exercises</a></li>
 <li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#exercise-11.11"><i class="fa fa-check"></i>Exercise 11.11</a></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#exercise-11.13"><i class="fa fa-check"></i>Exercise 11.13</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="exposure.html"><a href="exposure.html"><i class="fa fa-check"></i><b>12</b> Exposure assessment-over space and time</a></li>
 <li class="chapter" data-level="13" data-path="causality.html"><a href="causality.html"><i class="fa fa-check"></i><b>13</b> Causality-roadblocks on the way to it</a>
@@ -292,9 +292,9 @@ the areas.</p>
 <span id="cb17-2"><a href="tactics.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code></pre></div>
 <p>To create SMR maps, we need to read in the relevant shapefiles.</p>
 <ul>
-<li><code>englandlocalauthority.shp</code> and <code>englandlocalauthority.dbf</code> contain the location, shape, and attributes of English local authorities. The function <code>read_sf()</code> from the <code>sf</code> package will read these shapefiles into <code>R</code>.</li>
-<li><code>copdmortalityobserved.csv</code> contains the <strong>observed</strong> number of hospital admissions in England by local authority.</li>
-<li><code>copdmortalityexpected.csv</code> contains the <strong>expected</strong> number of hospital admissions in England by local authority.</li>
+<li><a href="https://github.com/spacetime-environ/stepi2/blob/main/data/englandlocalauthority.shp">englandlocalauthority.shp</a> and <a href="https://github.com/spacetime-environ/stepi2/blob/main/data/englandlocalauthority.dbf">englandlocalauthority.dbf</a> contain the location, shape, and attributes of English local authorities. The function <code>read_sf()</code> from the <code>sf</code> package will read these shapefiles into <code>R</code>.</li>
+<li><a href="https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityobserved.csv">copdmortalityobserved.csv</a> contains the <strong>observed</strong> number of hospital admissions in England by local authority. You can find this data by clicking.</li>
+<li><a href="https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityexpected.csv">copdmortalityexpected.csv</a> contains the <strong>expected</strong> number of hospital admissions in England by local authority.</li>
 </ul>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r foldable"><code class="sourceCode r"><span id="cb18-1"><a href="tactics.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reading in borders</span></span>
 <span id="cb18-2"><a href="tactics.html#cb18-2" aria-hidden="true" tabindex="-1"></a>england <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">&quot;data/englandlocalauthority.shp&quot;</span>)</span>
@@ -470,7 +470,7 @@ the areas.</p>
 <span id="cb32-17"><a href="tactics.html#cb32-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb32-18"><a href="tactics.html#cb32-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">rect =</span> <span class="fu">element_blank</span>()</span>
 <span id="cb32-19"><a href="tactics.html#cb32-19" aria-hidden="true" tabindex="-1"></a>  ) </span></code></pre></div>
-<p><img src="_main_files/figure-html/Ex%206.2%20map-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="bookdown-demo_files/figure-html/Ex%206.2%20map-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="modelling-a-poisson-gamma-with-an-mcmc-implemented-in-r" class="section level3 unnumbered hasAnchor">
 <h3>Modelling a Poisson-Gamma with an MCMC implemented in <code>R</code><a href="tactics.html#modelling-a-poisson-gamma-with-an-mcmc-implemented-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -570,23 +570,23 @@ the areas.</p>
 <span id="cb34-19"><a href="tactics.html#cb34-19" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(b[seqaux], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span>
 <span id="cb34-20"><a href="tactics.html#cb34-20" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(b[seqaux], <span class="at">prob =</span> <span class="dv">1</span>, <span class="at">main =</span> <span class="st">&quot;&quot;</span>)</span>
 <span id="cb34-21"><a href="tactics.html#cb34-21" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(xx, <span class="fu">dexp</span>(xx, lambda_b), <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/Ex%206.2%20MCMC%20convergence-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/Ex%206.2%20MCMC%20convergence-1.png" width="672" /></p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="tactics.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Traceplots of theta&#39;s</span></span>
 <span id="cb35-2"><a href="tactics.html#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-3"><a href="tactics.html#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>))</span>
 <span id="cb35-4"><a href="tactics.html#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>)</span>
 <span id="cb35-5"><a href="tactics.html#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(theta[seqaux, i], <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/Ex%206.2%20MCMC%20convergence-2.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/Ex%206.2%20MCMC%20convergence-2.png" width="672" /></p>
 <!-- TODO: Add effective size and paragraph about acceptance ratio -->
 <p>Given the convergence issues, we can also check the estimated sampled size and Rhat using the package <code>coda</code>.</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="tactics.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&quot;ESS a: &quot;</span>, coda<span class="sc">::</span><span class="fu">effectiveSize</span>(a[seqaux]))</span></code></pre></div>
-<pre><code>## [1] &quot;ESS a: 50.0892164646561&quot;</code></pre>
+<pre><code>## [1] &quot;ESS a: 53.3070749345953&quot;</code></pre>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="tactics.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&quot;ESS b: &quot;</span>, coda<span class="sc">::</span><span class="fu">effectiveSize</span>(b[seqaux]))</span></code></pre></div>
-<pre><code>## [1] &quot;ESS b: 54.1012433947017&quot;</code></pre>
+<pre><code>## [1] &quot;ESS b: 57.131227615661&quot;</code></pre>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="tactics.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&quot;ESS theta[1]: &quot;</span>, coda<span class="sc">::</span><span class="fu">effectiveSize</span>(theta[seqaux, <span class="dv">1</span>]))</span></code></pre></div>
 <pre><code>## [1] &quot;ESS theta[1]: 2001&quot;</code></pre>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="tactics.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&quot;ESS theta[10]: &quot;</span>,coda<span class="sc">::</span><span class="fu">effectiveSize</span>(theta[seqaux, <span class="dv">10</span>]))</span></code></pre></div>
-<pre><code>## [1] &quot;ESS theta[10]: 2001&quot;</code></pre>
+<pre><code>## [1] &quot;ESS theta[10]: 1872.9071257942&quot;</code></pre>
 <p>The variances for the parameters <code>a</code> and <code>b</code> is lower than the recommended minimum of 100. We will go back to this in Chapter 8.</p>
 <p>Now that we have guaranteed the convergence of the chains, we can look at the posterior summaries.</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="tactics.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Posterior summaries of theta_i</span></span>
@@ -611,7 +611,7 @@ the areas.</p>
 <span id="cb44-20"><a href="tactics.html#cb44-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N)</span>
 <span id="cb44-21"><a href="tactics.html#cb44-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">segments</span>(i, q025theta[i], i, q975theta[i])</span>
 <span id="cb44-22"><a href="tactics.html#cb44-22" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">1</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/Ex%206.2%20MCMC%20posterior%20summary-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="bookdown-demo_files/figure-html/Ex%206.2%20MCMC%20posterior%20summary-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="tactics.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Posterior summary of fitted values</span></span>
 <span id="cb45-2"><a href="tactics.html#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb45-3"><a href="tactics.html#cb45-3" aria-hidden="true" tabindex="-1"></a>meanfit <span class="ot">&lt;-</span> <span class="fu">apply</span>(fitted, <span class="dv">2</span>, mean)</span>
@@ -636,7 +636,7 @@ the areas.</p>
 <span id="cb45-22"><a href="tactics.html#cb45-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N)</span>
 <span id="cb45-23"><a href="tactics.html#cb45-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">segments</span>(y[i], q025fit[i], y[i], q975fit[i])</span>
 <span id="cb45-24"><a href="tactics.html#cb45-24" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">1</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/Ex%206.2%20MCMC%20posterior%20summary-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="bookdown-demo_files/figure-html/Ex%206.2%20MCMC%20posterior%20summary-2.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="example-6.3-fitting-a-poisson-regression-model" class="section level2 unnumbered hasAnchor">
@@ -705,23 +705,23 @@ the areas.</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="tactics.html#cb48-1" aria-hidden="true" tabindex="-1"></a>mcmc.out<span class="sc">$</span>WAIC</span></code></pre></div>
 <pre><code>## nimbleList object of type waicList
 ## Field &quot;WAIC&quot;:
-## [1] 3049.327
+## [1] 3049.259
 ## Field &quot;lppd&quot;:
-## [1] -1514.466
+## [1] -1514.469
 ## Field &quot;pWAIC&quot;:
-## [1] 10.19779</code></pre>
+## [1] 10.16002</code></pre>
 <p>Show the trace plots and posterior summaries for each of the parameters.</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="tactics.html#cb50-1" aria-hidden="true" tabindex="-1"></a>mvSamples <span class="ot">&lt;-</span> mcmc.out<span class="sc">$</span>samples</span>
 <span id="cb50-2"><a href="tactics.html#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb50-3"><a href="tactics.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="co">#trace plots of beta1</span></span>
 <span id="cb50-4"><a href="tactics.html#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mvSamples[, <span class="fu">c</span>(<span class="st">&quot;beta1&quot;</span>)])</span></code></pre></div>
-<p><img src="_main_files/figure-html/Ex%206.3%20nimble%20traceplots-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/Ex%206.3%20nimble%20traceplots-1.png" width="672" /></p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="tactics.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co">#trace plots of base</span></span>
 <span id="cb51-2"><a href="tactics.html#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mvSamples[, <span class="fu">c</span>(<span class="st">&quot;base&quot;</span>)])</span></code></pre></div>
-<p><img src="_main_files/figure-html/Ex%206.3%20nimble%20traceplots-2.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/Ex%206.3%20nimble%20traceplots-2.png" width="672" /></p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="tactics.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">#trace plots of RR</span></span>
 <span id="cb52-2"><a href="tactics.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mvSamples[, <span class="fu">c</span>(<span class="st">&quot;RR&quot;</span>)])</span></code></pre></div>
-<p><img src="_main_files/figure-html/Ex%206.3%20nimble%20traceplots-3.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/Ex%206.3%20nimble%20traceplots-3.png" width="672" /></p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="tactics.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co">#posterior summary of base</span></span>
 <span id="cb53-2"><a href="tactics.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mvSamples[, <span class="fu">c</span>(<span class="st">&quot;base&quot;</span>)])</span></code></pre></div>
 <pre><code>## 
@@ -734,12 +734,12 @@ the areas.</p>
 ##    plus standard error of the mean:
 ## 
 ##           Mean             SD       Naive SE Time-series SE 
-##      1.1288621      0.0123903      0.0001959      0.0001959 
+##      1.1287176      0.0126962      0.0002007      0.0001962 
 ## 
 ## 2. Quantiles for each variable:
 ## 
 ##  2.5%   25%   50%   75% 97.5% 
-## 1.104 1.121 1.129 1.137 1.154</code></pre>
+## 1.104 1.120 1.129 1.137 1.154</code></pre>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="tactics.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co">#posterior summary of RR</span></span>
 <span id="cb55-2"><a href="tactics.html#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mvSamples[, <span class="fu">c</span>(<span class="st">&quot;RR&quot;</span>)])</span></code></pre></div>
 <pre><code>## 
@@ -752,12 +752,12 @@ the areas.</p>
 ##    plus standard error of the mean:
 ## 
 ##           Mean             SD       Naive SE Time-series SE 
-##      1.0147062      0.0174258      0.0002755      0.0004217 
+##      1.0141220      0.0174991      0.0002767      0.0004310 
 ## 
 ## 2. Quantiles for each variable:
 ## 
 ##   2.5%    25%    50%    75%  97.5% 
-## 0.9806 1.0029 1.0143 1.0267 1.0486</code></pre>
+## 0.9798 1.0022 1.0141 1.0263 1.0479</code></pre>
 </div>
 <div id="stan" class="section level3 unnumbered hasAnchor">
 <h3>Stan<a href="tactics.html#stan" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -817,15 +817,15 @@ model {
 <span id="cb59-18"><a href="tactics.html#cb59-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="tactics.html#cb60-1" aria-hidden="true" tabindex="-1"></a>rstan<span class="sc">::</span><span class="fu">traceplot</span>(Example6_3_Stan,</span>
 <span id="cb60-2"><a href="tactics.html#cb60-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;beta1&quot;</span>, <span class="st">&quot;base&quot;</span>, <span class="st">&quot;RR&quot;</span>))</span></code></pre></div>
-<p><img src="_main_files/figure-html/Ex%206.3%20stan%20traceplots-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/Ex%206.3%20stan%20traceplots-1.png" width="672" /></p>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="tactics.html#cb61-1" aria-hidden="true" tabindex="-1"></a>stan_summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(Example6_3_Stan, <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;RR&quot;</span>, <span class="st">&quot;base&quot;</span>))</span>
 <span id="cb61-2"><a href="tactics.html#cb61-2" aria-hidden="true" tabindex="-1"></a>stan_summary<span class="sc">$</span>summary</span></code></pre></div>
 <pre><code>##          mean      se_mean         sd      2.5%      25%      50%      75%
-## RR   1.015277 0.0002199196 0.01758635 0.9810819 1.003394 1.015282 1.027100
-## base 1.128823 0.0001406853 0.01272524 1.1041418 1.120047 1.128823 1.137338
-##         97.5%    n_eff     Rhat
-## RR   1.050307 6394.753 1.000196
-## base 1.153955 8181.535 1.000037</code></pre>
+## RR   1.014756 0.0002229565 0.01755113 0.9808768 1.002950 1.014639 1.026634
+## base 1.128646 0.0001355376 0.01261214 1.1039974 1.120104 1.128592 1.137239
+##         97.5%    n_eff      Rhat
+## RR   1.049252 6196.836 1.0008100
+## base 1.153120 8658.802 0.9998217</code></pre>
 
 </div>
 </div>
@@ -867,7 +867,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/06-Chpt6.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/06-Chpt6.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -878,7 +878,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf", "_main.epub"],
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
 "search": {
 "engine": "fuse",
 "options": null

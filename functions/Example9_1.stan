@@ -2,14 +2,11 @@ data {
   int<lower=0> N;
   real<lower=0> E[N]; // need to indicate that variable is strictly positive
   int<lower=0> Y[N];
-  real<lower=0>lambda_a;
-  real<lower=0>lambda_b;
 }
 
 parameters {
   real<lower=0> theta[N];
   real<lower=0> a;
-  real<lower=0> b;
 }
 
 transformed parameters{
@@ -25,10 +22,9 @@ model {
   // likelihood function and prior for theta
   for(i in 1:N){
     Y[i] ~ poisson(mu[i]);
-    theta[i]~gamma(a,b);
+    theta[i]~gamma(a,a);
   }
-  a~exponential(lambda_a);
-  b~exponential(lambda_b);
+  a~gamma(1, 1);
 }
 
 generated quantities {

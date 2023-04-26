@@ -16,8 +16,7 @@ This chapter contains the basic theory for spatial processes and a number of app
 
 <!-- NOTE: Unlike some of the other chapters you have to run this code sequentially -->
 
-## Example 10.1 Spatial patterns in lead concentrations in the soil of the
-Meuse River flood plain {-}
+## Example 10.1 Spatial patterns in lead concentrations {-}
 
 ```{r Ex 10.1 meuse river, results='hide'}
 library(geoR)
@@ -66,8 +65,7 @@ plot(meuse_geodata)
 ```
 
 
-## Example 10.2: Examining the log concentrations of lead in the Meuse River
-flood plain
+## Example 10.2: Examining the log concentrations of lead {-}
 
 ```{r Figure 10.3}
 
