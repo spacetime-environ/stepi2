@@ -606,10 +606,10 @@ nim_bsample <- nimbleFunction(
 #
 ###########################################################################
 
-ddlmDF_multi_obs <- nimbleFunction(
+ddlm_multi_obs <- nimbleFunction(
   run = function(x = double(2), Ft = double(3), Vt = double(2),
-                 Gt = double(2), delta = double(0),
-                 m0 = double(1), C0 = double(2),
+                 Gt = double(2), Wt = double(2),
+                 m0 = double(1), C0 = double(2), 
                  log = integer(0, default = 0)) {
     
     p <- nimDim(Ft)[1]
@@ -626,10 +626,8 @@ ddlmDF_multi_obs <- nimbleFunction(
     for(t in 1:J) {
       
       at <- (Gt %*% mt)[,1]
-      Pt <- Gt %*% Ct %*% t(Gt)
-      Wt <- ((1-delta)/delta) * Pt
-      Rt <- Pt + Wt
-      
+      Rt <- Gt %*% Ct %*% t(Gt) + Wt[1:p,1:p]
+
       ft <- (t(Ft[1:p,1:N,t]) %*% at)[,1]
       Qt <- (t(Ft[1:p,1:N,t]) %*% Rt %*% Ft[1:p,1:N,t]) + Vt[1:N,1:N]
       
@@ -659,9 +657,9 @@ ddlmDF_multi_obs <- nimbleFunction(
 
 #Cddlm_multi_obs <- compileNimble(ddlm_multi_obs, showCompilerOutput = TRUE)
 
-rdlmDF_multi_obs <- nimbleFunction(
+rdlm_multi_obs <- nimbleFunction(
   run = function(n = integer(0), Ft = double(3), Vt = double(2),
-                 Gt = double(2), delta = double(0),
+                 Gt = double(2),  Wt = double(2),
                  m0 = double(1), C0 = double(2)) {
     
     p <- nimDim(Ft)[1]
@@ -678,11 +676,11 @@ rdlmDF_multi_obs <- nimbleFunction(
 #Crdlm_multi_obs <- compileNimble(rdlm_multi_obs, showCompilerOutput = FALSE)
 
 ###############################################################################
-# FFBS with DF and the Woodburry formula 
+# FFBS with the Woodburry formula 
 ###############################################################################
-nim_ffbsDF_woodbury <- nimbleFunction(
+nim_ffbs_woodbury <- nimbleFunction(
   run = function(yt = double(2), Ft = double(3), Vt = double(2),
-                 Gt = double(2), delta = double(0), 
+                 Gt = double(2), Wt = double(2), 
                  m0 = double(1), C0 = double(2)) {
     
     returnType(double(2))  # return type declaration
@@ -705,8 +703,8 @@ nim_ffbsDF_woodbury <- nimbleFunction(
     for(t in 1:Tt) {
       at[1:p,t] <- (Gt %*% mt[1:p,t])[,1]
       Pt <- Gt %*% Ct[1:p,1:p,t] %*% t(Gt)
-      Wt <- ((1-delta)/delta) * Pt
-      Rt[1:p,1:p,t] <- Gt %*% Ct[1:p,1:p,t] %*% t(Gt) + Wt
+      # Wt <- ((1-delta)/delta) * Pt
+      Rt[1:p,1:p,t] <- Gt %*% Ct[1:p,1:p,t] %*% t(Gt) + Wt[1:p,1:p]
       
       ft <- (t(Ft[1:p,1:n,t]) %*% at[1:p,t])[1:n,1]
       Qt <- t(Ft[1:p,1:n,t]) %*% Rt[1:p,1:p,t] %*% Ft[1:p,1:n,t] + Vt[1:n,1:n]
