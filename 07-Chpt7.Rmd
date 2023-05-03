@@ -1,3 +1,9 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
+---
 # Strategies implementing uncertainty models  {#Strategies}
 
 This chapter considers both some of the wider issues related to modelling and the generalisability of results and more
@@ -16,3 +22,209 @@ using predictions as inputs to a health model.
 - Methods for performing model selection, including the pros and cons of automatic selection procedures.
 - Model selection within the Bayesian setting and how the models themselves can be incorporated into the estimation
 process using Bayesian Model Averaging.
+
+
+## Example 7.6 Model choice in studies of air pollution and health {-}
+
+
+
+```{r Ex 7.6 load data}
+library(dplyr)
+library(ggplot2)
+library(nimble)
+
+lur_benzene <- read.csv("data/VOC_predictors.csv")
+colnames(lur_benzene)
+
+lur_benzene$X <- lur_benzene$X/1000
+lur_benzene$Y <- lur_benzene$Y/1000
+```
+
+### Nimble {-}
+
+Lasso regression
+
+```{r Ex 7.6 nimble lasso}
+
+Ex7_6LassoCode <- nimbleCode({
+
+  # Likelihood
+  for(i in 1:n){
+    y[i]   ~ dnorm(mu[i], sd = sigma)
+    mu[i] <- beta0 + inprod(X[i,], beta[1:p])
+  }
+
+  # Prior specification
+  for(j in 1:p){
+    beta[j] ~ ddexp(0, scale = tau)
+  }
+
+  sigma ~ T(dt(mu = 0, sigma = 1, df = 1), 0, Inf)
+  tau  ~ T(dt(mu = 0, sigma = 5, df = 1), 0, Inf)
+  beta0  ~ dnorm(0,0.01)
+
+})
+
+```
+
+
+
+
+```{r Ex 7_6 nimble lasso run model, message = FALSE, cache = TRUE, results='hide'}
+X <-  lur_benzene |> dplyr::select("X", "Y", ends_with("100m"))
+
+constants <-
+  list(n = nrow(lur_benzene), p = ncol(X))
+
+ex.data <-
+  list(y = log(lur_benzene$Benzene),
+       X = scale(X))
+params <- c( "beta0",  "beta", "tau", "sigma")
+
+inits <- list( sigma = 0.1, tau = 0.1)
+# Run model in nimble
+start_time <- Sys.time()
+
+mcmc.out <- nimbleMCMC(
+  code = Ex7_6LassoCode,
+  constants = constants,
+  data = ex.data,
+  inits = inits,
+  monitors = params,
+  niter = 100000,
+  nburnin = 50000,
+  thin = 15,
+  WAIC = TRUE,
+  nchains = 2,
+  summary = TRUE,
+  samplesAsCodaMCMC = TRUE
+)
+end_time <- Sys.time()
+run_time <- end_time - start_time
+run_time
+```
+
+```{r Ex 7.6 nimble lasso traceplot }
+min(coda::effectiveSize(mcmc.out$samples))
+plot(mcmc.out$samples[, c("beta0")], bty = "n", main = "beta0")
+plot(mcmc.out$samples[, c("beta[1]")], bty = "n", main = "beta1")
+plot(mcmc.out$samples[, c("beta[2]")], bty = "n", main = "beta2")
+plot(mcmc.out$samples[, c("beta[3]")], bty = "n", main = "beta3")
+plot(mcmc.out$samples[, c("beta[4]")], bty = "n", main = "beta4")
+plot(mcmc.out$samples[, c("beta[5]")], bty = "n", main = "beta5")
+plot(mcmc.out$samples[, c("beta[6]")], bty = "n", main = "beta6")
+plot(mcmc.out$samples[, c("beta[7]")], bty = "n", main = "beta7")
+plot(mcmc.out$samples[, c("beta[8]")], bty = "n", main = "beta8")
+plot(mcmc.out$samples[, c("sigma")], bty = "n", main = "sigma")
+plot(mcmc.out$samples[, c("tau")], bty = "n", main = "tau")
+```
+
+```{r Ex 7_6 nimble lasso posterior summary}
+beta_var  <- paste0("beta[", 1:ncol(X), "]") 
+post_summary <- mcmc.out$summary$all.chains |> as.data.frame() 
+post_summary <- post_summary[beta_var,]
+
+post_summary$variable <- colnames(X)
+
+ggplot(post_summary,
+       aes(x = variable)) + 
+  geom_pointrange(aes(y = Mean, ymin =`95%CI_low`, ymax =`95%CI_upp`)) + 
+  geom_hline(yintercept = 0) +
+  theme_classic() + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+```
+```{r Ex 7_6 nimble horseshoe}
+
+Ex7_6HorseshoeCode <- nimbleCode({
+
+  # Likelihood
+  for(i in 1:n){
+    y[i]   ~ dnorm(mu[i], sd = sigma)
+    mu[i] <- beta0 + inprod(X[i,], beta[1:p])
+  }
+
+  # Prior specification
+  for(j in 1:p){
+    beta[j] ~ dnorm(0, var = lambda)
+  }
+  lambda ~ T(dt(mu = 0, sigma = tau, df = 1), 0, Inf)
+  tau  ~ T(dt(mu = 0, sigma = nu, df = 1), 0, Inf)
+  nu <- sqrt(nu2)
+  nu2 ~  dgamma(0.01, 0.01)
+  sigma ~ T(dt(mu = 0, sigma = 1, df = 1), 0, Inf)
+  beta0  ~ dnorm(0,0.01)
+
+})
+
+```
+
+```{r Ex 7_6 nimble horseshoe run model, message = FALSE, cache = TRUE, results='hide'}
+set.seed(321)
+
+constants <-
+  list(n = nrow(lur_benzene), p = ncol(X))
+
+ex.data <-
+  list(y = log(lur_benzene$Benzene),
+       X = scale(X))
+params <- c( "beta0",  "beta", "tau", "sigma", "lambda", "nu")
+
+inits <- list( sigma = 0.1, tau = 0.1)
+# Run model in nimble
+start_time <- Sys.time()
+
+mcmc.out <- nimbleMCMC(
+  code = Ex7_6HorseshoeCode,
+  constants = constants,
+  data = ex.data,
+  inits = inits,
+  monitors = params,
+  niter = 100000,
+  nburnin = 50000,
+  thin = 15,
+  WAIC = TRUE,
+  nchains = 2,
+  summary = TRUE,
+  samplesAsCodaMCMC = TRUE
+)
+end_time <- Sys.time()
+run_time <- end_time - start_time
+run_time
+```
+
+
+
+
+```{r Ex 7.6 nimble horseshoe traceplot }
+min(coda::effectiveSize(mcmc.out$samples))
+plot(mcmc.out$samples[, c("beta0")], bty = "n", main = "beta0")
+plot(mcmc.out$samples[, c("beta[1]")], bty = "n", main = "beta1")
+plot(mcmc.out$samples[, c("beta[2]")], bty = "n", main = "beta2")
+plot(mcmc.out$samples[, c("beta[3]")], bty = "n", main = "beta3")
+plot(mcmc.out$samples[, c("beta[4]")], bty = "n", main = "beta4")
+plot(mcmc.out$samples[, c("beta[5]")], bty = "n", main = "beta5")
+plot(mcmc.out$samples[, c("beta[6]")], bty = "n", main = "beta6")
+plot(mcmc.out$samples[, c("beta[7]")], bty = "n", main = "beta7")
+plot(mcmc.out$samples[, c("beta[8]")], bty = "n", main = "beta8")
+plot(mcmc.out$samples[, c("sigma")], bty = "n", main = "sigma")
+plot(mcmc.out$samples[, c("tau")], bty = "n", main = "tau")
+plot(mcmc.out$samples[, c("lambda")], bty = "n", main = "lambda")
+plot(mcmc.out$samples[, c("nu")], bty = "n", main = "nu")
+
+```
+
+
+```{r Ex 7_6 nimble horseshoe posterior summary}
+beta_var  <- paste0("beta[", 1:ncol(X), "]") 
+post_summary <- mcmc.out$summary$all.chains |> as.data.frame() 
+post_summary <- post_summary[beta_var,]
+
+post_summary$variable <- colnames(X)
+
+ggplot(post_summary,
+       aes(x = variable)) + 
+  geom_pointrange(aes(y = Mean, ymin =`95%CI_low`, ymax =`95%CI_upp`)) + 
+  geom_hline(yintercept = 0) +
+  theme_classic() + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+```

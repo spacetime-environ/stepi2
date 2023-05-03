@@ -29,7 +29,6 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 # Files constantly modified by bookdown
-*.yml
 _main.Rmd
 *.pdf
 *.epub

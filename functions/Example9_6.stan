@@ -5,7 +5,7 @@ data {
   matrix[N,p] X;
   int<lower=1, upper=N> d[N];  // vector of number of neighbours
   int<lower=1, upper=N> node2[N_edges];  // long vector of neighbours
-  int<lower=0, upper=N_edges> C[N+1]; // cumulative number of neighbours
+  int<lower=0> C[N+1]; // cumulative number of neighbours
   int<lower=0> y[N];              
   vector<lower=0>[N] E;          
 }
