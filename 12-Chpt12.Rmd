@@ -305,9 +305,6 @@ library(coda)
 post_summary <- nimSummary(post_samples)
 post_summary[c('tau','sigma','phi','sqrt_Wt_diag[1]','sqrt_Wt_diag[2]','sqrt_Wt_diag[3]'),]
 
-save(run_time, post_samples, post_summary, file = "~/McGill/nimffbs_results/results_integrated_model_ukO3Data55Sites.rda")
-load("~/McGill/nimffbs_results/results_integrated_model_ukO3Data55Sites.rda")
-
 library(tidyverse)
 library(magrittr)
 library(tidybayes)

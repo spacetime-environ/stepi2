@@ -232,6 +232,7 @@ plot_coord_variog <- plot(benzene_vgm, benzene_vgm_fit, bty = "n")
 plot_grid(plot_inter_variog, plot_coord_variog, labels = "auto")
 ```
 
+
 ## Example 10.6 Basic spatial modelling and prediction of benzene in Montreal {-}
 
 
@@ -273,6 +274,344 @@ krig_var <-
 plot_grid(krig_pred, krig_var, labels = "auto")
 
 ```
+
+
+## Example 10.8 Spatial prediction of NO2 in Europe
+
+```{r Ex 10.8 clean nimble, include = FALSE}
+rm(list = ls())
+```
+
+```{r Ex 10.8 load libraries and read data, warning=FALSE, message = FALSE}
+library(gdata)
+library(ggmap)
+library(gstat)
+library(nimble)
+library(sp)
+library(tidybayes)
+library(tidyverse)
+
+ditch_the_axes <- theme(
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  panel.border = element_blank(),
+  panel.grid = element_blank(),
+  axis.title = element_blank())
+
+perl <- "C:/Perl64/bin/perl5.28.1.exe" # add location of perl exe for read.xls
+#perl <- ("C:/Strawberry/perl/bin/perl5.32.1.exe")
+no2 <- read.xls("data/NO2Europe.xlsx", perl = perl)
+no2$AirPollutionLevel <- as.numeric(no2$AirPollutionLevel)
+colnames(no2)
+
+```
+
+
+```{r Ex 10.8 summary countries}
+summary_no2 <- group_by(no2, Country) |>
+  summarize(total = n(),
+            mean_country = mean(AirPollutionLevel, na.rm = TRUE)) |> as.data.frame()
+
+summary_no2[order(summary_no2$total, decreasing = TRUE),]
+```
+
+```{r Ex 10.8 plot map, warning=FALSE, message = FALSE}
+europe_map <- get_stamenmap(c(left = -25, bottom = 30, right = 30, top = 70),
+                            zoom = 5)
+
+
+ggmap(europe_map, darken = c(0.25, "white")) +
+  geom_point(data = no2,
+             aes(x = Longitude, y = Latitude, color = Country),
+             size = 2) + ditch_the_axes +
+  labs(x = "", y = "") + theme(text = element_text(size = 15)) 
+
+```
+
+```{r Ex 10.8 subsample no2 data}
+
+set.seed(321)
+
+no2_sample <- no2 |> 
+  filter(Longitude < 30 & Longitude > -25 & Latitude > 30 & Latitude < 70)
+
+
+no2_sample <- no2_sample |>
+  filter(Country == "Spain" | Country == "Germany" | Country == "France" | 
+           Country == "Italy" | Country == "United Kingdom" | 
+           Country == "Poland" | Country == "Austria" )
+
+no2_subsample <- no2_sample |> group_by(Country) |>  slice_sample(n = 128)
+dim(no2_subsample)
+
+
+ggmap(europe_map, darken = c(0.25, "white")) +
+  geom_point(data = no2_subsample,
+             aes(x = Longitude, y = Latitude, color = Country),
+             size = 2) + ditch_the_axes +
+  labs(x = "", y = "") + theme(text = element_text(size = 15)) 
+
+```
+
+
+```{r Ex 10.8 select covs and change coords}
+
+# Function to get utm coordinates since we have different utm zones
+# This function was obtained from: https://stackoverflow.com/questions/71573206/converting-latitude-and-longitude-data-to-utm-with-points-from-multiple-utm-zone
+
+get_utm <- function(x, y, zone, loc){
+  points = SpatialPoints(cbind(x, y), 
+                         proj4string = CRS("+proj=longlat +datum=WGS84"))
+  points_utm = spTransform(points, 
+                           CRS(paste0("+proj=utm +zone=", 
+                                      zone[1]," +ellps=WGS84")))
+  if (loc == "x") {
+    return(coordinates(points_utm)[,1])
+  } else if (loc == "y") {
+    return(coordinates(points_utm)[,2])
+  }
+}
+
+no2_utm <- rename(no2_subsample, x = Longitude, y = Latitude)
+
+no2_utm <-
+  mutate(no2_utm, zone2 = (floor((x + 180)/6) %% 60) + 1, keep = "all") |> 
+  group_by(zone2) |> 
+  mutate(utm_x = get_utm(x, y, zone2, loc = "x"),
+         utm_y = get_utm(x, y, zone2, loc = "y"))|> as.data.frame() |> 
+  select(utm_x, utm_y, Altitude, Country, AirPollutionLevel)  |> 
+ mutate( ID = c(1:896))
+
+no2_utm_geo <- no2_utm  
+# change coordinates to kms and turn into a Spatial object
+no2_utm_geo[,c("utm_x", "utm_y")] <- no2_utm_geo[,c("utm_x", "utm_y")]/1000
+coordinates(no2_utm_geo) <- ~ utm_x + utm_y
+
+```
+
+```{r Ex 10.8 plot variogram covariates}
+# Estimate variogram intercept only
+no2_inter_vgm <- variogram(log(AirPollutionLevel) ~ 1,
+                               data = no2_utm_geo,
+                              cutoff = 200,# cutoff distance
+                               width = 200 / 10) # bins width 
+
+no2_vgm_inter_fit <- fit.variogram(no2_inter_vgm,
+                                       model = vgm(0.8, "Exp", 15, 0.007))
+
+no2_vgm_inter_fit
+
+# Estimate variogram with coordinates and altitude
+no2_utm_vgm <- variogram(log(AirPollutionLevel) ~ utm_x + utm_y + Altitude,
+                               data = no2_utm_geo,
+                              cutoff = 200,# cutoff distance
+                               width = 200 / 10) # bins width 
+
+no2_vgm_fit <- fit.variogram(no2_utm_vgm,
+                                       model = vgm(0.8, "Exp", 15, 0.007))
+
+no2_vgm_fit
+
+plot_inter_variog <- plot(no2_inter_vgm, no2_vgm_inter_fit, 
+                          ylim=c(0,0.4), bty = "n")
+plot_coord_variog <- plot(no2_utm_vgm, no2_vgm_fit, ylim=c(0,0.4), bty = "n")
+
+cowplot::plot_grid(plot_inter_variog, plot_coord_variog, labels = "auto")
+```
+
+```{r Ex 10.8 change coords}
+
+# Change coordinates to kilometers and observations to the log scale
+no2_df <-
+  data.frame(
+    y = log(no2_utm$AirPollutionLevel),
+    easting =  no2_utm$utm_x / 1000,
+    northing = no2_utm$utm_y / 1000,
+    altitude = no2_utm$Altitude
+  )
+# Compute the distance matrix
+obsCoords <- unname(as.matrix(no2_df[,c("easting", "northing")]))
+
+obsDist <- fields::rdist(obsCoords)
+
+easting_scaled <- as.vector(scale(no2_df$easting))
+northing_scaled <- as.vector(scale(no2_df$northing))
+altitude_scaled <- as.vector(scale(no2_df$altitude))
+
+```
+
+
+:::: {.blackbox data-latex=""}
+::: {.center data-latex=""}
+**WARNING**
+:::
+Due to the number of locations this model can take a long time to run in a regular computer (more than 3 hours)
+::::
+
+```{r Ex 10.8 nimble model, eval = FALSE}
+
+NO2Code <-  nimbleCode ({
+  # Covariance matrix spatial effect
+  Sigma[1:n, 1:n] <-
+    sigma_sq * exp(-distMatrix[1:n, 1:n] / phi) + tau_sq * identityMatrix(d = n)
+
+    for (site in 1:n) {
+    mean.site[site] <-
+      beta0 + beta1 * easting[site] + beta2 * northing[site] + beta3 * altitude[site]
+  }
+  y[1:n]  ~  dmnorm(mean.site[1:n], cov = Sigma[1:n, 1:n])
+  # Set up the priors for the spatial model
+  sigma ~ T(dt(mu = 0, sigma = 1, df = 1), 0, Inf)
+  sigma_sq <- sigma^2
+  tau ~ T(dt(mu = 0, sigma = 1, df = 1), 0, Inf)
+  tau_sq <- tau^2
+  phi_inv ~ dgamma(shape =  5, rate = 5)
+  phi <- 1 / phi_inv
+  # prior for the coefficients
+  beta0 ~ dnorm (0, 10)
+  beta1 ~ dnorm (0, 10)
+  beta2 ~ dnorm (0, 10)
+  beta3 ~ dnorm (0, 10)
+  
+}) 
+
+# Define the constants, data, parameters and initial values
+set.seed(1)
+
+constants <-
+  list(n = nrow(no2_df))
+ex.data <-
+  list(y = no2_df$y,
+       easting = easting_scaled,
+       northing = northing_scaled,
+       altitude = altitude_scaled,
+       distMatrix = obsDist)
+params <- c( "beta0",  "beta1","beta2","beta3" ,"phi",  "tau", "sigma", "tau_sq", "sigma_sq")
+inits <- list( sigma = 0.1, phi_inv = 6/max(obsDist), tau = 0.1)
+# Run model in nimble
+start_time <- Sys.time()
+
+mcmc.out <- nimbleMCMC(
+  code = NO2Code,
+  constants = constants,
+  data = ex.data,
+  inits = inits,
+  monitors = params,
+  niter = 40000,
+  nburnin = 20000,
+  thin = 14,
+  WAIC = TRUE,
+  nchains = 2,
+  summary = TRUE,
+  samplesAsCodaMCMC = TRUE
+)
+end_time <- Sys.time()
+run_time <- end_time - start_time
+run_time
+```
+
+
+```{r  Ex 10.8 load previously ran data, include=FALSE}
+mcmc.out <- readRDS("data/mcmc_out.rds")
+```
+
+
+
+
+```{r  Ex 10.8 eff traceplots and summary}
+min(coda::effectiveSize(mcmc.out$samples))
+plot(mcmc.out$samples[, c("beta0")], bty = "n", main = "beta0")
+plot(mcmc.out$samples[, c("beta1")], bty = "n", main = "beta1")
+plot(mcmc.out$samples[, c("beta2")], bty = "n", main = "beta2")
+plot(mcmc.out$samples[, c("beta3")], bty = "n", main = "beta3")
+plot(mcmc.out$samples[, c("sigma")], bty = "n", main = "sigma")
+plot(mcmc.out$samples[, c("tau")], bty = "n", main = "tau")
+plot(mcmc.out$samples[, c("phi")], bty = "n", main = "phi")
+mcmc.out$summary$all.chains[c("beta0", "beta1", "beta2", "beta3","sigma", "tau", "phi"), ]
+```
+
+
+```{r  Ex 10.8 read grid, message = FALSE, warning=FALSE, results='hide'}
+library(rgdal)
+
+grid <- sf::st_read("data/grid/10km_grid.shp")
+covs_grid <- read.csv("../data/grid/centroids_altitude.csv")
+
+covs_grid_utm <- rename(covs_grid, x = lon, y = lat)
+
+covs_grid_utm <-
+  mutate(covs_grid_utm, zone2 = (floor((x + 180)/6) %% 60) + 1, keep = "all") |> 
+  group_by(zone2) |> 
+  mutate(utm_x = get_utm(x, y, zone2, loc = "x"),
+         utm_y = get_utm(x, y, zone2, loc = "y"))|> as.data.frame() |> 
+  select(id, utm_x, utm_y, starts_with("eu_dem_v11")) |> 
+  gather(layer, altitude, -c(id, utm_x, utm_y), na.rm = TRUE) 
+
+
+# Scale covariates grid
+covs_grid_sc <- covs_grid_utm[,c("utm_x", "utm_y", "altitude")]
+predCoords <- covs_grid_utm[,c("utm_x", "utm_y")]/1000
+
+
+covs_grid_sc$utm_x <- ((covs_grid_sc$utm_x/1000) - mean(no2_df$easting))/sd(no2_df$easting)
+covs_grid_sc$utm_y <- ((covs_grid_sc$utm_y/1000) - mean(no2_df$northing))/sd(no2_df$northing)
+covs_grid_sc$altitude <- (covs_grid_sc$altitude - mean(no2_df$altitude))/sd(no2_df$altitude)
+
+```
+
+```{r  Ex 10.8 spatial predictions using Rcpp, cache=TRUE}
+# Extract samples from nimble model
+tidy_post_samples <- mcmc.out$samples |> tidy_draws()
+
+# Extract posterior samples for each of the parameters of interest
+post_beta0 <- tidy_post_samples$beta0 |> median()
+post_beta1 <- tidy_post_samples$beta1 |> median()
+post_beta2 <- tidy_post_samples$beta2 |> median()
+post_beta3 <- tidy_post_samples$beta3 |> median()
+
+post_sigmasq <- tidy_post_samples$sigma_sq |> median()
+post_phi <- tidy_post_samples$phi |> median()
+post_tausq <- tidy_post_samples$tau_sq |> median()
+
+n0 <- nrow(covs_grid_sc)
+# L <- length(post_tausq)
+L <- 1
+
+obsMu <- cbind(1, easting_scaled, northing_scaled, altitude_transf_scaled) %*% t(cbind(post_beta0, post_beta1, post_beta2, post_beta3))
+
+predMu <- cbind(1, as.matrix(covs_grid_sc)) %*% t(cbind(post_beta0, post_beta1, post_beta2, post_beta3))
+
+pred2obsDist <- fields::rdist(predCoords, obsCoords)
+
+
+Rcpp::sourceCpp("prediction_marginal_gp12.cpp")
+args(prediction_marginal_gp12)
+system.time(
+  pred_samples <- prediction_marginal_gp12(
+    y = no2_df$y,
+    obsMu = obsMu,
+    predMu = predMu,
+    obsDistMat = obsDist,
+    pred2ObsDistMat = pred2obsDist,
+    sigmasq = post_sigmasq,
+    phi = post_phi,
+    tausq = post_tausq,
+    iterprint = 100
+  )
+)
+
+#grid$pred <- pred_samples
+covs_grid_utm <- mutate(covs_grid_utm, pred = pred_samples)
+
+cut_grid <- grid[(grid$id %in% covs_grid_utm$id),]
+cut_grid <- cut_grid[order(cut_grid$id, decreasing = FALSE),]
+covs_grid_utm <- covs_grid_utm[order(covs_grid_utm$id, decreasing = FALSE),]
+cut_grid$pred <- covs_grid_utm$pred
+
+ggplot() + geom_sf(data = cut_grid, colour = NA, aes(fill = pred)) + 
+  ditch_the_axes + scale_fill_viridis_c(direction = -1, name = "log NO2 concentration") 
+``` 
 
 
 ## Example 10.9 Spatial modelling of Benzene in Montreal {-}
@@ -1107,17 +1446,14 @@ Example10_14_Nimble <- nimbleCode({
   Sigma[1:N, 1:N] <-
      sigma_sq*(1 + (sqrt(3)*obs_dist_mat[1:N, 1:N])/phi) * exp(-sqrt(3)*obs_dist_mat[1:N, 1:N] / phi) 
 
-  #b0[1:N] ~ dmnorm(zeroes[1:N], cov = Id10[1:N, 1:N])
-  #mean_S[1:N] <- nimRep(b0, N)
     for(i in 1:N){
     mean_S[i] <- b0
     }
   
-  #S[1:N] ~ dmnorm(mean_S[1:N], cov = Sigma[1:N,1:N])
-    S[1:N] ~ dmnorm(zeroes[1:N], cov = Sigma[1:N,1:N])
-  
+  S[1:N] ~ dmnorm(mean_S[1:N], cov = Sigma[1:N,1:N])
+
     for (j in 1:n) {  # by child
-    logit(p[j])  <- b0 + inprod(b[1:k], X[j,1:k]) + S[index_village[j]]
+    logit(p[j])  <- inprod(b[1:k], X[j,1:k]) + S[index_village[j]]
     y[j] ~ dbern(p[j])
     }
 
