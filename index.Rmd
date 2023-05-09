@@ -14,7 +14,8 @@ output:
       theme: lumen
 link-citations: yes
 cover-image: "img/cover.jpg"
-bibliography: references.bib 
+bibliography: ["references.bib"]
+biblio-style: "apalike"
 
 ---
 

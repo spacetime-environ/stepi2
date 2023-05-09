@@ -1,8 +1,3 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
 # Environmental hazards-spatial models {#hazards}
 
 This chapter contains the basic theory for spatial processes and a number of approaches to modelling point-referenced spatial data. From this chapter, the reader will have gained an understanding of the following topics:
@@ -16,7 +11,7 @@ This chapter contains the basic theory for spatial processes and a number of app
 
 <!-- NOTE: Unlike some of the other chapters you have to run this code sequentially -->
 
-## Example 10.1 Spatial patterns in lead concentrations {-}
+## Example 10.1 Spatial patterns in lead concentrations in the soil of the Meuse River flood plain {-}
 
 ```{r Ex 10.1 meuse river, results='hide'}
 library(geoR)
@@ -65,7 +60,7 @@ plot(meuse_geodata)
 ```
 
 
-## Example 10.2: Examining the log concentrations of lead {-}
+## Example 10.2: Examining the log concentrations of lead in the Meuse River flood plain {-}
 
 ```{r Figure 10.3}
 
@@ -83,90 +78,14 @@ meuse_df <-  as.data.frame(meuse)
 coplot( lead ~ y | x, data = meuse_df)
 ```
 
-
-
-## EXTRA: Example 10.1: Spatial patterns of benzene concentrations in Montreal, QC, Canada {-}
-
-Map the locations of the monitoring stations in Montreal.
-
-This example uses the [montreal_benzene_apr.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/montreal_benzene_apr.csv)
-
-```{r Ex 10.1 load data, message = FALSE, warning=FALSE, error=FALSE}
-library(cowplot)
-library(geoR)
-library(ggmap)
-library(spdep)
-# Load data on benzene concentration in Montreal
-benzene <- read.csv("data/montreal_benzene_apr.csv")
-# TODO: Add description of the data, this is the April campaign
-```
-
-```{r Ex 10.1 map data, message = FALSE, warning=FALSE, error=FALSE}
-# create a new variable in "sp" format and define coordinates
-benzene_geo <- benzene
-coordinates(benzene_geo) <- ~ lon + lat
-proj4string(benzene_geo) <- CRS("+proj=longlat +datum=WGS84")
-# specify the bounding box
-latLongBox = bbox(benzene_geo)
-location = c(latLongBox[1, 1] - 0.05,
-             latLongBox[2, 1] - 0.05,
-             latLongBox[1, 2] + 0.1,
-             latLongBox[2, 2] + 0.05)
-# create map with location dots marked on it in
-MontrelBenzeneMap <-
-  get_stamenmap(bbox =  location,
-                zoom = 10)
-ggmap(MontrelBenzeneMap) + geom_point(
-  data = benzene,
-  aes(x = lon,
-      y = lat,
-      size = Benzene),
-  col = "#011f4b",
-  alpha = 0.45
-) + theme_void()
-
-```
-
-Using the `geoR` package we can also plot the following:
-
--  the locations of the sampling sites 
--  the concentrations of ozone in relation to the x and y coordinates
-- and a histogram of the concentrations indicating the distribution of concentrations together with an estimate of the density.
-
-```{r Ex 10.1 geoR plot}
-# convert data to utm coordinates
-benzene_utm <- spTransform(benzene_geo,
-                           CRS("+proj=utm +zone=18 +ellps=WGS72"))
-# Save the utm as a data frame
-benzene_utm_df <- as.data.frame(benzene_utm)
-colnames(benzene_utm_df) <- c("Benzene", "X", "Y")
-# Save as geodata to generate the geodata plot
-benzene_geodata <- as.geodata(benzene_utm_df,
-                              coords.col = 2:3, data.col = 1)
-plot(benzene_geodata)
-```
-
-
-## EXTRA: Example 10.2: Examining the log concentrations of benzene in Montreal {-}
-
-```{r Ex 10.2 plot hist and qqplot log}
-# Histogram for the log of the benzene concentration
-par(mfrow = c(1, 2))
-log_histogram <-
-  hist(log(benzene$Benzene), main = "", xlab = "log(Benzene)")
-qqnorm(log(benzene$Benzene), bty = "n")
-qqline(log(benzene$Benzene))
-
-```
-<!-- NOTE: I don't know how to generate the plot in Figure 9.4 -->
 ## Example 10.3: Mapping the locations of ozone monitoring sites in New York State {-}
 
-This example uses the coordinates in the [NY_metadata.txt](https://github.com/spacetime-environ/stepi2/blob/main/data/NY_metadata.txt) file.
+This example uses the coordinates in the [NY_metadata.txt](https://github.com/spacetime-environ/stepi2/blob/main/data/ozone/NY_metadata.txt) file.
 
 
 ```{r Ex 10.3 plot ozone sites NY, message = FALSE, warning=FALSE, error=FALSE}
 # Load the metadata giving the site coordinates 
-ny_data <- read.csv("data/NY_metadata.txt", sep = "")
+ny_data <- read.csv("data/ozone/NY_metadata.txt", sep = "")
 # Now copy ny_data into ny_data_sp and convert data to "sp" format
 ny_data_sp <- ny_data
 coordinates(ny_data_sp) <- ~ Longitude + Latitude
@@ -176,7 +95,7 @@ proj4string(ny_data_sp) <- CRS("+proj=longlat +ellps=WGS84")
 
 # We next specify a bounding box - a 2 x 2 matrix of corners of the geographic
 # area. Then specify the range of locations within the box.
-# Note: location must bounding box format be in left -bottom -right -top
+# Note:  location must be in left-bottom-right-top bounding box format
 latLongBox  <-  bbox(ny_data_sp)
 location <-  c(latLongBox [1, 1] - 0.2 ,
                latLongBox [2, 1] - 0.2,
@@ -196,82 +115,68 @@ ggmap(NYmap) + geom_point(
 ```
 
 
-## Example 10.5: Variogram {-}
-
-```{r Ex 10.5 plot variogram}
-library(gstat)
-benzene_utm_geo <- benzene_utm_df
-# get the coordinates in kms and turn into a Spatial object
-benzene_utm_geo[,c("X", "Y")] <- benzene_utm_geo[,c("X", "Y")]/1000
-coordinates(benzene_utm_geo) <- ~ X + Y
-# Estimate variogram intercept only
-benzene_inter_vgm <- variogram(log(Benzene) ~ 1,
-                               data = benzene_utm_geo,
-                               cutoff = 20,# cutoff distance
-                               width = 20 / 10) # bins width 
+## Example 10.6: Spatial prediction of temperatures in California {-}
 
 
-benzene_inter_vgm_fit <- fit.variogram(benzene_inter_vgm,
-                                       model = vgm(0.1, "Exp", 15, 0.02))
+```{r Ex 10.6 plot variogram}
 
-benzene_inter_vgm_fit
+# REVIEW: There is something wrong with this dataset, it is impossible to have this temperatures
+# most likely all the data has to be divided by 10
 
-# Estimate variogram using coordinates
-benzene_vgm <- variogram(log(Benzene) ~ X + Y, 
-                         data = benzene_utm_geo,
-                         cutoff = 20, # cutoff distance
-                         width = 20 / 10) # bins width
+library(geoR)
+library(sp)
+
+### First we load the data
+CAmetadata <- read.table("data/metadataCA.txt", header = TRUE)
+CATemp <- read.csv("data/MaxCaliforniaTemp.csv", header = TRUE)
+CATemp_20120901 <- CATemp[CATemp$X == 20120901, -c(1,14)]
+CATemp_20120901 <- t(CATemp_20120901)
+### Change names of lat, long
+names(CAmetadata)[names(CAmetadata)=="Long"]<-"x"
+names(CAmetadata)[names(CAmetadata)=="Lat"]<-"y"
+
+### Augment data file with coordinates
+CATemp_20120901 <- cbind(CAmetadata, CATemp_20120901/10)
+names(CATemp_20120901)[names(CATemp_20120901) == "245"] <- "Temp"
+coordinates(CATemp_20120901) <- ~x +y
+
+CAgstat.vario <- variogram(Temp ~ x+y, CATemp_20120901)
+#CAgstat.vario <- variogram(Temp ~ 1, CATemp_20120501, print.SSE = TRUE)
+
+CATemp.variofit <- fit.variogram(CAgstat.vario,
+vgm(10, "Exp", 1, 0.1))
+
+# Plot variogram and fit
+
+plot(CAgstat.vario, CATemp.variofit, bty = "n")
 
 
-benzene_vgm_fit <- fit.variogram(benzene_vgm, model = vgm(0.1, "Exp", 3, 0.02))
-benzene_vgm_fit
+### Examine the fit
+summary(CATemp.variofit)
 
-plot_inter_variog <- plot(benzene_inter_vgm, benzene_inter_vgm_fit, bty = "n")
-plot_coord_variog <- plot(benzene_vgm, benzene_vgm_fit, bty = "n")
 
-plot_grid(plot_inter_variog, plot_coord_variog, labels = "auto")
 ```
 
 
-## Example 10.6 Basic spatial modelling and prediction of benzene in Montreal {-}
+
+```{r Ex 10.6 grid predictions}
+
+# Create the grid on which to make the spatial predictions
+CAPred.loci <- expand.grid(seq(-125, -115, 0.1), seq(32, 42, 0.1))
+names(CAPred.loci)[names(CAPred.loci) == "Var1"] <- "x"
+names(CAPred.loci)[names(CAPred.loci) == "Var2"] <- "y"
+coordinates(CAPred.loci) = ~ x + y
+gridded(CAPred.loci) = TRUE
+mod <- vgm(14, "Exp", 1.1, 0.01)
+
+# Get the monitoring locations
+monitor_loc <- list('sp.points', CATemp_20120901, pch=19, cex=.8, col='cornsilk4')
 
 
-```{r Ex 10.6 kriging predictions, message = FALSE, warning=FALSE, error=FALSE}
-# Generate grid
-MtlPred <- expand.grid(seq (580, 615 , 0.5),
-                             seq (5020, 5060 , 0.5) )
-# change names grid
-names(MtlPred)[ names(MtlPred)=="Var1"] <- "X"
-names(MtlPred)[ names(MtlPred)=="Var2"] <- "Y"
-# make the grid a Spatial object
-coordinates (MtlPred) = ~ X + Y
-gridded(MtlPred) = TRUE
-# define the model based on the variogram fit from the previous example
-mod <- vgm (0.053 , "Exp", 5.54, 0.0122)
-# use ordinary kriging to predict values in the grid
-x <- krige(log(Benzene) ~ X + Y, benzene_utm_geo , MtlPred , model = mod )
-# Plot the ordinary kriging predictions and their variance
-
-monitor_loc <- list('sp.points', benzene_utm_geo, pch=19, cex=.8, col='cornsilk4')
-
-krig_pred <-
-  spplot (
-    x["var1.pred"],
-    main = "Ordinary kriging predictions ",
-    col.regions = viridis::plasma(60),
-    sp.layout = list(monitor_loc),
-    at = seq(-0.3, 0.8, 0.02)
-  )
-krig_var <-
-  spplot (
-    x["var1.var"],
-    main = "Ordinary kriging variance ",
-    col.regions = viridis::plasma(60),
-    sp.layout = list(monitor_loc),
-    at = seq(0, 0.2, 0.01)
-  )
-
-plot_grid(krig_pred, krig_var, labels = "auto")
+# ordinary kriging:
+x <- krige(Temp ~ 1, CATemp_20120901, CAPred.loci, model = mod)
+spplot(x["var1.pred"], main = "ordinary kriging predictions", sp.layout = list(monitor_loc), )
+spplot(x["var1.var"], main = "ordinary kriging variance", sp.layout = list(monitor_loc), )
 
 ```
 
@@ -299,9 +204,9 @@ ditch_the_axes <- theme(
   panel.grid = element_blank(),
   axis.title = element_blank())
 
-perl <- "C:/Perl64/bin/perl5.28.1.exe" # add location of perl exe for read.xls
-#perl <- ("C:/Strawberry/perl/bin/perl5.32.1.exe")
-no2 <- read.xls("data/NO2Europe.xlsx", perl = perl)
+#perl <- "C:/Perl64/bin/perl5.28.1.exe" # add location of perl exe for read.xls
+perl <- ("C:/Strawberry/perl/bin/perl5.32.1.exe")
+no2 <- read.xls("data/no2_europe/NO2Europe.xlsx", perl = perl)
 no2$AirPollutionLevel <- as.numeric(no2$AirPollutionLevel)
 colnames(no2)
 
@@ -513,10 +418,8 @@ run_time
 
 
 ```{r  Ex 10.8 load previously ran data, include=FALSE}
-mcmc.out <- readRDS("data/mcmc_out.rds")
+mcmc.out <- readRDS("data/no2_europe/mcmc_out.rds")
 ```
-
-
 
 
 ```{r  Ex 10.8 eff traceplots and summary}
@@ -535,8 +438,8 @@ mcmc.out$summary$all.chains[c("beta0", "beta1", "beta2", "beta3","sigma", "tau",
 ```{r  Ex 10.8 read grid, message = FALSE, warning=FALSE, results='hide'}
 library(rgdal)
 
-grid <- sf::st_read("data/grid/10km_grid.shp")
-covs_grid <- read.csv("../data/grid/centroids_altitude.csv")
+grid <- sf::st_read("data/no2_europe/10km_grid.shp")
+covs_grid <- read.csv("data/no2_europe/centroids_altitude.csv")
 
 covs_grid_utm <- rename(covs_grid, x = lon, y = lat)
 
@@ -578,14 +481,14 @@ n0 <- nrow(covs_grid_sc)
 # L <- length(post_tausq)
 L <- 1
 
-obsMu <- cbind(1, easting_scaled, northing_scaled, altitude_transf_scaled) %*% t(cbind(post_beta0, post_beta1, post_beta2, post_beta3))
+obsMu <- cbind(1, easting_scaled, northing_scaled, altitude_scaled) %*% t(cbind(post_beta0, post_beta1, post_beta2, post_beta3))
 
 predMu <- cbind(1, as.matrix(covs_grid_sc)) %*% t(cbind(post_beta0, post_beta1, post_beta2, post_beta3))
 
 pred2obsDist <- fields::rdist(predCoords, obsCoords)
 
 
-Rcpp::sourceCpp("prediction_marginal_gp12.cpp")
+Rcpp::sourceCpp("functions/prediction_marginal_gp12.cpp")
 args(prediction_marginal_gp12)
 system.time(
   pred_samples <- prediction_marginal_gp12(
@@ -601,7 +504,6 @@ system.time(
   )
 )
 
-#grid$pred <- pred_samples
 covs_grid_utm <- mutate(covs_grid_utm, pred = pred_samples)
 
 cut_grid <- grid[(grid$id %in% covs_grid_utm$id),]
@@ -610,742 +512,77 @@ covs_grid_utm <- covs_grid_utm[order(covs_grid_utm$id, decreasing = FALSE),]
 cut_grid$pred <- covs_grid_utm$pred
 
 ggplot() + geom_sf(data = cut_grid, colour = NA, aes(fill = pred)) + 
-  ditch_the_axes + scale_fill_viridis_c(direction = -1, name = "log NO2 concentration") 
+  ditch_the_axes + scale_fill_viridis_c(direction = -1, name = bquote("log" ~NO[2]* " concentration"))
 ``` 
+## Example 10.10 Creating a mesh: black smoke monitoring locations in the UK
+
+```{r Ex 10.10 create mesh, eval = FALSE}
+mesh = inla.mesh.create(
+  locations[, 1:2],
+  extend = list(offset = -0.1),
+  cutoff = 1,
+  # Refined triangulation, minimal angles >=26 degrees ,
+  # interior maximal edge lengths 0.08,
+  # exterior maximal edge lengths 0.2:
+  refine = (list(
+    min.angle = 26,
+    max.edge.data = 100,
+    max.edge.extra = 200
+  ))
+)
+
+ukmap <-
+  readShapeLines("uk_BNG.shp") plot(mesh , col = "gray", main = "")
+lines(ukmap)
+points(locations ,
+       col = "red",
+       pch = 20,
+       bg = "red") 
+```
 
 
-## Example 10.9 Spatial modelling of Benzene in Montreal {-}
+## Example 10.12 Plotting directional variograms for temperatures in California
 
-This example uses the [montreal_benzene_apr.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/montreal_benzene_apr.csv)
+```{r Ex 10.12 clean, include = FALSE}
+rm(list=ls())
+```
 
-### Nimble {-}
+```{r Ex 10.12 directional variogram, message=FALSE, warning=FALSE}
 
-
-```{r Ex 10.9 load data, message = FALSE, warning=FALSE, error=FALSE}
-library(coda)
 library(geoR)
-library(magrittr)
-library(nimble)
-library(spdep)
-library(tidyverse)
-library(tidybayes)
-
-```
-
-```{r Ex 10.9 benzene to spatial data, message = FALSE, warning=FALSE, error=FALSE}
-# Load data on benzene concentration in Montreal
-benzene <- read.csv("data/montreal_benzene_apr.csv")
-# create a new variable in "sp" format and define coordinates
-benzene_geo <- benzene
-coordinates(benzene_geo) <- ~ lon + lat
-proj4string(benzene_geo) <- CRS("+proj=longlat +datum=WGS84")
-
-benzene_utm <- spTransform(benzene_geo,
-                        CRS("+proj=utm +zone=18 +ellps=WGS72"))
-# Save the utm as a data frame
-benzene_utm_df <- as.data.frame(benzene_utm)
-# Change coordinates to kilometers and observations to the log scale
-Mtl_benzene_sample <-
-  data.frame(
-    y = log(benzene_utm_df$Benzene),
-    easting =  benzene_utm_df$lon / 1000,
-    northing = benzene_utm_df$lat / 1000
-  )
-# Compute the distance matrix
-obsCoords <- unname(as.matrix(Mtl_benzene_sample[,c("easting", "northing")]))
-
-obsDist <- fields::rdist(obsCoords)
-  
-```
-
-
-```{r Ex 10.9 nimble model, error = FALSE, message = FALSE, results='hide', cache = TRUE}
-
-Example10_9Code <-  nimbleCode ({
-  # Covariance matrix spatial effect
-  Sigma[1:n, 1:n] <-
-    sigma_sq * exp(-distMatrix[1:n, 1:n] / phi) + tau_sq * identityMatrix(d = n)
-
-    for (site in 1:n) {
-    mean.site[site] <-
-      beta0 + beta1 * easting[site] + beta2 * northing[site]
-  }
-  y[1:n]  ~  dmnorm(mean.site[1:n], cov = Sigma[1:n, 1:n])
-  # Set up the priors for the spatial model
-  sigma ~ T(dt(mu = 0, sigma = 1, df = 1), 0, Inf)
-  sigma_sq <- sigma^2
-  tau ~ T(dt(mu = 0, sigma = 1, df = 1), 0, Inf)
-  tau_sq <- tau^2
-  phi_inv ~ dgamma(shape =  5, rate = 5)
-  phi <- 1 / phi_inv
-  # prior for the coefficients
-  beta0 ~ dnorm (0, 10)
-  beta1 ~ dnorm (0, 10)
-  beta2 ~ dnorm (0, 10)
-  
-}) 
-
-# Define the constants, data, parameters and initial values
-set.seed(1)
-easting_scaled <- as.vector(scale(Mtl_benzene_sample$easting))
-northing_scaled <- as.vector(scale(Mtl_benzene_sample$northing))
-
-constants <-
-  list(n = nrow(Mtl_benzene_sample))
-ex.data <-
-  list(y = Mtl_benzene_sample$y,
-       easting = easting_scaled,
-       northing = northing_scaled,
-       distMatrix = obsDist)
-params <- c( "beta0",  "beta1","beta2", "phi",  "tau", "sigma", "tau_sq", "sigma_sq")
-inits <- list( sigma = 0.1, phi_inv = 6/max(obsDist), tau = 0.1)
-# Run model in nimble
-start_time <- Sys.time()
-
-mcmc.out <- nimbleMCMC(
-  code = Example10_9Code,
-  constants = constants,
-  data = ex.data,
-  inits = inits,
-  monitors = params,
-  niter = 40000,
-  nburnin = 20000,
-  thin = 14,
-  WAIC = TRUE,
-  nchains = 2,
-  summary = TRUE,
-  samplesAsCodaMCMC = TRUE
-)
-end_time <- Sys.time()
-run_time <- end_time - start_time
-run_time
-
-```
-
-```{r Ex 10.9 nimble WAIC, ESS and traceplots}
-mcmc.out$WAIC
-min(coda::effectiveSize(mcmc.out$samples))
-plot(mcmc.out$samples[, c("beta0")], bty = "n", main = "beta0")
-plot(mcmc.out$samples[, c("beta1")], bty = "n", main = "beta1")
-plot(mcmc.out$samples[, c("beta2")], bty = "n", main = "beta2")
-plot(mcmc.out$samples[, c("sigma")], bty = "n", main = "sigma")
-plot(mcmc.out$samples[, c("tau")], bty = "n", main = "tau")
-plot(mcmc.out$samples[, c("phi")], bty = "n", main = "phi")
-mcmc.out$summary$all.chains[c("beta0", "beta1", "beta2", "sigma_sq", "tau_sq", "phi"), ]
-```
-
-```{r Ex 10.9 nimble rediction locations}
-# Obtain coordinates for predictions 
-# note that we are using the same coordinates as the one generated for 
-# the kriging example
-Mtl_centroids_df <- as.data.frame(MtlPred)
-predCoords <- unname(as.matrix(Mtl_centroids_df))
-
-```
-
-
-Following the posterior predictive distribution we have to define a model for the predictions. 
-
-```{r Ex 10.9 nimble predictions using Rcpp, cache=TRUE}
-# Extract samples from nimble model
-tidy_post_samples <- mcmc.out$samples |> tidy_draws()
-
-# Extract posterior samples for each of the parameters of interest
-post_beta0 <- tidy_post_samples$beta0
-post_beta1 <- tidy_post_samples$beta1
-post_beta2 <- tidy_post_samples$beta2
-post_sigmasq <- tidy_post_samples$sigma_sq
-post_phi <- tidy_post_samples$phi
-post_tausq <- tidy_post_samples$tau_sq
-
-# Scale coordinates for predictive locations
-predCoords_sc <- predCoords 
-predCoords_sc[,1] <-
-  (predCoords_sc[,1] - mean(Mtl_benzene_sample$easting)) / sd(Mtl_benzene_sample$easting)
-predCoords_sc[,2] <- 
-  (predCoords_sc[,2] - mean(Mtl_benzene_sample$northing)) / sd(Mtl_benzene_sample$northing)
-  
-n0 <- nrow(predCoords_sc)
-L <- length(post_tausq)
-
-obsMu <- cbind(1, easting_scaled, northing_scaled) %*% t(cbind(post_beta0, post_beta1, post_beta2))
-
-predMu <- cbind(1, as.matrix(predCoords_sc)) %*% t(cbind(post_beta0, post_beta1, post_beta2))
-
-pred2obsDist <- fields::rdist(predCoords, obsCoords)
-
-
-Rcpp::sourceCpp("functions/prediction_marginal_gp12.cpp")
-args(prediction_marginal_gp12)
-system.time(
-  pred_samples <- prediction_marginal_gp12(
-    y = Mtl_benzene_sample$y,
-    obsMu = obsMu,
-    predMu = predMu,
-    obsDistMat = obsDist,
-    pred2ObsDistMat = pred2obsDist,
-    sigmasq = post_sigmasq,
-    phi = post_phi,
-    tausq = post_tausq,
-    iterprint = 1000
-  )
-)
-
-predict_res_dt <- data.frame(
-  xcoord = predCoords[, 1],
-  ycoord = predCoords[, 2],
-  post.mean = apply(pred_samples, 1, mean),
-  post.var = apply(pred_samples, 1, var),
-  q2.5 = apply(pred_samples, 1, function(x)
-    quantile(x, prob = 0.025)),
-  q50 = apply(pred_samples, 1, function(x)
-    quantile(x, prob = 0.5)),
-  q97.5 = apply(pred_samples, 1, function(x)
-    quantile(x, prob = 0.975))
-)
-
-
-```
-
-
-
-```{r Ex 10.9 nimble plot predictions, messages = FALSE}
-
-x$nimble.pred <- predict_res_dt$post.mean
-x$nimble.var <- predict_res_dt$post.var
-
-nimble_pred <-
-  spplot (
-    x["nimble.pred"],
-    main = "Nimble spatial predictions ",
-    col.regions = viridis::plasma(60),
-    sp.layout = list(monitor_loc),
-    at = seq(-0.3, 0.8, 0.02)
-  )
-nimble_var <-
-  spplot (
-    x["nimble.var"],
-    main = "Nimble predictions variance ",
-    col.regions = viridis::plasma(60),
-    sp.layout = list(monitor_loc),
-    at = seq(0, 0.2, 0.01)
-
-  )
-
-plot_grid(nimble_pred, nimble_var, labels = "auto")
-
-predict_res_dt$post.mean[1:5]
-predict_res_dt$post.var[1:5]
-```
-
-### Stan {-}
-
-```{r Ex 10.9 load stan, message=FALSE, echo = FALSE, warning=FALSE, message= FALSE}
-# load rstan with options
-library(geoR)
-library(rstan)
-library(spdep)
-options(mc.cores = parallel::detectCores())
-rstan_options(auto_write = TRUE)
-```
-
-
-```{r Ex 10.9 stan load data}
-benzene_data <- read.csv("data/montreal_benzene_apr.csv")
-# create a new variable in "sp" format and define coordinates
-benzene_data_geo <- benzene_data
-coordinates(benzene_data_geo) <- ~ lon + lat
-proj4string(benzene_data_geo) <- CRS("+proj=longlat +datum=WGS84")
-
-benzene_data_utm <- spTransform(benzene_data_geo,
-                        CRS("+proj=utm +zone=18 +ellps=WGS72"))
-# Save the utm as a data frame
-benzene_utm_df <- as.data.frame(benzene_data_utm)
-# change the observed values to the log scale and the coordinates to km's
-Mtl_benzene_sample <-
-  data.frame(
-    y = log(benzene_utm_df$Benzene),
-    easting =  benzene_utm_df$lon / 1000,
-    northing = benzene_utm_df$lat / 1000
-  )
-# Compute the distance matrix
-obsCoords <- unname(as.matrix(Mtl_benzene_sample[,c("easting", "northing")]))
-
-obsDist <- fields::rdist(obsCoords)
-
-```
-
-
-
-```{r engine='bash', comment='', echo = FALSE}
-cat functions/Example10_9.stan
-``` 
-
-
-```{r Ex 10.9 stan exponential model, warning = FALSE, message = FALSE, cache = TRUE}
-set.seed(1)
-easting_scaled <- as.vector(scale(Mtl_benzene_sample$easting))
-northing_scaled <- as.vector(scale(Mtl_benzene_sample$northing))
-
-N <- nrow(benzene_utm_df)
-# Change coordinates to kilometers
-X <- data.frame(easting = easting_scaled,
-                northing = northing_scaled) 
-
-ex.data <- list(
-  N = N,
-  p = 2,
-  y =   log(benzene_utm_df$Benzene),
-  dist_matrix = obsDist,
-  X = as.matrix(X)
-)
-
-Example10_9Stan  <- stan(
-  file = "functions/Example10_9.stan",
-  data = ex.data,
-  warmup = 10000,
-  iter = 20000,
-  chains = 2,
-  thin = 10,
-  pars = c("beta0", "beta", "sigma_sq", "tau_sq", "phi"),
-  include = TRUE
-)
-
-```
-
-
-```{r  Ex 10.9 stan exp traceplots, warning = FALSE}
-
-rstan::traceplot(Example10_9Stan, pars = c("beta0","beta","sigma_sq", "tau_sq", "phi"))
-
-```
-
-```{r Ex 10.9 stan exp results}
-summary_exp_stan <-
-  summary(
-    Example10_9Stan,
-    pars = c("beta0","beta", "sigma_sq", "tau_sq",  "phi"),
-    probs = c(0.025, 0.975)
-  )
-
-summary_exp_stan$summary
-
-```
-
-
-```{r Ex 10.9 stan rediction locations}
-# Obtain coordinates for predictions 
-# note that we are using the same coordinates as the one generated for 
-# the kriging example
-Mtl_centroids_df <- as.data.frame(MtlPred)
-predCoords <- unname(as.matrix(Mtl_centroids_df))
-
-```
-
-```{r Ex 10.9 stan predictions using Rcpp, cache = TRUE}
-# Extract samples from nimble model
-stan_post_samples <- rstan::extract(Example10_9Stan,
-    pars = c("beta0","beta", "phi", "sigma_sq", "tau_sq"))
-
-# Extract posterior samples for each of the parameters of interest
-post_beta0 <- stan_post_samples$beta0
-post_beta <- stan_post_samples$beta
-# post_beta2 <- stan_post_samples$beta2
-post_sigmasq <- stan_post_samples$sigma_sq
-post_phi <- stan_post_samples$phi
-post_tausq <- stan_post_samples$tau_sq
-
-# Scale coordinates for predictive locations
-predCoords_sc <- predCoords 
-predCoords_sc[,1] <-
-  (predCoords_sc[,1] - mean(Mtl_benzene_sample$easting)) / sd(Mtl_benzene_sample$easting)
-predCoords_sc[,2] <- 
-  (predCoords_sc[,2] - mean(Mtl_benzene_sample$northing)) / sd(Mtl_benzene_sample$northing)
-  
-n0 <- nrow(predCoords_sc)
-L <- length(post_tausq)
-
-obsMu <- cbind(1, easting_scaled, northing_scaled) %*% t(cbind(post_beta0, post_beta))
-
-predMu <- cbind(1, as.matrix(predCoords_sc)) %*% t(cbind(post_beta0, post_beta))
-
-pred2obsDist <- fields::rdist(predCoords, obsCoords)
-
-Rcpp::sourceCpp("functions/prediction_marginal_gp12.cpp")
-args(prediction_marginal_gp12)
-system.time(
-  pred_samples <- prediction_marginal_gp12(
-    y = Mtl_benzene_sample$y,
-    obsMu = obsMu,
-    predMu = predMu,
-    obsDistMat = obsDist,
-    pred2ObsDistMat = pred2obsDist,
-    sigmasq = post_sigmasq,
-    phi = post_phi,
-    tausq = post_tausq,
-    iterprint = 1000
-  )
-)
-
-predict_res_dt <- data.frame(
-  xcoord = predCoords[, 1],
-  ycoord = predCoords[, 2],
-  post.mean = apply(pred_samples, 1, mean),
-  post.var = apply(pred_samples, 1, var),
-  q2.5 = apply(pred_samples, 1, function(x)
-    quantile(x, prob = 0.025)),
-  q50 = apply(pred_samples, 1, function(x)
-    quantile(x, prob = 0.5)),
-  q97.5 = apply(pred_samples, 1, function(x)
-    quantile(x, prob = 0.975))
-)
-
-
-```
-
-
-
-```{r Ex 10.9 stan plot predictions, messages = FALSE}
-
-x$stan.pred <- predict_res_dt$post.mean
-x$stan.var <- predict_res_dt$post.var
-
-
-stan_pred <-
-  spplot (
-    x["stan.pred"],
-    main = "Stan spatial predictions ",
-    col.regions = viridis::plasma(60),
-    sp.layout = list(monitor_loc),
-    at = seq(-0.3, 0.8, 0.02)
-  )
-stan_var <-
-  spplot (
-    x["stan.var"],
-    main = "Stan predictions variance ",
-    col.regions = viridis::plasma(60),
-    sp.layout = list(monitor_loc),
-    at = seq(0, 0.2, 0.01)
-  )
-
-plot_grid(stan_pred, stan_var, labels = "auto")
-
-```
-
-## Example 10.10: Spatial predictions {-}
-
-
-### Nimble {-}
-```{r Ex 10.10 nimble prediction mcmc}
-# NOTE: I am just doing for 5 locations (please double-check my equations) and it instead of running in 2 minutes it runs in 6 (in case you want to highlight that). But we should discuss the order of this cause I am doing the predictions with Paritosh's code in the previous section.
-
-# Obtain coordinates for predictions 
-# note that we are using the same coordinates as the one generated for 
-# the kriging example
-Mtl_centroids_df <- as.data.frame(MtlPred)
-predCoords <- unname(as.matrix(Mtl_centroids_df))
-
-# Scale coordinates for predictive locations
-predCoords_sc <- predCoords 
-predCoords_sc[,1] <-
-  (predCoords_sc[,1] - mean(Mtl_benzene_sample$easting)) / sd(Mtl_benzene_sample$easting)
-predCoords_sc[,2] <- 
-  (predCoords_sc[,2] - mean(Mtl_benzene_sample$northing)) / sd(Mtl_benzene_sample$northing)
-
-# As an example we are only going to predict 5 locations  
-
-nu <- 5
-predCoords_five <- predCoords_sc[1:nu,]
-
-obs2predDist <- fields::rdist(obsCoords, predCoords[1:nu,])
-pred2predDist <- fields::rdist(predCoords[1:nu,])
-
-```
-
-```{r Example 10.10 spatial predictions nimble, results='hide', warning=FALSE, message=FALSE, cache = TRUE}
-
-Example10_10Code <-  nimbleCode ({
-  # Covariance matrix spatial effect
-  Sigma_obs[1:n, 1:n] <-
-    sigma_sq * exp(-distMatrix[1:n, 1:n] / phi) + tau_sq * identityMatrix(d = n)
-  
-  Sigma_pred[1:nu, 1:nu] <-
-    sigma_sq * exp(-distMatrixUnobs[1:nu, 1:nu] / phi) + tau_sq * identityMatrix(d = nu)
-  
-  Sigma_obs_pred[1:n, 1:nu] <-
-    sigma_sq * exp(-distMatrixObsUnobs[1:n, 1:nu] / phi) 
-  
-  for (site in 1:n) {
-    mean.site[site] <-
-      beta0 + beta1 * easting[site] + beta2 * northing[site]
-  }
-  y[1:n]  ~  dmnorm(mean.site[1:n], cov = Sigma_obs[1:n, 1:n])
-  
-  # Spatial predictions
-  
-  for (usite in 1:nu) {
-    mean.pred.site[usite] <-
-      beta0 + beta1 * easting_pred[usite] + beta2 * northing_pred[usite]
-  }
-  
-  mean_sigma[1:nu] <- t(Sigma_obs_pred[1:n, 1:nu])%*% 
-    inverse(Sigma_obs[1:n, 1:n])%*%(y[1:n] - mean.site[1:n])
-  
-  mu_pred[1:nu] <-
-    mean.pred.site[1:nu] + mean_sigma[1:nu]
-  
-  cov_pred[1:nu, 1:nu] <-
-    Sigma_pred[1:nu, 1:nu] - t(Sigma_obs_pred[1:n, 1:nu]) %*% inverse(Sigma_obs[1:n, 1:n]) %*% Sigma_obs_pred[1:n, 1:nu]
-  
-  y_pred[1:nu]  ~  dmnorm(mu_pred[1:nu], cov = cov_pred[1:nu, 1:nu])
-  
-  # Set up the priors for the spatial model
-  
-  sigma ~ T(dt(mu = 0, sigma = 1, df = 1), 0, Inf)
-  sigma_sq <- sigma ^ 2
-  tau ~ T(dt(mu = 0, sigma = 1, df = 1), 0, Inf)
-  tau_sq <- tau ^ 2
-  phi_inv ~ dgamma(shape =  5, rate = 5)
-  phi <- 1 / phi_inv
-  # prior for the coefficients
-  beta0 ~ dnorm (0, 10)
-  beta1 ~ dnorm (0, 10)
-  beta2 ~ dnorm (0, 10)
-  
-}) 
-
-# Define the constants, data, parameters and initial values
-set.seed(1)
-easting_scaled <- as.vector(scale(Mtl_benzene_sample$easting))
-northing_scaled <- as.vector(scale(Mtl_benzene_sample$northing))
-
-constants <-
-  list(n = nrow(Mtl_benzene_sample), nu = nu)
-ex.data <-
-  list(
-    y = Mtl_benzene_sample$y,
-    easting = easting_scaled,
-    northing = northing_scaled,
-    easting_pred = predCoords_five[,1],
-    northing_pred = predCoords_five[,2],
-    distMatrix = obsDist,
-    distMatrixUnobs = pred2predDist,
-    distMatrixObsUnobs = obs2predDist
-  )
-params <-
-  c("beta0",
-    "beta1",
-    "beta2",
-    "phi",
-    "tau",
-    "sigma",
-    "tau_sq",
-    "y_pred",
-    "sigma_sq")
-inits <- list(sigma = 0.1,
-              phi_inv = 6 / max(obsDist),
-              tau = 0.1)
-# Run model in nimble
-
-mcmc.out <- nimbleMCMC(
-  code = Example10_10Code,
-  constants = constants,
-  data = ex.data,
-  inits = inits,
-  monitors = params,
-  niter = 40000,
-  nburnin = 20000,
-  thin = 14,
-  WAIC = TRUE,
-  nchains = 2,
-  summary = TRUE,
-  samplesAsCodaMCMC = TRUE
-)
-
-
-```
-
-```{r Ex 10.10 nimble WAIC, ESS and traceplots}
-mcmc.out$WAIC
-min(coda::effectiveSize(mcmc.out$samples))
-plot(mcmc.out$samples[, c("beta0")], bty = "n", main = "beta0")
-plot(mcmc.out$samples[, c("beta1")], bty = "n", main = "beta1")
-plot(mcmc.out$samples[, c("beta2")], bty = "n", main = "beta2")
-plot(mcmc.out$samples[, c("sigma")], bty = "n", main = "sigma")
-plot(mcmc.out$samples[, c("tau")], bty = "n", main = "tau")
-plot(mcmc.out$samples[, c("phi")], bty = "n", main = "phi")
-mcmc.out$summary$all.chains
-```
-### Stan{-}
-
-
-```{r Ex 10.10 stan load data}
-
-# Load data predictions
-# Obtain coordinates for predictions 
-# note that we are using the same coordinates as the one generated for 
-# the kriging example
-Mtl_centroids_df <- as.data.frame(MtlPred)
-predCoords <- unname(as.matrix(Mtl_centroids_df))
-
-# Scale coordinates for predictive locations
-predCoords_sc <- predCoords 
-predCoords_sc[,1] <-
-  (predCoords_sc[,1] - mean(Mtl_benzene_sample$easting)) / sd(Mtl_benzene_sample$easting)
-predCoords_sc[,2] <- 
-  (predCoords_sc[,2] - mean(Mtl_benzene_sample$northing)) / sd(Mtl_benzene_sample$northing)
-
-# As an example we are only going to predict 5 locations  
-
-nu <- 5
-predCoords_five <- predCoords_sc[1:nu,]
-
-obs2predDist <- fields::rdist(obsCoords, predCoords[1:nu,])
-pred2predDist <- fields::rdist(predCoords[1:nu,])
-
-```
-
-
-```{r engine='bash', comment='', echo = FALSE}
-cat functions/Example10_10.stan
-``` 
-
-
-```{r Ex 10.10 stan exponential model, warning = FALSE, message = FALSE, cache = TRUE}
-set.seed(1)
-easting_scaled <- as.vector(scale(Mtl_benzene_sample$easting))
-northing_scaled <- as.vector(scale(Mtl_benzene_sample$northing))
-
-N <- nrow(benzene_utm_df)
-# Change coordinates to kilometers
-X <- data.frame(easting = easting_scaled,
-                northing = northing_scaled) 
-
-ex.data <- list(
-  N = N,
-  N_pred = nrow(predCoords_five),
-  p = 2,
-  y =   log(benzene_utm_df$Benzene),
-  obs_dist_matrix = obsDist,
-  obs_pred_dist_matrix = obs2predDist,
-  pred_dist_matrix = pred2predDist,
-  X = as.matrix(X),
-  X_pred = predCoords_five
-)
-
-Example10_10Stan  <- stan(
-  file = "functions/Example10_10.stan",
-  data = ex.data,
-  warmup = 10000,
-  iter = 20000,
-  chains = 2,
-  thin = 10,
-  pars = c("beta0", "beta", "sigma_sq", "tau_sq", "phi", "y_pred"),
-  include = TRUE
-)
-
-```
-
-
-```{r  Ex 10.10 stan exp traceplots, warning = FALSE}
-
-rstan::traceplot(Example10_10Stan, pars = c("beta0","beta","sigma_sq", "tau_sq", "phi", "y_pred[1]", "y_pred[5]"))
-
-```
-
-```{r Ex 10.10 stan exp results}
-summary_exp_stan <-
-  summary(
-    Example10_10Stan,
-    pars = c("beta0","beta", "sigma_sq", "tau_sq",  "phi", "y_pred"),
-    probs = c(0.025, 0.975)
-  )
-
-summary_exp_stan$summary
-
-```
-
-
-
-
-
-## Example 10.11: INLA, creating a mesh {-}
-
-This example uses the [montreal_benzene_apr.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/montreal_benzene_apr.csv)
-
-```{r Ex 10.11 load data for INLA, message = FALSE, warning=FALSE, error=FALSE}
-library(geoR)
-library(INLA)
-library(spdep)
-
-benzene_data <- read.csv("data/montreal_benzene_apr.csv")
-# create a new variable in "sp" format and define coordinates
-benzene_data_loc <- benzene_data
-coordinates(benzene_data_loc) <- ~ lon + lat
-proj4string(benzene_data_loc) <- CRS("+proj=longlat +datum=WGS84")
-
-benzene_data_utm <- spTransform(benzene_data_loc,
-                        CRS("+proj=utm +zone=18 +ellps=WGS72"))
-# Save the utm as a data frame
-locations_df <- as.data.frame(benzene_data_utm@coords)
-
-benzene_utm_df <- data.frame( ID = 1:nrow(benzene_data),
-                              X = benzene_data_utm@coords[,1]/1000,
-                              Y = benzene_data_utm@coords[,2]/1000,
-                              logbenzene = log(benzene_data_utm$Benzene))
-  
-# change the observed values to the log scale and the coordinates to km's
-
-mesh = inla.mesh.create(locations_df, cutoff = 0.01, 
-                       refine =(list(min.angle =20)))
-plot(mesh , col="gray", main="") 
-
-
-```
-
-## Example 10.12: Fitting an SPDE model using R–INLA: benzene concentration in Montreal {-}
-
-```{r Ex 10.12 spde inla, warning=FALSE}
-# Field std . dev . for theta =0
-sigma0 = 1
-# find the range of the location data
-size = min(c(diff(range(mesh$loc[, 1])),
-             diff (range(mesh$loc[, 2]))))
-# A fifth of the approximate domain width .
-range0 = size/5
-kappa0 = sqrt(8)/range0
-tau0 = 1/(sqrt (4*pi)*kappa0*sigma0)
-spde = inla.spde2.matern (
-  mesh,
-  B.tau = cbind(log (tau0), -1, +1),
-  B.kappa = cbind(log (kappa0), 0, -1),
-  theta.prior.mean = c(0 , 0),
-  constr = TRUE
-)
-
-formula = logbenzene  ~ 1 + X + Y + f(ID , model = spde)
-model = inla(
-  formula,
-  family = "gaussian",
-  data = benzene_utm_df ,
-  control.predictor = list(compute = TRUE),
-  control.compute = list(dic = TRUE , config = TRUE)
-)
-
-model$summary.fixed
-```
-
-## Example 10.13: Directional variograms {-}
-
-```{r Ex 10.13 directional variogram, error = FALSE, message = FALSE, results='hide'}
-### Compute and plot the directional variogram
-CA.geo <- as.geodata( benzene_utm_df , coords.col = 2:3 , data.col=1)
-CA.vario4 <- variog4(CA.geo )
+library(sp)
+
+### First we load the data
+CAmetadata<- read.table("data/metadataCA.txt",header=TRUE)
+CATemp<-read.csv("data/MaxCaliforniaTemp.csv",header=TRUE)
+CATemp_20120401<-CATemp[CATemp$X==20120401, -c(1, 14)]
+CATemp_20120401<-t(CATemp_20120401)
+
+### Change names of lat, long
+names(CAmetadata)[names(CAmetadata)=="Long"]<-"x"
+names(CAmetadata)[names(CAmetadata)=="Lat"]<-"y"
+
+### Augment data file with coordinates
+CATemp_20120401 <- cbind(CAmetadata, CATemp_20120401/10)
+names(CATemp_20120401)[names(CATemp_20120401) == "92"] <- "Temp"
+
+CATempOri.geo <-
+  as.geodata(CATemp_20120401,
+             coords.col = 3:4,
+             data.col = 7)
+
+### Compute empirical variograms for the residual process with geoR. 
+###  The power variogram seemed best
+### although this points to nonstationarity in the process
+CA.vario4 <- variog4(CATempOri.geo, uvec = seq(0, 8, l = 8))
 plot(CA.vario4)
+
+
 ```
 
 
 <!-- REVIEW: I am not sure where this example goes -->
+
 
 ## Example 10.14: Spatial modeling of malaria in Gambia {-}
 
@@ -1356,7 +593,7 @@ rm(list=ls())
 
 Note: There might be a warning when loading the $\texttt{raster}$ package, if necessary, uninstall and re-install the package. 
 
-For this example we are using the same $\texttt{gambia}$ data set from the $\texttt{geoR}$ package but an $\texttt{id_area}$ column was added using QGIS to differentiate the different areas as in the original paper. Therefore, we need to load the [gambia_area.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/gambia_area.csv) file.
+For this example we are using the same $\texttt{gambia}$ data set from the $\texttt{geoR}$ package but an $\texttt{id_area}$ column was added using QGIS to differentiate the different areas as in the original paper. Therefore, we need to load the [gambia_area.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/malaria_gambia/gambia_area.csv) file.
 
 ```{r Ex 10.14 load libraries and data, message = FALSE, warning=FALSE, error=FALSE}
 
@@ -1373,7 +610,7 @@ library(viridis) # for a more cheerful color palette
 
 # Note, we are using the same Gambia dataset as in the geoR package but an id_area
 # attribute has been added using QGIS to a
-gambia <- read.csv("data/gambia_area.csv") # gambia dataset from geoR package
+gambia <- read.csv("data/malaria_gambia/gambia_area.csv") # gambia dataset from geoR package
 
 ```
 
@@ -1725,4 +962,889 @@ S_summary_df$village <-
 
 
 ```
+
+## Supplementary Material {-}
+
+
+## Extra 10.1: Spatial patterns of benzene concentrations in Montreal, QC, Canada {-}
+
+Map the locations of the monitoring stations in Montreal.
+
+This example uses the [montreal_benzene_apr.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/voc/montreal_benzene_apr.csv)
+
+```{r Extra 10.1 load data, message = FALSE, warning=FALSE, error=FALSE}
+library(cowplot)
+library(geoR)
+library(ggmap)
+library(spdep)
+# Load data on benzene concentration in Montreal
+benzene <- read.csv("data/voc/montreal_benzene_apr.csv")
+# TODO: Add description of the data, this is the April campaign
+```
+
+```{r Extra 10.1 map data, message = FALSE, warning=FALSE, error=FALSE}
+# create a new variable in "sp" format and define coordinates
+benzene_geo <- benzene
+coordinates(benzene_geo) <- ~ lon + lat
+proj4string(benzene_geo) <- CRS("+proj=longlat +datum=WGS84")
+# specify the bounding box
+latLongBox = bbox(benzene_geo)
+location = c(latLongBox[1, 1] - 0.05,
+             latLongBox[2, 1] - 0.05,
+             latLongBox[1, 2] + 0.1,
+             latLongBox[2, 2] + 0.05)
+# create map with location dots marked on it in
+MontrelBenzeneMap <-
+  get_stamenmap(bbox =  location,
+                zoom = 10)
+ggmap(MontrelBenzeneMap) + geom_point(
+  data = benzene,
+  aes(x = lon,
+      y = lat,
+      size = Benzene),
+  col = "#011f4b",
+  alpha = 0.45
+) + theme_void()
+
+```
+
+Using the `geoR` package we can also plot the following:
+
+-  the locations of the sampling sites 
+-  the concentrations of ozone in relation to the x and y coordinates
+- and a histogram of the concentrations indicating the distribution of concentrations together with an estimate of the density.
+
+```{r Extra 10.1 geoR plot}
+# convert data to utm coordinates
+benzene_utm <- spTransform(benzene_geo,
+                           CRS("+proj=utm +zone=18 +ellps=WGS72"))
+# Save the utm as a data frame
+benzene_utm_df <- as.data.frame(benzene_utm)
+colnames(benzene_utm_df) <- c("Benzene", "X", "Y")
+# Save as geodata to generate the geodata plot
+benzene_geodata <- as.geodata(benzene_utm_df,
+                              coords.col = 2:3, data.col = 1)
+plot(benzene_geodata)
+```
+
+
+## Extra 10.2: Examining the log concentrations of benzene in Montreal {-}
+
+```{r Extra 10.2 plot hist and qqplot log}
+# Histogram for the log of the benzene concentration
+par(mfrow = c(1, 2))
+log_histogram <-
+  hist(log(benzene$Benzene), main = "", xlab = "log(Benzene)")
+qqnorm(log(benzene$Benzene), bty = "n")
+qqline(log(benzene$Benzene))
+
+```
+
+## Extra 10.5: Variogram {-}
+
+```{r Extra 10.5 plot variogram}
+library(gstat)
+benzene_utm_geo <- benzene_utm_df
+# get the coordinates in kms and turn into a Spatial object
+benzene_utm_geo[,c("X", "Y")] <- benzene_utm_geo[,c("X", "Y")]/1000
+coordinates(benzene_utm_geo) <- ~ X + Y
+# Estimate variogram intercept only
+benzene_inter_vgm <- variogram(log(Benzene) ~ 1,
+                               data = benzene_utm_geo,
+                               cutoff = 20,# cutoff distance
+                               width = 20 / 10) # bins width 
+
+
+benzene_inter_vgm_fit <- fit.variogram(benzene_inter_vgm,
+                                       model = vgm(0.1, "Exp", 15, 0.02))
+
+benzene_inter_vgm_fit
+
+# Estimate variogram using coordinates
+benzene_vgm <- variogram(log(Benzene) ~ X + Y, 
+                         data = benzene_utm_geo,
+                         cutoff = 20, # cutoff distance
+                         width = 20 / 10) # bins width
+
+
+benzene_vgm_fit <- fit.variogram(benzene_vgm, model = vgm(0.1, "Exp", 3, 0.02))
+benzene_vgm_fit
+
+plot_inter_variog <- plot(benzene_inter_vgm, benzene_inter_vgm_fit, bty = "n")
+plot_coord_variog <- plot(benzene_vgm, benzene_vgm_fit, bty = "n")
+
+plot_grid(plot_inter_variog, plot_coord_variog, labels = "auto")
+```
+
+## Extra 10.6 Basic spatial modelling and prediction of benzene in Montreal {-}
+
+
+```{r Extra 10.6 kriging predictions, message = FALSE, warning=FALSE, error=FALSE}
+# Generate grid
+MtlPred <- expand.grid(seq (580, 615 , 0.5),
+                             seq (5020, 5060 , 0.5) )
+# change names grid
+names(MtlPred)[ names(MtlPred)=="Var1"] <- "X"
+names(MtlPred)[ names(MtlPred)=="Var2"] <- "Y"
+# make the grid a Spatial object
+coordinates (MtlPred) = ~ X + Y
+gridded(MtlPred) = TRUE
+# define the model based on the variogram fit from the previous example
+mod <- vgm (0.053 , "Exp", 5.54, 0.0122)
+# use ordinary kriging to predict values in the grid
+x <- krige(log(Benzene) ~ X + Y, benzene_utm_geo , MtlPred , model = mod )
+# Plot the ordinary kriging predictions and their variance
+
+monitor_loc <- list('sp.points', benzene_utm_geo, pch=19, cex=.8, col='cornsilk4')
+
+krig_pred <-
+  spplot (
+    x["var1.pred"],
+    main = "Ordinary kriging predictions ",
+    col.regions = viridis::plasma(60),
+    sp.layout = list(monitor_loc),
+    at = seq(-0.3, 0.8, 0.02)
+  )
+krig_var <-
+  spplot (
+    x["var1.var"],
+    main = "Ordinary kriging variance ",
+    col.regions = viridis::plasma(60),
+    sp.layout = list(monitor_loc),
+    at = seq(0, 0.2, 0.01)
+  )
+
+plot_grid(krig_pred, krig_var, labels = "auto")
+
+```
+
+## Extra 10.8 Spatial modelling of Benzene in Montreal {-}
+
+This example uses the [montreal_benzene_apr.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/voc/montreal_benzene_apr.csv)
+
+### Nimble {-}
+
+
+```{r Extra 10.8 load data, message = FALSE, warning=FALSE, error=FALSE}
+library(coda)
+library(geoR)
+library(magrittr)
+library(nimble)
+library(spdep)
+library(tidyverse)
+library(tidybayes)
+
+```
+
+```{r Extra 10.8 benzene to spatial data, message = FALSE, warning=FALSE, error=FALSE}
+# Load data on benzene concentration in Montreal
+benzene <- read.csv("data/voc/montreal_benzene_apr.csv")
+# create a new variable in "sp" format and define coordinates
+benzene_geo <- benzene
+coordinates(benzene_geo) <- ~ lon + lat
+proj4string(benzene_geo) <- CRS("+proj=longlat +datum=WGS84")
+
+benzene_utm <- spTransform(benzene_geo,
+                        CRS("+proj=utm +zone=18 +ellps=WGS72"))
+# Save the utm as a data frame
+benzene_utm_df <- as.data.frame(benzene_utm)
+# Change coordinates to kilometers and observations to the log scale
+Mtl_benzene_sample <-
+  data.frame(
+    y = log(benzene_utm_df$Benzene),
+    easting =  benzene_utm_df$lon / 1000,
+    northing = benzene_utm_df$lat / 1000
+  )
+# Compute the distance matrix
+obsCoords <- unname(as.matrix(Mtl_benzene_sample[,c("easting", "northing")]))
+
+obsDist <- fields::rdist(obsCoords)
+  
+```
+
+
+```{r Extra 10.8 nimble model, error = FALSE, message = FALSE, results='hide', cache = TRUE}
+
+Extra10_9Code <-  nimbleCode ({
+  # Covariance matrix spatial effect
+  Sigma[1:n, 1:n] <-
+    sigma_sq * exp(-distMatrix[1:n, 1:n] / phi) + tau_sq * identityMatrix(d = n)
+
+    for (site in 1:n) {
+    mean.site[site] <-
+      beta0 + beta1 * easting[site] + beta2 * northing[site]
+  }
+  y[1:n]  ~  dmnorm(mean.site[1:n], cov = Sigma[1:n, 1:n])
+  # Set up the priors for the spatial model
+  sigma ~ T(dt(mu = 0, sigma = 1, df = 1), 0, Inf)
+  sigma_sq <- sigma^2
+  tau ~ T(dt(mu = 0, sigma = 1, df = 1), 0, Inf)
+  tau_sq <- tau^2
+  phi_inv ~ dgamma(shape =  5, rate = 5)
+  phi <- 1 / phi_inv
+  # prior for the coefficients
+  beta0 ~ dnorm (0, 10)
+  beta1 ~ dnorm (0, 10)
+  beta2 ~ dnorm (0, 10)
+  
+}) 
+
+# Define the constants, data, parameters and initial values
+set.seed(1)
+easting_scaled <- as.vector(scale(Mtl_benzene_sample$easting))
+northing_scaled <- as.vector(scale(Mtl_benzene_sample$northing))
+
+constants <-
+  list(n = nrow(Mtl_benzene_sample))
+ex.data <-
+  list(y = Mtl_benzene_sample$y,
+       easting = easting_scaled,
+       northing = northing_scaled,
+       distMatrix = obsDist)
+params <- c( "beta0",  "beta1","beta2", "phi",  "tau", "sigma", "tau_sq", "sigma_sq")
+inits <- list( sigma = 0.1, phi_inv = 6/max(obsDist), tau = 0.1)
+# Run model in nimble
+start_time <- Sys.time()
+
+mcmc.out <- nimbleMCMC(
+  code = Example10_9Code,
+  constants = constants,
+  data = ex.data,
+  inits = inits,
+  monitors = params,
+  niter = 40000,
+  nburnin = 20000,
+  thin = 14,
+  WAIC = TRUE,
+  nchains = 2,
+  summary = TRUE,
+  samplesAsCodaMCMC = TRUE
+)
+end_time <- Sys.time()
+run_time <- end_time - start_time
+run_time
+
+```
+
+```{r Extra 10.8 nimble WAIC, ESS and traceplots}
+mcmc.out$WAIC
+min(coda::effectiveSize(mcmc.out$samples))
+plot(mcmc.out$samples[, c("beta0")], bty = "n", main = "beta0")
+plot(mcmc.out$samples[, c("beta1")], bty = "n", main = "beta1")
+plot(mcmc.out$samples[, c("beta2")], bty = "n", main = "beta2")
+plot(mcmc.out$samples[, c("sigma")], bty = "n", main = "sigma")
+plot(mcmc.out$samples[, c("tau")], bty = "n", main = "tau")
+plot(mcmc.out$samples[, c("phi")], bty = "n", main = "phi")
+mcmc.out$summary$all.chains[c("beta0", "beta1", "beta2", "sigma_sq", "tau_sq", "phi"), ]
+```
+
+```{r Extra 10.8 nimble rediction locations}
+# Obtain coordinates for predictions 
+# note that we are using the same coordinates as the one generated for 
+# the kriging example
+Mtl_centroids_df <- as.data.frame(MtlPred)
+predCoords <- unname(as.matrix(Mtl_centroids_df))
+
+```
+
+
+Following the posterior predictive distribution we have to define a model for the predictions. 
+
+```{r Extra 10.8 nimble predictions using Rcpp, cache=TRUE}
+# Extract samples from nimble model
+tidy_post_samples <- mcmc.out$samples |> tidy_draws()
+
+# Extract posterior samples for each of the parameters of interest
+post_beta0 <- tidy_post_samples$beta0
+post_beta1 <- tidy_post_samples$beta1
+post_beta2 <- tidy_post_samples$beta2
+post_sigmasq <- tidy_post_samples$sigma_sq
+post_phi <- tidy_post_samples$phi
+post_tausq <- tidy_post_samples$tau_sq
+
+# Scale coordinates for predictive locations
+predCoords_sc <- predCoords 
+predCoords_sc[,1] <-
+  (predCoords_sc[,1] - mean(Mtl_benzene_sample$easting)) / sd(Mtl_benzene_sample$easting)
+predCoords_sc[,2] <- 
+  (predCoords_sc[,2] - mean(Mtl_benzene_sample$northing)) / sd(Mtl_benzene_sample$northing)
+  
+n0 <- nrow(predCoords_sc)
+L <- length(post_tausq)
+
+obsMu <- cbind(1, easting_scaled, northing_scaled) %*% t(cbind(post_beta0, post_beta1, post_beta2))
+
+predMu <- cbind(1, as.matrix(predCoords_sc)) %*% t(cbind(post_beta0, post_beta1, post_beta2))
+
+pred2obsDist <- fields::rdist(predCoords, obsCoords)
+
+
+Rcpp::sourceCpp("functions/prediction_marginal_gp12.cpp")
+args(prediction_marginal_gp12)
+system.time(
+  pred_samples <- prediction_marginal_gp12(
+    y = Mtl_benzene_sample$y,
+    obsMu = obsMu,
+    predMu = predMu,
+    obsDistMat = obsDist,
+    pred2ObsDistMat = pred2obsDist,
+    sigmasq = post_sigmasq,
+    phi = post_phi,
+    tausq = post_tausq,
+    iterprint = 1000
+  )
+)
+
+predict_res_dt <- data.frame(
+  xcoord = predCoords[, 1],
+  ycoord = predCoords[, 2],
+  post.mean = apply(pred_samples, 1, mean),
+  post.var = apply(pred_samples, 1, var),
+  q2.5 = apply(pred_samples, 1, function(x)
+    quantile(x, prob = 0.025)),
+  q50 = apply(pred_samples, 1, function(x)
+    quantile(x, prob = 0.5)),
+  q97.5 = apply(pred_samples, 1, function(x)
+    quantile(x, prob = 0.975))
+)
+
+
+```
+
+
+
+```{r Extra 10.8 nimble plot predictions, messages = FALSE}
+
+x$nimble.pred <- predict_res_dt$post.mean
+x$nimble.var <- predict_res_dt$post.var
+
+nimble_pred <-
+  spplot (
+    x["nimble.pred"],
+    main = "Nimble spatial predictions ",
+    col.regions = viridis::plasma(60),
+    sp.layout = list(monitor_loc),
+    at = seq(-0.3, 0.8, 0.02)
+  )
+nimble_var <-
+  spplot (
+    x["nimble.var"],
+    main = "Nimble predictions variance ",
+    col.regions = viridis::plasma(60),
+    sp.layout = list(monitor_loc),
+    at = seq(0, 0.2, 0.01)
+
+  )
+
+plot_grid(nimble_pred, nimble_var, labels = "auto")
+
+predict_res_dt$post.mean[1:5]
+predict_res_dt$post.var[1:5]
+```
+
+### Stan {-}
+
+```{r Extra 10.8 load stan, message=FALSE, echo = FALSE, warning=FALSE, message= FALSE}
+# load rstan with options
+library(geoR)
+library(rstan)
+library(spdep)
+options(mc.cores = parallel::detectCores())
+rstan_options(auto_write = TRUE)
+```
+
+
+```{r Extra 10.8 stan load data}
+benzene_data <- read.csv("data/voc/montreal_benzene_apr.csv")
+# create a new variable in "sp" format and define coordinates
+benzene_data_geo <- benzene_data
+coordinates(benzene_data_geo) <- ~ lon + lat
+proj4string(benzene_data_geo) <- CRS("+proj=longlat +datum=WGS84")
+
+benzene_data_utm <- spTransform(benzene_data_geo,
+                        CRS("+proj=utm +zone=18 +ellps=WGS72"))
+# Save the utm as a data frame
+benzene_utm_df <- as.data.frame(benzene_data_utm)
+# change the observed values to the log scale and the coordinates to km's
+Mtl_benzene_sample <-
+  data.frame(
+    y = log(benzene_utm_df$Benzene),
+    easting =  benzene_utm_df$lon / 1000,
+    northing = benzene_utm_df$lat / 1000
+  )
+# Compute the distance matrix
+obsCoords <- unname(as.matrix(Mtl_benzene_sample[,c("easting", "northing")]))
+
+obsDist <- fields::rdist(obsCoords)
+
+```
+
+
+
+```{r engine='bash', comment='', echo = FALSE}
+cat functions/Example10_9.stan
+``` 
+
+
+```{r Extra 10.8 stan exponential model, warning = FALSE, message = FALSE, cache = TRUE}
+set.seed(1)
+easting_scaled <- as.vector(scale(Mtl_benzene_sample$easting))
+northing_scaled <- as.vector(scale(Mtl_benzene_sample$northing))
+
+N <- nrow(benzene_utm_df)
+# Change coordinates to kilometers
+X <- data.frame(easting = easting_scaled,
+                northing = northing_scaled) 
+
+ex.data <- list(
+  N = N,
+  p = 2,
+  y =   log(benzene_utm_df$Benzene),
+  dist_matrix = obsDist,
+  X = as.matrix(X)
+)
+
+Example10_9Stan  <- stan(
+  file = "functions/Example10_9.stan",
+  data = ex.data,
+  warmup = 10000,
+  iter = 20000,
+  chains = 2,
+  thin = 10,
+  pars = c("beta0", "beta", "sigma_sq", "tau_sq", "phi"),
+  include = TRUE
+)
+
+```
+
+
+```{r  Extra 10.8 stan exp traceplots, warning = FALSE}
+
+rstan::traceplot(Example10_9Stan, pars = c("beta0","beta","sigma_sq", "tau_sq", "phi"))
+
+```
+
+```{r Ex 10.8 stan exp results}
+summary_exp_stan <-
+  summary(
+    Example10_9Stan,
+    pars = c("beta0","beta", "sigma_sq", "tau_sq",  "phi"),
+    probs = c(0.025, 0.975)
+  )
+
+summary_exp_stan$summary
+
+```
+
+
+```{r Extra 10.8 stan rediction locations}
+# Obtain coordinates for predictions 
+# note that we are using the same coordinates as the one generated for 
+# the kriging example
+Mtl_centroids_df <- as.data.frame(MtlPred)
+predCoords <- unname(as.matrix(Mtl_centroids_df))
+
+```
+
+```{r Extra 10.8 stan predictions using Rcpp, cache = TRUE}
+# Extract samples from nimble model
+stan_post_samples <- rstan::extract(Example10_9Stan,
+    pars = c("beta0","beta", "phi", "sigma_sq", "tau_sq"))
+
+# Extract posterior samples for each of the parameters of interest
+post_beta0 <- stan_post_samples$beta0
+post_beta <- stan_post_samples$beta
+# post_beta2 <- stan_post_samples$beta2
+post_sigmasq <- stan_post_samples$sigma_sq
+post_phi <- stan_post_samples$phi
+post_tausq <- stan_post_samples$tau_sq
+
+# Scale coordinates for predictive locations
+predCoords_sc <- predCoords 
+predCoords_sc[,1] <-
+  (predCoords_sc[,1] - mean(Mtl_benzene_sample$easting)) / sd(Mtl_benzene_sample$easting)
+predCoords_sc[,2] <- 
+  (predCoords_sc[,2] - mean(Mtl_benzene_sample$northing)) / sd(Mtl_benzene_sample$northing)
+  
+n0 <- nrow(predCoords_sc)
+L <- length(post_tausq)
+
+obsMu <- cbind(1, easting_scaled, northing_scaled) %*% t(cbind(post_beta0, post_beta))
+
+predMu <- cbind(1, as.matrix(predCoords_sc)) %*% t(cbind(post_beta0, post_beta))
+
+pred2obsDist <- fields::rdist(predCoords, obsCoords)
+
+Rcpp::sourceCpp("functions/prediction_marginal_gp12.cpp")
+args(prediction_marginal_gp12)
+system.time(
+  pred_samples <- prediction_marginal_gp12(
+    y = Mtl_benzene_sample$y,
+    obsMu = obsMu,
+    predMu = predMu,
+    obsDistMat = obsDist,
+    pred2ObsDistMat = pred2obsDist,
+    sigmasq = post_sigmasq,
+    phi = post_phi,
+    tausq = post_tausq,
+    iterprint = 1000
+  )
+)
+
+predict_res_dt <- data.frame(
+  xcoord = predCoords[, 1],
+  ycoord = predCoords[, 2],
+  post.mean = apply(pred_samples, 1, mean),
+  post.var = apply(pred_samples, 1, var),
+  q2.5 = apply(pred_samples, 1, function(x)
+    quantile(x, prob = 0.025)),
+  q50 = apply(pred_samples, 1, function(x)
+    quantile(x, prob = 0.5)),
+  q97.5 = apply(pred_samples, 1, function(x)
+    quantile(x, prob = 0.975))
+)
+
+
+```
+
+
+
+```{r Extra 10.8 stan plot predictions, messages = FALSE}
+
+x$stan.pred <- predict_res_dt$post.mean
+x$stan.var <- predict_res_dt$post.var
+
+
+stan_pred <-
+  spplot (
+    x["stan.pred"],
+    main = "Stan spatial predictions ",
+    col.regions = viridis::plasma(60),
+    sp.layout = list(monitor_loc),
+    at = seq(-0.3, 0.8, 0.02)
+  )
+stan_var <-
+  spplot (
+    x["stan.var"],
+    main = "Stan predictions variance ",
+    col.regions = viridis::plasma(60),
+    sp.layout = list(monitor_loc),
+    at = seq(0, 0.2, 0.01)
+  )
+
+plot_grid(stan_pred, stan_var, labels = "auto")
+
+```
+
+## Extra 10.9: Spatial predictions {-}
+
+
+### Nimble {-}
+
+```{r Extra 10.9 nimble prediction mcmc}
+# NOTE: I am just doing for 5 locations (please double-check my equations) and it instead of running in 2 minutes it runs in 6 (in case you want to highlight that). But we should discuss the order of this cause I am doing the predictions with Paritosh's code in the previous section.
+
+# Obtain coordinates for predictions 
+# note that we are using the same coordinates as the one generated for 
+# the kriging example
+Mtl_centroids_df <- as.data.frame(MtlPred)
+predCoords <- unname(as.matrix(Mtl_centroids_df))
+
+# Scale coordinates for predictive locations
+predCoords_sc <- predCoords 
+predCoords_sc[,1] <-
+  (predCoords_sc[,1] - mean(Mtl_benzene_sample$easting)) / sd(Mtl_benzene_sample$easting)
+predCoords_sc[,2] <- 
+  (predCoords_sc[,2] - mean(Mtl_benzene_sample$northing)) / sd(Mtl_benzene_sample$northing)
+
+# As an example we are only going to predict 5 locations  
+
+nu <- 5
+predCoords_five <- predCoords_sc[1:nu,]
+
+obs2predDist <- fields::rdist(obsCoords, predCoords[1:nu,])
+pred2predDist <- fields::rdist(predCoords[1:nu,])
+
+```
+
+```{r Extra 10.9 spatial predictions nimble, results='hide', warning=FALSE, message=FALSE, cache = TRUE}
+
+Example10_10Code <-  nimbleCode ({
+  # Covariance matrix spatial effect
+  Sigma_obs[1:n, 1:n] <-
+    sigma_sq * exp(-distMatrix[1:n, 1:n] / phi) + tau_sq * identityMatrix(d = n)
+  
+  Sigma_pred[1:nu, 1:nu] <-
+    sigma_sq * exp(-distMatrixUnobs[1:nu, 1:nu] / phi) + tau_sq * identityMatrix(d = nu)
+  
+  Sigma_obs_pred[1:n, 1:nu] <-
+    sigma_sq * exp(-distMatrixObsUnobs[1:n, 1:nu] / phi) 
+  
+  for (site in 1:n) {
+    mean.site[site] <-
+      beta0 + beta1 * easting[site] + beta2 * northing[site]
+  }
+  y[1:n]  ~  dmnorm(mean.site[1:n], cov = Sigma_obs[1:n, 1:n])
+  
+  # Spatial predictions
+  
+  for (usite in 1:nu) {
+    mean.pred.site[usite] <-
+      beta0 + beta1 * easting_pred[usite] + beta2 * northing_pred[usite]
+  }
+  
+  mean_sigma[1:nu] <- t(Sigma_obs_pred[1:n, 1:nu])%*% 
+    inverse(Sigma_obs[1:n, 1:n])%*%(y[1:n] - mean.site[1:n])
+  
+  mu_pred[1:nu] <-
+    mean.pred.site[1:nu] + mean_sigma[1:nu]
+  
+  cov_pred[1:nu, 1:nu] <-
+    Sigma_pred[1:nu, 1:nu] - t(Sigma_obs_pred[1:n, 1:nu]) %*% inverse(Sigma_obs[1:n, 1:n]) %*% Sigma_obs_pred[1:n, 1:nu]
+  
+  y_pred[1:nu]  ~  dmnorm(mu_pred[1:nu], cov = cov_pred[1:nu, 1:nu])
+  
+  # Set up the priors for the spatial model
+  
+  sigma ~ T(dt(mu = 0, sigma = 1, df = 1), 0, Inf)
+  sigma_sq <- sigma ^ 2
+  tau ~ T(dt(mu = 0, sigma = 1, df = 1), 0, Inf)
+  tau_sq <- tau ^ 2
+  phi_inv ~ dgamma(shape =  5, rate = 5)
+  phi <- 1 / phi_inv
+  # prior for the coefficients
+  beta0 ~ dnorm (0, 10)
+  beta1 ~ dnorm (0, 10)
+  beta2 ~ dnorm (0, 10)
+  
+}) 
+
+# Define the constants, data, parameters and initial values
+set.seed(1)
+easting_scaled <- as.vector(scale(Mtl_benzene_sample$easting))
+northing_scaled <- as.vector(scale(Mtl_benzene_sample$northing))
+
+constants <-
+  list(n = nrow(Mtl_benzene_sample), nu = nu)
+ex.data <-
+  list(
+    y = Mtl_benzene_sample$y,
+    easting = easting_scaled,
+    northing = northing_scaled,
+    easting_pred = predCoords_five[,1],
+    northing_pred = predCoords_five[,2],
+    distMatrix = obsDist,
+    distMatrixUnobs = pred2predDist,
+    distMatrixObsUnobs = obs2predDist
+  )
+params <-
+  c("beta0",
+    "beta1",
+    "beta2",
+    "phi",
+    "tau",
+    "sigma",
+    "tau_sq",
+    "y_pred",
+    "sigma_sq")
+inits <- list(sigma = 0.1,
+              phi_inv = 6 / max(obsDist),
+              tau = 0.1)
+# Run model in nimble
+
+mcmc.out <- nimbleMCMC(
+  code = Example10_10Code,
+  constants = constants,
+  data = ex.data,
+  inits = inits,
+  monitors = params,
+  niter = 40000,
+  nburnin = 20000,
+  thin = 14,
+  WAIC = TRUE,
+  nchains = 2,
+  summary = TRUE,
+  samplesAsCodaMCMC = TRUE
+)
+
+
+```
+
+```{r Extra 10.9 nimble WAIC, ESS and traceplots}
+mcmc.out$WAIC
+min(coda::effectiveSize(mcmc.out$samples))
+plot(mcmc.out$samples[, c("beta0")], bty = "n", main = "beta0")
+plot(mcmc.out$samples[, c("beta1")], bty = "n", main = "beta1")
+plot(mcmc.out$samples[, c("beta2")], bty = "n", main = "beta2")
+plot(mcmc.out$samples[, c("sigma")], bty = "n", main = "sigma")
+plot(mcmc.out$samples[, c("tau")], bty = "n", main = "tau")
+plot(mcmc.out$samples[, c("phi")], bty = "n", main = "phi")
+mcmc.out$summary$all.chains
+```
+
+### Stan{-}
+
+```{r Extra 10.9 stan load data}
+
+# Load data predictions
+# Obtain coordinates for predictions 
+# note that we are using the same coordinates as the one generated for 
+# the kriging example
+Mtl_centroids_df <- as.data.frame(MtlPred)
+predCoords <- unname(as.matrix(Mtl_centroids_df))
+
+# Scale coordinates for predictive locations
+predCoords_sc <- predCoords 
+predCoords_sc[,1] <-
+  (predCoords_sc[,1] - mean(Mtl_benzene_sample$easting)) / sd(Mtl_benzene_sample$easting)
+predCoords_sc[,2] <- 
+  (predCoords_sc[,2] - mean(Mtl_benzene_sample$northing)) / sd(Mtl_benzene_sample$northing)
+
+# As an example we are only going to predict 5 locations  
+
+nu <- 5
+predCoords_five <- predCoords_sc[1:nu,]
+
+obs2predDist <- fields::rdist(obsCoords, predCoords[1:nu,])
+pred2predDist <- fields::rdist(predCoords[1:nu,])
+
+```
+
+
+```{r engine='bash', comment='', echo = FALSE}
+cat functions/Example10_10.stan
+``` 
+
+
+```{r Extra 10.9 stan exponential model, warning = FALSE, message = FALSE, cache = TRUE}
+set.seed(1)
+easting_scaled <- as.vector(scale(Mtl_benzene_sample$easting))
+northing_scaled <- as.vector(scale(Mtl_benzene_sample$northing))
+
+N <- nrow(benzene_utm_df)
+# Change coordinates to kilometers
+X <- data.frame(easting = easting_scaled,
+                northing = northing_scaled) 
+
+ex.data <- list(
+  N = N,
+  N_pred = nrow(predCoords_five),
+  p = 2,
+  y =   log(benzene_utm_df$Benzene),
+  obs_dist_matrix = obsDist,
+  obs_pred_dist_matrix = obs2predDist,
+  pred_dist_matrix = pred2predDist,
+  X = as.matrix(X),
+  X_pred = predCoords_five
+)
+
+Example10_10Stan  <- stan(
+  file = "functions/Example10_10.stan",
+  data = ex.data,
+  warmup = 10000,
+  iter = 20000,
+  chains = 2,
+  thin = 10,
+  pars = c("beta0", "beta", "sigma_sq", "tau_sq", "phi", "y_pred"),
+  include = TRUE
+)
+
+```
+
+
+```{r Extra 109 stan exp traceplots, warning = FALSE}
+
+rstan::traceplot(Example10_10Stan, pars = c("beta0","beta","sigma_sq", "tau_sq", "phi", "y_pred[1]", "y_pred[5]"))
+
+```
+
+```{r Extra 10.9 stan exp results}
+summary_exp_stan <-
+  summary(
+    Example10_10Stan,
+    pars = c("beta0","beta", "sigma_sq", "tau_sq",  "phi", "y_pred"),
+    probs = c(0.025, 0.975)
+  )
+
+summary_exp_stan$summary
+
+```
+
+
+## Extra 10.10: INLA, creating a mesh {-}
+
+This example uses the [montreal_benzene_apr.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/voc/montreal_benzene_apr.csv)
+
+```{r Extra 10.11 load data for INLA, message = FALSE, warning=FALSE, error=FALSE}
+library(geoR)
+library(INLA)
+library(spdep)
+
+benzene_data <- read.csv("data/voc/montreal_benzene_apr.csv")
+# create a new variable in "sp" format and define coordinates
+benzene_data_loc <- benzene_data
+coordinates(benzene_data_loc) <- ~ lon + lat
+proj4string(benzene_data_loc) <- CRS("+proj=longlat +datum=WGS84")
+
+benzene_data_utm <- spTransform(benzene_data_loc,
+                        CRS("+proj=utm +zone=18 +ellps=WGS72"))
+# Save the utm as a data frame
+locations_df <- as.data.frame(benzene_data_utm@coords)
+
+benzene_utm_df <- data.frame( ID = 1:nrow(benzene_data),
+                              X = benzene_data_utm@coords[,1]/1000,
+                              Y = benzene_data_utm@coords[,2]/1000,
+                              logbenzene = log(benzene_data_utm$Benzene))
+  
+# change the observed values to the log scale and the coordinates to km's
+
+mesh = inla.mesh.create(locations_df, cutoff = 0.01, 
+                       refine =(list(min.angle =20)))
+plot(mesh , col="gray", main="") 
+
+
+```
+
+## Extra 10.12: Fitting an SPDE model using R–INLA: benzene concentration in Montreal {-}
+
+```{r Extra 10.12 spde inla, warning=FALSE}
+# Field std . dev . for theta =0
+sigma0 = 1
+# find the range of the location data
+size = min(c(diff(range(mesh$loc[, 1])),
+             diff (range(mesh$loc[, 2]))))
+# A fifth of the approximate domain width .
+range0 = size/5
+kappa0 = sqrt(8)/range0
+tau0 = 1/(sqrt (4*pi)*kappa0*sigma0)
+spde = inla.spde2.matern (
+  mesh,
+  B.tau = cbind(log (tau0), -1, +1),
+  B.kappa = cbind(log (kappa0), 0, -1),
+  theta.prior.mean = c(0 , 0),
+  constr = TRUE
+)
+
+formula = logbenzene  ~ 1 + X + Y + f(ID , model = spde)
+model = inla(
+  formula,
+  family = "gaussian",
+  data = benzene_utm_df ,
+  control.predictor = list(compute = TRUE),
+  control.compute = list(dic = TRUE , config = TRUE)
+)
+
+model$summary.fixed
+```
+
+## Extra 10.13: Directional variograms {-}
+
+```{r Extra 10.13 directional variogram, error = FALSE, message = FALSE, results='hide'}
+### Compute and plot the directional variogram
+CA.geo <- as.geodata( benzene_utm_df , coords.col = 2:3 , data.col=1)
+CA.vario4 <- variog4(CA.geo )
+plot(CA.vario4)
+```
+
+
 

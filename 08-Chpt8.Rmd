@@ -37,11 +37,11 @@ library(sp)
 library(ggplot2)
 ```
 
-This example uses the [BlackSmokePrefData.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/BlackSmokePrefData.csv) file. 
+This example uses the [BlackSmokePrefData.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/black_smoke/BlackSmokePrefData.csv) file. 
 
 ```{r data clean and standardize}
 
-BlackSmokePrefData <- read.csv("data/BlackSmokePrefData.csv")
+BlackSmokePrefData <- read.csv("data/black_smoke/BlackSmokePrefData.csv")
 
 head(BlackSmokePrefData)
 
@@ -312,14 +312,14 @@ for (i in 1:no_T)
 ## placeholders for observed (R1 = active, R0 = inactive) site blacksmoke values
 
 R1_results2 = matrix(NA, nrow = no_T, ncol = 4) # prediction means, sd, LCL, UCL
-colnames(R1_results2) = c('predciction mean', 'prediction sd', 'LCL', 'UCL')
+colnames(R1_results2) = c('prediction mean', 'prediction sd', 'LCL', 'UCL')
 R0_results2 = matrix(NA, nrow = no_T, ncol = 4) # prediction means, sd, LCL, UCL
-colnames(R0_results2) = c('predciction mean', 'prediction sd', 'LCL', 'UCL')
+colnames(R0_results2) = c('prediction mean', 'prediction sd', 'LCL', 'UCL')
 Grid_results2 = matrix(NA, nrow = no_T, ncol = 4) # prediction means, sd, LCL, UCL
-colnames(Grid_results2) = c('predciction mean', 'prediction sd', 'LCL', 'UCL')
+colnames(Grid_results2) = c('prediction mean', 'prediction sd', 'LCL', 'UCL')
 
 BlackSmokePrefData_original <-
-  read.csv("data/BlackSmokePrefData.csv") ## need original columns here
+  read.csv("data/black_smoke/BlackSmokePrefData.csv") ## need original columns here
 
 for (j in 1:no_T)
 {

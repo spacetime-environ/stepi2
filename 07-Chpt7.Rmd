@@ -33,7 +33,7 @@ library(dplyr)
 library(ggplot2)
 library(nimble)
 
-lur_benzene <- read.csv("data/VOC_predictors.csv")
+lur_benzene <- read.csv("data/voc/VOC_predictors.csv")
 colnames(lur_benzene)
 
 lur_benzene$X <- lur_benzene$X/1000
@@ -47,21 +47,21 @@ Lasso regression
 ```{r Ex 7.6 nimble lasso}
 
 Ex7_6LassoCode <- nimbleCode({
-
   # Likelihood
-  for(i in 1:n){
+  for (i in 1:n) {
     y[i]   ~ dnorm(mu[i], sd = sigma)
-    mu[i] <- beta0 + inprod(X[i,], beta[1:p])
+    mu[i] <- beta0 + inprod(X[i, ], beta[1:p])
   }
-
+  
   # Prior specification
-  for(j in 1:p){
-    beta[j] ~ ddexp(0, scale = tau)
+  for (j in 1:p) {
+    beta[j] ~ ddexp(0, scale = taub * taue)
   }
-
-  sigma ~ T(dt(mu = 0, sigma = 1, df = 1), 0, Inf)
-  tau  ~ T(dt(mu = 0, sigma = 5, df = 1), 0, Inf)
-  beta0  ~ dnorm(0,0.01)
+  
+  taue  ~  dgamma(0.1, 0.1)
+  sigma <- 1/taue
+  taub  ~  dgamma(0.1, 0.1)
+  beta0  ~ dnorm(0, 0.01)
 
 })
 

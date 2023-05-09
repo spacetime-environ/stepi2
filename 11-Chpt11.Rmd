@@ -20,13 +20,13 @@ Load the daily and hourly data for one site.
 library(ggplot2)
 
 # Load data for one site
-site_daily <- read.csv("data/LA_ozone_daily.csv", header = TRUE)
+site_daily <- read.csv("data/ozone/LA_ozone_daily.csv", header = TRUE)
 
 # change the format of the date column
 site_daily$date <- as.Date(site_daily$date, "%m/%d/%Y")
 
 # load hourly data from that same site
-site_hourly <- read.csv("data/LA_ozone_hourly.csv", header = TRUE)
+site_hourly <- read.csv("data/ozone/LA_ozone_hourly.csv", header = TRUE)
 
 ```
 
@@ -69,7 +69,7 @@ For this example we will use the TTR package (Technical Trading Rules). This all
 
 library(TTR)
 # Load daily data
-site_daily <- read.csv("data/LA_ozone_daily.csv", header = TRUE)
+site_daily <- read.csv("data/ozone/LA_ozone_daily.csv", header = TRUE)
 # add an identifier column for each day in the sample
 site_daily$day <- 1:nrow(site_daily)
 
@@ -147,7 +147,7 @@ rm(list = ls())
 library(TTR)
 library(forecast)
 # Load hourly data for site 060379033
-site_hourly <- read.csv("data/LA_ozone_hourly.csv", header = TRUE)
+site_hourly <- read.csv("data/ozone/LA_ozone_hourly.csv", header = TRUE)
 # one night hour per day missing for instrument calibration - imputed for simplicity
 imputeNA <- mean(site_hourly$ozone, na.rm = TRUE)
 site_hourly$ozone[is.na(site_hourly$ozone)] <- imputeNA
@@ -215,7 +215,9 @@ volcano_dust <-
 
 ```
 
+
 The following figure shows the plot of the original time series.
+
 
 ```{r Ex 11.14 plot time series ACF and PACF}
 
@@ -295,7 +297,7 @@ library(tidybayes)
 library(tidyverse)
 source("functions/FFBS_functions_nimble.R") # load necessary functions for ffbs
 # Load data 
-pm10 <- source("data/11_13_data.txt")[["value"]][["y"]] |> unlist()
+pm10 <- source("data/pm_london/pm10_London.txt")[["value"]][["y"]] |> unlist()
 
 # Choose 250 days for example
 pm10_374 <- pm10[380:753]
@@ -533,7 +535,7 @@ rstan_options(auto_write = TRUE)
 
 
 # TODO: change the name of this dataset cause it is used here and in the exercises
-pm10 <- source("data/11_13_data.txt")[["value"]][["y"]] |> unlist()
+pm10 <- source("data/pm_london/pm10_London.txt")[["value"]][["y"]] |> unlist()
 pm10_374 <- pm10[380:753]
 
 
@@ -640,7 +642,7 @@ library(tidyverse)
 
 source("functions/FFBS_functions_nimble.R")
 
-UK_ozone <- read.csv("data/uk_ozone_one_site.csv")
+UK_ozone <- read.csv("data/ozone/uk_ozone_one_site.csv")
 ```
 
 
@@ -1083,7 +1085,7 @@ options(mc.cores = parallel::detectCores())
 rstan_options(auto_write = TRUE)
 
 # Load data for RW case
-UK_ozone <- read.csv("data/uk_ozone_one_site.csv")
+UK_ozone <- read.csv("data/ozone/uk_ozone_one_site.csv")
 
 ```
 
@@ -1429,9 +1431,9 @@ library(tidyverse)
 
 
 ```{r Exercise 11.13, cache = TRUE}
-data <- source("data/11_13_data.txt")
-inits1 <- source("data/11_13_model1_inits1.txt")
-model_ar <- jags.model(file = "data/11_13_model1.txt",
+data <- source("data/pm_london/pm10_London.txt")
+inits1 <- source("data/pm_london/11_13_model1_inits1.txt")
+model_ar <- jags.model(file = "data/pm_london/11_13_model1.txt",
                     data = data$value,
                     inits = inits1$value,
                     n.chains = 3)
@@ -1477,6 +1479,7 @@ plot <- ggplot(filter(plot_df, var == "gamma"), aes(x = time)) +
   geom_line(aes(y = median), alpha = 0.5) + 
   geom_line(aes(y = q025), alpha = 0.5, linetype = "dashed")+ 
   geom_line(aes(y = q975), alpha = 0.5, linetype = "dashed")+
-  geom_point(data = filter(plot_df, (var == "y" & time %in% missings)), aes(x = time, y = 0), color = "blue")
+  geom_point(data = filter(plot_df, (var == "y" & time %in% missings)), 
+             aes(x = time, y = 0), color = "blue")
 plot
 ```

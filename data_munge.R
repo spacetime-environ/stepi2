@@ -6,6 +6,41 @@ load("data/uk_pollutant_date.rda")
 
 library(mvtnorm)
 
+
+
+# Chapter 7: VOC predictors-----
+
+VOC_pred <- read.csv("data/all_campaigns_predictors.csv")
+
+# VOC_pred_selected <- dplyr::select(VOC_pred, "X", "Y", "ID", 
+#                                    starts_with("Building") | 
+#                                      starts_with("Residential") | 
+#                                      starts_with("Roads") | 
+#                                      starts_with("Population") |
+#                                    starts_with("Tot_NOx"))
+# 
+# VOC_pred_selected <- dplyr::select(VOC_pred, "X", "Y", "ID", 
+#                                    ends_with("50m") | ends_with("100m")| 
+#                                      ends_with("200m") | ends_with("500m") |
+#                                      ends_with("1000m")  )
+
+VOC_pred_selected  <- dplyr::select(VOC_pred, "X", "Y", "ID",  ends_with("100m"))
+VOC_pred_selected[is.na(VOC_pred_selected)] <- 0
+
+VOC_pred_selected <- dplyr::select(VOC_pred_selected, "X", "Y", "ID",
+                                   "Av_NOx_100m", "Av_traffic_100m",
+                                   "Building_100m", "Open.Area_100m",  "Residential_100m",
+                                   "Pop_100m", "Roads_100m")
+
+#benzene_coords <- read.csv("data/benzene_utm.csv")
+
+benzene_predictors <- merge(VOC_pred_selected, benzene_coords, by = c("X", "Y", "ID")) 
+
+# benzene_predictors <- select(benzene_predictors, -starts_with("Av_NOx")) |> 
+#   select(-starts_with("Av_traffic"))
+
+write.csv(benzene_predictors, "data/VOC_predictors.csv", row.names = FALSE)
+
 # uk_o3_uni <- data.frame(longitude = coords$longitude,
 #                         latitude = coords$latitude,
 #                         ozone = o3[, 1],
@@ -75,8 +110,8 @@ cal_sites$MaxTemp <- cal_temp_oneday[,2]
 write.csv(cal_sites, "data/CalTempData.csv", row.names = FALSE)
 
 ## April benzene
-VOCs <- read_excel("data/VOCApr2006.xlsx") 
-VOCS_IDs <- read_excel("data/VOClogsheetApr2006.xlsx") 
+VOCs <- read_excel("D:/20_sept_2021/Projects/VOCsMark/VOC Apr 2006 corrected data only.xlsx") 
+VOCS_IDs <- read_excel("D:/20_sept_2021/Projects/VOCsMark/VOC logsheet Apr 2006.xlsx") 
 
 VOCs_coords <- VOCS_IDs[,c("ID", "X", "Y")]
 benzene <- VOCs[,c("ID", "Benzene")]

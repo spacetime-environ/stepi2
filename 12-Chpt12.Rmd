@@ -36,11 +36,11 @@ library(nleqslv)
 
 source("functions/FFBS_functions_nimble.R")
 
-load("data/uk_o3.rda")
-load("data/uk_temp.rda")
-load("data/uk_wind.rda")
-load("data/uk_pollutant_coords.rda")
-load("data/uk_pollutant_date.rda")
+load("data/ozone/uk_o3.rda")
+load("data/ozone/uk_temp.rda")
+load("data/ozone/uk_wind.rda")
+load("data/ozone/uk_pollutant_coords.rda")
+load("data/ozone/uk_pollutant_date.rda")
 ls()
 
 ```

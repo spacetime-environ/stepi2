@@ -31,20 +31,20 @@ library(sf)
 
 To create SMR maps, we need to read in the relevant shapefiles. 
 
-- [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/englandlocalauthority.shp) and [englandlocalauthority.dbf](https://github.com/spacetime-environ/stepi2/blob/main/data/englandlocalauthority.dbf) contain the location, shape, and attributes of English local authorities. The function `read_sf()` from the `sf` package  will read these shapefiles into `R`.
-- [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityobserved.csv) contains the **observed**  number of hospital admissions in England by local authority. You can find this data by clicking.
-- [copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityexpected.csv) contains the **expected** number of hospital admissions in England by local authority. 
+- [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/englandlocalauthority.shp) and [englandlocalauthority.dbf](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/englandlocalauthority.dbf) contain the location, shape, and attributes of English local authorities. The function `read_sf()` from the `sf` package  will read these shapefiles into `R`.
+- [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityobserved.csv) contains the **observed**  number of hospital admissions in England by local authority. You can find this data by clicking.
+- [copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityexpected.csv) contains the **expected** number of hospital admissions in England by local authority. 
 
 ```{r Ex 6.2 read files, class.source = 'foldable' }
 # Reading in borders
-england <- read_sf("data/englandlocalauthority.shp")
+england <- read_sf("data/copd/englandlocalauthority.shp")
 
 # Reading in data
 observed <-
-  read.csv(file = "data/copdmortalityobserved.csv", row.names = 1)
+  read.csv(file = "data/copd/copdmortalityobserved.csv", row.names = 1)
 
 expected <-
-  read.csv(file = "data/copdmortalityexpected.csv", row.names = 1)
+  read.csv(file = "data/copd/copdmortalityexpected.csv", row.names = 1)
 
 ```
 

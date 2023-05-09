@@ -11,8 +11,8 @@ This chapter introduces disease mapping and contains the theory for spatial latt
 
 ## Example 9.1: Empirical Bayes and Bayes smoothing of COPD mortality for 2010 {-}
 
-This example uses the [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityobserved.csv), and
-[copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityexpected.csv) datasets from Chapter 6. 
+This example uses the [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityobserved.csv), and
+[copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityexpected.csv) datasets from Chapter 6. 
 
 ### Nimble {-}
 
@@ -26,12 +26,12 @@ library(sf) # to read shapefile
 
 # Load data
 # Reading in borders
-england <- read_sf("data/englandlocalauthority.shp")
+england <- read_sf("data/copd/englandlocalauthority.shp")
 # Reading in data
 observed <-
-  read.csv(file = "data/copdmortalityobserved.csv", row.names = 1)
+  read.csv(file = "data/copd/copdmortalityobserved.csv", row.names = 1)
 expected <-
-  read.csv(file = "data/copdmortalityexpected.csv", row.names = 1)
+  read.csv(file = "data/copd/copdmortalityexpected.csv", row.names = 1)
 
 ```
 
@@ -183,12 +183,12 @@ rstan_options(auto_write = TRUE)
 
 # Load data
 # Reading in borders
-england <- read_sf("data/englandlocalauthority.shp")
+england <- read_sf("data/copd/englandlocalauthority.shp")
 # Reading in data
 observed <-
-  read.csv(file = "data/copdmortalityobserved.csv", row.names = 1)
+  read.csv(file = "data/copd/copdmortalityobserved.csv", row.names = 1)
 expected <-
-  read.csv(file = "data/copdmortalityexpected.csv", row.names = 1)
+  read.csv(file = "data/copd/copdmortalityexpected.csv", row.names = 1)
 
 ```
 
@@ -291,8 +291,8 @@ abline(a = 0, b = 1)
 
 ## Example 9.3: Fitting a conditional spatial model in `nimble` and `stan` {-}
 
-This example uses the [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityobserved.csv), and
-[copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityexpected.csv) datasets from Chapter 6. 
+This example uses the [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityobserved.csv), and
+[copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityexpected.csv) datasets from Chapter 6. 
 
 ### Nimble {-}
 
@@ -311,13 +311,13 @@ library(nimble)
 
 # Load data
 # Reading in borders
-england <- read_sf("data/englandlocalauthority.shp")
+england <- read_sf("data/copd/englandlocalauthority.shp")
 # Reading in data
 observed <-
-  read.csv(file = "data/copdmortalityobserved.csv", row.names = 1)
+  read.csv(file = "data/copd/copdmortalityobserved.csv", row.names = 1)
 expected <-
-  read.csv(file = "data/copdmortalityexpected.csv")
-covariates <- read.csv(file = "data/copdavgscore.csv")
+  read.csv(file = "data/copd/copdmortalityexpected.csv")
+covariates <- read.csv(file = "data/copd/copdavgscore.csv")
 # Merge everything into one data frame
 copd_df <-
   cbind(observed,  expected) |> merge(
@@ -486,8 +486,8 @@ ggplot() +
 
 Here, we implement the CAR model using `stan`.
 
-This example uses the [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityobserved.csv), and
-[copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityexpected.csv) datasets from Chapter 6. 
+This example uses the [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityobserved.csv), and
+[copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityexpected.csv) datasets from Chapter 6. 
 
 
 ```{r Ex 9.3 stan clean, include = FALSE}
@@ -508,13 +508,13 @@ rstan_options(auto_write = TRUE)
 
 # Load data
 # Reading in borders
-england <- read_sf("data/englandlocalauthority.shp")
+england <- read_sf("data/copd/englandlocalauthority.shp")
 # Reading in data
 observed <-
-  read.csv(file = "data/copdmortalityobserved.csv", row.names = 1)
+  read.csv(file = "data/copd/copdmortalityobserved.csv", row.names = 1)
 expected <-
-  read.csv(file = "data/copdmortalityexpected.csv")
-covariates <- read.csv(file = "data/copdavgscore.csv")
+  read.csv(file = "data/copd/copdmortalityexpected.csv")
+covariates <- read.csv(file = "data/copd/copdavgscore.csv")
 # Merge everything into one data frame
 copd_df <-
   cbind(observed,  expected) |> merge(
@@ -699,7 +699,7 @@ ggplot() +
 rm(list=ls())
 ```
 
-Load the necessary libraries and the COPD data:  [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityobserved.csv), and [copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityexpected.csv) datasets from Chapter 6. 
+Load the necessary libraries and the COPD data:  [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityobserved.csv), and [copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityexpected.csv) datasets from Chapter 6. 
 
 
 ```{r Ex 9.4 carbayes load, message=FALSE, warning=FALSE, message= FALSE}
@@ -710,13 +710,13 @@ library(sf)
 library(spdep)
 
 # Reading in borders
-england <- read_sf("data/englandlocalauthority.shp")
+england <- read_sf("data/copd/englandlocalauthority.shp")
 # Reading in data
 observed <-
-  read.csv(file = "data/copdmortalityobserved.csv", row.names = 1)
+  read.csv(file = "data/copd/copdmortalityobserved.csv", row.names = 1)
 expected <-
-  read.csv(file = "data/copdmortalityexpected.csv")
-covariates <- read.csv(file = "data/copdavgscore.csv") 
+  read.csv(file = "data/copd/copdmortalityexpected.csv")
+covariates <- read.csv(file = "data/copd/copdavgscore.csv") 
 # Merge everything into one data frame
 copd_df <-
   cbind(observed,  expected) |> merge(
@@ -815,8 +815,8 @@ ggplot() +
 
 ## Example 9.5: Fitting a conditional model using INLA {-}
 
-This example uses the [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityobserved.csv), and
-[copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityexpected.csv) datasets from Chapter 6. 
+This example uses the [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityobserved.csv), and
+[copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityexpected.csv) datasets from Chapter 6. 
 
 
 ```{r Ex 9.5 clean, include = FALSE}
@@ -828,13 +828,13 @@ rm(list = ls())
 library(INLA)
 library(spdep) 
 # Reading in borders
-england <- read_sf("data/englandlocalauthority.shp")
+england <- read_sf("data/copd/englandlocalauthority.shp")
 # Reading in data
 observed <-
-  read.csv(file = "data/copdmortalityobserved.csv", row.names = 1)
+  read.csv(file = "data/copd/copdmortalityobserved.csv", row.names = 1)
 expected <-
-  read.csv(file = "data/copdmortalityexpected.csv")
-covariates <- read.csv(file = "data/copdavgscore.csv") 
+  read.csv(file = "data/copd/copdmortalityexpected.csv")
+covariates <- read.csv(file = "data/copd/copdavgscore.csv") 
 # Merge everything into one data frame
 copd_df <-
   cbind(observed,  expected) |> merge(
@@ -906,8 +906,8 @@ ggplot() +
 
 ## Example 9.6: Fitting a Leroux Model using Nimble, Stan and CARBayes
 
-This example uses the [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityobserved.csv), and
-[copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copdmortalityexpected.csv) datasets from Chapter 6.
+This example uses the [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityobserved.csv), and
+[copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityexpected.csv) datasets from Chapter 6.
 
 ### Nimble
 
@@ -924,13 +924,13 @@ library(nimble)
 
 # Load data
 # Reading in borders
-england <- read_sf("data/englandlocalauthority.shp")
+england <- read_sf("data/copd/englandlocalauthority.shp")
 # Reading in data
 observed <-
-  read.csv(file = "data/copdmortalityobserved.csv", row.names = 1)
+  read.csv(file = "data/copd/copdmortalityobserved.csv", row.names = 1)
 expected <-
-  read.csv(file = "data/copdmortalityexpected.csv")
-covariates <- read.csv(file = "data/copdavgscore.csv")
+  read.csv(file = "data/copd/copdmortalityexpected.csv")
+covariates <- read.csv(file = "data/copd/copdavgscore.csv")
 # Merge everything into one data frame
 copd_df <-
   cbind(observed,  expected) |> merge(
@@ -990,14 +990,15 @@ Example9_6Nimble <- nimbleCode({
   # Likelihood
   for (i in 1:N) {
     y[i] ~ dpois(lambda[i])
-    log(lambda[i]) <- log(E[i]) + b[i] + beta1*x[i]
-    b_centered[i] <- b[i] - b_mean
+    log(lambda[i]) <- log(E[i]) + b[i] 
+    mean_b[i] <- beta0 + beta1*x[i]
+   # b_centered[i] <- b[i] - b_mean
   }
 
   PrecMat[1:N, 1:N] <- tau*(rho*Q[1:N, 1:N] + (1-rho)*diag(N))
-  mean_b[1:N] <- nimRep(beta0, N)
+  # mean_b[1:N] <- nimRep(beta0, N)
 
-  b_mean <- sum(b[1:N])/N
+ # b_mean <- sum(b[1:N])/N
     # Priors
   beta0 ~ dnorm(0, sd = 1)
   beta1 ~ dnorm(0, sd = 1)
@@ -1006,9 +1007,9 @@ Example9_6Nimble <- nimbleCode({
   sigma_b ~ T(dt(0,1,1),0,)
   rho ~ dunif(0, 1)
   # Fitted values and likelihood for WAIC
-  for (i in 1:N) {
-    fitted[i] ~ dpois(lambda[i])
-  }
+  # for (i in 1:N) {
+  #   fitted[i] ~ dpois(lambda[i])
+  # }
 })
 
 #  Define the constants, data and initial values lists and run the model.
@@ -1026,12 +1027,12 @@ ex.data <-
 inits <-  list(
   beta0 = rnorm(1),
   beta1 = rnorm(1),
-  fitted = rpois(N, 2),
+#  fitted = rpois(N, 2),
   sigma_b = 1,
   b = rnorm(N),
   rho = 0.5
 )
-params <- c("beta0", "beta1","fitted", "b", "sigma_b", "tau" ,"rho")
+params <- c("beta0", "beta1", "b", "sigma_b", "tau" ,"rho")
 # Run model in nimble
 mcmc.out <- nimbleMCMC(
   code = Example9_6Nimble,
@@ -1041,7 +1042,7 @@ mcmc.out <- nimbleMCMC(
   monitors = params,
   niter = 80000,
   nburnin = 40000,
-  thin = 30,
+  thin = 15,
   WAIC = TRUE,
   nchains = 2,
   summary = TRUE,
@@ -1113,13 +1114,13 @@ rstan_options(auto_write = TRUE)
 
 # Load data
 # Reading in borders
-england <- read_sf("data/englandlocalauthority.shp")
+england <- read_sf("data/copd/englandlocalauthority.shp")
 # Reading in data
 observed <-
-  read.csv(file = "data/copdmortalityobserved.csv", row.names = 1)
+  read.csv(file = "data/copd/copdmortalityobserved.csv", row.names = 1)
 expected <-
-  read.csv(file = "data/copdmortalityexpected.csv")
-covariates <- read.csv(file = "data/copdavgscore.csv")
+  read.csv(file = "data/copd/copdmortalityexpected.csv")
+covariates <- read.csv(file = "data/copd/copdavgscore.csv")
 # Merge everything into one data frame
 copd_df <-
   cbind(observed,  expected) |> merge(
@@ -1324,13 +1325,13 @@ library(sf)
 library(spdep)
 
 # Reading in borders
-england <- read_sf("data/englandlocalauthority.shp")
+england <- read_sf("data/copd/englandlocalauthority.shp")
 # Reading in data
 observed <-
-  read.csv(file = "data/copdmortalityobserved.csv", row.names = 1)
+  read.csv(file = "data/copd/copdmortalityobserved.csv", row.names = 1)
 expected <-
-  read.csv(file = "data/copdmortalityexpected.csv")
-covariates <- read.csv(file = "data/copdavgscore.csv")
+  read.csv(file = "data/copd/copdmortalityexpected.csv")
+covariates <- read.csv(file = "data/copd/copdavgscore.csv")
 # Merge everything into one data frame
 copd_df <-
   cbind(observed,  expected) |> merge(
