@@ -12,6 +12,7 @@ output:
         collapsed: false
         smooth_scroll: false
       theme: lumen
+favicon: "favicon.ico"
 link-citations: yes
 cover-image: "img/cover.jpg"
 bibliography: ["references.bib"]
