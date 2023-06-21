@@ -1,16 +1,104 @@
-load("data/uk_o3.rda")
-load("data/uk_temp.rda")
-load("data/uk_wind.rda")
-load("data/uk_pollutant_coords.rda")
-load("data/uk_pollutant_date.rda")
-
-library(mvtnorm)
-
-
 
 # Chapter 7: VOC predictors-----
 
+# Choose ethylbezene 
+
+library(dplyr)
+library(readxl)
+library(spdep)
+library(data.table)
+
+## December ethylbenzene -----
+VOCs <- read_excel("data/VOCApr2006.xlsx") 
+VOCS_IDs <- read_excel("data/VOClogsheetApr2006.xlsx") 
+
+VOCs_coords <- VOCS_IDs[,c("ID", "X", "Y")]
+ethylbenzene <- VOCs[,c("ID", "Ethylbenzene")]
+# avoid dealing with replicates
+ethylbenzene <- ethylbenzene[unique(ethylbenzene$ID),]
+
+ethylbenzene_coords <- merge(ethylbenzene, VOCs_coords, by = "ID") %>% 
+  distinct(X, Y, .keep_all = TRUE)
+
+# Note: the coordinates for site 26 are wrong, they were fixed for the article 
+# but I just removed them
+
+
+# April
+ethylbenzene_coords <- ethylbenzene_coords[-c(23, 92, 104),]
+
+
+# August
+# ethylbenzene_coords <- ethylbenzene_coords[-c(21, 102),]
+
+
+# Note: the coordinates for site 26 are wrong, they were fixed for the article 
+# but I just removed them
+#benzene_coords <- benzene_coords[-21,]
+# Also, in order to make the code cleaner in the chapter, I will transform the 
+# coordinates to lon lat (for the map)
+
+ethylbenzene_utm <-
+  SpatialPointsDataFrame(
+    coords = ethylbenzene_coords[, c("X", "Y")],
+    data = ethylbenzene_coords[, c("ID", "Ethylbenzene")],
+    proj4string = CRS("+proj=utm +zone=18 +ellps=WGS72")
+  ) 
+
+ethylbenzene_geo <- spTransform(ethylbenzene_utm, CRS("+proj=longlat +datum=WGS84"))
+ethylbenzene_geo_df <- as.data.frame(ethylbenzene_geo)
+
+colnames(ethylbenzene_geo_df) <- c("ID", "Ethylbenzene", "lon", "lat")
+
+write.csv(ethylbenzene_geo_df, "data/montreal_ethylbenzene.csv", row.names = FALSE)
+
+# Select predictors ethylbenzene
+
 VOC_pred <- read.csv("data/all_campaigns_predictors.csv")
+# VOC_pred_selected <- dplyr::select(VOC_pred, "X", "Y", "ID" )
+
+# VOC_pred_selected <- dplyr::select(VOC_pred, "X", "Y", "ID",
+#                                    starts_with("Building") |
+#                                      starts_with("Residential") |
+#                                      starts_with("Roads") |
+#                                      starts_with("Population") |
+#                                    starts_with("Tot_NOx"))
+
+# VOC_pred_selected <- dplyr::select(VOC_pred, "X", "Y", "ID",
+                                   # ends_with("50m") | ends_with("100m")|
+                                   #   ends_with("200m") | ends_with("500m") |
+                                   #   ends_with("1000m")  )
+
+VOC_pred[is.na(VOC_pred)] <- 0
+
+
+#VOC_pred_selected  <- dplyr::select(VOC_pred, "X", "Y", "ID",  ends_with("100m"))
+
+
+VOC_pred_selected <- dplyr::select(VOC_pred, "X", "Y", "ID",
+                                   "Building_100m",
+                                   "Government.and.Institutional_1000m",
+                                   "Residential_1000m", "Pop_1000m", 
+                                   "Roads_1000m", "Tot_NOx_1000m")
+
+# VOC_pred_selected <- dplyr::select(VOC_pred, "X", "Y", "ID", 
+#                                   starts_with("Resource.and.Industrial"))
+#benzene_coords <- read.csv("data/benzene_utm.csv")
+
+#chosen_predictors <- merge(VOC_pred_selected, benzene_coords, by = c("X", "Y", "ID")) 
+ethylbenzene_predictors <- merge(VOC_pred_selected, 
+                                 ethylbenzene_coords,
+                                 by = c("X", "Y", "ID")) 
+
+# benzene_predictors <- select(benzene_predictors, -starts_with("Av_NOx")) |> 
+#   select(-starts_with("Av_traffic"))
+
+write.csv(ethylbenzene_predictors, "data/VOC_predictors.csv", row.names = FALSE)
+
+
+
+
+# VOC_pred <- read.csv("data/all_campaigns_predictors.csv")
 
 # VOC_pred_selected <- dplyr::select(VOC_pred, "X", "Y", "ID", 
 #                                    starts_with("Building") | 
@@ -24,22 +112,22 @@ VOC_pred <- read.csv("data/all_campaigns_predictors.csv")
 #                                      ends_with("200m") | ends_with("500m") |
 #                                      ends_with("1000m")  )
 
-VOC_pred_selected  <- dplyr::select(VOC_pred, "X", "Y", "ID",  ends_with("100m"))
-VOC_pred_selected[is.na(VOC_pred_selected)] <- 0
-
-VOC_pred_selected <- dplyr::select(VOC_pred_selected, "X", "Y", "ID",
-                                   "Av_NOx_100m", "Av_traffic_100m",
-                                   "Building_100m", "Open.Area_100m",  "Residential_100m",
-                                   "Pop_100m", "Roads_100m")
-
-#benzene_coords <- read.csv("data/benzene_utm.csv")
-
-benzene_predictors <- merge(VOC_pred_selected, benzene_coords, by = c("X", "Y", "ID")) 
-
-# benzene_predictors <- select(benzene_predictors, -starts_with("Av_NOx")) |> 
-#   select(-starts_with("Av_traffic"))
-
-write.csv(benzene_predictors, "data/VOC_predictors.csv", row.names = FALSE)
+# VOC_pred_selected  <- dplyr::select(VOC_pred, "X", "Y", "ID",  ends_with("100m"))
+# VOC_pred_selected[is.na(VOC_pred_selected)] <- 0
+# 
+# VOC_pred_selected <- dplyr::select(VOC_pred_selected, "X", "Y", "ID",
+#                                    "Av_NOx_100m", "Av_traffic_100m",
+#                                    "Building_100m", "Open.Area_100m",  "Residential_100m",
+#                                    "Pop_100m", "Roads_100m")
+# 
+# #benzene_coords <- read.csv("data/benzene_utm.csv")
+# 
+# benzene_predictors <- merge(VOC_pred_selected, benzene_coords, by = c("X", "Y", "ID")) 
+# 
+# # benzene_predictors <- select(benzene_predictors, -starts_with("Av_NOx")) |> 
+# #   select(-starts_with("Av_traffic"))
+# 
+# write.csv(benzene_predictors, "data/VOC_predictors.csv", row.names = FALSE)
 
 # uk_o3_uni <- data.frame(longitude = coords$longitude,
 #                         latitude = coords$latitude,
@@ -48,6 +136,17 @@ write.csv(benzene_predictors, "data/VOC_predictors.csv", row.names = FALSE)
 #                         wind = wind[,1])
 # 
 # write.csv(uk_o3_uni, "data/uk_ozone_uni.csv")
+
+# Ozone UK data -----
+load("data/uk_o3.rda")
+load("data/uk_temp.rda")
+load("data/uk_wind.rda")
+load("data/uk_pollutant_coords.rda")
+load("data/uk_pollutant_date.rda")
+
+library(mvtnorm)
+
+
 
 uk_o3_one_site <- data.frame(ozone = o3[1,],
                         temp = temp[1, ],

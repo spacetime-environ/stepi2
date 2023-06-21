@@ -26,18 +26,69 @@ process using Bayesian Model Averaging.
 
 ## Example 7.6 Model choice in studies of air pollution and health {-}
 
-
-
-```{r Ex 7.6 load data}
+```{r Example 7.6 load data, message = FALSE, warning=FALSE, error=FALSE}
 library(dplyr)
+library(geoR)
+library(GGally)
+library(ggmap)
 library(ggplot2)
+library(spdep)
 library(nimble)
+# Load data on benzene concentration in Montreal
+ethylbenzene <- read.csv("data/montreal_ethylbenzene.csv")
+# TODO: Add description of the data, this is the April campaign
+```
 
-lur_benzene <- read.csv("data/voc/VOC_predictors.csv")
-colnames(lur_benzene)
+```{r Example 7.6 map data, message = FALSE, warning=FALSE, error=FALSE}
+# create a new variable in "sp" format and define coordinates
+ethylbenzene_geo <- ethylbenzene
+coordinates(ethylbenzene_geo) <- ~ lon + lat
+proj4string(ethylbenzene_geo) <- CRS("+proj=longlat +datum=WGS84")
+# specify the bounding box
+latLongBox = bbox(ethylbenzene_geo)
+location = c(latLongBox[1, 1] - 0.05,
+             latLongBox[2, 1] - 0.05,
+             latLongBox[1, 2] + 0.1,
+             latLongBox[2, 2] + 0.05)
+# create map with location dots marked on it in
+MontrelEthylbenzeneMap <-
+  get_stamenmap(bbox =  location,
+                zoom = 10)
+ggmap(MontrelEthylbenzeneMap) + geom_point(
+  data = ethylbenzene,
+  aes(x = lon,
+      y = lat,
+      size = log(Ethylbenzene)),
+  col = "#011f4b",
+  alpha = 0.45
+) + theme_void()
 
-lur_benzene$X <- lur_benzene$X/1000
-lur_benzene$Y <- lur_benzene$Y/1000
+```
+
+```{r Ex 7.6 load covariates}
+
+lur <- read.csv("data/VOC_predictors.csv")
+colnames(lur)
+
+lur$X <- lur$X/1000
+lur$Y <- lur$Y/1000
+```
+```{r Ex 7.6 join covariates and data}
+ggpairs(lur[,-c(1:3)], title="correlogram with ggpairs()", progress = FALSE)
+
+```
+Since Average and Total traffic are highly correlated, as well as Average and Total NOx, we will just use one of them.
+
+```{r Ex 7.6 choose covs}
+lur_ethyl <- lur |> select( ends_with("0m"), "X", "Y","Ethylbenzene")
+
+# Fit a glm
+
+glm(
+  log(Ethylbenzene) ~ X + Y  +
+    Building_100m +  Government.and.Institutional_1000m + Residential_1000m + 
+    Pop_1000m + Roads_1000m, data = lur_ethyl )
+
 ```
 
 ### Nimble {-}
@@ -71,15 +122,15 @@ Ex7_6LassoCode <- nimbleCode({
 
 
 ```{r Ex 7_6 nimble lasso run model, message = FALSE, cache = TRUE, results='hide'}
-X <-  lur_benzene |> dplyr::select("X", "Y", ends_with("100m"))
+X <-  lur_ethyl |> dplyr::select( ends_with("0m"), "X", "Y")
 
 constants <-
-  list(n = nrow(lur_benzene), p = ncol(X))
+  list(n = nrow(lur_ethyl), p = ncol(X))
 
 ex.data <-
-  list(y = log(lur_benzene$Benzene),
+  list(y = log(lur_ethyl$Ethylbenzene),
        X = scale(X))
-params <- c( "beta0",  "beta", "tau", "sigma")
+params <- c( "beta0",  "beta", "taub","taue", "sigma")
 
 inits <- list( sigma = 0.1, tau = 0.1)
 # Run model in nimble
@@ -116,7 +167,9 @@ plot(mcmc.out$samples[, c("beta[6]")], bty = "n", main = "beta6")
 plot(mcmc.out$samples[, c("beta[7]")], bty = "n", main = "beta7")
 plot(mcmc.out$samples[, c("beta[8]")], bty = "n", main = "beta8")
 plot(mcmc.out$samples[, c("sigma")], bty = "n", main = "sigma")
-plot(mcmc.out$samples[, c("tau")], bty = "n", main = "tau")
+plot(mcmc.out$samples[, c("taue")], bty = "n", main = "taue")
+plot(mcmc.out$samples[, c("taub")], bty = "n", main = "taub")
+
 ```
 
 ```{r Ex 7_6 nimble lasso posterior summary}
@@ -162,10 +215,10 @@ Ex7_6HorseshoeCode <- nimbleCode({
 set.seed(321)
 
 constants <-
-  list(n = nrow(lur_benzene), p = ncol(X))
+  list(n = nrow(lur_ethyl), p = ncol(X))
 
 ex.data <-
-  list(y = log(lur_benzene$Benzene),
+  list(y = log(lur_ethyl$Ethylbenzene),
        X = scale(X))
 params <- c( "beta0",  "beta", "tau", "sigma", "lambda", "nu")
 
@@ -213,7 +266,7 @@ plot(mcmc.out$samples[, c("nu")], bty = "n", main = "nu")
 
 ```
 
-
+ 
 ```{r Ex 7_6 nimble horseshoe posterior summary}
 beta_var  <- paste0("beta[", 1:ncol(X), "]") 
 post_summary <- mcmc.out$summary$all.chains |> as.data.frame() 
