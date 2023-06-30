@@ -1,8 +1,8 @@
 # Uncertainty and its reduction {#uncertainty}
 
-This chapter contains a discussion of uncertainty, both in terms of statistical modelling and quantification but also in the wider setting of sources of uncertainty outside those normally encountered in statistics. From this chapter, the reader will have gained an understanding of the following topics:
+This chapter contains a discussion of uncertainty, both in terms of statistical modelling and quantification, but also in the wider setting of sources of uncertainty outside those normally encountered in statistics. From this chapter, the reader will have gained an understanding of the following topics:
 
-- Uncertainty can be dichotomised as either qualitative or quantitative, with the former allowing consideration of a wide variety of sources of uncertainty that would be difficult, if not impossible, to quantify mathematically.
+- Uncertainty can be dichotomized as either qualitative or quantitative, with the former allowing consideration of a wide variety of sources of uncertainty that would be difficult, if not impossible, to quantify mathematically.
 - Quantitative uncertainty can be thought of as comprising both aleatory and epistemic components, the former representing stochastic uncertainty and the latter subjective uncertainty.
 - Methods for assessing uncertainty including eliciting prior information from experts and sensitivity analysis.
 - Indexing quantitative uncertainty using the variance and entropy of the distribution of a random quantity.
@@ -18,7 +18,7 @@ The final two columns act as an aid to recording this more general uncertainty w
 
 :::: {.blackbox data-latex=""}
 ::: {.center data-latex=""}
-**Example 0.1: The health impact of VOCs**
+**Example S.1: The health impact of VOCs**
 :::
 
 The NUSAP matrix would be designed created to fit the specific context and process component being assessed, for example the quality of the data or the quality of a complex model. Here we will focus on the pedigree and assessment in an example of the health impact of VOCS. We concentrate on the pedigree analysis and show how the example of

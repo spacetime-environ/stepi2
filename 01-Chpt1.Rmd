@@ -1,59 +1,97 @@
 # Why spatio-temporal epidemiology? {#why}
 
-This chapter provides a overview of methods for spatio-temporal modelling and their use in epidemiological studies 
+This book provides a comprehensive treatment of  methods for spatio-temporal modelling and their use in epidemiological studies. Throughout the book,  we present examples of spatio-temporal modelling within a Bayesian framework and describe how  data can be used to update knowledge, together with in-depth consideration of the  role of uncertainty. 
+
+ Throughout the book we will use the [R](https://www.r-project.org/) statistical software. [R](https://www.r-project.org/) is an object-orientated programming language and provides an integrated suite of software facilities for data manipulation, calculation and graphical display. It provides an environment within which almost all classical and modern statistical techniques are available. [R](https://www.r-project.org/) can be used in a variety of ways, including directly from the command line or from within other programming environments. For many of the examples in this book we use \texttt{RStudio}, an integrated development environment (IDE) for [R](https://www.r-project.org/). It includes a console, syntax-highlighting editor that supports direct code execution, as well as tools for plotting, history, debugging and workspace management. Both [R](https://www.r-project.org/) (cran.r-project.org) and [RStudio](https://posit.co/products/open-source/rstudio/) are open source and can be downloaded free of charge. They are both available for Windows, Mac OSX and Linux.
 
 
-## Example 1.5 {-}
 
-```{r Ex 1.5 load data, message = FALSE, warning=FALSE, error=FALSE}
-# Loading relevant libraries
-library(ggmap)
-library(sp)
-library(rgdal)
-
-# Load Meuse river 
-data(meuse)
-
-```
+The base [R](https://www.r-project.org/) environment provides a rich set of functions with many thousands of functions with many more provided as additional packages, including those which allow the manipulation and visualization of spatio-temporal data, performing epidemiological analysis and advanced spatio-temporal analyses. These are available at The Comprehensive R Archive Network (CRAN) and can be downloaded from [cran.r-project.org](https://cran.r-project.org), a repository for [R](https://www.r-project.org/) software. Additional packages need to be downloaded and installed. 
 
 
-```{r Ex 1.5 coordinates and map}
 
-# Assign a reference system used in the Netherlands
-coordinates(meuse) <- ~ x + y
-proj4string(meuse) <- CRS('+init=epsg:28992') 
+From this book, the  reader will have gained an understanding of the following topics:
 
-# Convert it to latitude - longitude scale
-meuse_ll <- spTransform(meuse,CRS("+proj=longlat +datum=WGS84"))
-meuse_ll_df <- as.data.frame(meuse_ll)
-# Specify the bounding box 
-latLongBox = bbox(meuse_ll)
-location = c(latLongBox[1, 1] - 0.01,
-             latLongBox[2, 1] - 0.01,
-             latLongBox[1, 2] + 0.01,
-             latLongBox[2, 2] + 0.01)
-
-# Create map with location dots marked on it in
-MeuseMap <-
-  get_stamenmap(
-    bbox =  location,
-    zoom = 14
-  )
-
-ggmap(MeuseMap) + geom_point(
-  data = meuse_ll_df,
-  aes(
-    x = x,
-    y = y, 
-    color = "red"
-  )) + theme_void() + theme(legend.position="none")
-
-```
+ - The basic concepts of epidemiology and the estimation of  risks associated with  environmental hazards;
+ 
+ - The theory of spatial, temporal and spatio-temporal processes needed for environmental health risk analysis;
+ 
+ - Fundamental questions related to  the nature and role of uncertainty in environmental epidemiology, and methods that may help answer those questions;
+ 
+ - How data can be used to update knowledge and reducing uncertainty;
+ 
+ - A history of data collection and how databases may be constructed and how  data is formally represented through the sample space and associated formal constructs such as the sample space and sampling distributions;
+ 
+ - Important areas of application within environmental epidemiology, together with  strategies for building the models that are needed and coping with challenges that arise;
+ 
+ - Computational methods for the analysis of complex data measured over both space and time and how they can be implemented using R;  
+ 
+ - Areas of  current and future research directions in spatio-temporal modelling; 
+ 
+ - Examples of R code are given throughout the book and  the code, together with data for the examples, are available online on the book's GitHub site; 
+ 
+ - The book contains a variety of exercises, both theoretical and practical, to assist in the development of the skills needed to perform spatio-temporal analyses.
+	
 
 
-```{r Ex 1.5 write ogr data, eval = FALSE}
-# Finally we write the result that can be read by Google maps
-writeOGR(meuse_ll, "meuse.kml", "meuse", driver="KML")
 
-```
+
+
+
+<!--This chapter provides a overview of methods for spatio-temporal modelling and their use in epidemiological studies -->
+
+
+<!-- ## Example 1.5 {-} -->
+
+<!-- ```{r Ex 1.5 load data, message = FALSE, warning=FALSE, error=FALSE} -->
+<!-- # Loading relevant libraries -->
+<!-- library(ggmap) -->
+<!-- library(sp) -->
+<!-- library(rgdal) -->
+
+<!-- # Load Meuse river  -->
+<!-- data(meuse) -->
+
+<!-- ``` -->
+
+
+<!-- ```{r Ex 1.5 coordinates and map} -->
+
+<!-- # Assign a reference system used in the Netherlands -->
+<!-- coordinates(meuse) <- ~ x + y -->
+<!-- proj4string(meuse) <- CRS('+init=epsg:28992')  -->
+
+<!-- # Convert it to latitude - longitude scale -->
+<!-- meuse_ll <- spTransform(meuse,CRS("+proj=longlat +datum=WGS84")) -->
+<!-- meuse_ll_df <- as.data.frame(meuse_ll) -->
+<!-- # Specify the bounding box  -->
+<!-- latLongBox = bbox(meuse_ll) -->
+<!-- location = c(latLongBox[1, 1] - 0.01, -->
+<!--              latLongBox[2, 1] - 0.01, -->
+<!--              latLongBox[1, 2] + 0.01, -->
+<!--              latLongBox[2, 2] + 0.01) -->
+
+<!-- # Create map with location dots marked on it in -->
+<!-- MeuseMap <- -->
+<!--   get_stamenmap( -->
+<!--     bbox =  location, -->
+<!--     zoom = 14 -->
+<!--   ) -->
+
+<!-- ggmap(MeuseMap) + geom_point( -->
+<!--   data = meuse_ll_df, -->
+<!--   aes( -->
+<!--     x = x, -->
+<!--     y = y,  -->
+<!--     color = "red" -->
+<!--   )) + theme_void() + theme(legend.position="none") -->
+
+<!-- ``` -->
+
+
+<!-- ```{r Ex 1.5 write ogr data, eval = FALSE} -->
+<!-- # Finally we write the result that can be read by Google maps -->
+<!-- writeOGR(meuse_ll, "meuse.kml", "meuse", driver="KML") -->
+
+<!-- ``` -->
 

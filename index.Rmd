@@ -1,5 +1,5 @@
 --- 
-title: "Spatio-temporal methods in environmental epidemiology"
+title: "Spatio-Temporal Methods in Environmental Epidemiology with R"
 author: "Gavin Shaddick, James V. Zidek, and Alexandra M. Schmidt"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -22,18 +22,19 @@ biblio-style: "apalike"
 
 # Introduction {-}
 
-This is the online companion for the book **Spatio-temporal methods in environmental epidemiology** published in [Chapman and Hall/CRC](https://www.taylorfrancis.com/books/mono/10.1201/b18600/spatio-temporal-methods-environmental-epidemiology-gavin-shaddick-james-zidek).
+This is the online companion for the book **Spatio-Temporal Methods in Environmental Epidemiology with R** published by [Chapman and Hall/CRC](https://www.taylorfrancis.com/books/mono/10.1201/b18600/spatio-temporal-methods-environmental-epidemiology-gavin-shaddick-james-zidek).
 
 <a href="https://www.taylorfrancis.com/books/mono/10.1201/b18600/spatio-temporal-methods-environmental-epidemiology-gavin-shaddick-james-zidek"><img src="img/cover.jpg" width="250" height="375" alt="The book cover" align="right" style="margin: 0 1em 0 1em" /></a>
 
-All the codes used for the examples in the book are presented here to ensure the material is reproducible, transparent, and accessible. 
+Most of the codes used for the examples in the book are presented here to ensure the material is reproducible, transparent, and accessible. 
 
-Please feel free to contact us if you find any typos, or errors in our code *Errare humanum est*.
+Please feel free to contact [Alex Schmidt](https://alex-schmidt.research.mcgill.ca/) if you find any typos, or errors in the book or in our codes (*Errare humanum est*).
+
+
+We thank [Sara Zapata-Marin](https://github.com/SaraZM), [Johnny Xi](https://xijohnny.github.io/),  [Paritosh Kumar Roy](https://github.com/paritoshkroy), and [Mariana Carmona Baez](https://github.com/mcarmonabaez) for their help developing some of the additional examples and exercises for this edition. 
+
 
 We would like to thank Yang ‘Seagle’ Liu, Yiping Dou, and Yi Liu for allowing us to include their code and other material in the book and in the online resources.
-
-We would also like to thank [Sara Zapata-Marin](https://github.com/SaraZM), [Johnny Xi](https://xijohnny.github.io/),  [Paritosh Kumar Roy](https://github.com/paritoshkroy), and [Mariana Carmona Baez](https://github.com/mcarmonabaez) for their help developing some of the additional examples and exercises for this edition. 
-
 
 
 
