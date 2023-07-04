@@ -124,6 +124,7 @@ ggmap(NYmap) + geom_point(
 # most likely all the data has to be divided by 10
 
 library(geoR)
+library(gstat)
 library(sp)
 
 ### First we load the data
@@ -204,8 +205,8 @@ ditch_the_axes <- theme(
   panel.grid = element_blank(),
   axis.title = element_blank())
 
-#perl <- "C:/Perl64/bin/perl5.28.1.exe" # add location of perl exe for read.xls
-perl <- ("C:/Strawberry/perl/bin/perl5.32.1.exe")
+perl <- "C:/Perl64/bin/perl5.28.1.exe" # add location of perl exe for read.xls
+#perl <- ("C:/Strawberry/perl/bin/perl5.32.1.exe")
 no2 <- read.xls("data/no2_europe/NO2Europe.xlsx", perl = perl)
 no2$AirPollutionLevel <- as.numeric(no2$AirPollutionLevel)
 colnames(no2)
@@ -285,7 +286,7 @@ no2_utm <-
   group_by(zone2) |> 
   mutate(utm_x = get_utm(x, y, zone2, loc = "x"),
          utm_y = get_utm(x, y, zone2, loc = "y"))|> as.data.frame() |> 
-  select(utm_x, utm_y, Altitude, Country, AirPollutionLevel)  |> 
+  dplyr::select(utm_x, utm_y, Altitude, Country, AirPollutionLevel)  |> 
  mutate( ID = c(1:896))
 
 no2_utm_geo <- no2_utm  
@@ -448,7 +449,7 @@ covs_grid_utm <-
   group_by(zone2) |> 
   mutate(utm_x = get_utm(x, y, zone2, loc = "x"),
          utm_y = get_utm(x, y, zone2, loc = "y"))|> as.data.frame() |> 
-  select(id, utm_x, utm_y, starts_with("eu_dem_v11")) |> 
+  dplyr::select(id, utm_x, utm_y, starts_with("eu_dem_v11")) |> 
   gather(layer, altitude, -c(id, utm_x, utm_y), na.rm = TRUE) 
 
 

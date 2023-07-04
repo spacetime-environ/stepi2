@@ -1,8 +1,3 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
 # Time-why it also matters {#Time}
 
 The chapter contains the theory required for handling time series data. From this chapter, the reader will have gained an understanding of the following topics:

@@ -23,7 +23,7 @@ The Book now has a  GitHub site (https://spacetime-environ.github.io/stepi2) tha
 
 The authors remain indebted to all those individuals and institutions named above in the Preface to the first edition. To this list we now add, acknowledge, and warmly thank, individuals who helped put this revision together:
 
-- Ms Mariana Carmona Baes inspired the creation of the Bookdown format for the examples on the GitHub site associated with the second Edition;
+- Ms Mariana Carmona Baez inspired the creation of the Bookdown format for the examples on the GitHub site associated with the second Edition;
 - Dr. Sara Zapata-Marin together with Mariana provided the code and analyses for the worked examples using Bookdown and helped develop the GitHub site they can be accessed;
 - Mr Paritosh Kumar Roy provided the code for the forward-filtering-backward-sampling algorithm discussed in Chapter 11;
 - Mr. Johnny Li assisted with a number of software issues and assembled solutions for selected exercises;

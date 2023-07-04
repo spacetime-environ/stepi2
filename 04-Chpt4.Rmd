@@ -29,11 +29,8 @@ monitoring sites. We can import this into R and convert it to a
 dataframe either by using the \texttt{read.csv} 
 
 ```{r Structure of data frames, eval = TRUE}
-# reading in a .csv file into R
-# set the working directory
-setwd("./data/")
 # import the dataset from a .csv file
-WHO_GM_Database <- read.csv("WHOGMDatabase.csv")
+WHO_GM_Database <- read.csv("data/WHOGMDatabase.csv")
 # Viewing the structure of the variables within the WHO Air Pollution dataset
 str(WHO_GM_Database)
 ```

@@ -1,9 +1,3 @@
----
-output:
-  pdf_document: default
-  html_document: default
-  word_document: default
----
 # Strategies implementing uncertainty models  {#Strategies}
 
 This chapter considers both some of the wider issues related to modelling and the generalisability of results and more
@@ -32,6 +26,7 @@ library(geoR)
 library(GGally)
 library(ggmap)
 library(ggplot2)
+library(sp)
 library(spdep)
 library(nimble)
 # Load data on benzene concentration in Montreal
@@ -186,6 +181,7 @@ ggplot(post_summary,
   theme_classic() + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 ```
+
 ```{r Ex 7_6 nimble horseshoe}
 
 Ex7_6HorseshoeCode <- nimbleCode({
@@ -211,7 +207,7 @@ Ex7_6HorseshoeCode <- nimbleCode({
 
 ```
 
-```{r Ex 7_6 nimble horseshoe run model, message = FALSE, cache = TRUE, results='hide'}
+```{r Ex 7_6 nimble horseshoe run model, message = FALSE, cache = TRUE, results='hide' }
 set.seed(321)
 
 constants <-
