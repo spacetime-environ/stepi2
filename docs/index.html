@@ -23,7 +23,7 @@
 <meta name="author" content="Gavin Shaddick, James V. Zidek, and Alexandra M. Schmidt" />
 
 
-<meta name="date" content="2023-07-04" />
+<meta name="date" content="2023-07-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 
-<link rel="next" href="why.html"/>
+<link rel="next" href="preface-2nd-edition.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -137,6 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="preface-2nd-edition.html"><a href="preface-2nd-edition.html"><i class="fa fa-check"></i>Preface (2nd edition)</a></li>
 <li class="chapter" data-level="1" data-path="why.html"><a href="why.html"><i class="fa fa-check"></i><b>1</b> Why spatio-temporal epidemiology?</a></li>
 <li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Epidemiology-the basics</a>
 <ul>
@@ -284,7 +285,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Spatio-Temporal Methods in Environmental Epidemiology with R</h1>
 <p class="author"><em>Gavin Shaddick, James V. Zidek, and Alexandra M. Schmidt</em></p>
-<p class="date"><em>2023-07-04</em></p>
+<p class="date"><em>2023-07-05</em></p>
 </div>
 <div id="introduction" class="section level1 unnumbered hasAnchor">
 <h1>Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -295,48 +296,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We thank <a href="https://github.com/SaraZM">Sara Zapata-Marin</a>, <a href="https://xijohnny.github.io/">Johnny Xi</a>, <a href="https://github.com/paritoshkroy">Paritosh Kumar Roy</a>, and <a href="https://github.com/mcarmonabaez">Mariana Carmona Baez</a> for their help developing some of the additional examples and exercises for this edition.</p>
 <p>We would like to thank Yang ‘Seagle’ Liu, Yiping Dou, and Yi Liu for allowing us to include their code and other material in the book and in the online resources.</p>
 
-<p># Preface (2nd edition) {#preface2nd} {-}</p>
-<p>The overall aims and academic level of the revision remain the same as those of the first edition. Briefly, it aims to explore the interface between environmental epidemiology (EE) and spatio-temporal (ST) modelling. Its intended audience: graduate students in epidemiology with an intermediate-level background in statistics, and graduate students in statistics. The original steered a course between and cut-and-paste style cookbook and a scholarly work on underlying theory.</p>
-<p>The field of spatio-temporal statistics has continued to evolve rapidly since the original version was published in 2015, and thanks especially to the addition of Professor Alex Schmidt as a third author, we have been able to include a broader range of theoretical methods, methods for computational implementation and more applications. New ways of implementing theory and methods in applications have been added, replacing some of the now lesser used approaches that were in the first edition. As a result of these changes, the book has grown from 368 pages to almost 458 pages. This gives instructors more topics to choose from when planning their courses, depending on the educational backgrounds of their students.
-This book will also assist practitioners to take advantage of these changes, as these advances in statistical science have led to the possibility of more sophisticated models for evaluating the health risks of exposures, which vary over space and time. In summary, motivated by real-life problems, this book will continue to aim at providing a link between recent advances in spatial-temporal methodology and epidemiological applications, together with the means to implement these methods in practice. Chapter titles have been changed to better reflect the story the book is trying to tell.</p>
-<p>The book’s foundation has three general components, which together will lead to an understanding of processes associated with spatio-temporal environmental epidemiology, and hence lead to a reduction in the uncertainty associated with them:</p>
-<ol style="list-style-type: lower-roman">
-<li><p>The first component is represented by a process model, which incorporates direct and indirect prior knowledge about the natural process of interest e.g. a pollution field.</p></li>
-<li><p>Together with the form of the underlying process model we require<br />
-prior knowledge to inform the parameters of the model, that may change dynamically over space and/or time.</p></li>
-<li><p>The third, empirical component of the investigation, leads to the data model i.e. measurement model. This third route to understanding has seen an explosion of interest in data science, and has lead to an entire chapter being devoted to it in this book.</p></li>
-</ol>
-<p>The Book now has a GitHub site (<a href="https://spacetime-environ.github.io/stepi2" class="uri">https://spacetime-environ.github.io/stepi2</a>) that contains a toolbox of R-packages that has grown to enhance the value of the new methods now available for spatio-temporal modelling and make a wider array of applications feasible. That GitHub site includes an R Bookdown, which provides chapter-by-chapter material including the material from the first edition. The latter’s supplementary material found on a website, will be migrated to the R Bookdown. New material lies there, and is being added, as well including solutions to some selected exercises, R code, data or links to data files. The authors intend to keep the site updated and will add errata, additional data, new code, reviews, and so on.</p>
-<p>The authors remain indebted to all those individuals and institutions named above in the Preface to the first edition. To this list we now add, acknowledge, and warmly thank, individuals who helped put this revision together:</p>
-<ul>
-<li>Ms Mariana Carmona Baez inspired the creation of the Bookdown format for the examples on the GitHub site associated with the second Edition;</li>
-<li>Dr. Sara Zapata-Marin together with Mariana provided the code and analyses for the worked examples using Bookdown and helped develop the GitHub site they can be accessed;</li>
-<li>Mr Paritosh Kumar Roy provided the code for the forward-filtering-backward-sampling algorithm discussed in Chapter 11;</li>
-<li>Mr. Johnny Li assisted with a number of software issues and assembled solutions for selected exercises;</li>
-<li>La'is P. Freitas for her inspired graphic on the front cover, of spatio-temporal processes combined with their epidemiological impacts;</li>
-<li>Dr. Joe Watson for help in assembling his preferential sampling software for modelling the effect.</li>
-<li>Dr. Matthew L. Thomas for providing code, models, data and ideas related to the examples based on the WHO air quality database and modeling air pollutants in Europe.</li>
-</ul>
-<p>A big thanks also to Mr. Rob Calver, Senior Publisher-Mathematics, Statistics, and Physics. Chapman and Hall/CRD, Taylor and Francis Group for his advice and encouragement. Also, to Shashi Kumar on publisher’s Helpdesk for assistance with the Latex file. Finally, thank you, Lynne Zidek, for an enormous amount of help in coordinating and managing the revision. \</p>
-<p>In the Second Edition, R code is now fully listed in the examples where it is used. These examples are provided as in the first edition, along with embedded R code and details on the use of specific R packages and other software. \
-Additional code, data and examples are provided on the Book’s GitHub site along with other online resources associated with the book. These can be found on the GitHub site for the book.</p>
-<p>The following is a list of what has has been added to the first edition:</p>
-<pre><code>- dramatic new advances in spatio-temporal modelling, especially R packages for implementing those models, notably
-    with NIMBLE and STAN, which replace the outdated WinBugs used in the first edition;
-- a new chapter on data science that includes such things as data wrangling along with a clear description; 
-    of the complimentary roles of data modelling, process modelling and parameter modelling;
-- listed code for software used in examples;
-- modern computational methods, including INLA, together with code for implementation are provided;
-- a new section on causality showing how the comparison of the impact of Covid in China and Italy are 
-    completely reversed when Simpson decomposition is applied:
-- the R code needed for the examples is now fully listed in the text with additional code in R Bookdown posted on the book&#39;s
-    GitHub site;
-- solutions to selected problems appear in the GitHub site;
-- how to wrap a deterministic model in a stochastic shell by a  unified approach to physical and statistical modeling;
-- an illustration of how a build such as shell is illustrated by application to a deterministic model for the spread of an
-    infectious disease.
-- new sections on causality and confounders, including the relationship of Simpson&#39;s paradox with process models.</code></pre>
-
 </div>
             </section>
 
@@ -344,7 +303,7 @@ Additional code, data and examples are provided on the Book’s GitHub site alon
         </div>
       </div>
 
-<a href="why.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="preface-2nd-edition.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

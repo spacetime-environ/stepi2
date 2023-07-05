@@ -23,7 +23,7 @@
 <meta name="author" content="Gavin Shaddick, James V. Zidek, and Alexandra M. Schmidt" />
 
 
-<meta name="date" content="2023-07-04" />
+<meta name="date" content="2023-07-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -137,6 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="preface-2nd-edition.html"><a href="preface-2nd-edition.html"><i class="fa fa-check"></i>Preface (2nd edition)</a></li>
 <li class="chapter" data-level="1" data-path="why.html"><a href="why.html"><i class="fa fa-check"></i><b>1</b> Why spatio-temporal epidemiology?</a></li>
 <li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Epidemiology-the basics</a>
 <ul>
@@ -299,33 +300,33 @@ collected. From this chapter, the reader will have gained an understanding of th
 <div id="placeholder-repeat-the-black-smoke-analysis-conducted-in-watson-et-al.-2019.-in-the-naive-model." class="section level3 unnumbered hasAnchor">
 <h3>PLACEHOLDER: Repeat the Black Smoke analysis conducted in Watson et al. 2019. in the “naive” model.<a href="trusted.html#placeholder-repeat-the-black-smoke-analysis-conducted-in-watson-et-al.-2019.-in-the-naive-model." class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>If INLA is not already installed, it needs to be done manually (<a href="https://www.r-inla.org/download-install" class="uri">https://www.r-inla.org/download-install</a>):</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="trusted.html#cb106-1" tabindex="-1"></a><span class="fu">install.packages</span>(</span>
-<span id="cb106-2"><a href="trusted.html#cb106-2" tabindex="-1"></a>  <span class="st">&quot;INLA&quot;</span>,</span>
-<span id="cb106-3"><a href="trusted.html#cb106-3" tabindex="-1"></a>  <span class="at">repos =</span> <span class="fu">c</span>(<span class="fu">getOption</span>(<span class="st">&quot;repos&quot;</span>), <span class="at">INLA =</span> <span class="st">&quot;https://inla.r-inla-download.org/R/stable&quot;</span>),</span>
-<span id="cb106-4"><a href="trusted.html#cb106-4" tabindex="-1"></a>  <span class="at">dep =</span> <span class="cn">TRUE</span></span>
-<span id="cb106-5"><a href="trusted.html#cb106-5" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="trusted.html#cb105-1" tabindex="-1"></a><span class="fu">install.packages</span>(</span>
+<span id="cb105-2"><a href="trusted.html#cb105-2" tabindex="-1"></a>  <span class="st">&quot;INLA&quot;</span>,</span>
+<span id="cb105-3"><a href="trusted.html#cb105-3" tabindex="-1"></a>  <span class="at">repos =</span> <span class="fu">c</span>(<span class="fu">getOption</span>(<span class="st">&quot;repos&quot;</span>), <span class="at">INLA =</span> <span class="st">&quot;https://inla.r-inla-download.org/R/stable&quot;</span>),</span>
+<span id="cb105-4"><a href="trusted.html#cb105-4" tabindex="-1"></a>  <span class="at">dep =</span> <span class="cn">TRUE</span></span>
+<span id="cb105-5"><a href="trusted.html#cb105-5" tabindex="-1"></a>)</span></code></pre></div>
 <p>After INLA is installed load all the necessary packages.</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="trusted.html#cb107-1" tabindex="-1"></a><span class="fu">library</span>(INLA)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="trusted.html#cb106-1" tabindex="-1"></a><span class="fu">library</span>(INLA)</span></code></pre></div>
 <pre><code>## Loading required package: Matrix</code></pre>
 <pre><code>## Loading required package: foreach</code></pre>
 <pre><code>## Loading required package: parallel</code></pre>
 <pre><code>## This is INLA_22.12.16 built 2022-12-23 13:24:10 UTC.
 ##  - See www.r-inla.org/contact-us for how to get help.</code></pre>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="trusted.html#cb112-1" tabindex="-1"></a><span class="fu">library</span>(mvtnorm)</span>
-<span id="cb112-2"><a href="trusted.html#cb112-2" tabindex="-1"></a><span class="fu">library</span>(boot)</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="trusted.html#cb111-1" tabindex="-1"></a><span class="fu">library</span>(mvtnorm)</span>
+<span id="cb111-2"><a href="trusted.html#cb111-2" tabindex="-1"></a><span class="fu">library</span>(boot)</span></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;boot&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:nimble&#39;:
 ## 
 ##     logit</code></pre>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="trusted.html#cb115-1" tabindex="-1"></a><span class="fu">library</span>(geoR)</span>
-<span id="cb115-2"><a href="trusted.html#cb115-2" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
-<span id="cb115-3"><a href="trusted.html#cb115-3" tabindex="-1"></a><span class="fu">library</span>(sp)</span>
-<span id="cb115-4"><a href="trusted.html#cb115-4" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="trusted.html#cb114-1" tabindex="-1"></a><span class="fu">library</span>(geoR)</span>
+<span id="cb114-2"><a href="trusted.html#cb114-2" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb114-3"><a href="trusted.html#cb114-3" tabindex="-1"></a><span class="fu">library</span>(sp)</span>
+<span id="cb114-4"><a href="trusted.html#cb114-4" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
 <p>This example uses the <a href="https://github.com/spacetime-environ/stepi2/blob/main/data/black_smoke/BlackSmokePrefData.csv">BlackSmokePrefData.csv</a> file.</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="trusted.html#cb116-1" tabindex="-1"></a>BlackSmokePrefData <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/black_smoke/BlackSmokePrefData.csv&quot;</span>)</span>
-<span id="cb116-2"><a href="trusted.html#cb116-2" tabindex="-1"></a></span>
-<span id="cb116-3"><a href="trusted.html#cb116-3" tabindex="-1"></a><span class="fu">head</span>(BlackSmokePrefData)</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="trusted.html#cb115-1" tabindex="-1"></a>BlackSmokePrefData <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/black_smoke/BlackSmokePrefData.csv&quot;</span>)</span>
+<span id="cb115-2"><a href="trusted.html#cb115-2" tabindex="-1"></a></span>
+<span id="cb115-3"><a href="trusted.html#cb115-3" tabindex="-1"></a><span class="fu">head</span>(BlackSmokePrefData)</span></code></pre></div>
 <pre><code>##           site   east  north AMEAN66 AMEAN67 AMEAN68 AMEAN69 AMEAN70 AMEAN71
 ## 1 ADDLESTONE 1 505200 164600      92     103      68      47      47      45
 ## 2   BARNSLEY 8 434800 409400      NA      NA      NA      NA      NA      NA
@@ -354,327 +355,327 @@ collected. From this chapter, the reader will have gained an understanding of th
 ## 4      NA      NA      NA      NA      NA      NA      NA
 ## 5      NA      NA      NA      NA      NA      NA      NA
 ## 6      12      12       9      11       9      19      11</code></pre>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="trusted.html#cb118-1" tabindex="-1"></a><span class="do">## standardize location coordinates</span></span>
-<span id="cb118-2"><a href="trusted.html#cb118-2" tabindex="-1"></a></span>
-<span id="cb118-3"><a href="trusted.html#cb118-3" tabindex="-1"></a>sd_x <span class="ot">&lt;-</span> <span class="fu">sd</span>(BlackSmokePrefData[, <span class="fu">c</span>(<span class="dv">2</span>)])</span>
-<span id="cb118-4"><a href="trusted.html#cb118-4" tabindex="-1"></a>sd_y <span class="ot">&lt;-</span> <span class="fu">sd</span>(BlackSmokePrefData[, <span class="fu">c</span>(<span class="dv">3</span>)])</span>
-<span id="cb118-5"><a href="trusted.html#cb118-5" tabindex="-1"></a></span>
-<span id="cb118-6"><a href="trusted.html#cb118-6" tabindex="-1"></a>BlackSmokePrefData[, <span class="dv">2</span>] <span class="ot">&lt;-</span> BlackSmokePrefData[, <span class="dv">2</span>] <span class="sc">/</span> sd_x</span>
-<span id="cb118-7"><a href="trusted.html#cb118-7" tabindex="-1"></a>BlackSmokePrefData[, <span class="dv">3</span>] <span class="ot">&lt;-</span> BlackSmokePrefData[, <span class="dv">3</span>] <span class="sc">/</span> sd_y </span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="trusted.html#cb117-1" tabindex="-1"></a><span class="do">## standardize location coordinates</span></span>
+<span id="cb117-2"><a href="trusted.html#cb117-2" tabindex="-1"></a></span>
+<span id="cb117-3"><a href="trusted.html#cb117-3" tabindex="-1"></a>sd_x <span class="ot">&lt;-</span> <span class="fu">sd</span>(BlackSmokePrefData[, <span class="fu">c</span>(<span class="dv">2</span>)])</span>
+<span id="cb117-4"><a href="trusted.html#cb117-4" tabindex="-1"></a>sd_y <span class="ot">&lt;-</span> <span class="fu">sd</span>(BlackSmokePrefData[, <span class="fu">c</span>(<span class="dv">3</span>)])</span>
+<span id="cb117-5"><a href="trusted.html#cb117-5" tabindex="-1"></a></span>
+<span id="cb117-6"><a href="trusted.html#cb117-6" tabindex="-1"></a>BlackSmokePrefData[, <span class="dv">2</span>] <span class="ot">&lt;-</span> BlackSmokePrefData[, <span class="dv">2</span>] <span class="sc">/</span> sd_x</span>
+<span id="cb117-7"><a href="trusted.html#cb117-7" tabindex="-1"></a>BlackSmokePrefData[, <span class="dv">3</span>] <span class="ot">&lt;-</span> BlackSmokePrefData[, <span class="dv">3</span>] <span class="sc">/</span> sd_y </span></code></pre></div>
 <p>We need to reshape the data to have one observation per row, as required by INLA.</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="trusted.html#cb119-1" tabindex="-1"></a>yearmeans <span class="ot">=</span> <span class="fu">colMeans</span>(BlackSmokePrefData[, <span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)], <span class="at">na.rm =</span> T)  <span class="do">## save means for each year</span></span>
-<span id="cb119-2"><a href="trusted.html#cb119-2" tabindex="-1"></a></span>
-<span id="cb119-3"><a href="trusted.html#cb119-3" tabindex="-1"></a>BlackSmokePrefData <span class="ot">&lt;-</span></span>
-<span id="cb119-4"><a href="trusted.html#cb119-4" tabindex="-1"></a>  <span class="fu">melt</span>(</span>
-<span id="cb119-5"><a href="trusted.html#cb119-5" tabindex="-1"></a>    BlackSmokePrefData,</span>
-<span id="cb119-6"><a href="trusted.html#cb119-6" tabindex="-1"></a>    <span class="at">id.vars =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
-<span id="cb119-7"><a href="trusted.html#cb119-7" tabindex="-1"></a>    <span class="at">variable.name =</span> <span class="st">&#39;year&#39;</span>,</span>
-<span id="cb119-8"><a href="trusted.html#cb119-8" tabindex="-1"></a>    <span class="at">value.name =</span> <span class="st">&#39;bsmoke&#39;</span></span>
-<span id="cb119-9"><a href="trusted.html#cb119-9" tabindex="-1"></a>  )</span>
-<span id="cb119-10"><a href="trusted.html#cb119-10" tabindex="-1"></a>BlackSmokePrefData<span class="sc">$</span>year <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(<span class="fu">factor</span>(BlackSmokePrefData<span class="sc">$</span>year, <span class="at">labels =</span></span>
-<span id="cb119-11"><a href="trusted.html#cb119-11" tabindex="-1"></a>                                                           <span class="dv">66</span><span class="sc">:</span><span class="dv">96</span>)))</span>
-<span id="cb119-12"><a href="trusted.html#cb119-12" tabindex="-1"></a><span class="do">## standardize by mean of mean of each year to make it unitless</span></span>
-<span id="cb119-13"><a href="trusted.html#cb119-13" tabindex="-1"></a>BlackSmokePrefData<span class="sc">$</span>bsmoke <span class="ot">=</span> BlackSmokePrefData<span class="sc">$</span>bsmoke <span class="sc">/</span> <span class="fu">mean</span>(yearmeans)</span>
-<span id="cb119-14"><a href="trusted.html#cb119-14" tabindex="-1"></a><span class="do">## log-transform to eliminate right skew</span></span>
-<span id="cb119-15"><a href="trusted.html#cb119-15" tabindex="-1"></a>BlackSmokePrefData<span class="sc">$</span>bsmoke <span class="ot">=</span> <span class="fu">log</span>(BlackSmokePrefData<span class="sc">$</span>bsmoke)</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="trusted.html#cb118-1" tabindex="-1"></a>yearmeans <span class="ot">=</span> <span class="fu">colMeans</span>(BlackSmokePrefData[, <span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)], <span class="at">na.rm =</span> T)  <span class="do">## save means for each year</span></span>
+<span id="cb118-2"><a href="trusted.html#cb118-2" tabindex="-1"></a></span>
+<span id="cb118-3"><a href="trusted.html#cb118-3" tabindex="-1"></a>BlackSmokePrefData <span class="ot">&lt;-</span></span>
+<span id="cb118-4"><a href="trusted.html#cb118-4" tabindex="-1"></a>  <span class="fu">melt</span>(</span>
+<span id="cb118-5"><a href="trusted.html#cb118-5" tabindex="-1"></a>    BlackSmokePrefData,</span>
+<span id="cb118-6"><a href="trusted.html#cb118-6" tabindex="-1"></a>    <span class="at">id.vars =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb118-7"><a href="trusted.html#cb118-7" tabindex="-1"></a>    <span class="at">variable.name =</span> <span class="st">&#39;year&#39;</span>,</span>
+<span id="cb118-8"><a href="trusted.html#cb118-8" tabindex="-1"></a>    <span class="at">value.name =</span> <span class="st">&#39;bsmoke&#39;</span></span>
+<span id="cb118-9"><a href="trusted.html#cb118-9" tabindex="-1"></a>  )</span>
+<span id="cb118-10"><a href="trusted.html#cb118-10" tabindex="-1"></a>BlackSmokePrefData<span class="sc">$</span>year <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(<span class="fu">factor</span>(BlackSmokePrefData<span class="sc">$</span>year, <span class="at">labels =</span></span>
+<span id="cb118-11"><a href="trusted.html#cb118-11" tabindex="-1"></a>                                                           <span class="dv">66</span><span class="sc">:</span><span class="dv">96</span>)))</span>
+<span id="cb118-12"><a href="trusted.html#cb118-12" tabindex="-1"></a><span class="do">## standardize by mean of mean of each year to make it unitless</span></span>
+<span id="cb118-13"><a href="trusted.html#cb118-13" tabindex="-1"></a>BlackSmokePrefData<span class="sc">$</span>bsmoke <span class="ot">=</span> BlackSmokePrefData<span class="sc">$</span>bsmoke <span class="sc">/</span> <span class="fu">mean</span>(yearmeans)</span>
+<span id="cb118-14"><a href="trusted.html#cb118-14" tabindex="-1"></a><span class="do">## log-transform to eliminate right skew</span></span>
+<span id="cb118-15"><a href="trusted.html#cb118-15" tabindex="-1"></a>BlackSmokePrefData<span class="sc">$</span>bsmoke <span class="ot">=</span> <span class="fu">log</span>(BlackSmokePrefData<span class="sc">$</span>bsmoke)</span></code></pre></div>
 <p>Producing the 2-d mesh of the UK:</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="trusted.html#cb120-1" tabindex="-1"></a>no_sites <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">length</span>(<span class="fu">unique</span>(BlackSmokePrefData<span class="sc">$</span>site))) <span class="co"># number of sites</span></span>
-<span id="cb120-2"><a href="trusted.html#cb120-2" tabindex="-1"></a>no_T <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">length</span>(<span class="fu">unique</span>(BlackSmokePrefData<span class="sc">$</span>year))) <span class="co"># number of years</span></span>
-<span id="cb120-3"><a href="trusted.html#cb120-3" tabindex="-1"></a></span>
-<span id="cb120-4"><a href="trusted.html#cb120-4" tabindex="-1"></a>ncol <span class="ot">=</span> <span class="dv">100</span> <span class="co"># grid for projection</span></span>
-<span id="cb120-5"><a href="trusted.html#cb120-5" tabindex="-1"></a>nrow <span class="ot">=</span> <span class="dv">100</span></span>
-<span id="cb120-6"><a href="trusted.html#cb120-6" tabindex="-1"></a>L <span class="ot">=</span> nrow <span class="sc">*</span> ncol <span class="co"># number of grid sites</span></span>
-<span id="cb120-7"><a href="trusted.html#cb120-7" tabindex="-1"></a></span>
-<span id="cb120-8"><a href="trusted.html#cb120-8" tabindex="-1"></a><span class="co"># Form the regular mesh #</span></span>
-<span id="cb120-9"><a href="trusted.html#cb120-9" tabindex="-1"></a><span class="co"># Create a rough convex boundary for the UK #</span></span>
-<span id="cb120-10"><a href="trusted.html#cb120-10" tabindex="-1"></a><span class="co"># Form the grid independently from the sites to avoid preferential grid selection #</span></span>
-<span id="cb120-11"><a href="trusted.html#cb120-11" tabindex="-1"></a>UK_domain <span class="ot">=</span> <span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="fl">7.7</span>, <span class="fl">7.7</span>, <span class="dv">6</span>, <span class="dv">4</span>, <span class="dv">1</span>), <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="dv">6</span>, <span class="fl">13.5</span>, <span class="fl">13.5</span>, <span class="dv">12</span>))</span>
-<span id="cb120-12"><a href="trusted.html#cb120-12" tabindex="-1"></a>hull <span class="ot">=</span> <span class="fu">inla.nonconvex.hull</span>(<span class="fu">cbind</span>(BlackSmokePrefData<span class="sc">$</span>east, BlackSmokePrefData<span class="sc">$</span>north))</span>
-<span id="cb120-13"><a href="trusted.html#cb120-13" tabindex="-1"></a></span>
-<span id="cb120-14"><a href="trusted.html#cb120-14" tabindex="-1"></a>cutoff_dist <span class="ot">=</span> <span class="dv">16000</span> <span class="sc">/</span> sd_x <span class="co"># 16km as min edge</span></span>
-<span id="cb120-15"><a href="trusted.html#cb120-15" tabindex="-1"></a>max.edge <span class="ot">=</span> <span class="dv">100000</span> <span class="sc">/</span> sd_x <span class="co"># 100km max edge as in Shaddick and Zidek</span></span>
-<span id="cb120-16"><a href="trusted.html#cb120-16" tabindex="-1"></a></span>
-<span id="cb120-17"><a href="trusted.html#cb120-17" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: JOHNNY, I HAD TO COMMENT THE CUTOFF VARIABLE CAUSE OTHERWISE IT WOULDN&#39;T WORK</span></span>
-<span id="cb120-18"><a href="trusted.html#cb120-18" tabindex="-1"></a></span>
-<span id="cb120-19"><a href="trusted.html#cb120-19" tabindex="-1"></a>mesh <span class="ot">=</span> <span class="fu">inla.mesh.2d</span>(</span>
-<span id="cb120-20"><a href="trusted.html#cb120-20" tabindex="-1"></a>  <span class="at">loc =</span> <span class="fu">cbind</span>(BlackSmokePrefData<span class="sc">$</span>east, BlackSmokePrefData<span class="sc">$</span>north),</span>
-<span id="cb120-21"><a href="trusted.html#cb120-21" tabindex="-1"></a>  <span class="at">boundary =</span> hull,</span>
-<span id="cb120-22"><a href="trusted.html#cb120-22" tabindex="-1"></a>  <span class="at">offset =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.2</span>),</span>
-<span id="cb120-23"><a href="trusted.html#cb120-23" tabindex="-1"></a>  <span class="at">max.edge =</span> <span class="fu">c</span>(cutoff_dist, <span class="fl">0.5</span>),</span>
-<span id="cb120-24"><a href="trusted.html#cb120-24" tabindex="-1"></a>  <span class="co">#cutoff = c(cutoff_dist, 1),</span></span>
-<span id="cb120-25"><a href="trusted.html#cb120-25" tabindex="-1"></a>  <span class="at">min.angle =</span> <span class="dv">26</span></span>
-<span id="cb120-26"><a href="trusted.html#cb120-26" tabindex="-1"></a>)</span>
-<span id="cb120-27"><a href="trusted.html#cb120-27" tabindex="-1"></a></span>
-<span id="cb120-28"><a href="trusted.html#cb120-28" tabindex="-1"></a><span class="fu">plot</span>(mesh)</span>
-<span id="cb120-29"><a href="trusted.html#cb120-29" tabindex="-1"></a><span class="fu">points</span>(BlackSmokePrefData<span class="sc">$</span>east, BlackSmokePrefData<span class="sc">$</span>north, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="trusted.html#cb119-1" tabindex="-1"></a>no_sites <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">length</span>(<span class="fu">unique</span>(BlackSmokePrefData<span class="sc">$</span>site))) <span class="co"># number of sites</span></span>
+<span id="cb119-2"><a href="trusted.html#cb119-2" tabindex="-1"></a>no_T <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">length</span>(<span class="fu">unique</span>(BlackSmokePrefData<span class="sc">$</span>year))) <span class="co"># number of years</span></span>
+<span id="cb119-3"><a href="trusted.html#cb119-3" tabindex="-1"></a></span>
+<span id="cb119-4"><a href="trusted.html#cb119-4" tabindex="-1"></a>ncol <span class="ot">=</span> <span class="dv">100</span> <span class="co"># grid for projection</span></span>
+<span id="cb119-5"><a href="trusted.html#cb119-5" tabindex="-1"></a>nrow <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb119-6"><a href="trusted.html#cb119-6" tabindex="-1"></a>L <span class="ot">=</span> nrow <span class="sc">*</span> ncol <span class="co"># number of grid sites</span></span>
+<span id="cb119-7"><a href="trusted.html#cb119-7" tabindex="-1"></a></span>
+<span id="cb119-8"><a href="trusted.html#cb119-8" tabindex="-1"></a><span class="co"># Form the regular mesh #</span></span>
+<span id="cb119-9"><a href="trusted.html#cb119-9" tabindex="-1"></a><span class="co"># Create a rough convex boundary for the UK #</span></span>
+<span id="cb119-10"><a href="trusted.html#cb119-10" tabindex="-1"></a><span class="co"># Form the grid independently from the sites to avoid preferential grid selection #</span></span>
+<span id="cb119-11"><a href="trusted.html#cb119-11" tabindex="-1"></a>UK_domain <span class="ot">=</span> <span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="fl">7.7</span>, <span class="fl">7.7</span>, <span class="dv">6</span>, <span class="dv">4</span>, <span class="dv">1</span>), <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="dv">6</span>, <span class="fl">13.5</span>, <span class="fl">13.5</span>, <span class="dv">12</span>))</span>
+<span id="cb119-12"><a href="trusted.html#cb119-12" tabindex="-1"></a>hull <span class="ot">=</span> <span class="fu">inla.nonconvex.hull</span>(<span class="fu">cbind</span>(BlackSmokePrefData<span class="sc">$</span>east, BlackSmokePrefData<span class="sc">$</span>north))</span>
+<span id="cb119-13"><a href="trusted.html#cb119-13" tabindex="-1"></a></span>
+<span id="cb119-14"><a href="trusted.html#cb119-14" tabindex="-1"></a>cutoff_dist <span class="ot">=</span> <span class="dv">16000</span> <span class="sc">/</span> sd_x <span class="co"># 16km as min edge</span></span>
+<span id="cb119-15"><a href="trusted.html#cb119-15" tabindex="-1"></a>max.edge <span class="ot">=</span> <span class="dv">100000</span> <span class="sc">/</span> sd_x <span class="co"># 100km max edge as in Shaddick and Zidek</span></span>
+<span id="cb119-16"><a href="trusted.html#cb119-16" tabindex="-1"></a></span>
+<span id="cb119-17"><a href="trusted.html#cb119-17" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: JOHNNY, I HAD TO COMMENT THE CUTOFF VARIABLE CAUSE OTHERWISE IT WOULDN&#39;T WORK</span></span>
+<span id="cb119-18"><a href="trusted.html#cb119-18" tabindex="-1"></a></span>
+<span id="cb119-19"><a href="trusted.html#cb119-19" tabindex="-1"></a>mesh <span class="ot">=</span> <span class="fu">inla.mesh.2d</span>(</span>
+<span id="cb119-20"><a href="trusted.html#cb119-20" tabindex="-1"></a>  <span class="at">loc =</span> <span class="fu">cbind</span>(BlackSmokePrefData<span class="sc">$</span>east, BlackSmokePrefData<span class="sc">$</span>north),</span>
+<span id="cb119-21"><a href="trusted.html#cb119-21" tabindex="-1"></a>  <span class="at">boundary =</span> hull,</span>
+<span id="cb119-22"><a href="trusted.html#cb119-22" tabindex="-1"></a>  <span class="at">offset =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.2</span>),</span>
+<span id="cb119-23"><a href="trusted.html#cb119-23" tabindex="-1"></a>  <span class="at">max.edge =</span> <span class="fu">c</span>(cutoff_dist, <span class="fl">0.5</span>),</span>
+<span id="cb119-24"><a href="trusted.html#cb119-24" tabindex="-1"></a>  <span class="co">#cutoff = c(cutoff_dist, 1),</span></span>
+<span id="cb119-25"><a href="trusted.html#cb119-25" tabindex="-1"></a>  <span class="at">min.angle =</span> <span class="dv">26</span></span>
+<span id="cb119-26"><a href="trusted.html#cb119-26" tabindex="-1"></a>)</span>
+<span id="cb119-27"><a href="trusted.html#cb119-27" tabindex="-1"></a></span>
+<span id="cb119-28"><a href="trusted.html#cb119-28" tabindex="-1"></a><span class="fu">plot</span>(mesh)</span>
+<span id="cb119-29"><a href="trusted.html#cb119-29" tabindex="-1"></a><span class="fu">points</span>(BlackSmokePrefData<span class="sc">$</span>east, BlackSmokePrefData<span class="sc">$</span>north, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/mesh%20analysis-1.png" width="672" /></p>
 <p>Now we define and fit our INLA model.</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="trusted.html#cb121-1" tabindex="-1"></a>spde_obj <span class="ot">=</span> <span class="fu">inla.spde2.pcmatern</span>(</span>
-<span id="cb121-2"><a href="trusted.html#cb121-2" tabindex="-1"></a>  <span class="at">mesh =</span> mesh,</span>
-<span id="cb121-3"><a href="trusted.html#cb121-3" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="dv">2</span>,</span>
-<span id="cb121-4"><a href="trusted.html#cb121-4" tabindex="-1"></a>  <span class="at">prior.range =</span> <span class="fu">c</span>(<span class="fl">0.04</span>, <span class="fl">0.05</span>),</span>
-<span id="cb121-5"><a href="trusted.html#cb121-5" tabindex="-1"></a>  <span class="at">prior.sigma =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.01</span>),</span>
-<span id="cb121-6"><a href="trusted.html#cb121-6" tabindex="-1"></a>  <span class="at">constr =</span> T</span>
-<span id="cb121-7"><a href="trusted.html#cb121-7" tabindex="-1"></a>)</span>
-<span id="cb121-8"><a href="trusted.html#cb121-8" tabindex="-1"></a>A_proj <span class="ot">=</span> <span class="fu">inla.spde.make.A</span>(</span>
-<span id="cb121-9"><a href="trusted.html#cb121-9" tabindex="-1"></a>  <span class="at">mesh =</span> mesh,</span>
-<span id="cb121-10"><a href="trusted.html#cb121-10" tabindex="-1"></a>  <span class="at">loc =</span> <span class="fu">as.matrix</span>(<span class="fu">cbind</span>(</span>
-<span id="cb121-11"><a href="trusted.html#cb121-11" tabindex="-1"></a>    BlackSmokePrefData<span class="sc">$</span>east, BlackSmokePrefData<span class="sc">$</span>north</span>
-<span id="cb121-12"><a href="trusted.html#cb121-12" tabindex="-1"></a>  )),</span>
-<span id="cb121-13"><a href="trusted.html#cb121-13" tabindex="-1"></a>  <span class="at">group =</span> BlackSmokePrefData<span class="sc">$</span>year <span class="sc">-</span> <span class="dv">65</span>,</span>
-<span id="cb121-14"><a href="trusted.html#cb121-14" tabindex="-1"></a>  <span class="co"># group membership needs to be 1:no_T</span></span>
-<span id="cb121-15"><a href="trusted.html#cb121-15" tabindex="-1"></a>  <span class="at">n.group =</span> no_T</span>
-<span id="cb121-16"><a href="trusted.html#cb121-16" tabindex="-1"></a>)</span>
-<span id="cb121-17"><a href="trusted.html#cb121-17" tabindex="-1"></a></span>
-<span id="cb121-18"><a href="trusted.html#cb121-18" tabindex="-1"></a>s_index <span class="ot">=</span> <span class="fu">inla.spde.make.index</span>(<span class="at">name =</span> <span class="st">&quot;spatial.field&quot;</span>,</span>
-<span id="cb121-19"><a href="trusted.html#cb121-19" tabindex="-1"></a>                               <span class="at">n.spde =</span> spde_obj<span class="sc">$</span>n.spde,</span>
-<span id="cb121-20"><a href="trusted.html#cb121-20" tabindex="-1"></a>                               <span class="at">n.group =</span> no_T)</span>
-<span id="cb121-21"><a href="trusted.html#cb121-21" tabindex="-1"></a>time <span class="ot">=</span> (<span class="dv">1</span><span class="sc">:</span>no_T) <span class="sc">/</span> no_T</span>
-<span id="cb121-22"><a href="trusted.html#cb121-22" tabindex="-1"></a>time2 <span class="ot">=</span> time <span class="sc">^</span> <span class="dv">2</span></span>
-<span id="cb121-23"><a href="trusted.html#cb121-23" tabindex="-1"></a></span>
-<span id="cb121-24"><a href="trusted.html#cb121-24" tabindex="-1"></a><span class="co"># create the stack object for estimating observation process y #</span></span>
-<span id="cb121-25"><a href="trusted.html#cb121-25" tabindex="-1"></a></span>
-<span id="cb121-26"><a href="trusted.html#cb121-26" tabindex="-1"></a>cov_y <span class="ot">=</span> <span class="fu">data.frame</span>(</span>
-<span id="cb121-27"><a href="trusted.html#cb121-27" tabindex="-1"></a>  <span class="at">year =</span> <span class="fu">rep</span>(time, <span class="at">each =</span> no_sites),</span>
-<span id="cb121-28"><a href="trusted.html#cb121-28" tabindex="-1"></a>  <span class="at">year_2 =</span> <span class="fu">rep</span>(time2, <span class="at">each =</span> no_sites),</span>
-<span id="cb121-29"><a href="trusted.html#cb121-29" tabindex="-1"></a>  <span class="at">spatial_ind =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>no_sites, <span class="at">times =</span> no_T),</span>
-<span id="cb121-30"><a href="trusted.html#cb121-30" tabindex="-1"></a>  <span class="at">spatial_ind2 =</span> no_sites <span class="sc">+</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>no_sites, <span class="at">times =</span> no_T)</span>
-<span id="cb121-31"><a href="trusted.html#cb121-31" tabindex="-1"></a>) <span class="co"># site-specific random intercepts</span></span>
-<span id="cb121-32"><a href="trusted.html#cb121-32" tabindex="-1"></a></span>
-<span id="cb121-33"><a href="trusted.html#cb121-33" tabindex="-1"></a><span class="co"># Needs copies to include covariate twice</span></span>
-<span id="cb121-34"><a href="trusted.html#cb121-34" tabindex="-1"></a></span>
-<span id="cb121-35"><a href="trusted.html#cb121-35" tabindex="-1"></a>s_index_copy <span class="ot">=</span> s_index</span>
-<span id="cb121-36"><a href="trusted.html#cb121-36" tabindex="-1"></a><span class="fu">names</span>(s_index_copy) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;spatial.field.copy&#39;</span>,</span>
-<span id="cb121-37"><a href="trusted.html#cb121-37" tabindex="-1"></a>                        <span class="st">&quot;spatial.field.group.copy&quot;</span>,</span>
-<span id="cb121-38"><a href="trusted.html#cb121-38" tabindex="-1"></a>                        <span class="st">&quot;spatial.field.repl.copy&quot;</span>)</span>
-<span id="cb121-39"><a href="trusted.html#cb121-39" tabindex="-1"></a></span>
-<span id="cb121-40"><a href="trusted.html#cb121-40" tabindex="-1"></a>s_index_copy2 <span class="ot">=</span> s_index</span>
-<span id="cb121-41"><a href="trusted.html#cb121-41" tabindex="-1"></a><span class="fu">names</span>(s_index_copy2) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;spatial.field.copy2&#39;</span>,</span>
-<span id="cb121-42"><a href="trusted.html#cb121-42" tabindex="-1"></a>                         <span class="st">&quot;spatial.field.group.copy2&quot;</span>,</span>
-<span id="cb121-43"><a href="trusted.html#cb121-43" tabindex="-1"></a>                         <span class="st">&quot;spatial.field.repl.copy2&quot;</span>)</span>
-<span id="cb121-44"><a href="trusted.html#cb121-44" tabindex="-1"></a></span>
-<span id="cb121-45"><a href="trusted.html#cb121-45" tabindex="-1"></a></span>
-<span id="cb121-46"><a href="trusted.html#cb121-46" tabindex="-1"></a>stack_y_est <span class="ot">=</span> <span class="fu">inla.stack</span>(</span>
-<span id="cb121-47"><a href="trusted.html#cb121-47" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(</span>
-<span id="cb121-48"><a href="trusted.html#cb121-48" tabindex="-1"></a>    <span class="at">y =</span> BlackSmokePrefData<span class="sc">$</span>bsmoke,</span>
-<span id="cb121-49"><a href="trusted.html#cb121-49" tabindex="-1"></a>    <span class="co">#single model</span></span>
-<span id="cb121-50"><a href="trusted.html#cb121-50" tabindex="-1"></a>    <span class="at">alldata =</span> <span class="fu">cbind</span>(BlackSmokePrefData<span class="sc">$</span>bsmoke, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
-<span id="cb121-51"><a href="trusted.html#cb121-51" tabindex="-1"></a>    <span class="at">Ntrials =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="at">times =</span> <span class="fu">length</span>(BlackSmokePrefData<span class="sc">$</span>bsmoke))</span>
-<span id="cb121-52"><a href="trusted.html#cb121-52" tabindex="-1"></a>  ),</span>
-<span id="cb121-53"><a href="trusted.html#cb121-53" tabindex="-1"></a>  <span class="co">#joint model</span></span>
-<span id="cb121-54"><a href="trusted.html#cb121-54" tabindex="-1"></a>  <span class="at">A =</span> <span class="fu">list</span>(A_proj, A_proj, A_proj, <span class="dv">1</span>),</span>
-<span id="cb121-55"><a href="trusted.html#cb121-55" tabindex="-1"></a>  <span class="at">effects =</span> <span class="fu">list</span>(</span>
-<span id="cb121-56"><a href="trusted.html#cb121-56" tabindex="-1"></a>    <span class="fu">c</span>(s_index, <span class="fu">list</span>(<span class="at">Intercept =</span> <span class="dv">1</span>)),</span>
-<span id="cb121-57"><a href="trusted.html#cb121-57" tabindex="-1"></a>    <span class="fu">c</span>(s_index_copy, <span class="fu">list</span>(<span class="at">Intercept_copy =</span> <span class="dv">1</span>)),</span>
-<span id="cb121-58"><a href="trusted.html#cb121-58" tabindex="-1"></a>    <span class="fu">c</span>(s_index_copy2, <span class="fu">list</span>(<span class="at">Intercept_copy2 =</span> <span class="dv">1</span>)),</span>
-<span id="cb121-59"><a href="trusted.html#cb121-59" tabindex="-1"></a>    cov_y</span>
-<span id="cb121-60"><a href="trusted.html#cb121-60" tabindex="-1"></a>  ),</span>
-<span id="cb121-61"><a href="trusted.html#cb121-61" tabindex="-1"></a>  <span class="at">tag =</span> <span class="st">&#39;y_est&#39;</span></span>
-<span id="cb121-62"><a href="trusted.html#cb121-62" tabindex="-1"></a>)</span>
-<span id="cb121-63"><a href="trusted.html#cb121-63" tabindex="-1"></a></span>
-<span id="cb121-64"><a href="trusted.html#cb121-64" tabindex="-1"></a>formula_naive <span class="ot">=</span> y <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> Intercept <span class="sc">+</span></span>
-<span id="cb121-65"><a href="trusted.html#cb121-65" tabindex="-1"></a>  <span class="fu">f</span>(spatial.field, <span class="at">model =</span> spde_obj) <span class="sc">+</span></span>
-<span id="cb121-66"><a href="trusted.html#cb121-66" tabindex="-1"></a>  <span class="fu">f</span>(spatial.field.copy, <span class="fu">I</span>(spatial.field.group.copy <span class="sc">/</span> no_T), <span class="at">model =</span> spde_obj) <span class="sc">+</span></span>
-<span id="cb121-67"><a href="trusted.html#cb121-67" tabindex="-1"></a>  <span class="fu">f</span>(spatial.field.copy2, <span class="fu">I</span>((spatial.field.group.copy2 <span class="sc">/</span> no_T) <span class="sc">^</span> <span class="dv">2</span>), <span class="at">model =</span> spde_obj) <span class="sc">+</span></span>
-<span id="cb121-68"><a href="trusted.html#cb121-68" tabindex="-1"></a>  <span class="fu">I</span>(spatial.field.group <span class="sc">/</span> no_T) <span class="sc">+</span> <span class="fu">I</span>((spatial.field.group <span class="sc">/</span> no_T) <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb121-69"><a href="trusted.html#cb121-69" tabindex="-1"></a>  <span class="fu">f</span>(year, <span class="at">model =</span> <span class="st">&#39;ar1&#39;</span>) <span class="sc">+</span></span>
-<span id="cb121-70"><a href="trusted.html#cb121-70" tabindex="-1"></a>  <span class="fu">f</span>(spatial_ind,</span>
-<span id="cb121-71"><a href="trusted.html#cb121-71" tabindex="-1"></a>    <span class="at">model =</span> <span class="st">&quot;iid2d&quot;</span>,</span>
-<span id="cb121-72"><a href="trusted.html#cb121-72" tabindex="-1"></a>    <span class="at">n =</span> no_sites <span class="sc">*</span> <span class="dv">2</span>,</span>
-<span id="cb121-73"><a href="trusted.html#cb121-73" tabindex="-1"></a>    <span class="at">constr =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="co">#random site-specific intercepts</span></span>
-<span id="cb121-74"><a href="trusted.html#cb121-74" tabindex="-1"></a>  <span class="fu">f</span>(spatial_ind2, year, <span class="at">copy =</span> <span class="st">&quot;spatial_ind&quot;</span>)</span>
-<span id="cb121-75"><a href="trusted.html#cb121-75" tabindex="-1"></a></span>
-<span id="cb121-76"><a href="trusted.html#cb121-76" tabindex="-1"></a>theta.ini <span class="ot">=</span> <span class="fu">c</span>(</span>
-<span id="cb121-77"><a href="trusted.html#cb121-77" tabindex="-1"></a>  <span class="fl">1.597900</span>,<span class="sc">-</span><span class="fl">1.277423</span>,<span class="sc">-</span><span class="fl">0.443820</span>,<span class="sc">-</span><span class="fl">1.441220</span>,</span>
-<span id="cb121-78"><a href="trusted.html#cb121-78" tabindex="-1"></a>  <span class="fl">0.036510</span>,<span class="sc">-</span><span class="fl">1.441336</span>, <span class="fl">0.016919</span>, <span class="fl">4.462918</span>,</span>
-<span id="cb121-79"><a href="trusted.html#cb121-79" tabindex="-1"></a>  <span class="fl">1.437147</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>)</span>
-<span id="cb121-80"><a href="trusted.html#cb121-80" tabindex="-1"></a>out.naive <span class="ot">=</span> <span class="fu">inla</span>(</span>
-<span id="cb121-81"><a href="trusted.html#cb121-81" tabindex="-1"></a>  formula_naive,</span>
-<span id="cb121-82"><a href="trusted.html#cb121-82" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">&#39;gaussian&#39;</span>,</span>
-<span id="cb121-83"><a href="trusted.html#cb121-83" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">inla.stack.data</span>(stack_y_est),</span>
-<span id="cb121-84"><a href="trusted.html#cb121-84" tabindex="-1"></a>  <span class="at">control.predictor =</span> <span class="fu">list</span>(<span class="at">A =</span> <span class="fu">inla.stack.A</span>(stack_y_est), <span class="at">compute =</span> F),</span>
-<span id="cb121-85"><a href="trusted.html#cb121-85" tabindex="-1"></a>  <span class="at">control.compute =</span> <span class="fu">list</span>(<span class="at">dic =</span> F, <span class="at">config =</span> T, <span class="at">cpo =</span> F),</span>
-<span id="cb121-86"><a href="trusted.html#cb121-86" tabindex="-1"></a>  <span class="at">control.inla =</span> <span class="fu">list</span>(<span class="at">strategy =</span> <span class="st">&quot;gaussian&quot;</span>, <span class="at">int.strategy =</span> <span class="st">&#39;eb&#39;</span>),</span>
-<span id="cb121-87"><a href="trusted.html#cb121-87" tabindex="-1"></a>  <span class="at">control.mode =</span> <span class="fu">list</span>(<span class="at">theta =</span> theta.ini, <span class="at">restart =</span> T),</span>
-<span id="cb121-88"><a href="trusted.html#cb121-88" tabindex="-1"></a>  <span class="at">verbose =</span> T,</span>
-<span id="cb121-89"><a href="trusted.html#cb121-89" tabindex="-1"></a>  <span class="at">num.threads =</span> <span class="dv">2</span></span>
-<span id="cb121-90"><a href="trusted.html#cb121-90" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="trusted.html#cb120-1" tabindex="-1"></a>spde_obj <span class="ot">=</span> <span class="fu">inla.spde2.pcmatern</span>(</span>
+<span id="cb120-2"><a href="trusted.html#cb120-2" tabindex="-1"></a>  <span class="at">mesh =</span> mesh,</span>
+<span id="cb120-3"><a href="trusted.html#cb120-3" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="dv">2</span>,</span>
+<span id="cb120-4"><a href="trusted.html#cb120-4" tabindex="-1"></a>  <span class="at">prior.range =</span> <span class="fu">c</span>(<span class="fl">0.04</span>, <span class="fl">0.05</span>),</span>
+<span id="cb120-5"><a href="trusted.html#cb120-5" tabindex="-1"></a>  <span class="at">prior.sigma =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.01</span>),</span>
+<span id="cb120-6"><a href="trusted.html#cb120-6" tabindex="-1"></a>  <span class="at">constr =</span> T</span>
+<span id="cb120-7"><a href="trusted.html#cb120-7" tabindex="-1"></a>)</span>
+<span id="cb120-8"><a href="trusted.html#cb120-8" tabindex="-1"></a>A_proj <span class="ot">=</span> <span class="fu">inla.spde.make.A</span>(</span>
+<span id="cb120-9"><a href="trusted.html#cb120-9" tabindex="-1"></a>  <span class="at">mesh =</span> mesh,</span>
+<span id="cb120-10"><a href="trusted.html#cb120-10" tabindex="-1"></a>  <span class="at">loc =</span> <span class="fu">as.matrix</span>(<span class="fu">cbind</span>(</span>
+<span id="cb120-11"><a href="trusted.html#cb120-11" tabindex="-1"></a>    BlackSmokePrefData<span class="sc">$</span>east, BlackSmokePrefData<span class="sc">$</span>north</span>
+<span id="cb120-12"><a href="trusted.html#cb120-12" tabindex="-1"></a>  )),</span>
+<span id="cb120-13"><a href="trusted.html#cb120-13" tabindex="-1"></a>  <span class="at">group =</span> BlackSmokePrefData<span class="sc">$</span>year <span class="sc">-</span> <span class="dv">65</span>,</span>
+<span id="cb120-14"><a href="trusted.html#cb120-14" tabindex="-1"></a>  <span class="co"># group membership needs to be 1:no_T</span></span>
+<span id="cb120-15"><a href="trusted.html#cb120-15" tabindex="-1"></a>  <span class="at">n.group =</span> no_T</span>
+<span id="cb120-16"><a href="trusted.html#cb120-16" tabindex="-1"></a>)</span>
+<span id="cb120-17"><a href="trusted.html#cb120-17" tabindex="-1"></a></span>
+<span id="cb120-18"><a href="trusted.html#cb120-18" tabindex="-1"></a>s_index <span class="ot">=</span> <span class="fu">inla.spde.make.index</span>(<span class="at">name =</span> <span class="st">&quot;spatial.field&quot;</span>,</span>
+<span id="cb120-19"><a href="trusted.html#cb120-19" tabindex="-1"></a>                               <span class="at">n.spde =</span> spde_obj<span class="sc">$</span>n.spde,</span>
+<span id="cb120-20"><a href="trusted.html#cb120-20" tabindex="-1"></a>                               <span class="at">n.group =</span> no_T)</span>
+<span id="cb120-21"><a href="trusted.html#cb120-21" tabindex="-1"></a>time <span class="ot">=</span> (<span class="dv">1</span><span class="sc">:</span>no_T) <span class="sc">/</span> no_T</span>
+<span id="cb120-22"><a href="trusted.html#cb120-22" tabindex="-1"></a>time2 <span class="ot">=</span> time <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb120-23"><a href="trusted.html#cb120-23" tabindex="-1"></a></span>
+<span id="cb120-24"><a href="trusted.html#cb120-24" tabindex="-1"></a><span class="co"># create the stack object for estimating observation process y #</span></span>
+<span id="cb120-25"><a href="trusted.html#cb120-25" tabindex="-1"></a></span>
+<span id="cb120-26"><a href="trusted.html#cb120-26" tabindex="-1"></a>cov_y <span class="ot">=</span> <span class="fu">data.frame</span>(</span>
+<span id="cb120-27"><a href="trusted.html#cb120-27" tabindex="-1"></a>  <span class="at">year =</span> <span class="fu">rep</span>(time, <span class="at">each =</span> no_sites),</span>
+<span id="cb120-28"><a href="trusted.html#cb120-28" tabindex="-1"></a>  <span class="at">year_2 =</span> <span class="fu">rep</span>(time2, <span class="at">each =</span> no_sites),</span>
+<span id="cb120-29"><a href="trusted.html#cb120-29" tabindex="-1"></a>  <span class="at">spatial_ind =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>no_sites, <span class="at">times =</span> no_T),</span>
+<span id="cb120-30"><a href="trusted.html#cb120-30" tabindex="-1"></a>  <span class="at">spatial_ind2 =</span> no_sites <span class="sc">+</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>no_sites, <span class="at">times =</span> no_T)</span>
+<span id="cb120-31"><a href="trusted.html#cb120-31" tabindex="-1"></a>) <span class="co"># site-specific random intercepts</span></span>
+<span id="cb120-32"><a href="trusted.html#cb120-32" tabindex="-1"></a></span>
+<span id="cb120-33"><a href="trusted.html#cb120-33" tabindex="-1"></a><span class="co"># Needs copies to include covariate twice</span></span>
+<span id="cb120-34"><a href="trusted.html#cb120-34" tabindex="-1"></a></span>
+<span id="cb120-35"><a href="trusted.html#cb120-35" tabindex="-1"></a>s_index_copy <span class="ot">=</span> s_index</span>
+<span id="cb120-36"><a href="trusted.html#cb120-36" tabindex="-1"></a><span class="fu">names</span>(s_index_copy) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;spatial.field.copy&#39;</span>,</span>
+<span id="cb120-37"><a href="trusted.html#cb120-37" tabindex="-1"></a>                        <span class="st">&quot;spatial.field.group.copy&quot;</span>,</span>
+<span id="cb120-38"><a href="trusted.html#cb120-38" tabindex="-1"></a>                        <span class="st">&quot;spatial.field.repl.copy&quot;</span>)</span>
+<span id="cb120-39"><a href="trusted.html#cb120-39" tabindex="-1"></a></span>
+<span id="cb120-40"><a href="trusted.html#cb120-40" tabindex="-1"></a>s_index_copy2 <span class="ot">=</span> s_index</span>
+<span id="cb120-41"><a href="trusted.html#cb120-41" tabindex="-1"></a><span class="fu">names</span>(s_index_copy2) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;spatial.field.copy2&#39;</span>,</span>
+<span id="cb120-42"><a href="trusted.html#cb120-42" tabindex="-1"></a>                         <span class="st">&quot;spatial.field.group.copy2&quot;</span>,</span>
+<span id="cb120-43"><a href="trusted.html#cb120-43" tabindex="-1"></a>                         <span class="st">&quot;spatial.field.repl.copy2&quot;</span>)</span>
+<span id="cb120-44"><a href="trusted.html#cb120-44" tabindex="-1"></a></span>
+<span id="cb120-45"><a href="trusted.html#cb120-45" tabindex="-1"></a></span>
+<span id="cb120-46"><a href="trusted.html#cb120-46" tabindex="-1"></a>stack_y_est <span class="ot">=</span> <span class="fu">inla.stack</span>(</span>
+<span id="cb120-47"><a href="trusted.html#cb120-47" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">list</span>(</span>
+<span id="cb120-48"><a href="trusted.html#cb120-48" tabindex="-1"></a>    <span class="at">y =</span> BlackSmokePrefData<span class="sc">$</span>bsmoke,</span>
+<span id="cb120-49"><a href="trusted.html#cb120-49" tabindex="-1"></a>    <span class="co">#single model</span></span>
+<span id="cb120-50"><a href="trusted.html#cb120-50" tabindex="-1"></a>    <span class="at">alldata =</span> <span class="fu">cbind</span>(BlackSmokePrefData<span class="sc">$</span>bsmoke, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
+<span id="cb120-51"><a href="trusted.html#cb120-51" tabindex="-1"></a>    <span class="at">Ntrials =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="at">times =</span> <span class="fu">length</span>(BlackSmokePrefData<span class="sc">$</span>bsmoke))</span>
+<span id="cb120-52"><a href="trusted.html#cb120-52" tabindex="-1"></a>  ),</span>
+<span id="cb120-53"><a href="trusted.html#cb120-53" tabindex="-1"></a>  <span class="co">#joint model</span></span>
+<span id="cb120-54"><a href="trusted.html#cb120-54" tabindex="-1"></a>  <span class="at">A =</span> <span class="fu">list</span>(A_proj, A_proj, A_proj, <span class="dv">1</span>),</span>
+<span id="cb120-55"><a href="trusted.html#cb120-55" tabindex="-1"></a>  <span class="at">effects =</span> <span class="fu">list</span>(</span>
+<span id="cb120-56"><a href="trusted.html#cb120-56" tabindex="-1"></a>    <span class="fu">c</span>(s_index, <span class="fu">list</span>(<span class="at">Intercept =</span> <span class="dv">1</span>)),</span>
+<span id="cb120-57"><a href="trusted.html#cb120-57" tabindex="-1"></a>    <span class="fu">c</span>(s_index_copy, <span class="fu">list</span>(<span class="at">Intercept_copy =</span> <span class="dv">1</span>)),</span>
+<span id="cb120-58"><a href="trusted.html#cb120-58" tabindex="-1"></a>    <span class="fu">c</span>(s_index_copy2, <span class="fu">list</span>(<span class="at">Intercept_copy2 =</span> <span class="dv">1</span>)),</span>
+<span id="cb120-59"><a href="trusted.html#cb120-59" tabindex="-1"></a>    cov_y</span>
+<span id="cb120-60"><a href="trusted.html#cb120-60" tabindex="-1"></a>  ),</span>
+<span id="cb120-61"><a href="trusted.html#cb120-61" tabindex="-1"></a>  <span class="at">tag =</span> <span class="st">&#39;y_est&#39;</span></span>
+<span id="cb120-62"><a href="trusted.html#cb120-62" tabindex="-1"></a>)</span>
+<span id="cb120-63"><a href="trusted.html#cb120-63" tabindex="-1"></a></span>
+<span id="cb120-64"><a href="trusted.html#cb120-64" tabindex="-1"></a>formula_naive <span class="ot">=</span> y <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> Intercept <span class="sc">+</span></span>
+<span id="cb120-65"><a href="trusted.html#cb120-65" tabindex="-1"></a>  <span class="fu">f</span>(spatial.field, <span class="at">model =</span> spde_obj) <span class="sc">+</span></span>
+<span id="cb120-66"><a href="trusted.html#cb120-66" tabindex="-1"></a>  <span class="fu">f</span>(spatial.field.copy, <span class="fu">I</span>(spatial.field.group.copy <span class="sc">/</span> no_T), <span class="at">model =</span> spde_obj) <span class="sc">+</span></span>
+<span id="cb120-67"><a href="trusted.html#cb120-67" tabindex="-1"></a>  <span class="fu">f</span>(spatial.field.copy2, <span class="fu">I</span>((spatial.field.group.copy2 <span class="sc">/</span> no_T) <span class="sc">^</span> <span class="dv">2</span>), <span class="at">model =</span> spde_obj) <span class="sc">+</span></span>
+<span id="cb120-68"><a href="trusted.html#cb120-68" tabindex="-1"></a>  <span class="fu">I</span>(spatial.field.group <span class="sc">/</span> no_T) <span class="sc">+</span> <span class="fu">I</span>((spatial.field.group <span class="sc">/</span> no_T) <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb120-69"><a href="trusted.html#cb120-69" tabindex="-1"></a>  <span class="fu">f</span>(year, <span class="at">model =</span> <span class="st">&#39;ar1&#39;</span>) <span class="sc">+</span></span>
+<span id="cb120-70"><a href="trusted.html#cb120-70" tabindex="-1"></a>  <span class="fu">f</span>(spatial_ind,</span>
+<span id="cb120-71"><a href="trusted.html#cb120-71" tabindex="-1"></a>    <span class="at">model =</span> <span class="st">&quot;iid2d&quot;</span>,</span>
+<span id="cb120-72"><a href="trusted.html#cb120-72" tabindex="-1"></a>    <span class="at">n =</span> no_sites <span class="sc">*</span> <span class="dv">2</span>,</span>
+<span id="cb120-73"><a href="trusted.html#cb120-73" tabindex="-1"></a>    <span class="at">constr =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> <span class="co">#random site-specific intercepts</span></span>
+<span id="cb120-74"><a href="trusted.html#cb120-74" tabindex="-1"></a>  <span class="fu">f</span>(spatial_ind2, year, <span class="at">copy =</span> <span class="st">&quot;spatial_ind&quot;</span>)</span>
+<span id="cb120-75"><a href="trusted.html#cb120-75" tabindex="-1"></a></span>
+<span id="cb120-76"><a href="trusted.html#cb120-76" tabindex="-1"></a>theta.ini <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb120-77"><a href="trusted.html#cb120-77" tabindex="-1"></a>  <span class="fl">1.597900</span>,<span class="sc">-</span><span class="fl">1.277423</span>,<span class="sc">-</span><span class="fl">0.443820</span>,<span class="sc">-</span><span class="fl">1.441220</span>,</span>
+<span id="cb120-78"><a href="trusted.html#cb120-78" tabindex="-1"></a>  <span class="fl">0.036510</span>,<span class="sc">-</span><span class="fl">1.441336</span>, <span class="fl">0.016919</span>, <span class="fl">4.462918</span>,</span>
+<span id="cb120-79"><a href="trusted.html#cb120-79" tabindex="-1"></a>  <span class="fl">1.437147</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>)</span>
+<span id="cb120-80"><a href="trusted.html#cb120-80" tabindex="-1"></a>out.naive <span class="ot">=</span> <span class="fu">inla</span>(</span>
+<span id="cb120-81"><a href="trusted.html#cb120-81" tabindex="-1"></a>  formula_naive,</span>
+<span id="cb120-82"><a href="trusted.html#cb120-82" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">&#39;gaussian&#39;</span>,</span>
+<span id="cb120-83"><a href="trusted.html#cb120-83" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">inla.stack.data</span>(stack_y_est),</span>
+<span id="cb120-84"><a href="trusted.html#cb120-84" tabindex="-1"></a>  <span class="at">control.predictor =</span> <span class="fu">list</span>(<span class="at">A =</span> <span class="fu">inla.stack.A</span>(stack_y_est), <span class="at">compute =</span> F),</span>
+<span id="cb120-85"><a href="trusted.html#cb120-85" tabindex="-1"></a>  <span class="at">control.compute =</span> <span class="fu">list</span>(<span class="at">dic =</span> F, <span class="at">config =</span> T, <span class="at">cpo =</span> F),</span>
+<span id="cb120-86"><a href="trusted.html#cb120-86" tabindex="-1"></a>  <span class="at">control.inla =</span> <span class="fu">list</span>(<span class="at">strategy =</span> <span class="st">&quot;gaussian&quot;</span>, <span class="at">int.strategy =</span> <span class="st">&#39;eb&#39;</span>),</span>
+<span id="cb120-87"><a href="trusted.html#cb120-87" tabindex="-1"></a>  <span class="at">control.mode =</span> <span class="fu">list</span>(<span class="at">theta =</span> theta.ini, <span class="at">restart =</span> T),</span>
+<span id="cb120-88"><a href="trusted.html#cb120-88" tabindex="-1"></a>  <span class="at">verbose =</span> T,</span>
+<span id="cb120-89"><a href="trusted.html#cb120-89" tabindex="-1"></a>  <span class="at">num.threads =</span> <span class="dv">2</span></span>
+<span id="cb120-90"><a href="trusted.html#cb120-90" tabindex="-1"></a>)</span></code></pre></div>
 <p>We can now take posteriors from the model.</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="trusted.html#cb122-1" tabindex="-1"></a>m_samples <span class="ot">=</span> <span class="dv">50</span></span>
-<span id="cb122-2"><a href="trusted.html#cb122-2" tabindex="-1"></a></span>
-<span id="cb122-3"><a href="trusted.html#cb122-3" tabindex="-1"></a>samp <span class="ot">&lt;-</span> <span class="fu">inla.posterior.sample</span>(m_samples, out.naive)</span>
-<span id="cb122-4"><a href="trusted.html#cb122-4" tabindex="-1"></a></span>
-<span id="cb122-5"><a href="trusted.html#cb122-5" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m_samples)</span>
-<span id="cb122-6"><a href="trusted.html#cb122-6" tabindex="-1"></a>{</span>
-<span id="cb122-7"><a href="trusted.html#cb122-7" tabindex="-1"></a>  samp[[i]]<span class="sc">$</span>latent <span class="ot">=</span> samp[[i]]<span class="sc">$</span>latent[<span class="sc">-</span><span class="fu">c</span>(<span class="fu">grep</span>(<span class="st">&#39;Predictor&#39;</span>, <span class="fu">rownames</span>(samp[[i]]<span class="sc">$</span>latent), <span class="at">fixed =</span> T)),]</span>
-<span id="cb122-8"><a href="trusted.html#cb122-8" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="trusted.html#cb121-1" tabindex="-1"></a>m_samples <span class="ot">=</span> <span class="dv">50</span></span>
+<span id="cb121-2"><a href="trusted.html#cb121-2" tabindex="-1"></a></span>
+<span id="cb121-3"><a href="trusted.html#cb121-3" tabindex="-1"></a>samp <span class="ot">&lt;-</span> <span class="fu">inla.posterior.sample</span>(m_samples, out.naive)</span>
+<span id="cb121-4"><a href="trusted.html#cb121-4" tabindex="-1"></a></span>
+<span id="cb121-5"><a href="trusted.html#cb121-5" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m_samples)</span>
+<span id="cb121-6"><a href="trusted.html#cb121-6" tabindex="-1"></a>{</span>
+<span id="cb121-7"><a href="trusted.html#cb121-7" tabindex="-1"></a>  samp[[i]]<span class="sc">$</span>latent <span class="ot">=</span> samp[[i]]<span class="sc">$</span>latent[<span class="sc">-</span><span class="fu">c</span>(<span class="fu">grep</span>(<span class="st">&#39;Predictor&#39;</span>, <span class="fu">rownames</span>(samp[[i]]<span class="sc">$</span>latent), <span class="at">fixed =</span> T)),]</span>
+<span id="cb121-8"><a href="trusted.html#cb121-8" tabindex="-1"></a>}</span></code></pre></div>
 <p>Finally, summarize and plot the outputs:</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="trusted.html#cb123-1" tabindex="-1"></a>stepsize <span class="ot">=</span> <span class="dv">5000</span> <span class="sc">/</span> sd_x</span>
-<span id="cb123-2"><a href="trusted.html#cb123-2" tabindex="-1"></a>nxy <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">c</span>(<span class="fu">diff</span>(<span class="fu">range</span>(</span>
-<span id="cb123-3"><a href="trusted.html#cb123-3" tabindex="-1"></a>  BlackSmokePrefData<span class="sc">$</span>east</span>
-<span id="cb123-4"><a href="trusted.html#cb123-4" tabindex="-1"></a>)),</span>
-<span id="cb123-5"><a href="trusted.html#cb123-5" tabindex="-1"></a><span class="fu">diff</span>(<span class="fu">range</span>(</span>
-<span id="cb123-6"><a href="trusted.html#cb123-6" tabindex="-1"></a>  BlackSmokePrefData<span class="sc">$</span>north</span>
-<span id="cb123-7"><a href="trusted.html#cb123-7" tabindex="-1"></a>))) <span class="sc">/</span> stepsize)  <span class="do">## how many points?</span></span>
-<span id="cb123-8"><a href="trusted.html#cb123-8" tabindex="-1"></a>proj_grid <span class="ot">=</span> <span class="fu">inla.mesh.projector</span>(</span>
-<span id="cb123-9"><a href="trusted.html#cb123-9" tabindex="-1"></a>  mesh,</span>
-<span id="cb123-10"><a href="trusted.html#cb123-10" tabindex="-1"></a>  <span class="at">xlim =</span> <span class="fu">range</span>(BlackSmokePrefData<span class="sc">$</span>east),</span>
-<span id="cb123-11"><a href="trusted.html#cb123-11" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">range</span>(BlackSmokePrefData<span class="sc">$</span>north),</span>
-<span id="cb123-12"><a href="trusted.html#cb123-12" tabindex="-1"></a>  <span class="at">dims =</span> nxy</span>
-<span id="cb123-13"><a href="trusted.html#cb123-13" tabindex="-1"></a>)</span>
-<span id="cb123-14"><a href="trusted.html#cb123-14" tabindex="-1"></a>A.grid <span class="ot">=</span> <span class="fu">inla.spde.make.A</span>(mesh,</span>
-<span id="cb123-15"><a href="trusted.html#cb123-15" tabindex="-1"></a>                          <span class="at">loc =</span> <span class="fu">cbind</span>(BlackSmokePrefData<span class="sc">$</span>east, BlackSmokePrefData<span class="sc">$</span>north))</span>
-<span id="cb123-16"><a href="trusted.html#cb123-16" tabindex="-1"></a></span>
-<span id="cb123-17"><a href="trusted.html#cb123-17" tabindex="-1"></a><span class="do">## define placeholders</span></span>
-<span id="cb123-18"><a href="trusted.html#cb123-18" tabindex="-1"></a></span>
-<span id="cb123-19"><a href="trusted.html#cb123-19" tabindex="-1"></a>tmp2 <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> no_T, <span class="at">ncol =</span> mesh<span class="sc">$</span>n)</span>
-<span id="cb123-20"><a href="trusted.html#cb123-20" tabindex="-1"></a>year <span class="ot">=</span> (<span class="dv">1</span><span class="sc">:</span>no_T) <span class="sc">/</span> no_T</span>
-<span id="cb123-21"><a href="trusted.html#cb123-21" tabindex="-1"></a>year2 <span class="ot">=</span> year <span class="sc">^</span> <span class="dv">2</span></span>
-<span id="cb123-22"><a href="trusted.html#cb123-22" tabindex="-1"></a>Post_Array2 <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">0</span>, <span class="at">dim =</span> <span class="fu">c</span>(m_samples, no_T, mesh<span class="sc">$</span>n))</span>
-<span id="cb123-23"><a href="trusted.html#cb123-23" tabindex="-1"></a>Post_Sites_Array2 <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">0</span>, <span class="at">dim =</span> <span class="fu">c</span>(m_samples, no_T, <span class="fu">dim</span>(BlackSmokePrefData)[<span class="dv">1</span>]))</span>
-<span id="cb123-24"><a href="trusted.html#cb123-24" tabindex="-1"></a>residuals_array <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">0</span>, <span class="at">dim =</span> <span class="fu">c</span>(m_samples, no_T, <span class="fu">dim</span>(BlackSmokePrefData)[<span class="dv">1</span>]))</span>
-<span id="cb123-25"><a href="trusted.html#cb123-25" tabindex="-1"></a>RI_array <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">0</span>, <span class="at">dim =</span> <span class="fu">c</span>(m_samples, no_T, <span class="fu">dim</span>(BlackSmokePrefData)[<span class="dv">1</span>])) <span class="co"># random intercepts</span></span>
-<span id="cb123-26"><a href="trusted.html#cb123-26" tabindex="-1"></a>RS_array <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">0</span>, <span class="at">dim =</span> <span class="fu">c</span>(m_samples, no_T, <span class="fu">dim</span>(BlackSmokePrefData)[<span class="dv">1</span>])) <span class="co"># random slopes</span></span>
-<span id="cb123-27"><a href="trusted.html#cb123-27" tabindex="-1"></a></span>
-<span id="cb123-28"><a href="trusted.html#cb123-28" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m_samples) {</span>
-<span id="cb123-29"><a href="trusted.html#cb123-29" tabindex="-1"></a>  <span class="co"># Creating predictions for Y process</span></span>
-<span id="cb123-30"><a href="trusted.html#cb123-30" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>no_T)</span>
-<span id="cb123-31"><a href="trusted.html#cb123-31" tabindex="-1"></a>    <span class="co"># loop over the years</span></span>
-<span id="cb123-32"><a href="trusted.html#cb123-32" tabindex="-1"></a>  {</span>
-<span id="cb123-33"><a href="trusted.html#cb123-33" tabindex="-1"></a>    Post_Array2[i, j,] <span class="ot">&lt;-</span> samp[[i]]<span class="sc">$</span>latent[<span class="st">&#39;Intercept:1&#39;</span>] <span class="sc">+</span> <span class="co"># Intercept</span></span>
-<span id="cb123-34"><a href="trusted.html#cb123-34" tabindex="-1"></a>      samp[[i]]<span class="sc">$</span>latent[<span class="fu">which</span>(<span class="fu">startsWith</span>(<span class="at">prefix =</span> <span class="st">&#39;year:&#39;</span>, <span class="at">x =</span> <span class="fu">names</span>(samp[[i]]<span class="sc">$</span>latent)))][j] <span class="sc">*</span> year[j] <span class="sc">+</span> <span class="co"># linear fixed effect</span></span>
-<span id="cb123-35"><a href="trusted.html#cb123-35" tabindex="-1"></a>      <span class="co">#samp[[i]]$latent[&#39;year_2&#39;] * year2[j] + # quadratic fixed effect</span></span>
-<span id="cb123-36"><a href="trusted.html#cb123-36" tabindex="-1"></a>      <span class="fu">as.numeric</span>(samp[[i]]<span class="sc">$</span>latent[<span class="fu">which</span>(<span class="fu">startsWith</span>(<span class="at">prefix =</span> <span class="st">&#39;spatial.field:&#39;</span>, <span class="at">x =</span> <span class="fu">names</span>(samp[[i]]<span class="sc">$</span>latent)))]) <span class="sc">+</span> <span class="co"># Spatial Intercept</span></span>
-<span id="cb123-37"><a href="trusted.html#cb123-37" tabindex="-1"></a>      <span class="fu">as.numeric</span>(samp[[i]]<span class="sc">$</span>latent[<span class="fu">which</span>(<span class="fu">startsWith</span>(<span class="at">prefix =</span> <span class="st">&#39;spatial.field.copy:&#39;</span>, <span class="at">x =</span> <span class="fu">names</span>(samp[[i]]<span class="sc">$</span>latent)))]) <span class="sc">*</span> year[j] <span class="sc">+</span> <span class="co"># Spatial linear slope</span></span>
-<span id="cb123-38"><a href="trusted.html#cb123-38" tabindex="-1"></a>      <span class="fu">as.numeric</span>(samp[[i]]<span class="sc">$</span>latent[<span class="fu">which</span>(<span class="fu">startsWith</span>(<span class="at">prefix =</span> <span class="st">&#39;spatial.field.copy2:&#39;</span>, <span class="at">x =</span> <span class="fu">names</span>(samp[[i]]<span class="sc">$</span>latent)))]) <span class="sc">*</span> year2[j]  <span class="co"># Spatial quadratic slope</span></span>
-<span id="cb123-39"><a href="trusted.html#cb123-39" tabindex="-1"></a>    <span class="co"># Project onto the site locations and add random site-specific effects #</span></span>
-<span id="cb123-40"><a href="trusted.html#cb123-40" tabindex="-1"></a>    Post_Sites_Array2[i, j,] <span class="ot">=</span> <span class="fu">as.numeric</span>(A.grid <span class="sc">%*%</span> Post_Array2[i, j,]) <span class="sc">+</span></span>
-<span id="cb123-41"><a href="trusted.html#cb123-41" tabindex="-1"></a>      <span class="fu">as.numeric</span>(samp[[i]]<span class="sc">$</span>latent[<span class="fu">which</span>(<span class="fu">startsWith</span>(<span class="at">prefix =</span> <span class="st">&#39;spatial_ind:&#39;</span>, <span class="at">x =</span> <span class="fu">names</span>(samp[[i]]<span class="sc">$</span>latent)))[<span class="dv">1</span><span class="sc">:</span>no_sites]]) <span class="sc">+</span> <span class="co"># random Intercept</span></span>
-<span id="cb123-42"><a href="trusted.html#cb123-42" tabindex="-1"></a>      <span class="fu">as.numeric</span>(samp[[i]]<span class="sc">$</span>latent[<span class="fu">which</span>(<span class="fu">startsWith</span>(<span class="at">prefix =</span> <span class="st">&#39;spatial_ind2:&#39;</span>, <span class="at">x =</span> <span class="fu">names</span>(samp[[i]]<span class="sc">$</span>latent)))[no_sites <span class="sc">+</span></span>
-<span id="cb123-43"><a href="trusted.html#cb123-43" tabindex="-1"></a>                                                                                                             (<span class="dv">1</span><span class="sc">:</span>no_sites)]]) <span class="sc">*</span> year[j] <span class="co"># random slope</span></span>
-<span id="cb123-44"><a href="trusted.html#cb123-44" tabindex="-1"></a>    <span class="co"># Extract the random intercepts #</span></span>
-<span id="cb123-45"><a href="trusted.html#cb123-45" tabindex="-1"></a>    RI_array[i, j,] <span class="ot">=</span> <span class="fu">as.numeric</span>(samp[[i]]<span class="sc">$</span>latent[<span class="fu">which</span>(<span class="fu">startsWith</span>(<span class="at">prefix =</span> <span class="st">&#39;spatial_ind:&#39;</span>, <span class="at">x =</span> <span class="fu">names</span>(samp[[i]]<span class="sc">$</span>latent)))[<span class="dv">1</span><span class="sc">:</span>no_sites]])</span>
-<span id="cb123-46"><a href="trusted.html#cb123-46" tabindex="-1"></a>    </span>
-<span id="cb123-47"><a href="trusted.html#cb123-47" tabindex="-1"></a>    <span class="co"># Extract the random slopes #</span></span>
-<span id="cb123-48"><a href="trusted.html#cb123-48" tabindex="-1"></a>    RS_array[i, j,] <span class="ot">=</span> <span class="fu">as.numeric</span>(samp[[i]]<span class="sc">$</span>latent[<span class="fu">which</span>(<span class="fu">startsWith</span>(<span class="at">prefix =</span> <span class="st">&#39;spatial_ind2:&#39;</span>, <span class="at">x =</span> <span class="fu">names</span>(samp[[i]]<span class="sc">$</span>latent)))[no_sites <span class="sc">+</span></span>
-<span id="cb123-49"><a href="trusted.html#cb123-49" tabindex="-1"></a>                                                                                                                             (<span class="dv">1</span><span class="sc">:</span>no_sites)]])</span>
-<span id="cb123-50"><a href="trusted.html#cb123-50" tabindex="-1"></a>  }</span>
-<span id="cb123-51"><a href="trusted.html#cb123-51" tabindex="-1"></a>}</span>
-<span id="cb123-52"><a href="trusted.html#cb123-52" tabindex="-1"></a></span>
-<span id="cb123-53"><a href="trusted.html#cb123-53" tabindex="-1"></a><span class="do">## summarizing</span></span>
-<span id="cb123-54"><a href="trusted.html#cb123-54" tabindex="-1"></a></span>
-<span id="cb123-55"><a href="trusted.html#cb123-55" tabindex="-1"></a>Post_mean2 <span class="ot">&lt;-</span></span>
-<span id="cb123-56"><a href="trusted.html#cb123-56" tabindex="-1"></a>  <span class="fu">t</span>(<span class="fu">apply</span>(Post_Array2, <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), <span class="cf">function</span>(x) {</span>
-<span id="cb123-57"><a href="trusted.html#cb123-57" tabindex="-1"></a>    <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb123-58"><a href="trusted.html#cb123-58" tabindex="-1"></a>  }))</span>
-<span id="cb123-59"><a href="trusted.html#cb123-59" tabindex="-1"></a>Post_sd2 <span class="ot">&lt;-</span></span>
-<span id="cb123-60"><a href="trusted.html#cb123-60" tabindex="-1"></a>  <span class="fu">t</span>(<span class="fu">apply</span>(Post_Array2, <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), <span class="cf">function</span>(x) {</span>
-<span id="cb123-61"><a href="trusted.html#cb123-61" tabindex="-1"></a>    <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb123-62"><a href="trusted.html#cb123-62" tabindex="-1"></a>  }))</span>
-<span id="cb123-63"><a href="trusted.html#cb123-63" tabindex="-1"></a>Post_LCL2 <span class="ot">&lt;-</span></span>
-<span id="cb123-64"><a href="trusted.html#cb123-64" tabindex="-1"></a>  <span class="fu">apply</span>((<span class="fu">apply</span>(Post_Array2, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="cf">function</span>(x) {</span>
-<span id="cb123-65"><a href="trusted.html#cb123-65" tabindex="-1"></a>    <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb123-66"><a href="trusted.html#cb123-66" tabindex="-1"></a>  })), <span class="dv">2</span>, quantile, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>))</span>
-<span id="cb123-67"><a href="trusted.html#cb123-67" tabindex="-1"></a>Post_UCL2 <span class="ot">&lt;-</span></span>
-<span id="cb123-68"><a href="trusted.html#cb123-68" tabindex="-1"></a>  <span class="fu">apply</span>((<span class="fu">apply</span>(Post_Array2, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="cf">function</span>(x) {</span>
-<span id="cb123-69"><a href="trusted.html#cb123-69" tabindex="-1"></a>    <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb123-70"><a href="trusted.html#cb123-70" tabindex="-1"></a>  })), <span class="dv">2</span>, quantile, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.975</span>))</span>
-<span id="cb123-71"><a href="trusted.html#cb123-71" tabindex="-1"></a>RI_array <span class="ot">&lt;-</span></span>
-<span id="cb123-72"><a href="trusted.html#cb123-72" tabindex="-1"></a>  <span class="fu">t</span>(<span class="fu">apply</span>(RI_array, <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), <span class="cf">function</span>(x) {</span>
-<span id="cb123-73"><a href="trusted.html#cb123-73" tabindex="-1"></a>    <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb123-74"><a href="trusted.html#cb123-74" tabindex="-1"></a>  }))</span>
-<span id="cb123-75"><a href="trusted.html#cb123-75" tabindex="-1"></a>RS_array <span class="ot">&lt;-</span></span>
-<span id="cb123-76"><a href="trusted.html#cb123-76" tabindex="-1"></a>  <span class="fu">t</span>(<span class="fu">apply</span>(RS_array, <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), <span class="cf">function</span>(x) {</span>
-<span id="cb123-77"><a href="trusted.html#cb123-77" tabindex="-1"></a>    <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb123-78"><a href="trusted.html#cb123-78" tabindex="-1"></a>  }))</span>
-<span id="cb123-79"><a href="trusted.html#cb123-79" tabindex="-1"></a></span>
-<span id="cb123-80"><a href="trusted.html#cb123-80" tabindex="-1"></a><span class="do">## placeholders for uniform grid posterior blacksmoke values (not necessarily in dataset)</span></span>
-<span id="cb123-81"><a href="trusted.html#cb123-81" tabindex="-1"></a></span>
-<span id="cb123-82"><a href="trusted.html#cb123-82" tabindex="-1"></a>post_Matrix_grid_mean2 <span class="ot">=</span> <span class="fu">array</span>(<span class="cn">NA</span>, <span class="at">dim =</span> <span class="fu">c</span>(nxy[<span class="dv">1</span>], nxy[<span class="dv">2</span>], no_T))</span>
-<span id="cb123-83"><a href="trusted.html#cb123-83" tabindex="-1"></a>post_Matrix_grid_sd2 <span class="ot">=</span> <span class="fu">array</span>(<span class="cn">NA</span>, <span class="at">dim =</span> <span class="fu">c</span>(nxy[<span class="dv">1</span>], nxy[<span class="dv">2</span>], no_T))</span>
-<span id="cb123-84"><a href="trusted.html#cb123-84" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>no_T)</span>
-<span id="cb123-85"><a href="trusted.html#cb123-85" tabindex="-1"></a>{</span>
-<span id="cb123-86"><a href="trusted.html#cb123-86" tabindex="-1"></a>  post_Matrix_grid_mean2[, , i] <span class="ot">=</span> <span class="fu">inla.mesh.project</span>(proj_grid, Post_mean2[, i])</span>
-<span id="cb123-87"><a href="trusted.html#cb123-87" tabindex="-1"></a>  post_Matrix_grid_sd2[, , i] <span class="ot">=</span> <span class="fu">inla.mesh.project</span>(proj_grid, Post_sd2[, i])</span>
-<span id="cb123-88"><a href="trusted.html#cb123-88" tabindex="-1"></a>}</span>
-<span id="cb123-89"><a href="trusted.html#cb123-89" tabindex="-1"></a></span>
-<span id="cb123-90"><a href="trusted.html#cb123-90" tabindex="-1"></a><span class="do">## placeholders for observed (R1 = active, R0 = inactive) site blacksmoke values</span></span>
-<span id="cb123-91"><a href="trusted.html#cb123-91" tabindex="-1"></a></span>
-<span id="cb123-92"><a href="trusted.html#cb123-92" tabindex="-1"></a>R1_results2 <span class="ot">=</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> no_T, <span class="at">ncol =</span> <span class="dv">4</span>) <span class="co"># prediction means, sd, LCL, UCL</span></span>
-<span id="cb123-93"><a href="trusted.html#cb123-93" tabindex="-1"></a><span class="fu">colnames</span>(R1_results2) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;prediction mean&#39;</span>, <span class="st">&#39;prediction sd&#39;</span>, <span class="st">&#39;LCL&#39;</span>, <span class="st">&#39;UCL&#39;</span>)</span>
-<span id="cb123-94"><a href="trusted.html#cb123-94" tabindex="-1"></a>R0_results2 <span class="ot">=</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> no_T, <span class="at">ncol =</span> <span class="dv">4</span>) <span class="co"># prediction means, sd, LCL, UCL</span></span>
-<span id="cb123-95"><a href="trusted.html#cb123-95" tabindex="-1"></a><span class="fu">colnames</span>(R0_results2) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;prediction mean&#39;</span>, <span class="st">&#39;prediction sd&#39;</span>, <span class="st">&#39;LCL&#39;</span>, <span class="st">&#39;UCL&#39;</span>)</span>
-<span id="cb123-96"><a href="trusted.html#cb123-96" tabindex="-1"></a>Grid_results2 <span class="ot">=</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> no_T, <span class="at">ncol =</span> <span class="dv">4</span>) <span class="co"># prediction means, sd, LCL, UCL</span></span>
-<span id="cb123-97"><a href="trusted.html#cb123-97" tabindex="-1"></a><span class="fu">colnames</span>(Grid_results2) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;prediction mean&#39;</span>, <span class="st">&#39;prediction sd&#39;</span>, <span class="st">&#39;LCL&#39;</span>, <span class="st">&#39;UCL&#39;</span>)</span>
-<span id="cb123-98"><a href="trusted.html#cb123-98" tabindex="-1"></a></span>
-<span id="cb123-99"><a href="trusted.html#cb123-99" tabindex="-1"></a>BlackSmokePrefData_original <span class="ot">&lt;-</span></span>
-<span id="cb123-100"><a href="trusted.html#cb123-100" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="st">&quot;data/black_smoke/BlackSmokePrefData.csv&quot;</span>) <span class="do">## need original columns here</span></span>
-<span id="cb123-101"><a href="trusted.html#cb123-101" tabindex="-1"></a></span>
-<span id="cb123-102"><a href="trusted.html#cb123-102" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>no_T)</span>
-<span id="cb123-103"><a href="trusted.html#cb123-103" tabindex="-1"></a>{</span>
-<span id="cb123-104"><a href="trusted.html#cb123-104" tabindex="-1"></a>  R1_results2[j, <span class="dv">1</span>] <span class="ot">=</span> <span class="fu">mean</span>(Post_Sites_Array2[, j, <span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(BlackSmokePrefData_original[, <span class="dv">3</span> <span class="sc">+</span></span>
-<span id="cb123-105"><a href="trusted.html#cb123-105" tabindex="-1"></a>                                                                                             j]))], <span class="at">na.rm =</span> T)</span>
-<span id="cb123-106"><a href="trusted.html#cb123-106" tabindex="-1"></a>  R1_results2[j, <span class="dv">2</span>] <span class="ot">=</span> <span class="fu">sd</span>(<span class="fu">apply</span>(Post_Sites_Array2[, j, <span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(BlackSmokePrefData_original[, <span class="dv">3</span> <span class="sc">+</span></span>
-<span id="cb123-107"><a href="trusted.html#cb123-107" tabindex="-1"></a>                                                                                                 j]))], <span class="fu">c</span>(<span class="dv">1</span>), mean, <span class="at">na.rm =</span> T))</span>
-<span id="cb123-108"><a href="trusted.html#cb123-108" tabindex="-1"></a>  R1_results2[j, <span class="dv">3</span>] <span class="ot">=</span> <span class="fu">quantile</span>(<span class="fu">apply</span>(Post_Sites_Array2[, j, <span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(BlackSmokePrefData_original[, <span class="dv">3</span> <span class="sc">+</span></span>
-<span id="cb123-109"><a href="trusted.html#cb123-109" tabindex="-1"></a>                                                                                                       j]))], <span class="dv">1</span>, mean, <span class="at">na.rm =</span> T), <span class="at">probs =</span> <span class="fl">0.025</span>)</span>
-<span id="cb123-110"><a href="trusted.html#cb123-110" tabindex="-1"></a>  R1_results2[j, <span class="dv">4</span>] <span class="ot">=</span> <span class="fu">quantile</span>(<span class="fu">apply</span>(Post_Sites_Array2[, j, <span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(BlackSmokePrefData_original[, <span class="dv">3</span> <span class="sc">+</span></span>
-<span id="cb123-111"><a href="trusted.html#cb123-111" tabindex="-1"></a>                                                                                                       j]))], <span class="dv">1</span>, mean, <span class="at">na.rm =</span> T), <span class="at">probs =</span> <span class="fl">0.975</span>)</span>
-<span id="cb123-112"><a href="trusted.html#cb123-112" tabindex="-1"></a>  </span>
-<span id="cb123-113"><a href="trusted.html#cb123-113" tabindex="-1"></a>  R0_results2[j, <span class="dv">1</span>] <span class="ot">=</span> <span class="fu">mean</span>(Post_Sites_Array2[, j, <span class="fu">which</span>(<span class="fu">is.na</span>(BlackSmokePrefData_original[, <span class="dv">3</span> <span class="sc">+</span></span>
-<span id="cb123-114"><a href="trusted.html#cb123-114" tabindex="-1"></a>                                                                                            j]))], <span class="at">na.rm =</span> T)</span>
-<span id="cb123-115"><a href="trusted.html#cb123-115" tabindex="-1"></a>  R0_results2[j, <span class="dv">2</span>] <span class="ot">=</span> <span class="fu">sd</span>(<span class="fu">apply</span>(Post_Sites_Array2[, j, <span class="fu">which</span>(<span class="fu">is.na</span>(BlackSmokePrefData_original[, <span class="dv">3</span> <span class="sc">+</span></span>
-<span id="cb123-116"><a href="trusted.html#cb123-116" tabindex="-1"></a>                                                                                                j]))], <span class="fu">c</span>(<span class="dv">1</span>), mean, <span class="at">na.rm =</span> T))</span>
-<span id="cb123-117"><a href="trusted.html#cb123-117" tabindex="-1"></a>  R0_results2[j, <span class="dv">3</span>] <span class="ot">=</span> <span class="fu">quantile</span>(<span class="fu">apply</span>(Post_Sites_Array2[, j, <span class="fu">which</span>(<span class="fu">is.na</span>(BlackSmokePrefData_original[, <span class="dv">3</span> <span class="sc">+</span></span>
-<span id="cb123-118"><a href="trusted.html#cb123-118" tabindex="-1"></a>                                                                                                      j]))], <span class="dv">1</span>, mean, <span class="at">na.rm =</span> T), <span class="at">probs =</span> <span class="fl">0.025</span>)</span>
-<span id="cb123-119"><a href="trusted.html#cb123-119" tabindex="-1"></a>  R0_results2[j, <span class="dv">4</span>] <span class="ot">=</span> <span class="fu">quantile</span>(<span class="fu">apply</span>(Post_Sites_Array2[, j, <span class="fu">which</span>(<span class="fu">is.na</span>(BlackSmokePrefData_original[, <span class="dv">3</span> <span class="sc">+</span></span>
-<span id="cb123-120"><a href="trusted.html#cb123-120" tabindex="-1"></a>                                                                                                      j]))], <span class="dv">1</span>, mean, <span class="at">na.rm =</span> T), <span class="at">probs =</span> <span class="fl">0.975</span>)</span>
-<span id="cb123-121"><a href="trusted.html#cb123-121" tabindex="-1"></a>}</span>
-<span id="cb123-122"><a href="trusted.html#cb123-122" tabindex="-1"></a></span>
-<span id="cb123-123"><a href="trusted.html#cb123-123" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>no_T)</span>
-<span id="cb123-124"><a href="trusted.html#cb123-124" tabindex="-1"></a>{</span>
-<span id="cb123-125"><a href="trusted.html#cb123-125" tabindex="-1"></a>  Grid_results2[i, <span class="dv">1</span>] <span class="ot">=</span> <span class="fu">mean</span>(post_Matrix_grid_mean2[, , i], <span class="at">na.rm =</span> T)</span>
-<span id="cb123-126"><a href="trusted.html#cb123-126" tabindex="-1"></a>  Grid_results2[i, <span class="dv">2</span>] <span class="ot">=</span> <span class="fu">mean</span>(post_Matrix_grid_sd2[, , i], <span class="at">na.rm =</span> T)</span>
-<span id="cb123-127"><a href="trusted.html#cb123-127" tabindex="-1"></a>}</span>
-<span id="cb123-128"><a href="trusted.html#cb123-128" tabindex="-1"></a>Grid_results2[, <span class="dv">3</span>] <span class="ot">=</span> Post_LCL2</span>
-<span id="cb123-129"><a href="trusted.html#cb123-129" tabindex="-1"></a>Grid_results2[, <span class="dv">4</span>] <span class="ot">=</span> Post_UCL2</span>
-<span id="cb123-130"><a href="trusted.html#cb123-130" tabindex="-1"></a></span>
-<span id="cb123-131"><a href="trusted.html#cb123-131" tabindex="-1"></a><span class="do">## Revert to the original scale (exponentiating and scaling up)</span></span>
-<span id="cb123-132"><a href="trusted.html#cb123-132" tabindex="-1"></a>Grid_df_2 <span class="ot">=</span> <span class="fu">data.frame</span>(</span>
-<span id="cb123-133"><a href="trusted.html#cb123-133" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">exp</span>(<span class="fu">c</span>(</span>
-<span id="cb123-134"><a href="trusted.html#cb123-134" tabindex="-1"></a>    Grid_results2[, <span class="dv">1</span>], R1_results2[, <span class="dv">1</span>], R0_results2[, <span class="dv">1</span>]</span>
-<span id="cb123-135"><a href="trusted.html#cb123-135" tabindex="-1"></a>  )) <span class="sc">*</span> <span class="fu">mean</span>(yearmeans),</span>
-<span id="cb123-136"><a href="trusted.html#cb123-136" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">rep</span>(<span class="dv">66</span><span class="sc">:</span><span class="dv">96</span>, <span class="at">times =</span> <span class="dv">3</span>),</span>
-<span id="cb123-137"><a href="trusted.html#cb123-137" tabindex="-1"></a>  <span class="at">ymin =</span> <span class="fu">exp</span>(<span class="fu">c</span>(Post_LCL2, R1_results2[, <span class="dv">3</span>], R0_results2[, <span class="dv">3</span>])) <span class="sc">*</span></span>
-<span id="cb123-138"><a href="trusted.html#cb123-138" tabindex="-1"></a>    <span class="fu">mean</span>(yearmeans),</span>
-<span id="cb123-139"><a href="trusted.html#cb123-139" tabindex="-1"></a>  <span class="at">ymax =</span> <span class="fu">exp</span>(<span class="fu">c</span>(Post_UCL2, R1_results2[, <span class="dv">4</span>], R0_results2[, <span class="dv">4</span>])) <span class="sc">*</span></span>
-<span id="cb123-140"><a href="trusted.html#cb123-140" tabindex="-1"></a>    <span class="fu">mean</span>(yearmeans),</span>
-<span id="cb123-141"><a href="trusted.html#cb123-141" tabindex="-1"></a>  <span class="at">group =</span> <span class="fu">c</span>(</span>
-<span id="cb123-142"><a href="trusted.html#cb123-142" tabindex="-1"></a>    <span class="fu">rep</span>(<span class="st">&#39;Whole UK&#39;</span>, <span class="at">times =</span> <span class="dv">31</span>),</span>
-<span id="cb123-143"><a href="trusted.html#cb123-143" tabindex="-1"></a>    <span class="fu">rep</span>(<span class="st">&#39;R1&#39;</span>, <span class="at">times =</span> <span class="dv">31</span>),</span>
-<span id="cb123-144"><a href="trusted.html#cb123-144" tabindex="-1"></a>    <span class="fu">rep</span>(<span class="st">&#39;R0&#39;</span>, <span class="at">times =</span> <span class="dv">31</span>)</span>
-<span id="cb123-145"><a href="trusted.html#cb123-145" tabindex="-1"></a>  )</span>
-<span id="cb123-146"><a href="trusted.html#cb123-146" tabindex="-1"></a>)</span>
-<span id="cb123-147"><a href="trusted.html#cb123-147" tabindex="-1"></a></span>
-<span id="cb123-148"><a href="trusted.html#cb123-148" tabindex="-1"></a><span class="do">## plotting</span></span>
-<span id="cb123-149"><a href="trusted.html#cb123-149" tabindex="-1"></a></span>
-<span id="cb123-150"><a href="trusted.html#cb123-150" tabindex="-1"></a>Grid_plot_2 <span class="ot">=</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(</span>
-<span id="cb123-151"><a href="trusted.html#cb123-151" tabindex="-1"></a>  <span class="at">x =</span> x,</span>
-<span id="cb123-152"><a href="trusted.html#cb123-152" tabindex="-1"></a>  <span class="at">y =</span> y,</span>
-<span id="cb123-153"><a href="trusted.html#cb123-153" tabindex="-1"></a>  <span class="at">ymin =</span> ymin,</span>
-<span id="cb123-154"><a href="trusted.html#cb123-154" tabindex="-1"></a>  <span class="at">ymax =</span> ymax,</span>
-<span id="cb123-155"><a href="trusted.html#cb123-155" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span></span>
-<span id="cb123-156"><a href="trusted.html#cb123-156" tabindex="-1"></a>), <span class="at">data =</span> Grid_df_2) <span class="sc">+</span></span>
-<span id="cb123-157"><a href="trusted.html#cb123-157" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(</span>
-<span id="cb123-158"><a href="trusted.html#cb123-158" tabindex="-1"></a>    <span class="at">colour =</span> group,</span>
-<span id="cb123-159"><a href="trusted.html#cb123-159" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
-<span id="cb123-160"><a href="trusted.html#cb123-160" tabindex="-1"></a>    <span class="at">fill =</span> group</span>
-<span id="cb123-161"><a href="trusted.html#cb123-161" tabindex="-1"></a>  )) <span class="sc">+</span></span>
-<span id="cb123-162"><a href="trusted.html#cb123-162" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&#39;year&#39;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&#39;posterior mean bs on transformed scale&#39;</span>) <span class="sc">+</span></span>
-<span id="cb123-163"><a href="trusted.html#cb123-163" tabindex="-1"></a>  <span class="fu">ggtitle</span>(</span>
-<span id="cb123-164"><a href="trusted.html#cb123-164" tabindex="-1"></a>    <span class="st">&#39;Naive posterior means of BS at the selected, unselected sites and across the UK (R1, R0 and Whole UK resp.). &#39;</span></span>
-<span id="cb123-165"><a href="trusted.html#cb123-165" tabindex="-1"></a>  )</span>
-<span id="cb123-166"><a href="trusted.html#cb123-166" tabindex="-1"></a>Grid_plot_2</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="trusted.html#cb122-1" tabindex="-1"></a>stepsize <span class="ot">=</span> <span class="dv">5000</span> <span class="sc">/</span> sd_x</span>
+<span id="cb122-2"><a href="trusted.html#cb122-2" tabindex="-1"></a>nxy <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">c</span>(<span class="fu">diff</span>(<span class="fu">range</span>(</span>
+<span id="cb122-3"><a href="trusted.html#cb122-3" tabindex="-1"></a>  BlackSmokePrefData<span class="sc">$</span>east</span>
+<span id="cb122-4"><a href="trusted.html#cb122-4" tabindex="-1"></a>)),</span>
+<span id="cb122-5"><a href="trusted.html#cb122-5" tabindex="-1"></a><span class="fu">diff</span>(<span class="fu">range</span>(</span>
+<span id="cb122-6"><a href="trusted.html#cb122-6" tabindex="-1"></a>  BlackSmokePrefData<span class="sc">$</span>north</span>
+<span id="cb122-7"><a href="trusted.html#cb122-7" tabindex="-1"></a>))) <span class="sc">/</span> stepsize)  <span class="do">## how many points?</span></span>
+<span id="cb122-8"><a href="trusted.html#cb122-8" tabindex="-1"></a>proj_grid <span class="ot">=</span> <span class="fu">inla.mesh.projector</span>(</span>
+<span id="cb122-9"><a href="trusted.html#cb122-9" tabindex="-1"></a>  mesh,</span>
+<span id="cb122-10"><a href="trusted.html#cb122-10" tabindex="-1"></a>  <span class="at">xlim =</span> <span class="fu">range</span>(BlackSmokePrefData<span class="sc">$</span>east),</span>
+<span id="cb122-11"><a href="trusted.html#cb122-11" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">range</span>(BlackSmokePrefData<span class="sc">$</span>north),</span>
+<span id="cb122-12"><a href="trusted.html#cb122-12" tabindex="-1"></a>  <span class="at">dims =</span> nxy</span>
+<span id="cb122-13"><a href="trusted.html#cb122-13" tabindex="-1"></a>)</span>
+<span id="cb122-14"><a href="trusted.html#cb122-14" tabindex="-1"></a>A.grid <span class="ot">=</span> <span class="fu">inla.spde.make.A</span>(mesh,</span>
+<span id="cb122-15"><a href="trusted.html#cb122-15" tabindex="-1"></a>                          <span class="at">loc =</span> <span class="fu">cbind</span>(BlackSmokePrefData<span class="sc">$</span>east, BlackSmokePrefData<span class="sc">$</span>north))</span>
+<span id="cb122-16"><a href="trusted.html#cb122-16" tabindex="-1"></a></span>
+<span id="cb122-17"><a href="trusted.html#cb122-17" tabindex="-1"></a><span class="do">## define placeholders</span></span>
+<span id="cb122-18"><a href="trusted.html#cb122-18" tabindex="-1"></a></span>
+<span id="cb122-19"><a href="trusted.html#cb122-19" tabindex="-1"></a>tmp2 <span class="ot">=</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> no_T, <span class="at">ncol =</span> mesh<span class="sc">$</span>n)</span>
+<span id="cb122-20"><a href="trusted.html#cb122-20" tabindex="-1"></a>year <span class="ot">=</span> (<span class="dv">1</span><span class="sc">:</span>no_T) <span class="sc">/</span> no_T</span>
+<span id="cb122-21"><a href="trusted.html#cb122-21" tabindex="-1"></a>year2 <span class="ot">=</span> year <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb122-22"><a href="trusted.html#cb122-22" tabindex="-1"></a>Post_Array2 <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">0</span>, <span class="at">dim =</span> <span class="fu">c</span>(m_samples, no_T, mesh<span class="sc">$</span>n))</span>
+<span id="cb122-23"><a href="trusted.html#cb122-23" tabindex="-1"></a>Post_Sites_Array2 <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">0</span>, <span class="at">dim =</span> <span class="fu">c</span>(m_samples, no_T, <span class="fu">dim</span>(BlackSmokePrefData)[<span class="dv">1</span>]))</span>
+<span id="cb122-24"><a href="trusted.html#cb122-24" tabindex="-1"></a>residuals_array <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">0</span>, <span class="at">dim =</span> <span class="fu">c</span>(m_samples, no_T, <span class="fu">dim</span>(BlackSmokePrefData)[<span class="dv">1</span>]))</span>
+<span id="cb122-25"><a href="trusted.html#cb122-25" tabindex="-1"></a>RI_array <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">0</span>, <span class="at">dim =</span> <span class="fu">c</span>(m_samples, no_T, <span class="fu">dim</span>(BlackSmokePrefData)[<span class="dv">1</span>])) <span class="co"># random intercepts</span></span>
+<span id="cb122-26"><a href="trusted.html#cb122-26" tabindex="-1"></a>RS_array <span class="ot">=</span> <span class="fu">array</span>(<span class="dv">0</span>, <span class="at">dim =</span> <span class="fu">c</span>(m_samples, no_T, <span class="fu">dim</span>(BlackSmokePrefData)[<span class="dv">1</span>])) <span class="co"># random slopes</span></span>
+<span id="cb122-27"><a href="trusted.html#cb122-27" tabindex="-1"></a></span>
+<span id="cb122-28"><a href="trusted.html#cb122-28" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m_samples) {</span>
+<span id="cb122-29"><a href="trusted.html#cb122-29" tabindex="-1"></a>  <span class="co"># Creating predictions for Y process</span></span>
+<span id="cb122-30"><a href="trusted.html#cb122-30" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>no_T)</span>
+<span id="cb122-31"><a href="trusted.html#cb122-31" tabindex="-1"></a>    <span class="co"># loop over the years</span></span>
+<span id="cb122-32"><a href="trusted.html#cb122-32" tabindex="-1"></a>  {</span>
+<span id="cb122-33"><a href="trusted.html#cb122-33" tabindex="-1"></a>    Post_Array2[i, j,] <span class="ot">&lt;-</span> samp[[i]]<span class="sc">$</span>latent[<span class="st">&#39;Intercept:1&#39;</span>] <span class="sc">+</span> <span class="co"># Intercept</span></span>
+<span id="cb122-34"><a href="trusted.html#cb122-34" tabindex="-1"></a>      samp[[i]]<span class="sc">$</span>latent[<span class="fu">which</span>(<span class="fu">startsWith</span>(<span class="at">prefix =</span> <span class="st">&#39;year:&#39;</span>, <span class="at">x =</span> <span class="fu">names</span>(samp[[i]]<span class="sc">$</span>latent)))][j] <span class="sc">*</span> year[j] <span class="sc">+</span> <span class="co"># linear fixed effect</span></span>
+<span id="cb122-35"><a href="trusted.html#cb122-35" tabindex="-1"></a>      <span class="co">#samp[[i]]$latent[&#39;year_2&#39;] * year2[j] + # quadratic fixed effect</span></span>
+<span id="cb122-36"><a href="trusted.html#cb122-36" tabindex="-1"></a>      <span class="fu">as.numeric</span>(samp[[i]]<span class="sc">$</span>latent[<span class="fu">which</span>(<span class="fu">startsWith</span>(<span class="at">prefix =</span> <span class="st">&#39;spatial.field:&#39;</span>, <span class="at">x =</span> <span class="fu">names</span>(samp[[i]]<span class="sc">$</span>latent)))]) <span class="sc">+</span> <span class="co"># Spatial Intercept</span></span>
+<span id="cb122-37"><a href="trusted.html#cb122-37" tabindex="-1"></a>      <span class="fu">as.numeric</span>(samp[[i]]<span class="sc">$</span>latent[<span class="fu">which</span>(<span class="fu">startsWith</span>(<span class="at">prefix =</span> <span class="st">&#39;spatial.field.copy:&#39;</span>, <span class="at">x =</span> <span class="fu">names</span>(samp[[i]]<span class="sc">$</span>latent)))]) <span class="sc">*</span> year[j] <span class="sc">+</span> <span class="co"># Spatial linear slope</span></span>
+<span id="cb122-38"><a href="trusted.html#cb122-38" tabindex="-1"></a>      <span class="fu">as.numeric</span>(samp[[i]]<span class="sc">$</span>latent[<span class="fu">which</span>(<span class="fu">startsWith</span>(<span class="at">prefix =</span> <span class="st">&#39;spatial.field.copy2:&#39;</span>, <span class="at">x =</span> <span class="fu">names</span>(samp[[i]]<span class="sc">$</span>latent)))]) <span class="sc">*</span> year2[j]  <span class="co"># Spatial quadratic slope</span></span>
+<span id="cb122-39"><a href="trusted.html#cb122-39" tabindex="-1"></a>    <span class="co"># Project onto the site locations and add random site-specific effects #</span></span>
+<span id="cb122-40"><a href="trusted.html#cb122-40" tabindex="-1"></a>    Post_Sites_Array2[i, j,] <span class="ot">=</span> <span class="fu">as.numeric</span>(A.grid <span class="sc">%*%</span> Post_Array2[i, j,]) <span class="sc">+</span></span>
+<span id="cb122-41"><a href="trusted.html#cb122-41" tabindex="-1"></a>      <span class="fu">as.numeric</span>(samp[[i]]<span class="sc">$</span>latent[<span class="fu">which</span>(<span class="fu">startsWith</span>(<span class="at">prefix =</span> <span class="st">&#39;spatial_ind:&#39;</span>, <span class="at">x =</span> <span class="fu">names</span>(samp[[i]]<span class="sc">$</span>latent)))[<span class="dv">1</span><span class="sc">:</span>no_sites]]) <span class="sc">+</span> <span class="co"># random Intercept</span></span>
+<span id="cb122-42"><a href="trusted.html#cb122-42" tabindex="-1"></a>      <span class="fu">as.numeric</span>(samp[[i]]<span class="sc">$</span>latent[<span class="fu">which</span>(<span class="fu">startsWith</span>(<span class="at">prefix =</span> <span class="st">&#39;spatial_ind2:&#39;</span>, <span class="at">x =</span> <span class="fu">names</span>(samp[[i]]<span class="sc">$</span>latent)))[no_sites <span class="sc">+</span></span>
+<span id="cb122-43"><a href="trusted.html#cb122-43" tabindex="-1"></a>                                                                                                             (<span class="dv">1</span><span class="sc">:</span>no_sites)]]) <span class="sc">*</span> year[j] <span class="co"># random slope</span></span>
+<span id="cb122-44"><a href="trusted.html#cb122-44" tabindex="-1"></a>    <span class="co"># Extract the random intercepts #</span></span>
+<span id="cb122-45"><a href="trusted.html#cb122-45" tabindex="-1"></a>    RI_array[i, j,] <span class="ot">=</span> <span class="fu">as.numeric</span>(samp[[i]]<span class="sc">$</span>latent[<span class="fu">which</span>(<span class="fu">startsWith</span>(<span class="at">prefix =</span> <span class="st">&#39;spatial_ind:&#39;</span>, <span class="at">x =</span> <span class="fu">names</span>(samp[[i]]<span class="sc">$</span>latent)))[<span class="dv">1</span><span class="sc">:</span>no_sites]])</span>
+<span id="cb122-46"><a href="trusted.html#cb122-46" tabindex="-1"></a>    </span>
+<span id="cb122-47"><a href="trusted.html#cb122-47" tabindex="-1"></a>    <span class="co"># Extract the random slopes #</span></span>
+<span id="cb122-48"><a href="trusted.html#cb122-48" tabindex="-1"></a>    RS_array[i, j,] <span class="ot">=</span> <span class="fu">as.numeric</span>(samp[[i]]<span class="sc">$</span>latent[<span class="fu">which</span>(<span class="fu">startsWith</span>(<span class="at">prefix =</span> <span class="st">&#39;spatial_ind2:&#39;</span>, <span class="at">x =</span> <span class="fu">names</span>(samp[[i]]<span class="sc">$</span>latent)))[no_sites <span class="sc">+</span></span>
+<span id="cb122-49"><a href="trusted.html#cb122-49" tabindex="-1"></a>                                                                                                                             (<span class="dv">1</span><span class="sc">:</span>no_sites)]])</span>
+<span id="cb122-50"><a href="trusted.html#cb122-50" tabindex="-1"></a>  }</span>
+<span id="cb122-51"><a href="trusted.html#cb122-51" tabindex="-1"></a>}</span>
+<span id="cb122-52"><a href="trusted.html#cb122-52" tabindex="-1"></a></span>
+<span id="cb122-53"><a href="trusted.html#cb122-53" tabindex="-1"></a><span class="do">## summarizing</span></span>
+<span id="cb122-54"><a href="trusted.html#cb122-54" tabindex="-1"></a></span>
+<span id="cb122-55"><a href="trusted.html#cb122-55" tabindex="-1"></a>Post_mean2 <span class="ot">&lt;-</span></span>
+<span id="cb122-56"><a href="trusted.html#cb122-56" tabindex="-1"></a>  <span class="fu">t</span>(<span class="fu">apply</span>(Post_Array2, <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), <span class="cf">function</span>(x) {</span>
+<span id="cb122-57"><a href="trusted.html#cb122-57" tabindex="-1"></a>    <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb122-58"><a href="trusted.html#cb122-58" tabindex="-1"></a>  }))</span>
+<span id="cb122-59"><a href="trusted.html#cb122-59" tabindex="-1"></a>Post_sd2 <span class="ot">&lt;-</span></span>
+<span id="cb122-60"><a href="trusted.html#cb122-60" tabindex="-1"></a>  <span class="fu">t</span>(<span class="fu">apply</span>(Post_Array2, <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), <span class="cf">function</span>(x) {</span>
+<span id="cb122-61"><a href="trusted.html#cb122-61" tabindex="-1"></a>    <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb122-62"><a href="trusted.html#cb122-62" tabindex="-1"></a>  }))</span>
+<span id="cb122-63"><a href="trusted.html#cb122-63" tabindex="-1"></a>Post_LCL2 <span class="ot">&lt;-</span></span>
+<span id="cb122-64"><a href="trusted.html#cb122-64" tabindex="-1"></a>  <span class="fu">apply</span>((<span class="fu">apply</span>(Post_Array2, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="cf">function</span>(x) {</span>
+<span id="cb122-65"><a href="trusted.html#cb122-65" tabindex="-1"></a>    <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb122-66"><a href="trusted.html#cb122-66" tabindex="-1"></a>  })), <span class="dv">2</span>, quantile, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>))</span>
+<span id="cb122-67"><a href="trusted.html#cb122-67" tabindex="-1"></a>Post_UCL2 <span class="ot">&lt;-</span></span>
+<span id="cb122-68"><a href="trusted.html#cb122-68" tabindex="-1"></a>  <span class="fu">apply</span>((<span class="fu">apply</span>(Post_Array2, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="cf">function</span>(x) {</span>
+<span id="cb122-69"><a href="trusted.html#cb122-69" tabindex="-1"></a>    <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb122-70"><a href="trusted.html#cb122-70" tabindex="-1"></a>  })), <span class="dv">2</span>, quantile, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.975</span>))</span>
+<span id="cb122-71"><a href="trusted.html#cb122-71" tabindex="-1"></a>RI_array <span class="ot">&lt;-</span></span>
+<span id="cb122-72"><a href="trusted.html#cb122-72" tabindex="-1"></a>  <span class="fu">t</span>(<span class="fu">apply</span>(RI_array, <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), <span class="cf">function</span>(x) {</span>
+<span id="cb122-73"><a href="trusted.html#cb122-73" tabindex="-1"></a>    <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb122-74"><a href="trusted.html#cb122-74" tabindex="-1"></a>  }))</span>
+<span id="cb122-75"><a href="trusted.html#cb122-75" tabindex="-1"></a>RS_array <span class="ot">&lt;-</span></span>
+<span id="cb122-76"><a href="trusted.html#cb122-76" tabindex="-1"></a>  <span class="fu">t</span>(<span class="fu">apply</span>(RS_array, <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), <span class="cf">function</span>(x) {</span>
+<span id="cb122-77"><a href="trusted.html#cb122-77" tabindex="-1"></a>    <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb122-78"><a href="trusted.html#cb122-78" tabindex="-1"></a>  }))</span>
+<span id="cb122-79"><a href="trusted.html#cb122-79" tabindex="-1"></a></span>
+<span id="cb122-80"><a href="trusted.html#cb122-80" tabindex="-1"></a><span class="do">## placeholders for uniform grid posterior blacksmoke values (not necessarily in dataset)</span></span>
+<span id="cb122-81"><a href="trusted.html#cb122-81" tabindex="-1"></a></span>
+<span id="cb122-82"><a href="trusted.html#cb122-82" tabindex="-1"></a>post_Matrix_grid_mean2 <span class="ot">=</span> <span class="fu">array</span>(<span class="cn">NA</span>, <span class="at">dim =</span> <span class="fu">c</span>(nxy[<span class="dv">1</span>], nxy[<span class="dv">2</span>], no_T))</span>
+<span id="cb122-83"><a href="trusted.html#cb122-83" tabindex="-1"></a>post_Matrix_grid_sd2 <span class="ot">=</span> <span class="fu">array</span>(<span class="cn">NA</span>, <span class="at">dim =</span> <span class="fu">c</span>(nxy[<span class="dv">1</span>], nxy[<span class="dv">2</span>], no_T))</span>
+<span id="cb122-84"><a href="trusted.html#cb122-84" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>no_T)</span>
+<span id="cb122-85"><a href="trusted.html#cb122-85" tabindex="-1"></a>{</span>
+<span id="cb122-86"><a href="trusted.html#cb122-86" tabindex="-1"></a>  post_Matrix_grid_mean2[, , i] <span class="ot">=</span> <span class="fu">inla.mesh.project</span>(proj_grid, Post_mean2[, i])</span>
+<span id="cb122-87"><a href="trusted.html#cb122-87" tabindex="-1"></a>  post_Matrix_grid_sd2[, , i] <span class="ot">=</span> <span class="fu">inla.mesh.project</span>(proj_grid, Post_sd2[, i])</span>
+<span id="cb122-88"><a href="trusted.html#cb122-88" tabindex="-1"></a>}</span>
+<span id="cb122-89"><a href="trusted.html#cb122-89" tabindex="-1"></a></span>
+<span id="cb122-90"><a href="trusted.html#cb122-90" tabindex="-1"></a><span class="do">## placeholders for observed (R1 = active, R0 = inactive) site blacksmoke values</span></span>
+<span id="cb122-91"><a href="trusted.html#cb122-91" tabindex="-1"></a></span>
+<span id="cb122-92"><a href="trusted.html#cb122-92" tabindex="-1"></a>R1_results2 <span class="ot">=</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> no_T, <span class="at">ncol =</span> <span class="dv">4</span>) <span class="co"># prediction means, sd, LCL, UCL</span></span>
+<span id="cb122-93"><a href="trusted.html#cb122-93" tabindex="-1"></a><span class="fu">colnames</span>(R1_results2) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;prediction mean&#39;</span>, <span class="st">&#39;prediction sd&#39;</span>, <span class="st">&#39;LCL&#39;</span>, <span class="st">&#39;UCL&#39;</span>)</span>
+<span id="cb122-94"><a href="trusted.html#cb122-94" tabindex="-1"></a>R0_results2 <span class="ot">=</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> no_T, <span class="at">ncol =</span> <span class="dv">4</span>) <span class="co"># prediction means, sd, LCL, UCL</span></span>
+<span id="cb122-95"><a href="trusted.html#cb122-95" tabindex="-1"></a><span class="fu">colnames</span>(R0_results2) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;prediction mean&#39;</span>, <span class="st">&#39;prediction sd&#39;</span>, <span class="st">&#39;LCL&#39;</span>, <span class="st">&#39;UCL&#39;</span>)</span>
+<span id="cb122-96"><a href="trusted.html#cb122-96" tabindex="-1"></a>Grid_results2 <span class="ot">=</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> no_T, <span class="at">ncol =</span> <span class="dv">4</span>) <span class="co"># prediction means, sd, LCL, UCL</span></span>
+<span id="cb122-97"><a href="trusted.html#cb122-97" tabindex="-1"></a><span class="fu">colnames</span>(Grid_results2) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;prediction mean&#39;</span>, <span class="st">&#39;prediction sd&#39;</span>, <span class="st">&#39;LCL&#39;</span>, <span class="st">&#39;UCL&#39;</span>)</span>
+<span id="cb122-98"><a href="trusted.html#cb122-98" tabindex="-1"></a></span>
+<span id="cb122-99"><a href="trusted.html#cb122-99" tabindex="-1"></a>BlackSmokePrefData_original <span class="ot">&lt;-</span></span>
+<span id="cb122-100"><a href="trusted.html#cb122-100" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="st">&quot;data/black_smoke/BlackSmokePrefData.csv&quot;</span>) <span class="do">## need original columns here</span></span>
+<span id="cb122-101"><a href="trusted.html#cb122-101" tabindex="-1"></a></span>
+<span id="cb122-102"><a href="trusted.html#cb122-102" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>no_T)</span>
+<span id="cb122-103"><a href="trusted.html#cb122-103" tabindex="-1"></a>{</span>
+<span id="cb122-104"><a href="trusted.html#cb122-104" tabindex="-1"></a>  R1_results2[j, <span class="dv">1</span>] <span class="ot">=</span> <span class="fu">mean</span>(Post_Sites_Array2[, j, <span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(BlackSmokePrefData_original[, <span class="dv">3</span> <span class="sc">+</span></span>
+<span id="cb122-105"><a href="trusted.html#cb122-105" tabindex="-1"></a>                                                                                             j]))], <span class="at">na.rm =</span> T)</span>
+<span id="cb122-106"><a href="trusted.html#cb122-106" tabindex="-1"></a>  R1_results2[j, <span class="dv">2</span>] <span class="ot">=</span> <span class="fu">sd</span>(<span class="fu">apply</span>(Post_Sites_Array2[, j, <span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(BlackSmokePrefData_original[, <span class="dv">3</span> <span class="sc">+</span></span>
+<span id="cb122-107"><a href="trusted.html#cb122-107" tabindex="-1"></a>                                                                                                 j]))], <span class="fu">c</span>(<span class="dv">1</span>), mean, <span class="at">na.rm =</span> T))</span>
+<span id="cb122-108"><a href="trusted.html#cb122-108" tabindex="-1"></a>  R1_results2[j, <span class="dv">3</span>] <span class="ot">=</span> <span class="fu">quantile</span>(<span class="fu">apply</span>(Post_Sites_Array2[, j, <span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(BlackSmokePrefData_original[, <span class="dv">3</span> <span class="sc">+</span></span>
+<span id="cb122-109"><a href="trusted.html#cb122-109" tabindex="-1"></a>                                                                                                       j]))], <span class="dv">1</span>, mean, <span class="at">na.rm =</span> T), <span class="at">probs =</span> <span class="fl">0.025</span>)</span>
+<span id="cb122-110"><a href="trusted.html#cb122-110" tabindex="-1"></a>  R1_results2[j, <span class="dv">4</span>] <span class="ot">=</span> <span class="fu">quantile</span>(<span class="fu">apply</span>(Post_Sites_Array2[, j, <span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(BlackSmokePrefData_original[, <span class="dv">3</span> <span class="sc">+</span></span>
+<span id="cb122-111"><a href="trusted.html#cb122-111" tabindex="-1"></a>                                                                                                       j]))], <span class="dv">1</span>, mean, <span class="at">na.rm =</span> T), <span class="at">probs =</span> <span class="fl">0.975</span>)</span>
+<span id="cb122-112"><a href="trusted.html#cb122-112" tabindex="-1"></a>  </span>
+<span id="cb122-113"><a href="trusted.html#cb122-113" tabindex="-1"></a>  R0_results2[j, <span class="dv">1</span>] <span class="ot">=</span> <span class="fu">mean</span>(Post_Sites_Array2[, j, <span class="fu">which</span>(<span class="fu">is.na</span>(BlackSmokePrefData_original[, <span class="dv">3</span> <span class="sc">+</span></span>
+<span id="cb122-114"><a href="trusted.html#cb122-114" tabindex="-1"></a>                                                                                            j]))], <span class="at">na.rm =</span> T)</span>
+<span id="cb122-115"><a href="trusted.html#cb122-115" tabindex="-1"></a>  R0_results2[j, <span class="dv">2</span>] <span class="ot">=</span> <span class="fu">sd</span>(<span class="fu">apply</span>(Post_Sites_Array2[, j, <span class="fu">which</span>(<span class="fu">is.na</span>(BlackSmokePrefData_original[, <span class="dv">3</span> <span class="sc">+</span></span>
+<span id="cb122-116"><a href="trusted.html#cb122-116" tabindex="-1"></a>                                                                                                j]))], <span class="fu">c</span>(<span class="dv">1</span>), mean, <span class="at">na.rm =</span> T))</span>
+<span id="cb122-117"><a href="trusted.html#cb122-117" tabindex="-1"></a>  R0_results2[j, <span class="dv">3</span>] <span class="ot">=</span> <span class="fu">quantile</span>(<span class="fu">apply</span>(Post_Sites_Array2[, j, <span class="fu">which</span>(<span class="fu">is.na</span>(BlackSmokePrefData_original[, <span class="dv">3</span> <span class="sc">+</span></span>
+<span id="cb122-118"><a href="trusted.html#cb122-118" tabindex="-1"></a>                                                                                                      j]))], <span class="dv">1</span>, mean, <span class="at">na.rm =</span> T), <span class="at">probs =</span> <span class="fl">0.025</span>)</span>
+<span id="cb122-119"><a href="trusted.html#cb122-119" tabindex="-1"></a>  R0_results2[j, <span class="dv">4</span>] <span class="ot">=</span> <span class="fu">quantile</span>(<span class="fu">apply</span>(Post_Sites_Array2[, j, <span class="fu">which</span>(<span class="fu">is.na</span>(BlackSmokePrefData_original[, <span class="dv">3</span> <span class="sc">+</span></span>
+<span id="cb122-120"><a href="trusted.html#cb122-120" tabindex="-1"></a>                                                                                                      j]))], <span class="dv">1</span>, mean, <span class="at">na.rm =</span> T), <span class="at">probs =</span> <span class="fl">0.975</span>)</span>
+<span id="cb122-121"><a href="trusted.html#cb122-121" tabindex="-1"></a>}</span>
+<span id="cb122-122"><a href="trusted.html#cb122-122" tabindex="-1"></a></span>
+<span id="cb122-123"><a href="trusted.html#cb122-123" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>no_T)</span>
+<span id="cb122-124"><a href="trusted.html#cb122-124" tabindex="-1"></a>{</span>
+<span id="cb122-125"><a href="trusted.html#cb122-125" tabindex="-1"></a>  Grid_results2[i, <span class="dv">1</span>] <span class="ot">=</span> <span class="fu">mean</span>(post_Matrix_grid_mean2[, , i], <span class="at">na.rm =</span> T)</span>
+<span id="cb122-126"><a href="trusted.html#cb122-126" tabindex="-1"></a>  Grid_results2[i, <span class="dv">2</span>] <span class="ot">=</span> <span class="fu">mean</span>(post_Matrix_grid_sd2[, , i], <span class="at">na.rm =</span> T)</span>
+<span id="cb122-127"><a href="trusted.html#cb122-127" tabindex="-1"></a>}</span>
+<span id="cb122-128"><a href="trusted.html#cb122-128" tabindex="-1"></a>Grid_results2[, <span class="dv">3</span>] <span class="ot">=</span> Post_LCL2</span>
+<span id="cb122-129"><a href="trusted.html#cb122-129" tabindex="-1"></a>Grid_results2[, <span class="dv">4</span>] <span class="ot">=</span> Post_UCL2</span>
+<span id="cb122-130"><a href="trusted.html#cb122-130" tabindex="-1"></a></span>
+<span id="cb122-131"><a href="trusted.html#cb122-131" tabindex="-1"></a><span class="do">## Revert to the original scale (exponentiating and scaling up)</span></span>
+<span id="cb122-132"><a href="trusted.html#cb122-132" tabindex="-1"></a>Grid_df_2 <span class="ot">=</span> <span class="fu">data.frame</span>(</span>
+<span id="cb122-133"><a href="trusted.html#cb122-133" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">exp</span>(<span class="fu">c</span>(</span>
+<span id="cb122-134"><a href="trusted.html#cb122-134" tabindex="-1"></a>    Grid_results2[, <span class="dv">1</span>], R1_results2[, <span class="dv">1</span>], R0_results2[, <span class="dv">1</span>]</span>
+<span id="cb122-135"><a href="trusted.html#cb122-135" tabindex="-1"></a>  )) <span class="sc">*</span> <span class="fu">mean</span>(yearmeans),</span>
+<span id="cb122-136"><a href="trusted.html#cb122-136" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">rep</span>(<span class="dv">66</span><span class="sc">:</span><span class="dv">96</span>, <span class="at">times =</span> <span class="dv">3</span>),</span>
+<span id="cb122-137"><a href="trusted.html#cb122-137" tabindex="-1"></a>  <span class="at">ymin =</span> <span class="fu">exp</span>(<span class="fu">c</span>(Post_LCL2, R1_results2[, <span class="dv">3</span>], R0_results2[, <span class="dv">3</span>])) <span class="sc">*</span></span>
+<span id="cb122-138"><a href="trusted.html#cb122-138" tabindex="-1"></a>    <span class="fu">mean</span>(yearmeans),</span>
+<span id="cb122-139"><a href="trusted.html#cb122-139" tabindex="-1"></a>  <span class="at">ymax =</span> <span class="fu">exp</span>(<span class="fu">c</span>(Post_UCL2, R1_results2[, <span class="dv">4</span>], R0_results2[, <span class="dv">4</span>])) <span class="sc">*</span></span>
+<span id="cb122-140"><a href="trusted.html#cb122-140" tabindex="-1"></a>    <span class="fu">mean</span>(yearmeans),</span>
+<span id="cb122-141"><a href="trusted.html#cb122-141" tabindex="-1"></a>  <span class="at">group =</span> <span class="fu">c</span>(</span>
+<span id="cb122-142"><a href="trusted.html#cb122-142" tabindex="-1"></a>    <span class="fu">rep</span>(<span class="st">&#39;Whole UK&#39;</span>, <span class="at">times =</span> <span class="dv">31</span>),</span>
+<span id="cb122-143"><a href="trusted.html#cb122-143" tabindex="-1"></a>    <span class="fu">rep</span>(<span class="st">&#39;R1&#39;</span>, <span class="at">times =</span> <span class="dv">31</span>),</span>
+<span id="cb122-144"><a href="trusted.html#cb122-144" tabindex="-1"></a>    <span class="fu">rep</span>(<span class="st">&#39;R0&#39;</span>, <span class="at">times =</span> <span class="dv">31</span>)</span>
+<span id="cb122-145"><a href="trusted.html#cb122-145" tabindex="-1"></a>  )</span>
+<span id="cb122-146"><a href="trusted.html#cb122-146" tabindex="-1"></a>)</span>
+<span id="cb122-147"><a href="trusted.html#cb122-147" tabindex="-1"></a></span>
+<span id="cb122-148"><a href="trusted.html#cb122-148" tabindex="-1"></a><span class="do">## plotting</span></span>
+<span id="cb122-149"><a href="trusted.html#cb122-149" tabindex="-1"></a></span>
+<span id="cb122-150"><a href="trusted.html#cb122-150" tabindex="-1"></a>Grid_plot_2 <span class="ot">=</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(</span>
+<span id="cb122-151"><a href="trusted.html#cb122-151" tabindex="-1"></a>  <span class="at">x =</span> x,</span>
+<span id="cb122-152"><a href="trusted.html#cb122-152" tabindex="-1"></a>  <span class="at">y =</span> y,</span>
+<span id="cb122-153"><a href="trusted.html#cb122-153" tabindex="-1"></a>  <span class="at">ymin =</span> ymin,</span>
+<span id="cb122-154"><a href="trusted.html#cb122-154" tabindex="-1"></a>  <span class="at">ymax =</span> ymax,</span>
+<span id="cb122-155"><a href="trusted.html#cb122-155" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span></span>
+<span id="cb122-156"><a href="trusted.html#cb122-156" tabindex="-1"></a>), <span class="at">data =</span> Grid_df_2) <span class="sc">+</span></span>
+<span id="cb122-157"><a href="trusted.html#cb122-157" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(</span>
+<span id="cb122-158"><a href="trusted.html#cb122-158" tabindex="-1"></a>    <span class="at">colour =</span> group,</span>
+<span id="cb122-159"><a href="trusted.html#cb122-159" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb122-160"><a href="trusted.html#cb122-160" tabindex="-1"></a>    <span class="at">fill =</span> group</span>
+<span id="cb122-161"><a href="trusted.html#cb122-161" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb122-162"><a href="trusted.html#cb122-162" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&#39;year&#39;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&#39;posterior mean bs on transformed scale&#39;</span>) <span class="sc">+</span></span>
+<span id="cb122-163"><a href="trusted.html#cb122-163" tabindex="-1"></a>  <span class="fu">ggtitle</span>(</span>
+<span id="cb122-164"><a href="trusted.html#cb122-164" tabindex="-1"></a>    <span class="st">&#39;Naive posterior means of BS at the selected, unselected sites and across the UK (R1, R0 and Whole UK resp.). &#39;</span></span>
+<span id="cb122-165"><a href="trusted.html#cb122-165" tabindex="-1"></a>  )</span>
+<span id="cb122-166"><a href="trusted.html#cb122-166" tabindex="-1"></a>Grid_plot_2</span></code></pre></div>
 <p><img src="_main_files/figure-html/summarize-1.png" width="672" /></p>
 
 </div>

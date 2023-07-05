@@ -23,7 +23,7 @@
 <meta name="author" content="Gavin Shaddick, James V. Zidek, and Alexandra M. Schmidt" />
 
 
-<meta name="date" content="2023-07-04" />
+<meta name="date" content="2023-07-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -137,6 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="preface-2nd-edition.html"><a href="preface-2nd-edition.html"><i class="fa fa-check"></i>Preface (2nd edition)</a></li>
 <li class="chapter" data-level="1" data-path="why.html"><a href="why.html"><i class="fa fa-check"></i><b>1</b> Why spatio-temporal epidemiology?</a></li>
 <li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Epidemiology-the basics</a>
 <ul>
@@ -299,78 +300,78 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="nimble-2" class="section level3 unnumbered hasAnchor">
 <h3>Nimble<a href="Disease.html#nimble-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Following Example 6.2 we look back at the hospital admission rates for COPD, in England for 2010. We can implement the same model we used on Example 6.2 using <code>nimble</code>.</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="Disease.html#cb124-1" tabindex="-1"></a><span class="co"># Load nimble</span></span>
-<span id="cb124-2"><a href="Disease.html#cb124-2" tabindex="-1"></a><span class="fu">library</span>(nimble)</span>
-<span id="cb124-3"><a href="Disease.html#cb124-3" tabindex="-1"></a><span class="fu">library</span>(sf) <span class="co"># to read shapefile</span></span>
-<span id="cb124-4"><a href="Disease.html#cb124-4" tabindex="-1"></a></span>
-<span id="cb124-5"><a href="Disease.html#cb124-5" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb124-6"><a href="Disease.html#cb124-6" tabindex="-1"></a><span class="co"># Reading in borders</span></span>
-<span id="cb124-7"><a href="Disease.html#cb124-7" tabindex="-1"></a>england <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">&quot;data/copd/englandlocalauthority.shp&quot;</span>)</span>
-<span id="cb124-8"><a href="Disease.html#cb124-8" tabindex="-1"></a><span class="co"># Reading in data</span></span>
-<span id="cb124-9"><a href="Disease.html#cb124-9" tabindex="-1"></a>observed <span class="ot">&lt;-</span></span>
-<span id="cb124-10"><a href="Disease.html#cb124-10" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/copd/copdmortalityobserved.csv&quot;</span>, <span class="at">row.names =</span> <span class="dv">1</span>)</span>
-<span id="cb124-11"><a href="Disease.html#cb124-11" tabindex="-1"></a>expected <span class="ot">&lt;-</span></span>
-<span id="cb124-12"><a href="Disease.html#cb124-12" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/copd/copdmortalityexpected.csv&quot;</span>, <span class="at">row.names =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="Disease.html#cb123-1" tabindex="-1"></a><span class="co"># Load nimble</span></span>
+<span id="cb123-2"><a href="Disease.html#cb123-2" tabindex="-1"></a><span class="fu">library</span>(nimble)</span>
+<span id="cb123-3"><a href="Disease.html#cb123-3" tabindex="-1"></a><span class="fu">library</span>(sf) <span class="co"># to read shapefile</span></span>
+<span id="cb123-4"><a href="Disease.html#cb123-4" tabindex="-1"></a></span>
+<span id="cb123-5"><a href="Disease.html#cb123-5" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb123-6"><a href="Disease.html#cb123-6" tabindex="-1"></a><span class="co"># Reading in borders</span></span>
+<span id="cb123-7"><a href="Disease.html#cb123-7" tabindex="-1"></a>england <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">&quot;data/copd/englandlocalauthority.shp&quot;</span>)</span>
+<span id="cb123-8"><a href="Disease.html#cb123-8" tabindex="-1"></a><span class="co"># Reading in data</span></span>
+<span id="cb123-9"><a href="Disease.html#cb123-9" tabindex="-1"></a>observed <span class="ot">&lt;-</span></span>
+<span id="cb123-10"><a href="Disease.html#cb123-10" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/copd/copdmortalityobserved.csv&quot;</span>, <span class="at">row.names =</span> <span class="dv">1</span>)</span>
+<span id="cb123-11"><a href="Disease.html#cb123-11" tabindex="-1"></a>expected <span class="ot">&lt;-</span></span>
+<span id="cb123-12"><a href="Disease.html#cb123-12" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/copd/copdmortalityexpected.csv&quot;</span>, <span class="at">row.names =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p>The following is the code for the Poisson-Gamma model implemented in <code>nimble</code>.</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="Disease.html#cb125-1" tabindex="-1"></a>Example9_1Nimble <span class="ot">&lt;-</span> <span class="fu">nimbleCode</span>({</span>
-<span id="cb125-2"><a href="Disease.html#cb125-2" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
-<span id="cb125-3"><a href="Disease.html#cb125-3" tabindex="-1"></a>    Y[i] <span class="sc">~</span> <span class="fu">dpois</span>(mu[i])</span>
-<span id="cb125-4"><a href="Disease.html#cb125-4" tabindex="-1"></a>    <span class="co"># REVIEW: There is an intercept in the book, </span></span>
-<span id="cb125-5"><a href="Disease.html#cb125-5" tabindex="-1"></a>    <span class="co"># but then we wouldn&#39;t be able to compare it to example 5.2</span></span>
-<span id="cb125-6"><a href="Disease.html#cb125-6" tabindex="-1"></a>    mu[i] <span class="ot">&lt;-</span> E[i]<span class="sc">*</span><span class="fu">exp</span>(beta0)<span class="sc">*</span> theta[i]</span>
-<span id="cb125-7"><a href="Disease.html#cb125-7" tabindex="-1"></a>    <span class="co">#mu[i] &lt;- E[i]* theta[i]</span></span>
-<span id="cb125-8"><a href="Disease.html#cb125-8" tabindex="-1"></a>    <span class="co"># REVIEW: Same as before, the example in the book has theta[i] ~ Ga(a,a)</span></span>
-<span id="cb125-9"><a href="Disease.html#cb125-9" tabindex="-1"></a>    theta[i] <span class="sc">~</span> <span class="fu">dgamma</span>(a, a)</span>
-<span id="cb125-10"><a href="Disease.html#cb125-10" tabindex="-1"></a>    Y.fit[i] <span class="sc">~</span> <span class="fu">dpois</span>(mu[i])</span>
-<span id="cb125-11"><a href="Disease.html#cb125-11" tabindex="-1"></a>  }</span>
-<span id="cb125-12"><a href="Disease.html#cb125-12" tabindex="-1"></a>  <span class="co"># Priors</span></span>
-<span id="cb125-13"><a href="Disease.html#cb125-13" tabindex="-1"></a>  a <span class="sc">~</span> <span class="fu">dgamma</span>(<span class="dv">1</span>,<span class="dv">1</span>)</span>
-<span id="cb125-14"><a href="Disease.html#cb125-14" tabindex="-1"></a>  beta0 <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">10</span>)</span>
-<span id="cb125-15"><a href="Disease.html#cb125-15" tabindex="-1"></a></span>
-<span id="cb125-16"><a href="Disease.html#cb125-16" tabindex="-1"></a>})</span>
-<span id="cb125-17"><a href="Disease.html#cb125-17" tabindex="-1"></a></span>
-<span id="cb125-18"><a href="Disease.html#cb125-18" tabindex="-1"></a><span class="co"># Define the constants, data and initials lists for the `nimble` model.</span></span>
-<span id="cb125-19"><a href="Disease.html#cb125-19" tabindex="-1"></a></span>
-<span id="cb125-20"><a href="Disease.html#cb125-20" tabindex="-1"></a><span class="co"># observations</span></span>
-<span id="cb125-21"><a href="Disease.html#cb125-21" tabindex="-1"></a>y <span class="ot">&lt;-</span> observed<span class="sc">$</span>Y2010</span>
-<span id="cb125-22"><a href="Disease.html#cb125-22" tabindex="-1"></a><span class="co"># offset</span></span>
-<span id="cb125-23"><a href="Disease.html#cb125-23" tabindex="-1"></a>E <span class="ot">&lt;-</span> expected<span class="sc">$</span>E2010</span>
-<span id="cb125-24"><a href="Disease.html#cb125-24" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
-<span id="cb125-25"><a href="Disease.html#cb125-25" tabindex="-1"></a><span class="co"># constants list</span></span>
-<span id="cb125-26"><a href="Disease.html#cb125-26" tabindex="-1"></a>constants <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb125-27"><a href="Disease.html#cb125-27" tabindex="-1"></a>  <span class="at">N =</span> N,</span>
-<span id="cb125-28"><a href="Disease.html#cb125-28" tabindex="-1"></a>  <span class="at">E =</span> E</span>
-<span id="cb125-29"><a href="Disease.html#cb125-29" tabindex="-1"></a>)</span>
-<span id="cb125-30"><a href="Disease.html#cb125-30" tabindex="-1"></a><span class="co"># data list</span></span>
-<span id="cb125-31"><a href="Disease.html#cb125-31" tabindex="-1"></a>ex.data <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Y =</span> y)</span>
-<span id="cb125-32"><a href="Disease.html#cb125-32" tabindex="-1"></a><span class="co"># initial values list</span></span>
-<span id="cb125-33"><a href="Disease.html#cb125-33" tabindex="-1"></a>inits <span class="ot">&lt;-</span></span>
-<span id="cb125-34"><a href="Disease.html#cb125-34" tabindex="-1"></a>    <span class="fu">list</span>(</span>
-<span id="cb125-35"><a href="Disease.html#cb125-35" tabindex="-1"></a>      <span class="at">theta =</span> <span class="fu">rgamma</span>(N, <span class="dv">1</span>, <span class="dv">1</span>),</span>
-<span id="cb125-36"><a href="Disease.html#cb125-36" tabindex="-1"></a>      <span class="at">a =</span> <span class="fu">rgamma</span>(<span class="dv">1</span>, <span class="dv">1</span>),</span>
-<span id="cb125-37"><a href="Disease.html#cb125-37" tabindex="-1"></a>      <span class="at">beta0 =</span> <span class="dv">0</span>,</span>
-<span id="cb125-38"><a href="Disease.html#cb125-38" tabindex="-1"></a>      <span class="at">Y.fit =</span> <span class="fu">rpois</span>(N, E)</span>
-<span id="cb125-39"><a href="Disease.html#cb125-39" tabindex="-1"></a>    )</span>
-<span id="cb125-40"><a href="Disease.html#cb125-40" tabindex="-1"></a><span class="co"># parameters to monitor</span></span>
-<span id="cb125-41"><a href="Disease.html#cb125-41" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;theta&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;beta0&quot;</span>, <span class="st">&quot;Y.fit&quot;</span>)</span>
-<span id="cb125-42"><a href="Disease.html#cb125-42" tabindex="-1"></a></span>
-<span id="cb125-43"><a href="Disease.html#cb125-43" tabindex="-1"></a><span class="co"># Run model in nimble</span></span>
-<span id="cb125-44"><a href="Disease.html#cb125-44" tabindex="-1"></a>mcmc.out <span class="ot">&lt;-</span> <span class="fu">nimbleMCMC</span>(</span>
-<span id="cb125-45"><a href="Disease.html#cb125-45" tabindex="-1"></a>  <span class="at">code =</span> Example9_1Nimble,</span>
-<span id="cb125-46"><a href="Disease.html#cb125-46" tabindex="-1"></a>  <span class="at">constants =</span> constants,</span>
-<span id="cb125-47"><a href="Disease.html#cb125-47" tabindex="-1"></a>  <span class="at">data =</span> ex.data,</span>
-<span id="cb125-48"><a href="Disease.html#cb125-48" tabindex="-1"></a>  <span class="at">inits =</span> inits,</span>
-<span id="cb125-49"><a href="Disease.html#cb125-49" tabindex="-1"></a>  <span class="at">monitors =</span> params,</span>
-<span id="cb125-50"><a href="Disease.html#cb125-50" tabindex="-1"></a>  <span class="at">niter =</span> <span class="dv">50000</span>,</span>
-<span id="cb125-51"><a href="Disease.html#cb125-51" tabindex="-1"></a>  <span class="at">nburnin =</span> <span class="dv">20000</span>,</span>
-<span id="cb125-52"><a href="Disease.html#cb125-52" tabindex="-1"></a>  <span class="at">thin =</span> <span class="dv">14</span>,</span>
-<span id="cb125-53"><a href="Disease.html#cb125-53" tabindex="-1"></a>  <span class="at">WAIC =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb125-54"><a href="Disease.html#cb125-54" tabindex="-1"></a>  <span class="at">nchains =</span> <span class="dv">2</span>,</span>
-<span id="cb125-55"><a href="Disease.html#cb125-55" tabindex="-1"></a>  <span class="at">summary =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb125-56"><a href="Disease.html#cb125-56" tabindex="-1"></a>  <span class="at">samplesAsCodaMCMC =</span> <span class="cn">TRUE</span></span>
-<span id="cb125-57"><a href="Disease.html#cb125-57" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="Disease.html#cb124-1" tabindex="-1"></a>Example9_1Nimble <span class="ot">&lt;-</span> <span class="fu">nimbleCode</span>({</span>
+<span id="cb124-2"><a href="Disease.html#cb124-2" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
+<span id="cb124-3"><a href="Disease.html#cb124-3" tabindex="-1"></a>    Y[i] <span class="sc">~</span> <span class="fu">dpois</span>(mu[i])</span>
+<span id="cb124-4"><a href="Disease.html#cb124-4" tabindex="-1"></a>    <span class="co"># REVIEW: There is an intercept in the book, </span></span>
+<span id="cb124-5"><a href="Disease.html#cb124-5" tabindex="-1"></a>    <span class="co"># but then we wouldn&#39;t be able to compare it to example 5.2</span></span>
+<span id="cb124-6"><a href="Disease.html#cb124-6" tabindex="-1"></a>    mu[i] <span class="ot">&lt;-</span> E[i]<span class="sc">*</span><span class="fu">exp</span>(beta0)<span class="sc">*</span> theta[i]</span>
+<span id="cb124-7"><a href="Disease.html#cb124-7" tabindex="-1"></a>    <span class="co">#mu[i] &lt;- E[i]* theta[i]</span></span>
+<span id="cb124-8"><a href="Disease.html#cb124-8" tabindex="-1"></a>    <span class="co"># REVIEW: Same as before, the example in the book has theta[i] ~ Ga(a,a)</span></span>
+<span id="cb124-9"><a href="Disease.html#cb124-9" tabindex="-1"></a>    theta[i] <span class="sc">~</span> <span class="fu">dgamma</span>(a, a)</span>
+<span id="cb124-10"><a href="Disease.html#cb124-10" tabindex="-1"></a>    Y.fit[i] <span class="sc">~</span> <span class="fu">dpois</span>(mu[i])</span>
+<span id="cb124-11"><a href="Disease.html#cb124-11" tabindex="-1"></a>  }</span>
+<span id="cb124-12"><a href="Disease.html#cb124-12" tabindex="-1"></a>  <span class="co"># Priors</span></span>
+<span id="cb124-13"><a href="Disease.html#cb124-13" tabindex="-1"></a>  a <span class="sc">~</span> <span class="fu">dgamma</span>(<span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb124-14"><a href="Disease.html#cb124-14" tabindex="-1"></a>  beta0 <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">10</span>)</span>
+<span id="cb124-15"><a href="Disease.html#cb124-15" tabindex="-1"></a></span>
+<span id="cb124-16"><a href="Disease.html#cb124-16" tabindex="-1"></a>})</span>
+<span id="cb124-17"><a href="Disease.html#cb124-17" tabindex="-1"></a></span>
+<span id="cb124-18"><a href="Disease.html#cb124-18" tabindex="-1"></a><span class="co"># Define the constants, data and initials lists for the `nimble` model.</span></span>
+<span id="cb124-19"><a href="Disease.html#cb124-19" tabindex="-1"></a></span>
+<span id="cb124-20"><a href="Disease.html#cb124-20" tabindex="-1"></a><span class="co"># observations</span></span>
+<span id="cb124-21"><a href="Disease.html#cb124-21" tabindex="-1"></a>y <span class="ot">&lt;-</span> observed<span class="sc">$</span>Y2010</span>
+<span id="cb124-22"><a href="Disease.html#cb124-22" tabindex="-1"></a><span class="co"># offset</span></span>
+<span id="cb124-23"><a href="Disease.html#cb124-23" tabindex="-1"></a>E <span class="ot">&lt;-</span> expected<span class="sc">$</span>E2010</span>
+<span id="cb124-24"><a href="Disease.html#cb124-24" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
+<span id="cb124-25"><a href="Disease.html#cb124-25" tabindex="-1"></a><span class="co"># constants list</span></span>
+<span id="cb124-26"><a href="Disease.html#cb124-26" tabindex="-1"></a>constants <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb124-27"><a href="Disease.html#cb124-27" tabindex="-1"></a>  <span class="at">N =</span> N,</span>
+<span id="cb124-28"><a href="Disease.html#cb124-28" tabindex="-1"></a>  <span class="at">E =</span> E</span>
+<span id="cb124-29"><a href="Disease.html#cb124-29" tabindex="-1"></a>)</span>
+<span id="cb124-30"><a href="Disease.html#cb124-30" tabindex="-1"></a><span class="co"># data list</span></span>
+<span id="cb124-31"><a href="Disease.html#cb124-31" tabindex="-1"></a>ex.data <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Y =</span> y)</span>
+<span id="cb124-32"><a href="Disease.html#cb124-32" tabindex="-1"></a><span class="co"># initial values list</span></span>
+<span id="cb124-33"><a href="Disease.html#cb124-33" tabindex="-1"></a>inits <span class="ot">&lt;-</span></span>
+<span id="cb124-34"><a href="Disease.html#cb124-34" tabindex="-1"></a>    <span class="fu">list</span>(</span>
+<span id="cb124-35"><a href="Disease.html#cb124-35" tabindex="-1"></a>      <span class="at">theta =</span> <span class="fu">rgamma</span>(N, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb124-36"><a href="Disease.html#cb124-36" tabindex="-1"></a>      <span class="at">a =</span> <span class="fu">rgamma</span>(<span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb124-37"><a href="Disease.html#cb124-37" tabindex="-1"></a>      <span class="at">beta0 =</span> <span class="dv">0</span>,</span>
+<span id="cb124-38"><a href="Disease.html#cb124-38" tabindex="-1"></a>      <span class="at">Y.fit =</span> <span class="fu">rpois</span>(N, E)</span>
+<span id="cb124-39"><a href="Disease.html#cb124-39" tabindex="-1"></a>    )</span>
+<span id="cb124-40"><a href="Disease.html#cb124-40" tabindex="-1"></a><span class="co"># parameters to monitor</span></span>
+<span id="cb124-41"><a href="Disease.html#cb124-41" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;theta&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;beta0&quot;</span>, <span class="st">&quot;Y.fit&quot;</span>)</span>
+<span id="cb124-42"><a href="Disease.html#cb124-42" tabindex="-1"></a></span>
+<span id="cb124-43"><a href="Disease.html#cb124-43" tabindex="-1"></a><span class="co"># Run model in nimble</span></span>
+<span id="cb124-44"><a href="Disease.html#cb124-44" tabindex="-1"></a>mcmc.out <span class="ot">&lt;-</span> <span class="fu">nimbleMCMC</span>(</span>
+<span id="cb124-45"><a href="Disease.html#cb124-45" tabindex="-1"></a>  <span class="at">code =</span> Example9_1Nimble,</span>
+<span id="cb124-46"><a href="Disease.html#cb124-46" tabindex="-1"></a>  <span class="at">constants =</span> constants,</span>
+<span id="cb124-47"><a href="Disease.html#cb124-47" tabindex="-1"></a>  <span class="at">data =</span> ex.data,</span>
+<span id="cb124-48"><a href="Disease.html#cb124-48" tabindex="-1"></a>  <span class="at">inits =</span> inits,</span>
+<span id="cb124-49"><a href="Disease.html#cb124-49" tabindex="-1"></a>  <span class="at">monitors =</span> params,</span>
+<span id="cb124-50"><a href="Disease.html#cb124-50" tabindex="-1"></a>  <span class="at">niter =</span> <span class="dv">50000</span>,</span>
+<span id="cb124-51"><a href="Disease.html#cb124-51" tabindex="-1"></a>  <span class="at">nburnin =</span> <span class="dv">20000</span>,</span>
+<span id="cb124-52"><a href="Disease.html#cb124-52" tabindex="-1"></a>  <span class="at">thin =</span> <span class="dv">14</span>,</span>
+<span id="cb124-53"><a href="Disease.html#cb124-53" tabindex="-1"></a>  <span class="at">WAIC =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb124-54"><a href="Disease.html#cb124-54" tabindex="-1"></a>  <span class="at">nchains =</span> <span class="dv">2</span>,</span>
+<span id="cb124-55"><a href="Disease.html#cb124-55" tabindex="-1"></a>  <span class="at">summary =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb124-56"><a href="Disease.html#cb124-56" tabindex="-1"></a>  <span class="at">samplesAsCodaMCMC =</span> <span class="cn">TRUE</span></span>
+<span id="cb124-57"><a href="Disease.html#cb124-57" tabindex="-1"></a>)</span></code></pre></div>
 <p>Show the WAIC, effective sample size, and trace plots for some of the parameters.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="Disease.html#cb126-1" tabindex="-1"></a>mcmc.out<span class="sc">$</span>WAIC</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="Disease.html#cb125-1" tabindex="-1"></a>mcmc.out<span class="sc">$</span>WAIC</span></code></pre></div>
 <pre><code>## nimbleList object of type waicList
 ## Field &quot;WAIC&quot;:
 ## [1] 2422.955
@@ -378,23 +379,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [1] -1061.414
 ## Field &quot;pWAIC&quot;:
 ## [1] 150.0635</code></pre>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="Disease.html#cb128-1" tabindex="-1"></a><span class="fu">min</span>(coda<span class="sc">::</span><span class="fu">effectiveSize</span>(mcmc.out<span class="sc">$</span>samples))</span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="Disease.html#cb127-1" tabindex="-1"></a><span class="fu">min</span>(coda<span class="sc">::</span><span class="fu">effectiveSize</span>(mcmc.out<span class="sc">$</span>samples))</span></code></pre></div>
 <pre><code>## [1] 873.7203</code></pre>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="Disease.html#cb130-1" tabindex="-1"></a>mvSamples <span class="ot">&lt;-</span> mcmc.out<span class="sc">$</span>samples</span>
-<span id="cb130-2"><a href="Disease.html#cb130-2" tabindex="-1"></a></span>
-<span id="cb130-3"><a href="Disease.html#cb130-3" tabindex="-1"></a><span class="co"># trace plot of a</span></span>
-<span id="cb130-4"><a href="Disease.html#cb130-4" tabindex="-1"></a><span class="fu">plot</span>(mvSamples[, <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="Disease.html#cb129-1" tabindex="-1"></a>mvSamples <span class="ot">&lt;-</span> mcmc.out<span class="sc">$</span>samples</span>
+<span id="cb129-2"><a href="Disease.html#cb129-2" tabindex="-1"></a></span>
+<span id="cb129-3"><a href="Disease.html#cb129-3" tabindex="-1"></a><span class="co"># trace plot of a</span></span>
+<span id="cb129-4"><a href="Disease.html#cb129-4" tabindex="-1"></a><span class="fu">plot</span>(mvSamples[, <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/Ex%209.1%20nimble%20WAIC,%20ESS%20and%20traceplots-1.png" width="672" /></p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="Disease.html#cb131-1" tabindex="-1"></a><span class="co"># trace plot of beta0</span></span>
-<span id="cb131-2"><a href="Disease.html#cb131-2" tabindex="-1"></a><span class="fu">plot</span>(mvSamples[, <span class="fu">c</span>(<span class="st">&quot;beta0&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="Disease.html#cb130-1" tabindex="-1"></a><span class="co"># trace plot of beta0</span></span>
+<span id="cb130-2"><a href="Disease.html#cb130-2" tabindex="-1"></a><span class="fu">plot</span>(mvSamples[, <span class="fu">c</span>(<span class="st">&quot;beta0&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/Ex%209.1%20nimble%20WAIC,%20ESS%20and%20traceplots-2.png" width="672" /></p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="Disease.html#cb132-1" tabindex="-1"></a><span class="co"># trace plots of theta</span></span>
-<span id="cb132-2"><a href="Disease.html#cb132-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
-<span id="cb132-3"><a href="Disease.html#cb132-3" tabindex="-1"></a>  <span class="fu">plot</span>(mvSamples[, <span class="fu">c</span>(<span class="fu">paste</span>(<span class="st">&quot;theta[&quot;</span>, i, <span class="st">&quot;]&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="Disease.html#cb131-1" tabindex="-1"></a><span class="co"># trace plots of theta</span></span>
+<span id="cb131-2"><a href="Disease.html#cb131-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb131-3"><a href="Disease.html#cb131-3" tabindex="-1"></a>  <span class="fu">plot</span>(mvSamples[, <span class="fu">c</span>(<span class="fu">paste</span>(<span class="st">&quot;theta[&quot;</span>, i, <span class="st">&quot;]&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/Ex%209.1%20nimble%20WAIC,%20ESS%20and%20traceplots-3.png" width="672" /><img src="_main_files/figure-html/Ex%209.1%20nimble%20WAIC,%20ESS%20and%20traceplots-4.png" width="672" /><img src="_main_files/figure-html/Ex%209.1%20nimble%20WAIC,%20ESS%20and%20traceplots-5.png" width="672" /></p>
 <p>Now that we have checked the convergence of the chains we can plot the posterior mean and 95% CIs for each of the parameters.</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="Disease.html#cb133-1" tabindex="-1"></a><span class="co"># Print posterior summary for parameters a and b</span></span>
-<span id="cb133-2"><a href="Disease.html#cb133-2" tabindex="-1"></a><span class="fu">summary</span>(mvSamples[, <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;beta0&quot;</span>)])</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="Disease.html#cb132-1" tabindex="-1"></a><span class="co"># Print posterior summary for parameters a and b</span></span>
+<span id="cb132-2"><a href="Disease.html#cb132-2" tabindex="-1"></a><span class="fu">summary</span>(mvSamples[, <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;beta0&quot;</span>)])</span></code></pre></div>
 <pre><code>## 
 ## Iterations = 1:2142
 ## Thinning interval = 1 
@@ -413,63 +414,63 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##           2.5%      25%      50%      75%     97.5%
 ## a     10.75130 12.15487 12.95729 13.77618 15.477421
 ## beta0 -0.06441 -0.04214 -0.03104 -0.01967  0.003427</code></pre>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="Disease.html#cb135-1" tabindex="-1"></a><span class="co"># posterior summaries of theta_i</span></span>
-<span id="cb135-2"><a href="Disease.html#cb135-2" tabindex="-1"></a>post_summary <span class="ot">&lt;-</span> mcmc.out<span class="sc">$</span>summary<span class="sc">$</span>all.chains <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span></span>
-<span id="cb135-3"><a href="Disease.html#cb135-3" tabindex="-1"></a>  tibble<span class="sc">::</span><span class="fu">rownames_to_column</span>(<span class="st">&quot;variable&quot;</span>)</span>
-<span id="cb135-4"><a href="Disease.html#cb135-4" tabindex="-1"></a><span class="co"># plot the mean and 95% CIs for the thetas</span></span>
-<span id="cb135-5"><a href="Disease.html#cb135-5" tabindex="-1"></a>post_theta <span class="ot">&lt;-</span></span>
-<span id="cb135-6"><a href="Disease.html#cb135-6" tabindex="-1"></a>  post_summary[<span class="fu">grepl</span>(<span class="st">&quot;theta</span><span class="sc">\\</span><span class="st">[&quot;</span>, post_summary<span class="sc">$</span>variable),]</span>
-<span id="cb135-7"><a href="Disease.html#cb135-7" tabindex="-1"></a></span>
-<span id="cb135-8"><a href="Disease.html#cb135-8" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb135-9"><a href="Disease.html#cb135-9" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb135-10"><a href="Disease.html#cb135-10" tabindex="-1"></a>  post_theta<span class="sc">$</span>Mean,</span>
-<span id="cb135-11"><a href="Disease.html#cb135-11" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">19</span>,</span>
-<span id="cb135-12"><a href="Disease.html#cb135-12" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.8</span>,</span>
-<span id="cb135-13"><a href="Disease.html#cb135-13" tabindex="-1"></a>  <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>,</span>
-<span id="cb135-14"><a href="Disease.html#cb135-14" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Borough&quot;</span>,</span>
-<span id="cb135-15"><a href="Disease.html#cb135-15" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Posterior Summary Rate&quot;</span>,</span>
-<span id="cb135-16"><a href="Disease.html#cb135-16" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fu">min</span>(post_theta<span class="sc">$</span><span class="st">`</span><span class="at">95%CI_low</span><span class="st">`</span>), <span class="fu">max</span>(post_theta<span class="sc">$</span><span class="st">`</span><span class="at">95%CI_upp</span><span class="st">`</span>))</span>
-<span id="cb135-17"><a href="Disease.html#cb135-17" tabindex="-1"></a>)</span>
-<span id="cb135-18"><a href="Disease.html#cb135-18" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N)</span>
-<span id="cb135-19"><a href="Disease.html#cb135-19" tabindex="-1"></a>  <span class="fu">segments</span>(i, post_theta<span class="sc">$</span><span class="st">`</span><span class="at">95%CI_low</span><span class="st">`</span>[i], i, post_theta<span class="sc">$</span><span class="st">`</span><span class="at">95%CI_upp</span><span class="st">`</span>[i])</span>
-<span id="cb135-20"><a href="Disease.html#cb135-20" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">1</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="Disease.html#cb134-1" tabindex="-1"></a><span class="co"># posterior summaries of theta_i</span></span>
+<span id="cb134-2"><a href="Disease.html#cb134-2" tabindex="-1"></a>post_summary <span class="ot">&lt;-</span> mcmc.out<span class="sc">$</span>summary<span class="sc">$</span>all.chains <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span></span>
+<span id="cb134-3"><a href="Disease.html#cb134-3" tabindex="-1"></a>  tibble<span class="sc">::</span><span class="fu">rownames_to_column</span>(<span class="st">&quot;variable&quot;</span>)</span>
+<span id="cb134-4"><a href="Disease.html#cb134-4" tabindex="-1"></a><span class="co"># plot the mean and 95% CIs for the thetas</span></span>
+<span id="cb134-5"><a href="Disease.html#cb134-5" tabindex="-1"></a>post_theta <span class="ot">&lt;-</span></span>
+<span id="cb134-6"><a href="Disease.html#cb134-6" tabindex="-1"></a>  post_summary[<span class="fu">grepl</span>(<span class="st">&quot;theta</span><span class="sc">\\</span><span class="st">[&quot;</span>, post_summary<span class="sc">$</span>variable),]</span>
+<span id="cb134-7"><a href="Disease.html#cb134-7" tabindex="-1"></a></span>
+<span id="cb134-8"><a href="Disease.html#cb134-8" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb134-9"><a href="Disease.html#cb134-9" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb134-10"><a href="Disease.html#cb134-10" tabindex="-1"></a>  post_theta<span class="sc">$</span>Mean,</span>
+<span id="cb134-11"><a href="Disease.html#cb134-11" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb134-12"><a href="Disease.html#cb134-12" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.8</span>,</span>
+<span id="cb134-13"><a href="Disease.html#cb134-13" tabindex="-1"></a>  <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>,</span>
+<span id="cb134-14"><a href="Disease.html#cb134-14" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Borough&quot;</span>,</span>
+<span id="cb134-15"><a href="Disease.html#cb134-15" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Posterior Summary Rate&quot;</span>,</span>
+<span id="cb134-16"><a href="Disease.html#cb134-16" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fu">min</span>(post_theta<span class="sc">$</span><span class="st">`</span><span class="at">95%CI_low</span><span class="st">`</span>), <span class="fu">max</span>(post_theta<span class="sc">$</span><span class="st">`</span><span class="at">95%CI_upp</span><span class="st">`</span>))</span>
+<span id="cb134-17"><a href="Disease.html#cb134-17" tabindex="-1"></a>)</span>
+<span id="cb134-18"><a href="Disease.html#cb134-18" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N)</span>
+<span id="cb134-19"><a href="Disease.html#cb134-19" tabindex="-1"></a>  <span class="fu">segments</span>(i, post_theta<span class="sc">$</span><span class="st">`</span><span class="at">95%CI_low</span><span class="st">`</span>[i], i, post_theta<span class="sc">$</span><span class="st">`</span><span class="at">95%CI_upp</span><span class="st">`</span>[i])</span>
+<span id="cb134-20"><a href="Disease.html#cb134-20" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">1</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/Ex%209.1%20nimble%20posterior%20summary-1.png" width="672" /></p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="Disease.html#cb136-1" tabindex="-1"></a><span class="co"># posterior summary of fitted values</span></span>
-<span id="cb136-2"><a href="Disease.html#cb136-2" tabindex="-1"></a>post_fitted <span class="ot">&lt;-</span></span>
-<span id="cb136-3"><a href="Disease.html#cb136-3" tabindex="-1"></a>  post_summary[<span class="fu">grepl</span>(<span class="st">&quot;Y.fit</span><span class="sc">\\</span><span class="st">[&quot;</span>, post_summary<span class="sc">$</span>variable),]</span>
-<span id="cb136-4"><a href="Disease.html#cb136-4" tabindex="-1"></a><span class="co"># plot mean and 95% CIs for the fitted values</span></span>
-<span id="cb136-5"><a href="Disease.html#cb136-5" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb136-6"><a href="Disease.html#cb136-6" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb136-7"><a href="Disease.html#cb136-7" tabindex="-1"></a>  y,</span>
-<span id="cb136-8"><a href="Disease.html#cb136-8" tabindex="-1"></a>  post_fitted<span class="sc">$</span>Mean,</span>
-<span id="cb136-9"><a href="Disease.html#cb136-9" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fu">min</span>(post_fitted<span class="sc">$</span><span class="st">`</span><span class="at">95%CI_low</span><span class="st">`</span>), <span class="fu">max</span>(post_fitted<span class="sc">$</span><span class="st">`</span><span class="at">95%CI_upp</span><span class="st">`</span>)),</span>
-<span id="cb136-10"><a href="Disease.html#cb136-10" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Observed&quot;</span>,</span>
-<span id="cb136-11"><a href="Disease.html#cb136-11" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Fitted&quot;</span>,</span>
-<span id="cb136-12"><a href="Disease.html#cb136-12" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">19</span>,</span>
-<span id="cb136-13"><a href="Disease.html#cb136-13" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.7</span>,</span>
-<span id="cb136-14"><a href="Disease.html#cb136-14" tabindex="-1"></a>  <span class="at">bty =</span> <span class="st">&quot;n&quot;</span></span>
-<span id="cb136-15"><a href="Disease.html#cb136-15" tabindex="-1"></a>)</span>
-<span id="cb136-16"><a href="Disease.html#cb136-16" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N)</span>
-<span id="cb136-17"><a href="Disease.html#cb136-17" tabindex="-1"></a>  <span class="fu">segments</span>(y[i], post_fitted<span class="sc">$</span><span class="st">`</span><span class="at">95%CI_low</span><span class="st">`</span>[i], y[i], post_fitted<span class="sc">$</span><span class="st">`</span><span class="at">95%CI_upp</span><span class="st">`</span>[i])</span>
-<span id="cb136-18"><a href="Disease.html#cb136-18" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="Disease.html#cb135-1" tabindex="-1"></a><span class="co"># posterior summary of fitted values</span></span>
+<span id="cb135-2"><a href="Disease.html#cb135-2" tabindex="-1"></a>post_fitted <span class="ot">&lt;-</span></span>
+<span id="cb135-3"><a href="Disease.html#cb135-3" tabindex="-1"></a>  post_summary[<span class="fu">grepl</span>(<span class="st">&quot;Y.fit</span><span class="sc">\\</span><span class="st">[&quot;</span>, post_summary<span class="sc">$</span>variable),]</span>
+<span id="cb135-4"><a href="Disease.html#cb135-4" tabindex="-1"></a><span class="co"># plot mean and 95% CIs for the fitted values</span></span>
+<span id="cb135-5"><a href="Disease.html#cb135-5" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb135-6"><a href="Disease.html#cb135-6" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb135-7"><a href="Disease.html#cb135-7" tabindex="-1"></a>  y,</span>
+<span id="cb135-8"><a href="Disease.html#cb135-8" tabindex="-1"></a>  post_fitted<span class="sc">$</span>Mean,</span>
+<span id="cb135-9"><a href="Disease.html#cb135-9" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fu">min</span>(post_fitted<span class="sc">$</span><span class="st">`</span><span class="at">95%CI_low</span><span class="st">`</span>), <span class="fu">max</span>(post_fitted<span class="sc">$</span><span class="st">`</span><span class="at">95%CI_upp</span><span class="st">`</span>)),</span>
+<span id="cb135-10"><a href="Disease.html#cb135-10" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Observed&quot;</span>,</span>
+<span id="cb135-11"><a href="Disease.html#cb135-11" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Fitted&quot;</span>,</span>
+<span id="cb135-12"><a href="Disease.html#cb135-12" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb135-13"><a href="Disease.html#cb135-13" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.7</span>,</span>
+<span id="cb135-14"><a href="Disease.html#cb135-14" tabindex="-1"></a>  <span class="at">bty =</span> <span class="st">&quot;n&quot;</span></span>
+<span id="cb135-15"><a href="Disease.html#cb135-15" tabindex="-1"></a>)</span>
+<span id="cb135-16"><a href="Disease.html#cb135-16" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N)</span>
+<span id="cb135-17"><a href="Disease.html#cb135-17" tabindex="-1"></a>  <span class="fu">segments</span>(y[i], post_fitted<span class="sc">$</span><span class="st">`</span><span class="at">95%CI_low</span><span class="st">`</span>[i], y[i], post_fitted<span class="sc">$</span><span class="st">`</span><span class="at">95%CI_upp</span><span class="st">`</span>[i])</span>
+<span id="cb135-18"><a href="Disease.html#cb135-18" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/Ex%209.1%20nimble%20posterior%20summary-2.png" width="672" /></p>
 </div>
 <div id="stan-1" class="section level3 unnumbered hasAnchor">
 <h3>Stan<a href="Disease.html#stan-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="Disease.html#cb137-1" tabindex="-1"></a><span class="fu">library</span>(rstan)</span>
-<span id="cb137-2"><a href="Disease.html#cb137-2" tabindex="-1"></a><span class="fu">library</span>(sf) <span class="co"># to read shapefile</span></span>
-<span id="cb137-3"><a href="Disease.html#cb137-3" tabindex="-1"></a><span class="fu">library</span>(loo) <span class="co"># To calculate WAIC</span></span>
-<span id="cb137-4"><a href="Disease.html#cb137-4" tabindex="-1"></a><span class="fu">options</span>(<span class="at">mc.cores =</span> parallel<span class="sc">::</span><span class="fu">detectCores</span>())</span>
-<span id="cb137-5"><a href="Disease.html#cb137-5" tabindex="-1"></a><span class="fu">rstan_options</span>(<span class="at">auto_write =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb137-6"><a href="Disease.html#cb137-6" tabindex="-1"></a></span>
-<span id="cb137-7"><a href="Disease.html#cb137-7" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb137-8"><a href="Disease.html#cb137-8" tabindex="-1"></a><span class="co"># Reading in borders</span></span>
-<span id="cb137-9"><a href="Disease.html#cb137-9" tabindex="-1"></a>england <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">&quot;data/copd/englandlocalauthority.shp&quot;</span>)</span>
-<span id="cb137-10"><a href="Disease.html#cb137-10" tabindex="-1"></a><span class="co"># Reading in data</span></span>
-<span id="cb137-11"><a href="Disease.html#cb137-11" tabindex="-1"></a>observed <span class="ot">&lt;-</span></span>
-<span id="cb137-12"><a href="Disease.html#cb137-12" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/copd/copdmortalityobserved.csv&quot;</span>, <span class="at">row.names =</span> <span class="dv">1</span>)</span>
-<span id="cb137-13"><a href="Disease.html#cb137-13" tabindex="-1"></a>expected <span class="ot">&lt;-</span></span>
-<span id="cb137-14"><a href="Disease.html#cb137-14" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/copd/copdmortalityexpected.csv&quot;</span>, <span class="at">row.names =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="Disease.html#cb136-1" tabindex="-1"></a><span class="fu">library</span>(rstan)</span>
+<span id="cb136-2"><a href="Disease.html#cb136-2" tabindex="-1"></a><span class="fu">library</span>(sf) <span class="co"># to read shapefile</span></span>
+<span id="cb136-3"><a href="Disease.html#cb136-3" tabindex="-1"></a><span class="fu">library</span>(loo) <span class="co"># To calculate WAIC</span></span>
+<span id="cb136-4"><a href="Disease.html#cb136-4" tabindex="-1"></a><span class="fu">options</span>(<span class="at">mc.cores =</span> parallel<span class="sc">::</span><span class="fu">detectCores</span>())</span>
+<span id="cb136-5"><a href="Disease.html#cb136-5" tabindex="-1"></a><span class="fu">rstan_options</span>(<span class="at">auto_write =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb136-6"><a href="Disease.html#cb136-6" tabindex="-1"></a></span>
+<span id="cb136-7"><a href="Disease.html#cb136-7" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb136-8"><a href="Disease.html#cb136-8" tabindex="-1"></a><span class="co"># Reading in borders</span></span>
+<span id="cb136-9"><a href="Disease.html#cb136-9" tabindex="-1"></a>england <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">&quot;data/copd/englandlocalauthority.shp&quot;</span>)</span>
+<span id="cb136-10"><a href="Disease.html#cb136-10" tabindex="-1"></a><span class="co"># Reading in data</span></span>
+<span id="cb136-11"><a href="Disease.html#cb136-11" tabindex="-1"></a>observed <span class="ot">&lt;-</span></span>
+<span id="cb136-12"><a href="Disease.html#cb136-12" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/copd/copdmortalityobserved.csv&quot;</span>, <span class="at">row.names =</span> <span class="dv">1</span>)</span>
+<span id="cb136-13"><a href="Disease.html#cb136-13" tabindex="-1"></a>expected <span class="ot">&lt;-</span></span>
+<span id="cb136-14"><a href="Disease.html#cb136-14" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/copd/copdmortalityexpected.csv&quot;</span>, <span class="at">row.names =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p>Write the <code>stan</code> model. This model is in a separate file called <code>Example8_1.stan</code> that will be called later.</p>
 <pre><code>data {
   int&lt;lower=0&gt; N;
@@ -512,35 +513,35 @@ generated quantities {
   
 }</code></pre>
 <p>Define the data for the model, similar to <code>nimble</code>.</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="Disease.html#cb139-1" tabindex="-1"></a><span class="co"># observations</span></span>
-<span id="cb139-2"><a href="Disease.html#cb139-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> observed<span class="sc">$</span>Y2010</span>
-<span id="cb139-3"><a href="Disease.html#cb139-3" tabindex="-1"></a><span class="co"># offset</span></span>
-<span id="cb139-4"><a href="Disease.html#cb139-4" tabindex="-1"></a>E <span class="ot">&lt;-</span> expected<span class="sc">$</span>E2010</span>
-<span id="cb139-5"><a href="Disease.html#cb139-5" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
-<span id="cb139-6"><a href="Disease.html#cb139-6" tabindex="-1"></a><span class="co"># data list</span></span>
-<span id="cb139-7"><a href="Disease.html#cb139-7" tabindex="-1"></a>ex.data <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb139-8"><a href="Disease.html#cb139-8" tabindex="-1"></a>  <span class="at">N =</span> <span class="fu">length</span>(y),</span>
-<span id="cb139-9"><a href="Disease.html#cb139-9" tabindex="-1"></a>  <span class="at">Y =</span> y,</span>
-<span id="cb139-10"><a href="Disease.html#cb139-10" tabindex="-1"></a>  <span class="at">E =</span> E</span>
-<span id="cb139-11"><a href="Disease.html#cb139-11" tabindex="-1"></a>)</span>
-<span id="cb139-12"><a href="Disease.html#cb139-12" tabindex="-1"></a><span class="co"># Run the model in Stan</span></span>
-<span id="cb139-13"><a href="Disease.html#cb139-13" tabindex="-1"></a>Ex9_1Stan <span class="ot">&lt;-</span> <span class="fu">stan</span>(</span>
-<span id="cb139-14"><a href="Disease.html#cb139-14" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">&quot;functions/Example9_1.stan&quot;</span>,</span>
-<span id="cb139-15"><a href="Disease.html#cb139-15" tabindex="-1"></a>  <span class="at">data =</span> ex.data,</span>
-<span id="cb139-16"><a href="Disease.html#cb139-16" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">3</span>,</span>
-<span id="cb139-17"><a href="Disease.html#cb139-17" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">10000</span>,</span>
-<span id="cb139-18"><a href="Disease.html#cb139-18" tabindex="-1"></a>  <span class="at">warmup =</span> <span class="dv">3000</span>,</span>
-<span id="cb139-19"><a href="Disease.html#cb139-19" tabindex="-1"></a>  <span class="at">thin =</span> <span class="dv">14</span>,</span>
-<span id="cb139-20"><a href="Disease.html#cb139-20" tabindex="-1"></a>  <span class="co"># QUESTION: should we explain this?</span></span>
-<span id="cb139-21"><a href="Disease.html#cb139-21" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">list</span>(<span class="at">adapt_delta =</span> <span class="fl">0.8</span>, <span class="at">max_treedepth =</span> <span class="dv">15</span>),</span>
-<span id="cb139-22"><a href="Disease.html#cb139-22" tabindex="-1"></a>  <span class="at">init =</span> <span class="st">&quot;random&quot;</span>,</span>
-<span id="cb139-23"><a href="Disease.html#cb139-23" tabindex="-1"></a>  <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;theta&quot;</span>, <span class="st">&quot;log_lik&quot;</span>, <span class="st">&quot;yfit&quot;</span>),</span>
-<span id="cb139-24"><a href="Disease.html#cb139-24" tabindex="-1"></a>  <span class="at">include =</span> <span class="cn">TRUE</span></span>
-<span id="cb139-25"><a href="Disease.html#cb139-25" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="Disease.html#cb138-1" tabindex="-1"></a><span class="co"># observations</span></span>
+<span id="cb138-2"><a href="Disease.html#cb138-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> observed<span class="sc">$</span>Y2010</span>
+<span id="cb138-3"><a href="Disease.html#cb138-3" tabindex="-1"></a><span class="co"># offset</span></span>
+<span id="cb138-4"><a href="Disease.html#cb138-4" tabindex="-1"></a>E <span class="ot">&lt;-</span> expected<span class="sc">$</span>E2010</span>
+<span id="cb138-5"><a href="Disease.html#cb138-5" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">length</span>(y)</span>
+<span id="cb138-6"><a href="Disease.html#cb138-6" tabindex="-1"></a><span class="co"># data list</span></span>
+<span id="cb138-7"><a href="Disease.html#cb138-7" tabindex="-1"></a>ex.data <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb138-8"><a href="Disease.html#cb138-8" tabindex="-1"></a>  <span class="at">N =</span> <span class="fu">length</span>(y),</span>
+<span id="cb138-9"><a href="Disease.html#cb138-9" tabindex="-1"></a>  <span class="at">Y =</span> y,</span>
+<span id="cb138-10"><a href="Disease.html#cb138-10" tabindex="-1"></a>  <span class="at">E =</span> E</span>
+<span id="cb138-11"><a href="Disease.html#cb138-11" tabindex="-1"></a>)</span>
+<span id="cb138-12"><a href="Disease.html#cb138-12" tabindex="-1"></a><span class="co"># Run the model in Stan</span></span>
+<span id="cb138-13"><a href="Disease.html#cb138-13" tabindex="-1"></a>Ex9_1Stan <span class="ot">&lt;-</span> <span class="fu">stan</span>(</span>
+<span id="cb138-14"><a href="Disease.html#cb138-14" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">&quot;functions/Example9_1.stan&quot;</span>,</span>
+<span id="cb138-15"><a href="Disease.html#cb138-15" tabindex="-1"></a>  <span class="at">data =</span> ex.data,</span>
+<span id="cb138-16"><a href="Disease.html#cb138-16" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">3</span>,</span>
+<span id="cb138-17"><a href="Disease.html#cb138-17" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">10000</span>,</span>
+<span id="cb138-18"><a href="Disease.html#cb138-18" tabindex="-1"></a>  <span class="at">warmup =</span> <span class="dv">3000</span>,</span>
+<span id="cb138-19"><a href="Disease.html#cb138-19" tabindex="-1"></a>  <span class="at">thin =</span> <span class="dv">14</span>,</span>
+<span id="cb138-20"><a href="Disease.html#cb138-20" tabindex="-1"></a>  <span class="co"># QUESTION: should we explain this?</span></span>
+<span id="cb138-21"><a href="Disease.html#cb138-21" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">list</span>(<span class="at">adapt_delta =</span> <span class="fl">0.8</span>, <span class="at">max_treedepth =</span> <span class="dv">15</span>),</span>
+<span id="cb138-22"><a href="Disease.html#cb138-22" tabindex="-1"></a>  <span class="at">init =</span> <span class="st">&quot;random&quot;</span>,</span>
+<span id="cb138-23"><a href="Disease.html#cb138-23" tabindex="-1"></a>  <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;theta&quot;</span>, <span class="st">&quot;log_lik&quot;</span>, <span class="st">&quot;yfit&quot;</span>),</span>
+<span id="cb138-24"><a href="Disease.html#cb138-24" tabindex="-1"></a>  <span class="at">include =</span> <span class="cn">TRUE</span></span>
+<span id="cb138-25"><a href="Disease.html#cb138-25" tabindex="-1"></a>)</span></code></pre></div>
 <p>Compute the WAIC, show the trace plots and posterior summaries of the parameters.</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="Disease.html#cb140-1" tabindex="-1"></a>loglik0 <span class="ot">&lt;-</span> <span class="fu">extract_log_lik</span>(Ex9_1Stan)</span>
-<span id="cb140-2"><a href="Disease.html#cb140-2" tabindex="-1"></a>waic0 <span class="ot">&lt;-</span> <span class="fu">waic</span>(loglik0)</span>
-<span id="cb140-3"><a href="Disease.html#cb140-3" tabindex="-1"></a>waic0</span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="Disease.html#cb139-1" tabindex="-1"></a>loglik0 <span class="ot">&lt;-</span> <span class="fu">extract_log_lik</span>(Ex9_1Stan)</span>
+<span id="cb139-2"><a href="Disease.html#cb139-2" tabindex="-1"></a>waic0 <span class="ot">&lt;-</span> <span class="fu">waic</span>(loglik0)</span>
+<span id="cb139-3"><a href="Disease.html#cb139-3" tabindex="-1"></a>waic0</span></code></pre></div>
 <pre><code>## 
 ## Computed from 1500 by 324 log-likelihood matrix
 ## 
@@ -550,51 +551,51 @@ generated quantities {
 ## waic        2424.2 15.1
 ## 
 ## 180 (55.6%) p_waic estimates greater than 0.4. We recommend trying loo instead.</code></pre>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="Disease.html#cb142-1" tabindex="-1"></a><span class="co"># traceplots of parameters a and b</span></span>
-<span id="cb142-2"><a href="Disease.html#cb142-2" tabindex="-1"></a>rstan<span class="sc">::</span><span class="fu">traceplot</span>(Ex9_1Stan, <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="Disease.html#cb141-1" tabindex="-1"></a><span class="co"># traceplots of parameters a and b</span></span>
+<span id="cb141-2"><a href="Disease.html#cb141-2" tabindex="-1"></a>rstan<span class="sc">::</span><span class="fu">traceplot</span>(Ex9_1Stan, <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>))</span></code></pre></div>
 <p><img src="_main_files/figure-html/Ex%209.1%20stan%20waic%20and%20traceplots-1.png" width="672" /></p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="Disease.html#cb143-1" tabindex="-1"></a><span class="co"># traceplots of parameter theta</span></span>
-<span id="cb143-2"><a href="Disease.html#cb143-2" tabindex="-1"></a>rstan<span class="sc">::</span><span class="fu">traceplot</span>(Ex9_1Stan, <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;theta[1]&quot;</span>, <span class="st">&quot;theta[2]&quot;</span>, <span class="st">&quot;theta[3]&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="Disease.html#cb142-1" tabindex="-1"></a><span class="co"># traceplots of parameter theta</span></span>
+<span id="cb142-2"><a href="Disease.html#cb142-2" tabindex="-1"></a>rstan<span class="sc">::</span><span class="fu">traceplot</span>(Ex9_1Stan, <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;theta[1]&quot;</span>, <span class="st">&quot;theta[2]&quot;</span>, <span class="st">&quot;theta[3]&quot;</span>))</span></code></pre></div>
 <p><img src="_main_files/figure-html/Ex%209.1%20stan%20waic%20and%20traceplots-2.png" width="672" /></p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="Disease.html#cb144-1" tabindex="-1"></a>summary_theta <span class="ot">&lt;-</span></span>
-<span id="cb144-2"><a href="Disease.html#cb144-2" tabindex="-1"></a>  <span class="fu">summary</span>(Ex9_1Stan,</span>
-<span id="cb144-3"><a href="Disease.html#cb144-3" tabindex="-1"></a>          <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;theta&quot;</span>),</span>
-<span id="cb144-4"><a href="Disease.html#cb144-4" tabindex="-1"></a>          <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.95</span>))<span class="sc">$</span>summary <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb144-5"><a href="Disease.html#cb144-5" tabindex="-1"></a></span>
-<span id="cb144-6"><a href="Disease.html#cb144-6" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb144-7"><a href="Disease.html#cb144-7" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb144-8"><a href="Disease.html#cb144-8" tabindex="-1"></a>  summary_theta<span class="sc">$</span>mean,</span>
-<span id="cb144-9"><a href="Disease.html#cb144-9" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">19</span>,</span>
-<span id="cb144-10"><a href="Disease.html#cb144-10" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.8</span>,</span>
-<span id="cb144-11"><a href="Disease.html#cb144-11" tabindex="-1"></a>  <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>,</span>
-<span id="cb144-12"><a href="Disease.html#cb144-12" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Borough&quot;</span>,</span>
-<span id="cb144-13"><a href="Disease.html#cb144-13" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Posterior Summary Rate&quot;</span>,</span>
-<span id="cb144-14"><a href="Disease.html#cb144-14" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fu">min</span>(summary_theta<span class="sc">$</span><span class="st">`</span><span class="at">5%</span><span class="st">`</span>), <span class="fu">max</span>(summary_theta<span class="sc">$</span><span class="st">`</span><span class="at">95%</span><span class="st">`</span>))</span>
-<span id="cb144-15"><a href="Disease.html#cb144-15" tabindex="-1"></a>)</span>
-<span id="cb144-16"><a href="Disease.html#cb144-16" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N)</span>
-<span id="cb144-17"><a href="Disease.html#cb144-17" tabindex="-1"></a>  <span class="fu">segments</span>(i, summary_theta<span class="sc">$</span><span class="st">`</span><span class="at">5%</span><span class="st">`</span>[i], i, summary_theta<span class="sc">$</span><span class="st">`</span><span class="at">95%</span><span class="st">`</span>[i])</span>
-<span id="cb144-18"><a href="Disease.html#cb144-18" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">1</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="Disease.html#cb143-1" tabindex="-1"></a>summary_theta <span class="ot">&lt;-</span></span>
+<span id="cb143-2"><a href="Disease.html#cb143-2" tabindex="-1"></a>  <span class="fu">summary</span>(Ex9_1Stan,</span>
+<span id="cb143-3"><a href="Disease.html#cb143-3" tabindex="-1"></a>          <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;theta&quot;</span>),</span>
+<span id="cb143-4"><a href="Disease.html#cb143-4" tabindex="-1"></a>          <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.95</span>))<span class="sc">$</span>summary <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb143-5"><a href="Disease.html#cb143-5" tabindex="-1"></a></span>
+<span id="cb143-6"><a href="Disease.html#cb143-6" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb143-7"><a href="Disease.html#cb143-7" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb143-8"><a href="Disease.html#cb143-8" tabindex="-1"></a>  summary_theta<span class="sc">$</span>mean,</span>
+<span id="cb143-9"><a href="Disease.html#cb143-9" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb143-10"><a href="Disease.html#cb143-10" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.8</span>,</span>
+<span id="cb143-11"><a href="Disease.html#cb143-11" tabindex="-1"></a>  <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>,</span>
+<span id="cb143-12"><a href="Disease.html#cb143-12" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Borough&quot;</span>,</span>
+<span id="cb143-13"><a href="Disease.html#cb143-13" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Posterior Summary Rate&quot;</span>,</span>
+<span id="cb143-14"><a href="Disease.html#cb143-14" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fu">min</span>(summary_theta<span class="sc">$</span><span class="st">`</span><span class="at">5%</span><span class="st">`</span>), <span class="fu">max</span>(summary_theta<span class="sc">$</span><span class="st">`</span><span class="at">95%</span><span class="st">`</span>))</span>
+<span id="cb143-15"><a href="Disease.html#cb143-15" tabindex="-1"></a>)</span>
+<span id="cb143-16"><a href="Disease.html#cb143-16" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N)</span>
+<span id="cb143-17"><a href="Disease.html#cb143-17" tabindex="-1"></a>  <span class="fu">segments</span>(i, summary_theta<span class="sc">$</span><span class="st">`</span><span class="at">5%</span><span class="st">`</span>[i], i, summary_theta<span class="sc">$</span><span class="st">`</span><span class="at">95%</span><span class="st">`</span>[i])</span>
+<span id="cb143-18"><a href="Disease.html#cb143-18" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">1</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/Ex%209.1%20stan%20posterior%20summary-1.png" width="672" /></p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="Disease.html#cb145-1" tabindex="-1"></a><span class="co"># Posterior summary of fitted values</span></span>
-<span id="cb145-2"><a href="Disease.html#cb145-2" tabindex="-1"></a>summary_fit <span class="ot">&lt;-</span></span>
-<span id="cb145-3"><a href="Disease.html#cb145-3" tabindex="-1"></a>  <span class="fu">summary</span>(Ex9_1Stan,</span>
-<span id="cb145-4"><a href="Disease.html#cb145-4" tabindex="-1"></a>          <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;yfit&quot;</span>),</span>
-<span id="cb145-5"><a href="Disease.html#cb145-5" tabindex="-1"></a>          <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.95</span>))<span class="sc">$</span>summary <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb145-6"><a href="Disease.html#cb145-6" tabindex="-1"></a><span class="co"># Plot mean and 95% CIs for the fitted values</span></span>
-<span id="cb145-7"><a href="Disease.html#cb145-7" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb145-8"><a href="Disease.html#cb145-8" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb145-9"><a href="Disease.html#cb145-9" tabindex="-1"></a>  y,</span>
-<span id="cb145-10"><a href="Disease.html#cb145-10" tabindex="-1"></a>  summary_fit<span class="sc">$</span>mean,</span>
-<span id="cb145-11"><a href="Disease.html#cb145-11" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fu">min</span>(summary_fit<span class="sc">$</span><span class="st">`</span><span class="at">5%</span><span class="st">`</span>), <span class="fu">max</span>(summary_fit<span class="sc">$</span><span class="st">`</span><span class="at">95%</span><span class="st">`</span>)),</span>
-<span id="cb145-12"><a href="Disease.html#cb145-12" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Observed&quot;</span>,</span>
-<span id="cb145-13"><a href="Disease.html#cb145-13" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Fitted&quot;</span>,</span>
-<span id="cb145-14"><a href="Disease.html#cb145-14" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">19</span>,</span>
-<span id="cb145-15"><a href="Disease.html#cb145-15" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.7</span>,</span>
-<span id="cb145-16"><a href="Disease.html#cb145-16" tabindex="-1"></a>  <span class="at">bty =</span> <span class="st">&quot;n&quot;</span></span>
-<span id="cb145-17"><a href="Disease.html#cb145-17" tabindex="-1"></a>)</span>
-<span id="cb145-18"><a href="Disease.html#cb145-18" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N)</span>
-<span id="cb145-19"><a href="Disease.html#cb145-19" tabindex="-1"></a>  <span class="fu">segments</span>(y[i], summary_fit<span class="sc">$</span><span class="st">`</span><span class="at">5%</span><span class="st">`</span>[i], y[i], summary_fit<span class="sc">$</span><span class="st">`</span><span class="at">95%</span><span class="st">`</span>[i])</span>
-<span id="cb145-20"><a href="Disease.html#cb145-20" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="Disease.html#cb144-1" tabindex="-1"></a><span class="co"># Posterior summary of fitted values</span></span>
+<span id="cb144-2"><a href="Disease.html#cb144-2" tabindex="-1"></a>summary_fit <span class="ot">&lt;-</span></span>
+<span id="cb144-3"><a href="Disease.html#cb144-3" tabindex="-1"></a>  <span class="fu">summary</span>(Ex9_1Stan,</span>
+<span id="cb144-4"><a href="Disease.html#cb144-4" tabindex="-1"></a>          <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;yfit&quot;</span>),</span>
+<span id="cb144-5"><a href="Disease.html#cb144-5" tabindex="-1"></a>          <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.95</span>))<span class="sc">$</span>summary <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb144-6"><a href="Disease.html#cb144-6" tabindex="-1"></a><span class="co"># Plot mean and 95% CIs for the fitted values</span></span>
+<span id="cb144-7"><a href="Disease.html#cb144-7" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb144-8"><a href="Disease.html#cb144-8" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb144-9"><a href="Disease.html#cb144-9" tabindex="-1"></a>  y,</span>
+<span id="cb144-10"><a href="Disease.html#cb144-10" tabindex="-1"></a>  summary_fit<span class="sc">$</span>mean,</span>
+<span id="cb144-11"><a href="Disease.html#cb144-11" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fu">min</span>(summary_fit<span class="sc">$</span><span class="st">`</span><span class="at">5%</span><span class="st">`</span>), <span class="fu">max</span>(summary_fit<span class="sc">$</span><span class="st">`</span><span class="at">95%</span><span class="st">`</span>)),</span>
+<span id="cb144-12"><a href="Disease.html#cb144-12" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Observed&quot;</span>,</span>
+<span id="cb144-13"><a href="Disease.html#cb144-13" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Fitted&quot;</span>,</span>
+<span id="cb144-14"><a href="Disease.html#cb144-14" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb144-15"><a href="Disease.html#cb144-15" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.7</span>,</span>
+<span id="cb144-16"><a href="Disease.html#cb144-16" tabindex="-1"></a>  <span class="at">bty =</span> <span class="st">&quot;n&quot;</span></span>
+<span id="cb144-17"><a href="Disease.html#cb144-17" tabindex="-1"></a>)</span>
+<span id="cb144-18"><a href="Disease.html#cb144-18" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N)</span>
+<span id="cb144-19"><a href="Disease.html#cb144-19" tabindex="-1"></a>  <span class="fu">segments</span>(y[i], summary_fit<span class="sc">$</span><span class="st">`</span><span class="at">5%</span><span class="st">`</span>[i], y[i], summary_fit<span class="sc">$</span><span class="st">`</span><span class="at">95%</span><span class="st">`</span>[i])</span>
+<span id="cb144-20"><a href="Disease.html#cb144-20" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/Ex%209.1%20stan%20posterior%20summary-2.png" width="672" /></p>
 </div>
 </div>
@@ -605,117 +606,117 @@ generated quantities {
 <div id="nimble-3" class="section level3 unnumbered hasAnchor">
 <h3>Nimble<a href="Disease.html#nimble-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In this example we revisit the COPD data from example 6.3.</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="Disease.html#cb146-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># to plot map</span></span>
-<span id="cb146-2"><a href="Disease.html#cb146-2" tabindex="-1"></a><span class="fu">library</span>(spdep) <span class="co"># read the shapefile (read_sf) and build neighbors list (poly2nb)</span></span>
-<span id="cb146-3"><a href="Disease.html#cb146-3" tabindex="-1"></a><span class="fu">library</span>(nimble)</span>
-<span id="cb146-4"><a href="Disease.html#cb146-4" tabindex="-1"></a></span>
-<span id="cb146-5"><a href="Disease.html#cb146-5" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb146-6"><a href="Disease.html#cb146-6" tabindex="-1"></a><span class="co"># Reading in borders</span></span>
-<span id="cb146-7"><a href="Disease.html#cb146-7" tabindex="-1"></a>england <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">&quot;data/copd/englandlocalauthority.shp&quot;</span>)</span>
-<span id="cb146-8"><a href="Disease.html#cb146-8" tabindex="-1"></a><span class="co"># Reading in data</span></span>
-<span id="cb146-9"><a href="Disease.html#cb146-9" tabindex="-1"></a>observed <span class="ot">&lt;-</span></span>
-<span id="cb146-10"><a href="Disease.html#cb146-10" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/copd/copdmortalityobserved.csv&quot;</span>, <span class="at">row.names =</span> <span class="dv">1</span>)</span>
-<span id="cb146-11"><a href="Disease.html#cb146-11" tabindex="-1"></a>expected <span class="ot">&lt;-</span></span>
-<span id="cb146-12"><a href="Disease.html#cb146-12" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/copd/copdmortalityexpected.csv&quot;</span>)</span>
-<span id="cb146-13"><a href="Disease.html#cb146-13" tabindex="-1"></a>covariates <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/copd/copdavgscore.csv&quot;</span>)</span>
-<span id="cb146-14"><a href="Disease.html#cb146-14" tabindex="-1"></a><span class="co"># Merge everything into one data frame</span></span>
-<span id="cb146-15"><a href="Disease.html#cb146-15" tabindex="-1"></a>copd_df <span class="ot">&lt;-</span></span>
-<span id="cb146-16"><a href="Disease.html#cb146-16" tabindex="-1"></a>  <span class="fu">cbind</span>(observed,  expected) <span class="sc">|&gt;</span> <span class="fu">merge</span>(</span>
-<span id="cb146-17"><a href="Disease.html#cb146-17" tabindex="-1"></a>    covariates,</span>
-<span id="cb146-18"><a href="Disease.html#cb146-18" tabindex="-1"></a>    <span class="at">by.x =</span> <span class="st">&quot;code&quot;</span>,</span>
-<span id="cb146-19"><a href="Disease.html#cb146-19" tabindex="-1"></a>    <span class="at">by.y =</span> <span class="st">&quot;LA.CODE&quot;</span>,</span>
-<span id="cb146-20"><a href="Disease.html#cb146-20" tabindex="-1"></a>    <span class="at">all.x =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb146-21"><a href="Disease.html#cb146-21" tabindex="-1"></a>    <span class="at">all.y =</span> <span class="cn">FALSE</span></span>
-<span id="cb146-22"><a href="Disease.html#cb146-22" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="Disease.html#cb145-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># to plot map</span></span>
+<span id="cb145-2"><a href="Disease.html#cb145-2" tabindex="-1"></a><span class="fu">library</span>(spdep) <span class="co"># read the shapefile (read_sf) and build neighbors list (poly2nb)</span></span>
+<span id="cb145-3"><a href="Disease.html#cb145-3" tabindex="-1"></a><span class="fu">library</span>(nimble)</span>
+<span id="cb145-4"><a href="Disease.html#cb145-4" tabindex="-1"></a></span>
+<span id="cb145-5"><a href="Disease.html#cb145-5" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb145-6"><a href="Disease.html#cb145-6" tabindex="-1"></a><span class="co"># Reading in borders</span></span>
+<span id="cb145-7"><a href="Disease.html#cb145-7" tabindex="-1"></a>england <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">&quot;data/copd/englandlocalauthority.shp&quot;</span>)</span>
+<span id="cb145-8"><a href="Disease.html#cb145-8" tabindex="-1"></a><span class="co"># Reading in data</span></span>
+<span id="cb145-9"><a href="Disease.html#cb145-9" tabindex="-1"></a>observed <span class="ot">&lt;-</span></span>
+<span id="cb145-10"><a href="Disease.html#cb145-10" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/copd/copdmortalityobserved.csv&quot;</span>, <span class="at">row.names =</span> <span class="dv">1</span>)</span>
+<span id="cb145-11"><a href="Disease.html#cb145-11" tabindex="-1"></a>expected <span class="ot">&lt;-</span></span>
+<span id="cb145-12"><a href="Disease.html#cb145-12" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/copd/copdmortalityexpected.csv&quot;</span>)</span>
+<span id="cb145-13"><a href="Disease.html#cb145-13" tabindex="-1"></a>covariates <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/copd/copdavgscore.csv&quot;</span>)</span>
+<span id="cb145-14"><a href="Disease.html#cb145-14" tabindex="-1"></a><span class="co"># Merge everything into one data frame</span></span>
+<span id="cb145-15"><a href="Disease.html#cb145-15" tabindex="-1"></a>copd_df <span class="ot">&lt;-</span></span>
+<span id="cb145-16"><a href="Disease.html#cb145-16" tabindex="-1"></a>  <span class="fu">cbind</span>(observed,  expected) <span class="sc">|&gt;</span> <span class="fu">merge</span>(</span>
+<span id="cb145-17"><a href="Disease.html#cb145-17" tabindex="-1"></a>    covariates,</span>
+<span id="cb145-18"><a href="Disease.html#cb145-18" tabindex="-1"></a>    <span class="at">by.x =</span> <span class="st">&quot;code&quot;</span>,</span>
+<span id="cb145-19"><a href="Disease.html#cb145-19" tabindex="-1"></a>    <span class="at">by.y =</span> <span class="st">&quot;LA.CODE&quot;</span>,</span>
+<span id="cb145-20"><a href="Disease.html#cb145-20" tabindex="-1"></a>    <span class="at">all.x =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb145-21"><a href="Disease.html#cb145-21" tabindex="-1"></a>    <span class="at">all.y =</span> <span class="cn">FALSE</span></span>
+<span id="cb145-22"><a href="Disease.html#cb145-22" tabindex="-1"></a>  )</span></code></pre></div>
 <p>Analyze the relationship between COPD data and the average deprivation score which is a measure of the socioeconomic status of the patients.</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="Disease.html#cb147-1" tabindex="-1"></a>copd_df<span class="sc">$</span>SMR2010 <span class="ot">=</span> copd_df<span class="sc">$</span>Y2010 <span class="sc">/</span> copd_df<span class="sc">$</span>E2010</span>
-<span id="cb147-2"><a href="Disease.html#cb147-2" tabindex="-1"></a></span>
-<span id="cb147-3"><a href="Disease.html#cb147-3" tabindex="-1"></a><span class="fu">ggplot</span>(copd_df) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> Average.Score, <span class="at">y =</span> SMR2010)) <span class="sc">+</span> </span>
-<span id="cb147-4"><a href="Disease.html#cb147-4" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;SMR 2010&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Average deprivation score&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="Disease.html#cb146-1" tabindex="-1"></a>copd_df<span class="sc">$</span>SMR2010 <span class="ot">=</span> copd_df<span class="sc">$</span>Y2010 <span class="sc">/</span> copd_df<span class="sc">$</span>E2010</span>
+<span id="cb146-2"><a href="Disease.html#cb146-2" tabindex="-1"></a></span>
+<span id="cb146-3"><a href="Disease.html#cb146-3" tabindex="-1"></a><span class="fu">ggplot</span>(copd_df) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> Average.Score, <span class="at">y =</span> SMR2010)) <span class="sc">+</span> </span>
+<span id="cb146-4"><a href="Disease.html#cb146-4" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;SMR 2010&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Average deprivation score&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/Ex%209.3%20plot%20copd%20and%20avg%20score-1.png" width="672" /></p>
 <p>Define a function to obtain the number of neighbors.</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="Disease.html#cb148-1" tabindex="-1"></a>adjlist <span class="ot">=</span> <span class="cf">function</span>(W, N) {</span>
-<span id="cb148-2"><a href="Disease.html#cb148-2" tabindex="-1"></a>  adj <span class="ot">=</span> <span class="dv">0</span></span>
-<span id="cb148-3"><a href="Disease.html#cb148-3" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
-<span id="cb148-4"><a href="Disease.html#cb148-4" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
-<span id="cb148-5"><a href="Disease.html#cb148-5" tabindex="-1"></a>      <span class="cf">if</span> (W[i, j] <span class="sc">==</span> <span class="dv">1</span>) {</span>
-<span id="cb148-6"><a href="Disease.html#cb148-6" tabindex="-1"></a>        adj <span class="ot">=</span> <span class="fu">append</span>(adj, j)</span>
-<span id="cb148-7"><a href="Disease.html#cb148-7" tabindex="-1"></a>      }</span>
-<span id="cb148-8"><a href="Disease.html#cb148-8" tabindex="-1"></a>    }</span>
-<span id="cb148-9"><a href="Disease.html#cb148-9" tabindex="-1"></a>  }</span>
-<span id="cb148-10"><a href="Disease.html#cb148-10" tabindex="-1"></a>  adj <span class="ot">=</span> adj[<span class="sc">-</span><span class="dv">1</span>]</span>
-<span id="cb148-11"><a href="Disease.html#cb148-11" tabindex="-1"></a>  <span class="fu">return</span>(adj)</span>
-<span id="cb148-12"><a href="Disease.html#cb148-12" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="Disease.html#cb147-1" tabindex="-1"></a>adjlist <span class="ot">=</span> <span class="cf">function</span>(W, N) {</span>
+<span id="cb147-2"><a href="Disease.html#cb147-2" tabindex="-1"></a>  adj <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb147-3"><a href="Disease.html#cb147-3" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
+<span id="cb147-4"><a href="Disease.html#cb147-4" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
+<span id="cb147-5"><a href="Disease.html#cb147-5" tabindex="-1"></a>      <span class="cf">if</span> (W[i, j] <span class="sc">==</span> <span class="dv">1</span>) {</span>
+<span id="cb147-6"><a href="Disease.html#cb147-6" tabindex="-1"></a>        adj <span class="ot">=</span> <span class="fu">append</span>(adj, j)</span>
+<span id="cb147-7"><a href="Disease.html#cb147-7" tabindex="-1"></a>      }</span>
+<span id="cb147-8"><a href="Disease.html#cb147-8" tabindex="-1"></a>    }</span>
+<span id="cb147-9"><a href="Disease.html#cb147-9" tabindex="-1"></a>  }</span>
+<span id="cb147-10"><a href="Disease.html#cb147-10" tabindex="-1"></a>  adj <span class="ot">=</span> adj[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb147-11"><a href="Disease.html#cb147-11" tabindex="-1"></a>  <span class="fu">return</span>(adj)</span>
+<span id="cb147-12"><a href="Disease.html#cb147-12" tabindex="-1"></a>}</span></code></pre></div>
 <p>Define the adjacency matrix and indexes for <code>stan</code> using the <code>nb2mat</code> and <code>adjlist</code></p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="Disease.html#cb149-1" tabindex="-1"></a><span class="co"># Create the neighborhood</span></span>
-<span id="cb149-2"><a href="Disease.html#cb149-2" tabindex="-1"></a>W.nb <span class="ot">&lt;-</span></span>
-<span id="cb149-3"><a href="Disease.html#cb149-3" tabindex="-1"></a>  <span class="fu">poly2nb</span>(england, <span class="at">row.names =</span> <span class="fu">rownames</span>(england))</span>
-<span id="cb149-4"><a href="Disease.html#cb149-4" tabindex="-1"></a><span class="co"># Creates a matrix for following function call</span></span>
-<span id="cb149-5"><a href="Disease.html#cb149-5" tabindex="-1"></a>W.mat <span class="ot">&lt;-</span> <span class="fu">nb2mat</span>(W.nb, <span class="at">style =</span> <span class="st">&quot;B&quot;</span>)</span>
-<span id="cb149-6"><a href="Disease.html#cb149-6" tabindex="-1"></a><span class="co"># Define the spatial structure to use in stan</span></span>
-<span id="cb149-7"><a href="Disease.html#cb149-7" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(england<span class="sc">$</span>ID))</span>
-<span id="cb149-8"><a href="Disease.html#cb149-8" tabindex="-1"></a>neigh  <span class="ot">&lt;-</span> <span class="fu">adjlist</span>(W.mat, N)</span>
-<span id="cb149-9"><a href="Disease.html#cb149-9" tabindex="-1"></a>numneigh  <span class="ot">&lt;-</span> <span class="fu">apply</span>(W.mat,<span class="dv">2</span>,sum)</span></code></pre></div>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="Disease.html#cb150-1" tabindex="-1"></a>Example9_3Nimble <span class="ot">&lt;-</span> <span class="fu">nimbleCode</span>({</span>
-<span id="cb150-2"><a href="Disease.html#cb150-2" tabindex="-1"></a>  <span class="co"># Likelihood</span></span>
-<span id="cb150-3"><a href="Disease.html#cb150-3" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
-<span id="cb150-4"><a href="Disease.html#cb150-4" tabindex="-1"></a>    y[i] <span class="sc">~</span> <span class="fu">dpois</span>(lambda[i])</span>
-<span id="cb150-5"><a href="Disease.html#cb150-5" tabindex="-1"></a>    <span class="fu">log</span>(lambda[i]) <span class="ot">&lt;-</span> <span class="fu">log</span>(E[i]) <span class="sc">+</span> b[i] <span class="sc">+</span> beta0 <span class="sc">+</span> beta1<span class="sc">*</span>x[i]</span>
-<span id="cb150-6"><a href="Disease.html#cb150-6" tabindex="-1"></a>  }</span>
-<span id="cb150-7"><a href="Disease.html#cb150-7" tabindex="-1"></a>  </span>
-<span id="cb150-8"><a href="Disease.html#cb150-8" tabindex="-1"></a>  <span class="co"># Priors</span></span>
-<span id="cb150-9"><a href="Disease.html#cb150-9" tabindex="-1"></a>  beta0 <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb150-10"><a href="Disease.html#cb150-10" tabindex="-1"></a>  beta1 <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb150-11"><a href="Disease.html#cb150-11" tabindex="-1"></a>  b[<span class="dv">1</span><span class="sc">:</span>N] <span class="sc">~</span> <span class="fu">dcar_normal</span>(adj[<span class="dv">1</span><span class="sc">:</span>L], weights[<span class="dv">1</span><span class="sc">:</span>L], num[<span class="dv">1</span><span class="sc">:</span>N], tau, <span class="at">zero_mean =</span> <span class="dv">1</span>)</span>
-<span id="cb150-12"><a href="Disease.html#cb150-12" tabindex="-1"></a>  tau <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> (sigma_b <span class="sc">^</span> <span class="dv">2</span>)</span>
-<span id="cb150-13"><a href="Disease.html#cb150-13" tabindex="-1"></a>  sigma_b <span class="sc">~</span> <span class="fu">T</span>(<span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>), <span class="dv">0</span>,)</span>
-<span id="cb150-14"><a href="Disease.html#cb150-14" tabindex="-1"></a>  <span class="co"># Fitted values and likelihood for WAIC</span></span>
-<span id="cb150-15"><a href="Disease.html#cb150-15" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
-<span id="cb150-16"><a href="Disease.html#cb150-16" tabindex="-1"></a>    fitted[i] <span class="sc">~</span> <span class="fu">dpois</span>(lambda[i])</span>
-<span id="cb150-17"><a href="Disease.html#cb150-17" tabindex="-1"></a>  }</span>
-<span id="cb150-18"><a href="Disease.html#cb150-18" tabindex="-1"></a>})</span>
-<span id="cb150-19"><a href="Disease.html#cb150-19" tabindex="-1"></a></span>
-<span id="cb150-20"><a href="Disease.html#cb150-20" tabindex="-1"></a><span class="co">#  Define the constants, data and initial values lists and run the model. </span></span>
-<span id="cb150-21"><a href="Disease.html#cb150-21" tabindex="-1"></a></span>
-<span id="cb150-22"><a href="Disease.html#cb150-22" tabindex="-1"></a><span class="co"># constants list</span></span>
-<span id="cb150-23"><a href="Disease.html#cb150-23" tabindex="-1"></a>constants <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb150-24"><a href="Disease.html#cb150-24" tabindex="-1"></a>  <span class="at">N =</span> N,</span>
-<span id="cb150-25"><a href="Disease.html#cb150-25" tabindex="-1"></a>  <span class="at">E =</span> copd_df<span class="sc">$</span>E2010,</span>
-<span id="cb150-26"><a href="Disease.html#cb150-26" tabindex="-1"></a>  <span class="at">L =</span> <span class="fu">length</span>(neigh),</span>
-<span id="cb150-27"><a href="Disease.html#cb150-27" tabindex="-1"></a>  <span class="at">adj =</span> neigh,</span>
-<span id="cb150-28"><a href="Disease.html#cb150-28" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(neigh)),</span>
-<span id="cb150-29"><a href="Disease.html#cb150-29" tabindex="-1"></a>  <span class="at">num =</span> <span class="fu">as.vector</span>(numneigh),</span>
-<span id="cb150-30"><a href="Disease.html#cb150-30" tabindex="-1"></a>  <span class="at">p =</span> <span class="dv">3</span></span>
-<span id="cb150-31"><a href="Disease.html#cb150-31" tabindex="-1"></a>)</span>
-<span id="cb150-32"><a href="Disease.html#cb150-32" tabindex="-1"></a><span class="co"># data list</span></span>
-<span id="cb150-33"><a href="Disease.html#cb150-33" tabindex="-1"></a>ex.data <span class="ot">&lt;-</span></span>
-<span id="cb150-34"><a href="Disease.html#cb150-34" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">y =</span> copd_df<span class="sc">$</span>Y2010, </span>
-<span id="cb150-35"><a href="Disease.html#cb150-35" tabindex="-1"></a>       <span class="at">x =</span> <span class="fu">as.vector</span>(<span class="fu">scale</span>(copd_df<span class="sc">$</span>Average.Score))) <span class="co"># vector of covariates</span></span>
-<span id="cb150-36"><a href="Disease.html#cb150-36" tabindex="-1"></a>inits <span class="ot">&lt;-</span>  <span class="fu">list</span>(</span>
-<span id="cb150-37"><a href="Disease.html#cb150-37" tabindex="-1"></a>  <span class="at">beta0 =</span> <span class="fu">rnorm</span>(<span class="dv">1</span>),</span>
-<span id="cb150-38"><a href="Disease.html#cb150-38" tabindex="-1"></a>  <span class="at">beta1 =</span> <span class="fu">rnorm</span>(<span class="dv">1</span>),</span>
-<span id="cb150-39"><a href="Disease.html#cb150-39" tabindex="-1"></a>  <span class="at">fitted =</span> <span class="fu">rpois</span>(N, <span class="dv">2</span>),</span>
-<span id="cb150-40"><a href="Disease.html#cb150-40" tabindex="-1"></a>  <span class="at">sigma_b =</span> <span class="dv">1</span>,</span>
-<span id="cb150-41"><a href="Disease.html#cb150-41" tabindex="-1"></a>  <span class="at">b =</span> <span class="fu">rnorm</span>(N)</span>
-<span id="cb150-42"><a href="Disease.html#cb150-42" tabindex="-1"></a>)</span>
-<span id="cb150-43"><a href="Disease.html#cb150-43" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;beta0&quot;</span>,<span class="st">&quot;beta1&quot;</span>, <span class="st">&quot;fitted&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;tau&quot;</span>)</span>
-<span id="cb150-44"><a href="Disease.html#cb150-44" tabindex="-1"></a><span class="co"># Run model in nimble</span></span>
-<span id="cb150-45"><a href="Disease.html#cb150-45" tabindex="-1"></a>mcmc.out <span class="ot">&lt;-</span> <span class="fu">nimbleMCMC</span>(</span>
-<span id="cb150-46"><a href="Disease.html#cb150-46" tabindex="-1"></a>  <span class="at">code =</span> Example9_3Nimble,</span>
-<span id="cb150-47"><a href="Disease.html#cb150-47" tabindex="-1"></a>  <span class="at">constants =</span> constants,</span>
-<span id="cb150-48"><a href="Disease.html#cb150-48" tabindex="-1"></a>  <span class="at">data =</span> ex.data,</span>
-<span id="cb150-49"><a href="Disease.html#cb150-49" tabindex="-1"></a>  <span class="at">inits =</span> inits,</span>
-<span id="cb150-50"><a href="Disease.html#cb150-50" tabindex="-1"></a>  <span class="at">monitors =</span> params,</span>
-<span id="cb150-51"><a href="Disease.html#cb150-51" tabindex="-1"></a>  <span class="at">niter =</span> <span class="dv">40000</span>,</span>
-<span id="cb150-52"><a href="Disease.html#cb150-52" tabindex="-1"></a>  <span class="at">nburnin =</span> <span class="dv">20000</span>,</span>
-<span id="cb150-53"><a href="Disease.html#cb150-53" tabindex="-1"></a>  <span class="at">thin =</span> <span class="dv">80</span>,</span>
-<span id="cb150-54"><a href="Disease.html#cb150-54" tabindex="-1"></a>  <span class="at">WAIC =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb150-55"><a href="Disease.html#cb150-55" tabindex="-1"></a>  <span class="at">nchains =</span> <span class="dv">2</span>,</span>
-<span id="cb150-56"><a href="Disease.html#cb150-56" tabindex="-1"></a>  <span class="at">summary =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb150-57"><a href="Disease.html#cb150-57" tabindex="-1"></a>  <span class="at">samplesAsCodaMCMC =</span> <span class="cn">TRUE</span></span>
-<span id="cb150-58"><a href="Disease.html#cb150-58" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="Disease.html#cb148-1" tabindex="-1"></a><span class="co"># Create the neighborhood</span></span>
+<span id="cb148-2"><a href="Disease.html#cb148-2" tabindex="-1"></a>W.nb <span class="ot">&lt;-</span></span>
+<span id="cb148-3"><a href="Disease.html#cb148-3" tabindex="-1"></a>  <span class="fu">poly2nb</span>(england, <span class="at">row.names =</span> <span class="fu">rownames</span>(england))</span>
+<span id="cb148-4"><a href="Disease.html#cb148-4" tabindex="-1"></a><span class="co"># Creates a matrix for following function call</span></span>
+<span id="cb148-5"><a href="Disease.html#cb148-5" tabindex="-1"></a>W.mat <span class="ot">&lt;-</span> <span class="fu">nb2mat</span>(W.nb, <span class="at">style =</span> <span class="st">&quot;B&quot;</span>)</span>
+<span id="cb148-6"><a href="Disease.html#cb148-6" tabindex="-1"></a><span class="co"># Define the spatial structure to use in stan</span></span>
+<span id="cb148-7"><a href="Disease.html#cb148-7" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(england<span class="sc">$</span>ID))</span>
+<span id="cb148-8"><a href="Disease.html#cb148-8" tabindex="-1"></a>neigh  <span class="ot">&lt;-</span> <span class="fu">adjlist</span>(W.mat, N)</span>
+<span id="cb148-9"><a href="Disease.html#cb148-9" tabindex="-1"></a>numneigh  <span class="ot">&lt;-</span> <span class="fu">apply</span>(W.mat,<span class="dv">2</span>,sum)</span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="Disease.html#cb149-1" tabindex="-1"></a>Example9_3Nimble <span class="ot">&lt;-</span> <span class="fu">nimbleCode</span>({</span>
+<span id="cb149-2"><a href="Disease.html#cb149-2" tabindex="-1"></a>  <span class="co"># Likelihood</span></span>
+<span id="cb149-3"><a href="Disease.html#cb149-3" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
+<span id="cb149-4"><a href="Disease.html#cb149-4" tabindex="-1"></a>    y[i] <span class="sc">~</span> <span class="fu">dpois</span>(lambda[i])</span>
+<span id="cb149-5"><a href="Disease.html#cb149-5" tabindex="-1"></a>    <span class="fu">log</span>(lambda[i]) <span class="ot">&lt;-</span> <span class="fu">log</span>(E[i]) <span class="sc">+</span> b[i] <span class="sc">+</span> beta0 <span class="sc">+</span> beta1<span class="sc">*</span>x[i]</span>
+<span id="cb149-6"><a href="Disease.html#cb149-6" tabindex="-1"></a>  }</span>
+<span id="cb149-7"><a href="Disease.html#cb149-7" tabindex="-1"></a>  </span>
+<span id="cb149-8"><a href="Disease.html#cb149-8" tabindex="-1"></a>  <span class="co"># Priors</span></span>
+<span id="cb149-9"><a href="Disease.html#cb149-9" tabindex="-1"></a>  beta0 <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb149-10"><a href="Disease.html#cb149-10" tabindex="-1"></a>  beta1 <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb149-11"><a href="Disease.html#cb149-11" tabindex="-1"></a>  b[<span class="dv">1</span><span class="sc">:</span>N] <span class="sc">~</span> <span class="fu">dcar_normal</span>(adj[<span class="dv">1</span><span class="sc">:</span>L], weights[<span class="dv">1</span><span class="sc">:</span>L], num[<span class="dv">1</span><span class="sc">:</span>N], tau, <span class="at">zero_mean =</span> <span class="dv">1</span>)</span>
+<span id="cb149-12"><a href="Disease.html#cb149-12" tabindex="-1"></a>  tau <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> (sigma_b <span class="sc">^</span> <span class="dv">2</span>)</span>
+<span id="cb149-13"><a href="Disease.html#cb149-13" tabindex="-1"></a>  sigma_b <span class="sc">~</span> <span class="fu">T</span>(<span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>), <span class="dv">0</span>,)</span>
+<span id="cb149-14"><a href="Disease.html#cb149-14" tabindex="-1"></a>  <span class="co"># Fitted values and likelihood for WAIC</span></span>
+<span id="cb149-15"><a href="Disease.html#cb149-15" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
+<span id="cb149-16"><a href="Disease.html#cb149-16" tabindex="-1"></a>    fitted[i] <span class="sc">~</span> <span class="fu">dpois</span>(lambda[i])</span>
+<span id="cb149-17"><a href="Disease.html#cb149-17" tabindex="-1"></a>  }</span>
+<span id="cb149-18"><a href="Disease.html#cb149-18" tabindex="-1"></a>})</span>
+<span id="cb149-19"><a href="Disease.html#cb149-19" tabindex="-1"></a></span>
+<span id="cb149-20"><a href="Disease.html#cb149-20" tabindex="-1"></a><span class="co">#  Define the constants, data and initial values lists and run the model. </span></span>
+<span id="cb149-21"><a href="Disease.html#cb149-21" tabindex="-1"></a></span>
+<span id="cb149-22"><a href="Disease.html#cb149-22" tabindex="-1"></a><span class="co"># constants list</span></span>
+<span id="cb149-23"><a href="Disease.html#cb149-23" tabindex="-1"></a>constants <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb149-24"><a href="Disease.html#cb149-24" tabindex="-1"></a>  <span class="at">N =</span> N,</span>
+<span id="cb149-25"><a href="Disease.html#cb149-25" tabindex="-1"></a>  <span class="at">E =</span> copd_df<span class="sc">$</span>E2010,</span>
+<span id="cb149-26"><a href="Disease.html#cb149-26" tabindex="-1"></a>  <span class="at">L =</span> <span class="fu">length</span>(neigh),</span>
+<span id="cb149-27"><a href="Disease.html#cb149-27" tabindex="-1"></a>  <span class="at">adj =</span> neigh,</span>
+<span id="cb149-28"><a href="Disease.html#cb149-28" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">length</span>(neigh)),</span>
+<span id="cb149-29"><a href="Disease.html#cb149-29" tabindex="-1"></a>  <span class="at">num =</span> <span class="fu">as.vector</span>(numneigh),</span>
+<span id="cb149-30"><a href="Disease.html#cb149-30" tabindex="-1"></a>  <span class="at">p =</span> <span class="dv">3</span></span>
+<span id="cb149-31"><a href="Disease.html#cb149-31" tabindex="-1"></a>)</span>
+<span id="cb149-32"><a href="Disease.html#cb149-32" tabindex="-1"></a><span class="co"># data list</span></span>
+<span id="cb149-33"><a href="Disease.html#cb149-33" tabindex="-1"></a>ex.data <span class="ot">&lt;-</span></span>
+<span id="cb149-34"><a href="Disease.html#cb149-34" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">y =</span> copd_df<span class="sc">$</span>Y2010, </span>
+<span id="cb149-35"><a href="Disease.html#cb149-35" tabindex="-1"></a>       <span class="at">x =</span> <span class="fu">as.vector</span>(<span class="fu">scale</span>(copd_df<span class="sc">$</span>Average.Score))) <span class="co"># vector of covariates</span></span>
+<span id="cb149-36"><a href="Disease.html#cb149-36" tabindex="-1"></a>inits <span class="ot">&lt;-</span>  <span class="fu">list</span>(</span>
+<span id="cb149-37"><a href="Disease.html#cb149-37" tabindex="-1"></a>  <span class="at">beta0 =</span> <span class="fu">rnorm</span>(<span class="dv">1</span>),</span>
+<span id="cb149-38"><a href="Disease.html#cb149-38" tabindex="-1"></a>  <span class="at">beta1 =</span> <span class="fu">rnorm</span>(<span class="dv">1</span>),</span>
+<span id="cb149-39"><a href="Disease.html#cb149-39" tabindex="-1"></a>  <span class="at">fitted =</span> <span class="fu">rpois</span>(N, <span class="dv">2</span>),</span>
+<span id="cb149-40"><a href="Disease.html#cb149-40" tabindex="-1"></a>  <span class="at">sigma_b =</span> <span class="dv">1</span>,</span>
+<span id="cb149-41"><a href="Disease.html#cb149-41" tabindex="-1"></a>  <span class="at">b =</span> <span class="fu">rnorm</span>(N)</span>
+<span id="cb149-42"><a href="Disease.html#cb149-42" tabindex="-1"></a>)</span>
+<span id="cb149-43"><a href="Disease.html#cb149-43" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;beta0&quot;</span>,<span class="st">&quot;beta1&quot;</span>, <span class="st">&quot;fitted&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;tau&quot;</span>)</span>
+<span id="cb149-44"><a href="Disease.html#cb149-44" tabindex="-1"></a><span class="co"># Run model in nimble</span></span>
+<span id="cb149-45"><a href="Disease.html#cb149-45" tabindex="-1"></a>mcmc.out <span class="ot">&lt;-</span> <span class="fu">nimbleMCMC</span>(</span>
+<span id="cb149-46"><a href="Disease.html#cb149-46" tabindex="-1"></a>  <span class="at">code =</span> Example9_3Nimble,</span>
+<span id="cb149-47"><a href="Disease.html#cb149-47" tabindex="-1"></a>  <span class="at">constants =</span> constants,</span>
+<span id="cb149-48"><a href="Disease.html#cb149-48" tabindex="-1"></a>  <span class="at">data =</span> ex.data,</span>
+<span id="cb149-49"><a href="Disease.html#cb149-49" tabindex="-1"></a>  <span class="at">inits =</span> inits,</span>
+<span id="cb149-50"><a href="Disease.html#cb149-50" tabindex="-1"></a>  <span class="at">monitors =</span> params,</span>
+<span id="cb149-51"><a href="Disease.html#cb149-51" tabindex="-1"></a>  <span class="at">niter =</span> <span class="dv">40000</span>,</span>
+<span id="cb149-52"><a href="Disease.html#cb149-52" tabindex="-1"></a>  <span class="at">nburnin =</span> <span class="dv">20000</span>,</span>
+<span id="cb149-53"><a href="Disease.html#cb149-53" tabindex="-1"></a>  <span class="at">thin =</span> <span class="dv">80</span>,</span>
+<span id="cb149-54"><a href="Disease.html#cb149-54" tabindex="-1"></a>  <span class="at">WAIC =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb149-55"><a href="Disease.html#cb149-55" tabindex="-1"></a>  <span class="at">nchains =</span> <span class="dv">2</span>,</span>
+<span id="cb149-56"><a href="Disease.html#cb149-56" tabindex="-1"></a>  <span class="at">summary =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb149-57"><a href="Disease.html#cb149-57" tabindex="-1"></a>  <span class="at">samplesAsCodaMCMC =</span> <span class="cn">TRUE</span></span>
+<span id="cb149-58"><a href="Disease.html#cb149-58" tabindex="-1"></a>)</span></code></pre></div>
 <p>Show the WAIC, effective sample size, and trace plots for some of the parameters.</p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="Disease.html#cb151-1" tabindex="-1"></a>mcmc.out<span class="sc">$</span>WAIC</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="Disease.html#cb150-1" tabindex="-1"></a>mcmc.out<span class="sc">$</span>WAIC</span></code></pre></div>
 <pre><code>## nimbleList object of type waicList
 ## Field &quot;WAIC&quot;:
 ## [1] 2390.229
@@ -723,32 +724,32 @@ generated quantities {
 ## [1] -1079.614
 ## Field &quot;pWAIC&quot;:
 ## [1] 115.5007</code></pre>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="Disease.html#cb153-1" tabindex="-1"></a><span class="co"># min(coda::effectiveSize(mcmc.out$samples))</span></span>
-<span id="cb153-2"><a href="Disease.html#cb153-2" tabindex="-1"></a><span class="co"># plot(mcmc.out$samples[, c(&quot;beta0&quot;)], bty = &quot;n&quot;, main = &quot;beta0&quot;)</span></span>
-<span id="cb153-3"><a href="Disease.html#cb153-3" tabindex="-1"></a><span class="co"># plot(mcmc.out$samples[, c(&quot;beta1&quot;)], bty = &quot;n&quot;)</span></span>
-<span id="cb153-4"><a href="Disease.html#cb153-4" tabindex="-1"></a><span class="co"># plot(mcmc.out$samples[, c(&quot;b[2]&quot;)], bty = &quot;n&quot;)</span></span>
-<span id="cb153-5"><a href="Disease.html#cb153-5" tabindex="-1"></a><span class="co"># plot(mcmc.out$samples[, c(&quot;tau&quot;)], bty = &quot;n&quot;)</span></span></code></pre></div>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="Disease.html#cb154-1" tabindex="-1"></a><span class="co"># Extract samples</span></span>
-<span id="cb154-2"><a href="Disease.html#cb154-2" tabindex="-1"></a>variables <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;beta0&quot;</span>, <span class="st">&quot;beta1&quot;</span>,<span class="st">&quot;tau&quot;</span>)</span>
-<span id="cb154-3"><a href="Disease.html#cb154-3" tabindex="-1"></a>summary_CAR_nimble <span class="ot">&lt;-</span> mcmc.out<span class="sc">$</span>summary<span class="sc">$</span>all.chains</span>
-<span id="cb154-4"><a href="Disease.html#cb154-4" tabindex="-1"></a>summary_CAR_nimble[variables,]</span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="Disease.html#cb152-1" tabindex="-1"></a><span class="co"># min(coda::effectiveSize(mcmc.out$samples))</span></span>
+<span id="cb152-2"><a href="Disease.html#cb152-2" tabindex="-1"></a><span class="co"># plot(mcmc.out$samples[, c(&quot;beta0&quot;)], bty = &quot;n&quot;, main = &quot;beta0&quot;)</span></span>
+<span id="cb152-3"><a href="Disease.html#cb152-3" tabindex="-1"></a><span class="co"># plot(mcmc.out$samples[, c(&quot;beta1&quot;)], bty = &quot;n&quot;)</span></span>
+<span id="cb152-4"><a href="Disease.html#cb152-4" tabindex="-1"></a><span class="co"># plot(mcmc.out$samples[, c(&quot;b[2]&quot;)], bty = &quot;n&quot;)</span></span>
+<span id="cb152-5"><a href="Disease.html#cb152-5" tabindex="-1"></a><span class="co"># plot(mcmc.out$samples[, c(&quot;tau&quot;)], bty = &quot;n&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="Disease.html#cb153-1" tabindex="-1"></a><span class="co"># Extract samples</span></span>
+<span id="cb153-2"><a href="Disease.html#cb153-2" tabindex="-1"></a>variables <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;beta0&quot;</span>, <span class="st">&quot;beta1&quot;</span>,<span class="st">&quot;tau&quot;</span>)</span>
+<span id="cb153-3"><a href="Disease.html#cb153-3" tabindex="-1"></a>summary_CAR_nimble <span class="ot">&lt;-</span> mcmc.out<span class="sc">$</span>summary<span class="sc">$</span>all.chains</span>
+<span id="cb153-4"><a href="Disease.html#cb153-4" tabindex="-1"></a>summary_CAR_nimble[variables,]</span></code></pre></div>
 <pre><code>##              Mean      Median     St.Dev.   95%CI_low   95%CI_upp
 ## beta0 -0.06939286 -0.06926006 0.007375274 -0.08342067 -0.05498754
 ## beta1  0.18147895  0.18106966 0.012254519  0.15800950  0.20442849
 ## tau   15.12970586 14.81443048 2.445113457 11.10376297 20.24953767</code></pre>
 <p>Map the mean of the posterior estimate for the latent effect.</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="Disease.html#cb156-1" tabindex="-1"></a>samples_CAR_b <span class="ot">&lt;-</span></span>
-<span id="cb156-2"><a href="Disease.html#cb156-2" tabindex="-1"></a>  summary_CAR_nimble[<span class="fu">grepl</span>(<span class="st">&quot;b</span><span class="sc">\\</span><span class="st">[&quot;</span>, <span class="fu">rownames</span>(summary_CAR_nimble)), ] <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb156-3"><a href="Disease.html#cb156-3" tabindex="-1"></a>observed <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">rownames_to_column</span>(observed, <span class="st">&quot;ID&quot;</span>)</span>
-<span id="cb156-4"><a href="Disease.html#cb156-4" tabindex="-1"></a>samples_CAR_b<span class="sc">$</span>ID <span class="ot">&lt;-</span> observed<span class="sc">$</span>ID</span>
-<span id="cb156-5"><a href="Disease.html#cb156-5" tabindex="-1"></a>CAR_nimble_merge <span class="ot">&lt;-</span> <span class="fu">merge</span>(england, samples_CAR_b, <span class="at">by =</span> <span class="st">&quot;ID&quot;</span>)</span>
-<span id="cb156-6"><a href="Disease.html#cb156-6" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb156-7"><a href="Disease.html#cb156-7" tabindex="-1"></a>  <span class="co"># Choose spatial object and column for plotting</span></span>
-<span id="cb156-8"><a href="Disease.html#cb156-8" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> CAR_nimble_merge, <span class="fu">aes</span>(<span class="at">fill =</span> Mean)) <span class="sc">+</span></span>
-<span id="cb156-9"><a href="Disease.html#cb156-9" tabindex="-1"></a>  <span class="co"># Change legend&#39;s label</span></span>
-<span id="cb156-10"><a href="Disease.html#cb156-10" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&#39;Latent effects nimble&#39;</span>) <span class="sc">+</span></span>
-<span id="cb156-11"><a href="Disease.html#cb156-11" tabindex="-1"></a>  <span class="co"># Clear background and plot borders</span></span>
-<span id="cb156-12"><a href="Disease.html#cb156-12" tabindex="-1"></a> <span class="fu">theme_void</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="Disease.html#cb155-1" tabindex="-1"></a>samples_CAR_b <span class="ot">&lt;-</span></span>
+<span id="cb155-2"><a href="Disease.html#cb155-2" tabindex="-1"></a>  summary_CAR_nimble[<span class="fu">grepl</span>(<span class="st">&quot;b</span><span class="sc">\\</span><span class="st">[&quot;</span>, <span class="fu">rownames</span>(summary_CAR_nimble)), ] <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb155-3"><a href="Disease.html#cb155-3" tabindex="-1"></a>observed <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">rownames_to_column</span>(observed, <span class="st">&quot;ID&quot;</span>)</span>
+<span id="cb155-4"><a href="Disease.html#cb155-4" tabindex="-1"></a>samples_CAR_b<span class="sc">$</span>ID <span class="ot">&lt;-</span> observed<span class="sc">$</span>ID</span>
+<span id="cb155-5"><a href="Disease.html#cb155-5" tabindex="-1"></a>CAR_nimble_merge <span class="ot">&lt;-</span> <span class="fu">merge</span>(england, samples_CAR_b, <span class="at">by =</span> <span class="st">&quot;ID&quot;</span>)</span>
+<span id="cb155-6"><a href="Disease.html#cb155-6" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb155-7"><a href="Disease.html#cb155-7" tabindex="-1"></a>  <span class="co"># Choose spatial object and column for plotting</span></span>
+<span id="cb155-8"><a href="Disease.html#cb155-8" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> CAR_nimble_merge, <span class="fu">aes</span>(<span class="at">fill =</span> Mean)) <span class="sc">+</span></span>
+<span id="cb155-9"><a href="Disease.html#cb155-9" tabindex="-1"></a>  <span class="co"># Change legend&#39;s label</span></span>
+<span id="cb155-10"><a href="Disease.html#cb155-10" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&#39;Latent effects nimble&#39;</span>) <span class="sc">+</span></span>
+<span id="cb155-11"><a href="Disease.html#cb155-11" tabindex="-1"></a>  <span class="co"># Clear background and plot borders</span></span>
+<span id="cb155-12"><a href="Disease.html#cb155-12" tabindex="-1"></a> <span class="fu">theme_void</span>()</span></code></pre></div>
 </div>
 <div id="stan-2" class="section level3 unnumbered hasAnchor">
 <h3>Stan<a href="Disease.html#stan-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -756,46 +757,46 @@ generated quantities {
 <p>This example uses the <a href="https://github.com/spacetime-environ/stepi2/blob/main/data/copd/englandlocalauthority.shp">englandlocalauthority.shp</a>, <a href="https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityobserved.csv">copdmortalityobserved.csv</a>, and
 <a href="https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityexpected.csv">copdmortalityexpected.csv</a> datasets from Chapter 6.</p>
 <p>We will need two functions to structure the matrix of neighbors that will be needed in <code>stan</code>.</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="Disease.html#cb157-1" tabindex="-1"></a>adjlist <span class="ot">=</span> <span class="cf">function</span>(W, N) {</span>
-<span id="cb157-2"><a href="Disease.html#cb157-2" tabindex="-1"></a>  adj <span class="ot">=</span> <span class="dv">0</span></span>
-<span id="cb157-3"><a href="Disease.html#cb157-3" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
-<span id="cb157-4"><a href="Disease.html#cb157-4" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
-<span id="cb157-5"><a href="Disease.html#cb157-5" tabindex="-1"></a>      <span class="cf">if</span> (W[i, j] <span class="sc">==</span> <span class="dv">1</span>) {</span>
-<span id="cb157-6"><a href="Disease.html#cb157-6" tabindex="-1"></a>        adj <span class="ot">=</span> <span class="fu">append</span>(adj, j)</span>
-<span id="cb157-7"><a href="Disease.html#cb157-7" tabindex="-1"></a>      }</span>
-<span id="cb157-8"><a href="Disease.html#cb157-8" tabindex="-1"></a>    }</span>
-<span id="cb157-9"><a href="Disease.html#cb157-9" tabindex="-1"></a>  }</span>
-<span id="cb157-10"><a href="Disease.html#cb157-10" tabindex="-1"></a>  adj <span class="ot">=</span> adj[<span class="sc">-</span><span class="dv">1</span>]</span>
-<span id="cb157-11"><a href="Disease.html#cb157-11" tabindex="-1"></a>  <span class="fu">return</span>(adj)</span>
-<span id="cb157-12"><a href="Disease.html#cb157-12" tabindex="-1"></a>}</span>
-<span id="cb157-13"><a href="Disease.html#cb157-13" tabindex="-1"></a></span>
-<span id="cb157-14"><a href="Disease.html#cb157-14" tabindex="-1"></a>mungeCARdata4stan <span class="ot">=</span> <span class="cf">function</span>(adjBUGS, numBUGS) {</span>
-<span id="cb157-15"><a href="Disease.html#cb157-15" tabindex="-1"></a>  N <span class="ot">=</span> <span class="fu">length</span>(numBUGS)</span>
-<span id="cb157-16"><a href="Disease.html#cb157-16" tabindex="-1"></a>  nn <span class="ot">=</span> numBUGS</span>
-<span id="cb157-17"><a href="Disease.html#cb157-17" tabindex="-1"></a>  N_edges <span class="ot">=</span> <span class="fu">length</span>(adjBUGS) <span class="sc">/</span> <span class="dv">2</span></span>
-<span id="cb157-18"><a href="Disease.html#cb157-18" tabindex="-1"></a>  node1 <span class="ot">=</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">&quot;numeric&quot;</span>, <span class="at">length =</span> N_edges)</span>
-<span id="cb157-19"><a href="Disease.html#cb157-19" tabindex="-1"></a>  node2 <span class="ot">=</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">&quot;numeric&quot;</span>, <span class="at">length =</span> N_edges)</span>
-<span id="cb157-20"><a href="Disease.html#cb157-20" tabindex="-1"></a>  iAdj <span class="ot">=</span> <span class="dv">0</span></span>
-<span id="cb157-21"><a href="Disease.html#cb157-21" tabindex="-1"></a>  iEdge <span class="ot">=</span> <span class="dv">0</span></span>
-<span id="cb157-22"><a href="Disease.html#cb157-22" tabindex="-1"></a>  </span>
-<span id="cb157-23"><a href="Disease.html#cb157-23" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
-<span id="cb157-24"><a href="Disease.html#cb157-24" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nn[i]) {</span>
-<span id="cb157-25"><a href="Disease.html#cb157-25" tabindex="-1"></a>      iAdj <span class="ot">=</span> iAdj <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb157-26"><a href="Disease.html#cb157-26" tabindex="-1"></a>      <span class="cf">if</span> (i <span class="sc">&lt;</span> adjBUGS[iAdj]) {</span>
-<span id="cb157-27"><a href="Disease.html#cb157-27" tabindex="-1"></a>        iEdge <span class="ot">=</span> iEdge <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb157-28"><a href="Disease.html#cb157-28" tabindex="-1"></a>        node1[iEdge] <span class="ot">=</span> i</span>
-<span id="cb157-29"><a href="Disease.html#cb157-29" tabindex="-1"></a>        node2[iEdge] <span class="ot">=</span> adjBUGS[iAdj]</span>
-<span id="cb157-30"><a href="Disease.html#cb157-30" tabindex="-1"></a>      }</span>
-<span id="cb157-31"><a href="Disease.html#cb157-31" tabindex="-1"></a>    }</span>
-<span id="cb157-32"><a href="Disease.html#cb157-32" tabindex="-1"></a>  }</span>
-<span id="cb157-33"><a href="Disease.html#cb157-33" tabindex="-1"></a>  <span class="fu">return</span> (<span class="fu">list</span>(</span>
-<span id="cb157-34"><a href="Disease.html#cb157-34" tabindex="-1"></a>    <span class="st">&quot;N&quot;</span> <span class="ot">=</span> N,</span>
-<span id="cb157-35"><a href="Disease.html#cb157-35" tabindex="-1"></a>    <span class="st">&quot;N_edges&quot;</span> <span class="ot">=</span> N_edges,</span>
-<span id="cb157-36"><a href="Disease.html#cb157-36" tabindex="-1"></a>    <span class="st">&quot;node1&quot;</span> <span class="ot">=</span> node1,</span>
-<span id="cb157-37"><a href="Disease.html#cb157-37" tabindex="-1"></a>    <span class="st">&quot;node2&quot;</span> <span class="ot">=</span> node2</span>
-<span id="cb157-38"><a href="Disease.html#cb157-38" tabindex="-1"></a>  ))</span>
-<span id="cb157-39"><a href="Disease.html#cb157-39" tabindex="-1"></a>  </span>
-<span id="cb157-40"><a href="Disease.html#cb157-40" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="Disease.html#cb156-1" tabindex="-1"></a>adjlist <span class="ot">=</span> <span class="cf">function</span>(W, N) {</span>
+<span id="cb156-2"><a href="Disease.html#cb156-2" tabindex="-1"></a>  adj <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb156-3"><a href="Disease.html#cb156-3" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
+<span id="cb156-4"><a href="Disease.html#cb156-4" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
+<span id="cb156-5"><a href="Disease.html#cb156-5" tabindex="-1"></a>      <span class="cf">if</span> (W[i, j] <span class="sc">==</span> <span class="dv">1</span>) {</span>
+<span id="cb156-6"><a href="Disease.html#cb156-6" tabindex="-1"></a>        adj <span class="ot">=</span> <span class="fu">append</span>(adj, j)</span>
+<span id="cb156-7"><a href="Disease.html#cb156-7" tabindex="-1"></a>      }</span>
+<span id="cb156-8"><a href="Disease.html#cb156-8" tabindex="-1"></a>    }</span>
+<span id="cb156-9"><a href="Disease.html#cb156-9" tabindex="-1"></a>  }</span>
+<span id="cb156-10"><a href="Disease.html#cb156-10" tabindex="-1"></a>  adj <span class="ot">=</span> adj[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb156-11"><a href="Disease.html#cb156-11" tabindex="-1"></a>  <span class="fu">return</span>(adj)</span>
+<span id="cb156-12"><a href="Disease.html#cb156-12" tabindex="-1"></a>}</span>
+<span id="cb156-13"><a href="Disease.html#cb156-13" tabindex="-1"></a></span>
+<span id="cb156-14"><a href="Disease.html#cb156-14" tabindex="-1"></a>mungeCARdata4stan <span class="ot">=</span> <span class="cf">function</span>(adjBUGS, numBUGS) {</span>
+<span id="cb156-15"><a href="Disease.html#cb156-15" tabindex="-1"></a>  N <span class="ot">=</span> <span class="fu">length</span>(numBUGS)</span>
+<span id="cb156-16"><a href="Disease.html#cb156-16" tabindex="-1"></a>  nn <span class="ot">=</span> numBUGS</span>
+<span id="cb156-17"><a href="Disease.html#cb156-17" tabindex="-1"></a>  N_edges <span class="ot">=</span> <span class="fu">length</span>(adjBUGS) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb156-18"><a href="Disease.html#cb156-18" tabindex="-1"></a>  node1 <span class="ot">=</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">&quot;numeric&quot;</span>, <span class="at">length =</span> N_edges)</span>
+<span id="cb156-19"><a href="Disease.html#cb156-19" tabindex="-1"></a>  node2 <span class="ot">=</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">&quot;numeric&quot;</span>, <span class="at">length =</span> N_edges)</span>
+<span id="cb156-20"><a href="Disease.html#cb156-20" tabindex="-1"></a>  iAdj <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb156-21"><a href="Disease.html#cb156-21" tabindex="-1"></a>  iEdge <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb156-22"><a href="Disease.html#cb156-22" tabindex="-1"></a>  </span>
+<span id="cb156-23"><a href="Disease.html#cb156-23" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
+<span id="cb156-24"><a href="Disease.html#cb156-24" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nn[i]) {</span>
+<span id="cb156-25"><a href="Disease.html#cb156-25" tabindex="-1"></a>      iAdj <span class="ot">=</span> iAdj <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb156-26"><a href="Disease.html#cb156-26" tabindex="-1"></a>      <span class="cf">if</span> (i <span class="sc">&lt;</span> adjBUGS[iAdj]) {</span>
+<span id="cb156-27"><a href="Disease.html#cb156-27" tabindex="-1"></a>        iEdge <span class="ot">=</span> iEdge <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb156-28"><a href="Disease.html#cb156-28" tabindex="-1"></a>        node1[iEdge] <span class="ot">=</span> i</span>
+<span id="cb156-29"><a href="Disease.html#cb156-29" tabindex="-1"></a>        node2[iEdge] <span class="ot">=</span> adjBUGS[iAdj]</span>
+<span id="cb156-30"><a href="Disease.html#cb156-30" tabindex="-1"></a>      }</span>
+<span id="cb156-31"><a href="Disease.html#cb156-31" tabindex="-1"></a>    }</span>
+<span id="cb156-32"><a href="Disease.html#cb156-32" tabindex="-1"></a>  }</span>
+<span id="cb156-33"><a href="Disease.html#cb156-33" tabindex="-1"></a>  <span class="fu">return</span> (<span class="fu">list</span>(</span>
+<span id="cb156-34"><a href="Disease.html#cb156-34" tabindex="-1"></a>    <span class="st">&quot;N&quot;</span> <span class="ot">=</span> N,</span>
+<span id="cb156-35"><a href="Disease.html#cb156-35" tabindex="-1"></a>    <span class="st">&quot;N_edges&quot;</span> <span class="ot">=</span> N_edges,</span>
+<span id="cb156-36"><a href="Disease.html#cb156-36" tabindex="-1"></a>    <span class="st">&quot;node1&quot;</span> <span class="ot">=</span> node1,</span>
+<span id="cb156-37"><a href="Disease.html#cb156-37" tabindex="-1"></a>    <span class="st">&quot;node2&quot;</span> <span class="ot">=</span> node2</span>
+<span id="cb156-38"><a href="Disease.html#cb156-38" tabindex="-1"></a>  ))</span>
+<span id="cb156-39"><a href="Disease.html#cb156-39" tabindex="-1"></a>  </span>
+<span id="cb156-40"><a href="Disease.html#cb156-40" tabindex="-1"></a>}</span></code></pre></div>
 <p>This model is in a separate file called <code>Example8_3.stan</code> that will be called later.</p>
 <pre><code>data {
   int&lt;lower=1&gt; N;
@@ -849,53 +850,53 @@ generated quantities {
 }</code></pre>
 <!-- REVIEW: I am missing the adjacency matrix but I calculated like they did for the CARBayes example, is that right? -->
 <p>Define the adjacency matrix and indexes for <code>stan</code> using the <code>nb2mat</code> and <code>adjlist</code></p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="Disease.html#cb159-1" tabindex="-1"></a><span class="co"># Create the neighborhood</span></span>
-<span id="cb159-2"><a href="Disease.html#cb159-2" tabindex="-1"></a>W.nb <span class="ot">&lt;-</span></span>
-<span id="cb159-3"><a href="Disease.html#cb159-3" tabindex="-1"></a>  <span class="fu">poly2nb</span>(england, <span class="at">row.names =</span> <span class="fu">rownames</span>(england))</span>
-<span id="cb159-4"><a href="Disease.html#cb159-4" tabindex="-1"></a><span class="co"># Creates a matrix for following function call</span></span>
-<span id="cb159-5"><a href="Disease.html#cb159-5" tabindex="-1"></a>W.mat <span class="ot">&lt;-</span> <span class="fu">nb2mat</span>(W.nb, <span class="at">style =</span> <span class="st">&quot;B&quot;</span>)</span>
-<span id="cb159-6"><a href="Disease.html#cb159-6" tabindex="-1"></a></span>
-<span id="cb159-7"><a href="Disease.html#cb159-7" tabindex="-1"></a><span class="co"># Define the spatial structure to use in stan</span></span>
-<span id="cb159-8"><a href="Disease.html#cb159-8" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(england<span class="sc">$</span>ID))</span>
-<span id="cb159-9"><a href="Disease.html#cb159-9" tabindex="-1"></a>neigh <span class="ot">&lt;-</span> <span class="fu">adjlist</span>(W.mat, N)</span>
-<span id="cb159-10"><a href="Disease.html#cb159-10" tabindex="-1"></a>numneigh  <span class="ot">&lt;-</span>  <span class="fu">apply</span>(W.mat, <span class="dv">2</span>, sum)</span>
-<span id="cb159-11"><a href="Disease.html#cb159-11" tabindex="-1"></a>nbs <span class="ot">&lt;-</span> <span class="fu">mungeCARdata4stan</span>(neigh, numneigh)</span>
-<span id="cb159-12"><a href="Disease.html#cb159-12" tabindex="-1"></a></span>
-<span id="cb159-13"><a href="Disease.html#cb159-13" tabindex="-1"></a></span>
-<span id="cb159-14"><a href="Disease.html#cb159-14" tabindex="-1"></a><span class="co"># Define data and variables for Stan model</span></span>
-<span id="cb159-15"><a href="Disease.html#cb159-15" tabindex="-1"></a>y <span class="ot">&lt;-</span> copd_df<span class="sc">$</span>Y2010</span>
-<span id="cb159-16"><a href="Disease.html#cb159-16" tabindex="-1"></a>E <span class="ot">&lt;-</span> copd_df<span class="sc">$</span>E2010</span>
-<span id="cb159-17"><a href="Disease.html#cb159-17" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">scale</span>(copd_df<span class="sc">$</span>Average.Score))</span>
-<span id="cb159-18"><a href="Disease.html#cb159-18" tabindex="-1"></a></span>
-<span id="cb159-19"><a href="Disease.html#cb159-19" tabindex="-1"></a>ex.data <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb159-20"><a href="Disease.html#cb159-20" tabindex="-1"></a>  <span class="at">N =</span>  nbs<span class="sc">$</span>N,</span>
-<span id="cb159-21"><a href="Disease.html#cb159-21" tabindex="-1"></a>  <span class="at">y =</span> y,</span>
-<span id="cb159-22"><a href="Disease.html#cb159-22" tabindex="-1"></a>  <span class="at">E =</span> E,</span>
-<span id="cb159-23"><a href="Disease.html#cb159-23" tabindex="-1"></a>  <span class="at">p =</span> <span class="dv">1</span>,</span>
-<span id="cb159-24"><a href="Disease.html#cb159-24" tabindex="-1"></a>  <span class="at">X =</span> <span class="fu">as.matrix</span>(X),</span>
-<span id="cb159-25"><a href="Disease.html#cb159-25" tabindex="-1"></a>  <span class="at">N_edges =</span> nbs<span class="sc">$</span>N_edges,</span>
-<span id="cb159-26"><a href="Disease.html#cb159-26" tabindex="-1"></a>  <span class="at">node1 =</span> nbs<span class="sc">$</span>node1,</span>
-<span id="cb159-27"><a href="Disease.html#cb159-27" tabindex="-1"></a>  <span class="at">node2 =</span> nbs<span class="sc">$</span>node2</span>
-<span id="cb159-28"><a href="Disease.html#cb159-28" tabindex="-1"></a>)</span>
-<span id="cb159-29"><a href="Disease.html#cb159-29" tabindex="-1"></a></span>
-<span id="cb159-30"><a href="Disease.html#cb159-30" tabindex="-1"></a>Example9_3Stan  <span class="ot">&lt;-</span> <span class="fu">stan</span>(</span>
-<span id="cb159-31"><a href="Disease.html#cb159-31" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">&quot;functions/Example9_3.stan&quot;</span>,</span>
-<span id="cb159-32"><a href="Disease.html#cb159-32" tabindex="-1"></a>  <span class="at">data =</span> ex.data,</span>
-<span id="cb159-33"><a href="Disease.html#cb159-33" tabindex="-1"></a>  <span class="at">warmup =</span> <span class="dv">10000</span>,</span>
-<span id="cb159-34"><a href="Disease.html#cb159-34" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">20000</span>,</span>
-<span id="cb159-35"><a href="Disease.html#cb159-35" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">2</span>,</span>
-<span id="cb159-36"><a href="Disease.html#cb159-36" tabindex="-1"></a>  <span class="at">thin =</span> <span class="dv">10</span>,</span>
-<span id="cb159-37"><a href="Disease.html#cb159-37" tabindex="-1"></a>  <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;beta0&quot;</span>, <span class="st">&quot;beta&quot;</span>,<span class="st">&quot;sigma_s&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;log_lik&quot;</span>),</span>
-<span id="cb159-38"><a href="Disease.html#cb159-38" tabindex="-1"></a>  <span class="at">include =</span> <span class="cn">TRUE</span></span>
-<span id="cb159-39"><a href="Disease.html#cb159-39" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="Disease.html#cb158-1" tabindex="-1"></a><span class="co"># Create the neighborhood</span></span>
+<span id="cb158-2"><a href="Disease.html#cb158-2" tabindex="-1"></a>W.nb <span class="ot">&lt;-</span></span>
+<span id="cb158-3"><a href="Disease.html#cb158-3" tabindex="-1"></a>  <span class="fu">poly2nb</span>(england, <span class="at">row.names =</span> <span class="fu">rownames</span>(england))</span>
+<span id="cb158-4"><a href="Disease.html#cb158-4" tabindex="-1"></a><span class="co"># Creates a matrix for following function call</span></span>
+<span id="cb158-5"><a href="Disease.html#cb158-5" tabindex="-1"></a>W.mat <span class="ot">&lt;-</span> <span class="fu">nb2mat</span>(W.nb, <span class="at">style =</span> <span class="st">&quot;B&quot;</span>)</span>
+<span id="cb158-6"><a href="Disease.html#cb158-6" tabindex="-1"></a></span>
+<span id="cb158-7"><a href="Disease.html#cb158-7" tabindex="-1"></a><span class="co"># Define the spatial structure to use in stan</span></span>
+<span id="cb158-8"><a href="Disease.html#cb158-8" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(england<span class="sc">$</span>ID))</span>
+<span id="cb158-9"><a href="Disease.html#cb158-9" tabindex="-1"></a>neigh <span class="ot">&lt;-</span> <span class="fu">adjlist</span>(W.mat, N)</span>
+<span id="cb158-10"><a href="Disease.html#cb158-10" tabindex="-1"></a>numneigh  <span class="ot">&lt;-</span>  <span class="fu">apply</span>(W.mat, <span class="dv">2</span>, sum)</span>
+<span id="cb158-11"><a href="Disease.html#cb158-11" tabindex="-1"></a>nbs <span class="ot">&lt;-</span> <span class="fu">mungeCARdata4stan</span>(neigh, numneigh)</span>
+<span id="cb158-12"><a href="Disease.html#cb158-12" tabindex="-1"></a></span>
+<span id="cb158-13"><a href="Disease.html#cb158-13" tabindex="-1"></a></span>
+<span id="cb158-14"><a href="Disease.html#cb158-14" tabindex="-1"></a><span class="co"># Define data and variables for Stan model</span></span>
+<span id="cb158-15"><a href="Disease.html#cb158-15" tabindex="-1"></a>y <span class="ot">&lt;-</span> copd_df<span class="sc">$</span>Y2010</span>
+<span id="cb158-16"><a href="Disease.html#cb158-16" tabindex="-1"></a>E <span class="ot">&lt;-</span> copd_df<span class="sc">$</span>E2010</span>
+<span id="cb158-17"><a href="Disease.html#cb158-17" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">scale</span>(copd_df<span class="sc">$</span>Average.Score))</span>
+<span id="cb158-18"><a href="Disease.html#cb158-18" tabindex="-1"></a></span>
+<span id="cb158-19"><a href="Disease.html#cb158-19" tabindex="-1"></a>ex.data <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb158-20"><a href="Disease.html#cb158-20" tabindex="-1"></a>  <span class="at">N =</span>  nbs<span class="sc">$</span>N,</span>
+<span id="cb158-21"><a href="Disease.html#cb158-21" tabindex="-1"></a>  <span class="at">y =</span> y,</span>
+<span id="cb158-22"><a href="Disease.html#cb158-22" tabindex="-1"></a>  <span class="at">E =</span> E,</span>
+<span id="cb158-23"><a href="Disease.html#cb158-23" tabindex="-1"></a>  <span class="at">p =</span> <span class="dv">1</span>,</span>
+<span id="cb158-24"><a href="Disease.html#cb158-24" tabindex="-1"></a>  <span class="at">X =</span> <span class="fu">as.matrix</span>(X),</span>
+<span id="cb158-25"><a href="Disease.html#cb158-25" tabindex="-1"></a>  <span class="at">N_edges =</span> nbs<span class="sc">$</span>N_edges,</span>
+<span id="cb158-26"><a href="Disease.html#cb158-26" tabindex="-1"></a>  <span class="at">node1 =</span> nbs<span class="sc">$</span>node1,</span>
+<span id="cb158-27"><a href="Disease.html#cb158-27" tabindex="-1"></a>  <span class="at">node2 =</span> nbs<span class="sc">$</span>node2</span>
+<span id="cb158-28"><a href="Disease.html#cb158-28" tabindex="-1"></a>)</span>
+<span id="cb158-29"><a href="Disease.html#cb158-29" tabindex="-1"></a></span>
+<span id="cb158-30"><a href="Disease.html#cb158-30" tabindex="-1"></a>Example9_3Stan  <span class="ot">&lt;-</span> <span class="fu">stan</span>(</span>
+<span id="cb158-31"><a href="Disease.html#cb158-31" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">&quot;functions/Example9_3.stan&quot;</span>,</span>
+<span id="cb158-32"><a href="Disease.html#cb158-32" tabindex="-1"></a>  <span class="at">data =</span> ex.data,</span>
+<span id="cb158-33"><a href="Disease.html#cb158-33" tabindex="-1"></a>  <span class="at">warmup =</span> <span class="dv">10000</span>,</span>
+<span id="cb158-34"><a href="Disease.html#cb158-34" tabindex="-1"></a>  <span class="at">iter =</span> <span class="dv">20000</span>,</span>
+<span id="cb158-35"><a href="Disease.html#cb158-35" tabindex="-1"></a>  <span class="at">chains =</span> <span class="dv">2</span>,</span>
+<span id="cb158-36"><a href="Disease.html#cb158-36" tabindex="-1"></a>  <span class="at">thin =</span> <span class="dv">10</span>,</span>
+<span id="cb158-37"><a href="Disease.html#cb158-37" tabindex="-1"></a>  <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;beta0&quot;</span>, <span class="st">&quot;beta&quot;</span>,<span class="st">&quot;sigma_s&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;log_lik&quot;</span>),</span>
+<span id="cb158-38"><a href="Disease.html#cb158-38" tabindex="-1"></a>  <span class="at">include =</span> <span class="cn">TRUE</span></span>
+<span id="cb158-39"><a href="Disease.html#cb158-39" tabindex="-1"></a>)</span></code></pre></div>
 <p>Show traceplots.</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="Disease.html#cb160-1" tabindex="-1"></a><span class="co">#computing WAIC using the package loo</span></span>
-<span id="cb160-2"><a href="Disease.html#cb160-2" tabindex="-1"></a></span>
-<span id="cb160-3"><a href="Disease.html#cb160-3" tabindex="-1"></a>loglikcar <span class="ot">&lt;-</span> <span class="fu">extract_log_lik</span>(Example9_3Stan)</span>
-<span id="cb160-4"><a href="Disease.html#cb160-4" tabindex="-1"></a>waiccar <span class="ot">&lt;-</span> <span class="fu">waic</span>(loglikcar)</span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="Disease.html#cb159-1" tabindex="-1"></a><span class="co">#computing WAIC using the package loo</span></span>
+<span id="cb159-2"><a href="Disease.html#cb159-2" tabindex="-1"></a></span>
+<span id="cb159-3"><a href="Disease.html#cb159-3" tabindex="-1"></a>loglikcar <span class="ot">&lt;-</span> <span class="fu">extract_log_lik</span>(Example9_3Stan)</span>
+<span id="cb159-4"><a href="Disease.html#cb159-4" tabindex="-1"></a>waiccar <span class="ot">&lt;-</span> <span class="fu">waic</span>(loglikcar)</span></code></pre></div>
 <pre><code>## Warning: 
 ## 89 (27.5%) p_waic estimates greater than 0.4. We recommend trying loo instead.</code></pre>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="Disease.html#cb162-1" tabindex="-1"></a>waiccar</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="Disease.html#cb161-1" tabindex="-1"></a>waiccar</span></code></pre></div>
 <pre><code>## 
 ## Computed from 2000 by 324 log-likelihood matrix
 ## 
@@ -905,19 +906,19 @@ generated quantities {
 ## waic        2390.2 28.4
 ## 
 ## 89 (27.5%) p_waic estimates greater than 0.4. We recommend trying loo instead.</code></pre>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="Disease.html#cb164-1" tabindex="-1"></a>rstan<span class="sc">::</span><span class="fu">traceplot</span>(Example9_3Stan, <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;beta0&quot;</span>,<span class="st">&quot;beta&quot;</span>,<span class="st">&quot;sigma_s&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="Disease.html#cb163-1" tabindex="-1"></a>rstan<span class="sc">::</span><span class="fu">traceplot</span>(Example9_3Stan, <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;beta0&quot;</span>,<span class="st">&quot;beta&quot;</span>,<span class="st">&quot;sigma_s&quot;</span>))</span></code></pre></div>
 <p><img src="_main_files/figure-html/Ex%209.3%20stan%20CAR%20traceplots-1.png" width="672" /></p>
 <p>Show the posterior summary for the parameters if interest.
 Keep in mind that in the stan model the we are sampling the standard deviation of the random effect unlike <code>CARBayes</code> where the variance is obtained.</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="Disease.html#cb165-1" tabindex="-1"></a><span class="co"># Extract samples</span></span>
-<span id="cb165-2"><a href="Disease.html#cb165-2" tabindex="-1"></a>summary_CAR_stan <span class="ot">&lt;-</span></span>
-<span id="cb165-3"><a href="Disease.html#cb165-3" tabindex="-1"></a>  <span class="fu">summary</span>(</span>
-<span id="cb165-4"><a href="Disease.html#cb165-4" tabindex="-1"></a>    Example9_3Stan,</span>
-<span id="cb165-5"><a href="Disease.html#cb165-5" tabindex="-1"></a>    <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;beta0&quot;</span>, <span class="st">&quot;beta&quot;</span>,<span class="st">&quot;sigma_s&quot;</span>),</span>
-<span id="cb165-6"><a href="Disease.html#cb165-6" tabindex="-1"></a>    <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)</span>
-<span id="cb165-7"><a href="Disease.html#cb165-7" tabindex="-1"></a>  )</span>
-<span id="cb165-8"><a href="Disease.html#cb165-8" tabindex="-1"></a></span>
-<span id="cb165-9"><a href="Disease.html#cb165-9" tabindex="-1"></a>summary_CAR_stan<span class="sc">$</span>summary</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="Disease.html#cb164-1" tabindex="-1"></a><span class="co"># Extract samples</span></span>
+<span id="cb164-2"><a href="Disease.html#cb164-2" tabindex="-1"></a>summary_CAR_stan <span class="ot">&lt;-</span></span>
+<span id="cb164-3"><a href="Disease.html#cb164-3" tabindex="-1"></a>  <span class="fu">summary</span>(</span>
+<span id="cb164-4"><a href="Disease.html#cb164-4" tabindex="-1"></a>    Example9_3Stan,</span>
+<span id="cb164-5"><a href="Disease.html#cb164-5" tabindex="-1"></a>    <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;beta0&quot;</span>, <span class="st">&quot;beta&quot;</span>,<span class="st">&quot;sigma_s&quot;</span>),</span>
+<span id="cb164-6"><a href="Disease.html#cb164-6" tabindex="-1"></a>    <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)</span>
+<span id="cb164-7"><a href="Disease.html#cb164-7" tabindex="-1"></a>  )</span>
+<span id="cb164-8"><a href="Disease.html#cb164-8" tabindex="-1"></a></span>
+<span id="cb164-9"><a href="Disease.html#cb164-9" tabindex="-1"></a>summary_CAR_stan<span class="sc">$</span>summary</span></code></pre></div>
 <pre><code>##                mean      se_mean          sd        2.5%       97.5%    n_eff
 ## beta0   -0.06896897 0.0001634880 0.007487734 -0.08337321 -0.05406075 2097.630
 ## beta[1]  0.18192275 0.0002938688 0.012404484  0.15732535  0.20552801 1781.765
@@ -927,26 +928,26 @@ Keep in mind that in the stan model the we are sampling the standard deviation o
 ## beta[1] 1.002448
 ## sigma_s 1.001970</code></pre>
 <p>Map the mean of the posterior estimate for the latent effect.</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="Disease.html#cb167-1" tabindex="-1"></a>summary_CAR_stan_b <span class="ot">&lt;-</span></span>
-<span id="cb167-2"><a href="Disease.html#cb167-2" tabindex="-1"></a>  <span class="fu">summary</span>(</span>
-<span id="cb167-3"><a href="Disease.html#cb167-3" tabindex="-1"></a>    Example9_3Stan,</span>
-<span id="cb167-4"><a href="Disease.html#cb167-4" tabindex="-1"></a>    <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;b&quot;</span>),</span>
-<span id="cb167-5"><a href="Disease.html#cb167-5" tabindex="-1"></a>    <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)</span>
-<span id="cb167-6"><a href="Disease.html#cb167-6" tabindex="-1"></a>  )</span>
-<span id="cb167-7"><a href="Disease.html#cb167-7" tabindex="-1"></a></span>
-<span id="cb167-8"><a href="Disease.html#cb167-8" tabindex="-1"></a>observed <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">rownames_to_column</span>(observed, <span class="st">&quot;ID&quot;</span>)</span>
-<span id="cb167-9"><a href="Disease.html#cb167-9" tabindex="-1"></a></span>
-<span id="cb167-10"><a href="Disease.html#cb167-10" tabindex="-1"></a>summary_CAR_stan_b<span class="sc">$</span>ID <span class="ot">&lt;-</span> observed<span class="sc">$</span>ID</span>
-<span id="cb167-11"><a href="Disease.html#cb167-11" tabindex="-1"></a></span>
-<span id="cb167-12"><a href="Disease.html#cb167-12" tabindex="-1"></a>CAR_stan_merge <span class="ot">&lt;-</span> <span class="fu">merge</span>(england, summary_CAR_stan_b, <span class="at">by =</span> <span class="st">&quot;ID&quot;</span>) </span>
-<span id="cb167-13"><a href="Disease.html#cb167-13" tabindex="-1"></a></span>
-<span id="cb167-14"><a href="Disease.html#cb167-14" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb167-15"><a href="Disease.html#cb167-15" tabindex="-1"></a>  <span class="co"># Choose spatial object and column for plotting</span></span>
-<span id="cb167-16"><a href="Disease.html#cb167-16" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> CAR_stan_merge, <span class="fu">aes</span>(<span class="at">fill =</span> summary.mean)) <span class="sc">+</span> </span>
-<span id="cb167-17"><a href="Disease.html#cb167-17" tabindex="-1"></a>  <span class="co"># Change legend&#39;s label</span></span>
-<span id="cb167-18"><a href="Disease.html#cb167-18" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&#39;Latent effects stan&#39;</span>) <span class="sc">+</span></span>
-<span id="cb167-19"><a href="Disease.html#cb167-19" tabindex="-1"></a>  <span class="co"># Clear background and plot borders</span></span>
-<span id="cb167-20"><a href="Disease.html#cb167-20" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="Disease.html#cb166-1" tabindex="-1"></a>summary_CAR_stan_b <span class="ot">&lt;-</span></span>
+<span id="cb166-2"><a href="Disease.html#cb166-2" tabindex="-1"></a>  <span class="fu">summary</span>(</span>
+<span id="cb166-3"><a href="Disease.html#cb166-3" tabindex="-1"></a>    Example9_3Stan,</span>
+<span id="cb166-4"><a href="Disease.html#cb166-4" tabindex="-1"></a>    <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;b&quot;</span>),</span>
+<span id="cb166-5"><a href="Disease.html#cb166-5" tabindex="-1"></a>    <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)</span>
+<span id="cb166-6"><a href="Disease.html#cb166-6" tabindex="-1"></a>  )</span>
+<span id="cb166-7"><a href="Disease.html#cb166-7" tabindex="-1"></a></span>
+<span id="cb166-8"><a href="Disease.html#cb166-8" tabindex="-1"></a>observed <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">rownames_to_column</span>(observed, <span class="st">&quot;ID&quot;</span>)</span>
+<span id="cb166-9"><a href="Disease.html#cb166-9" tabindex="-1"></a></span>
+<span id="cb166-10"><a href="Disease.html#cb166-10" tabindex="-1"></a>summary_CAR_stan_b<span class="sc">$</span>ID <span class="ot">&lt;-</span> observed<span class="sc">$</span>ID</span>
+<span id="cb166-11"><a href="Disease.html#cb166-11" tabindex="-1"></a></span>
+<span id="cb166-12"><a href="Disease.html#cb166-12" tabindex="-1"></a>CAR_stan_merge <span class="ot">&lt;-</span> <span class="fu">merge</span>(england, summary_CAR_stan_b, <span class="at">by =</span> <span class="st">&quot;ID&quot;</span>) </span>
+<span id="cb166-13"><a href="Disease.html#cb166-13" tabindex="-1"></a></span>
+<span id="cb166-14"><a href="Disease.html#cb166-14" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb166-15"><a href="Disease.html#cb166-15" tabindex="-1"></a>  <span class="co"># Choose spatial object and column for plotting</span></span>
+<span id="cb166-16"><a href="Disease.html#cb166-16" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> CAR_stan_merge, <span class="fu">aes</span>(<span class="at">fill =</span> summary.mean)) <span class="sc">+</span> </span>
+<span id="cb166-17"><a href="Disease.html#cb166-17" tabindex="-1"></a>  <span class="co"># Change legend&#39;s label</span></span>
+<span id="cb166-18"><a href="Disease.html#cb166-18" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&#39;Latent effects stan&#39;</span>) <span class="sc">+</span></span>
+<span id="cb166-19"><a href="Disease.html#cb166-19" tabindex="-1"></a>  <span class="co"># Clear background and plot borders</span></span>
+<span id="cb166-20"><a href="Disease.html#cb166-20" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code></pre></div>
 <p><img src="_main_files/figure-html/Ex%209.3%20plot%20map%20stan-1.png" width="672" /></p>
 <!-- IDEA: Maybe we should agree on what output we will show for every method -->
 </div>
@@ -954,62 +955,62 @@ Keep in mind that in the stan model the we are sampling the standard deviation o
 <div id="example-9.4-fitting-a-conditional-spatial-model-using-carbayes" class="section level2 unnumbered hasAnchor">
 <h2>Example 9.4: Fitting a conditional spatial model using CARBayes<a href="Disease.html#example-9.4-fitting-a-conditional-spatial-model-using-carbayes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Load the necessary libraries and the COPD data: <a href="https://github.com/spacetime-environ/stepi2/blob/main/data/copd/englandlocalauthority.shp">englandlocalauthority.shp</a>, <a href="https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityobserved.csv">copdmortalityobserved.csv</a>, and <a href="https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityexpected.csv">copdmortalityexpected.csv</a> datasets from Chapter 6.</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="Disease.html#cb168-1" tabindex="-1"></a><span class="fu">library</span>(CARBayes)</span>
-<span id="cb168-2"><a href="Disease.html#cb168-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb168-3"><a href="Disease.html#cb168-3" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb168-4"><a href="Disease.html#cb168-4" tabindex="-1"></a><span class="fu">library</span>(spdep)</span>
-<span id="cb168-5"><a href="Disease.html#cb168-5" tabindex="-1"></a></span>
-<span id="cb168-6"><a href="Disease.html#cb168-6" tabindex="-1"></a><span class="co"># Reading in borders</span></span>
-<span id="cb168-7"><a href="Disease.html#cb168-7" tabindex="-1"></a>england <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">&quot;data/copd/englandlocalauthority.shp&quot;</span>)</span>
-<span id="cb168-8"><a href="Disease.html#cb168-8" tabindex="-1"></a><span class="co"># Reading in data</span></span>
-<span id="cb168-9"><a href="Disease.html#cb168-9" tabindex="-1"></a>observed <span class="ot">&lt;-</span></span>
-<span id="cb168-10"><a href="Disease.html#cb168-10" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/copd/copdmortalityobserved.csv&quot;</span>, <span class="at">row.names =</span> <span class="dv">1</span>)</span>
-<span id="cb168-11"><a href="Disease.html#cb168-11" tabindex="-1"></a>expected <span class="ot">&lt;-</span></span>
-<span id="cb168-12"><a href="Disease.html#cb168-12" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/copd/copdmortalityexpected.csv&quot;</span>)</span>
-<span id="cb168-13"><a href="Disease.html#cb168-13" tabindex="-1"></a>covariates <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/copd/copdavgscore.csv&quot;</span>) </span>
-<span id="cb168-14"><a href="Disease.html#cb168-14" tabindex="-1"></a><span class="co"># Merge everything into one data frame</span></span>
-<span id="cb168-15"><a href="Disease.html#cb168-15" tabindex="-1"></a>copd_df <span class="ot">&lt;-</span></span>
-<span id="cb168-16"><a href="Disease.html#cb168-16" tabindex="-1"></a>  <span class="fu">cbind</span>(observed,  expected) <span class="sc">|&gt;</span> <span class="fu">merge</span>(</span>
-<span id="cb168-17"><a href="Disease.html#cb168-17" tabindex="-1"></a>    covariates,</span>
-<span id="cb168-18"><a href="Disease.html#cb168-18" tabindex="-1"></a>    <span class="at">by.x =</span> <span class="st">&quot;code&quot;</span>,</span>
-<span id="cb168-19"><a href="Disease.html#cb168-19" tabindex="-1"></a>    <span class="at">by.y =</span> <span class="st">&quot;LA.CODE&quot;</span>,</span>
-<span id="cb168-20"><a href="Disease.html#cb168-20" tabindex="-1"></a>    <span class="at">all.x =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb168-21"><a href="Disease.html#cb168-21" tabindex="-1"></a>    <span class="at">all.y =</span> <span class="cn">FALSE</span></span>
-<span id="cb168-22"><a href="Disease.html#cb168-22" tabindex="-1"></a>  )</span>
-<span id="cb168-23"><a href="Disease.html#cb168-23" tabindex="-1"></a>copd_df<span class="sc">$</span>Average.Score <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">scale</span>(copd_df<span class="sc">$</span>Average.Score))</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="Disease.html#cb167-1" tabindex="-1"></a><span class="fu">library</span>(CARBayes)</span>
+<span id="cb167-2"><a href="Disease.html#cb167-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb167-3"><a href="Disease.html#cb167-3" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb167-4"><a href="Disease.html#cb167-4" tabindex="-1"></a><span class="fu">library</span>(spdep)</span>
+<span id="cb167-5"><a href="Disease.html#cb167-5" tabindex="-1"></a></span>
+<span id="cb167-6"><a href="Disease.html#cb167-6" tabindex="-1"></a><span class="co"># Reading in borders</span></span>
+<span id="cb167-7"><a href="Disease.html#cb167-7" tabindex="-1"></a>england <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">&quot;data/copd/englandlocalauthority.shp&quot;</span>)</span>
+<span id="cb167-8"><a href="Disease.html#cb167-8" tabindex="-1"></a><span class="co"># Reading in data</span></span>
+<span id="cb167-9"><a href="Disease.html#cb167-9" tabindex="-1"></a>observed <span class="ot">&lt;-</span></span>
+<span id="cb167-10"><a href="Disease.html#cb167-10" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/copd/copdmortalityobserved.csv&quot;</span>, <span class="at">row.names =</span> <span class="dv">1</span>)</span>
+<span id="cb167-11"><a href="Disease.html#cb167-11" tabindex="-1"></a>expected <span class="ot">&lt;-</span></span>
+<span id="cb167-12"><a href="Disease.html#cb167-12" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/copd/copdmortalityexpected.csv&quot;</span>)</span>
+<span id="cb167-13"><a href="Disease.html#cb167-13" tabindex="-1"></a>covariates <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/copd/copdavgscore.csv&quot;</span>) </span>
+<span id="cb167-14"><a href="Disease.html#cb167-14" tabindex="-1"></a><span class="co"># Merge everything into one data frame</span></span>
+<span id="cb167-15"><a href="Disease.html#cb167-15" tabindex="-1"></a>copd_df <span class="ot">&lt;-</span></span>
+<span id="cb167-16"><a href="Disease.html#cb167-16" tabindex="-1"></a>  <span class="fu">cbind</span>(observed,  expected) <span class="sc">|&gt;</span> <span class="fu">merge</span>(</span>
+<span id="cb167-17"><a href="Disease.html#cb167-17" tabindex="-1"></a>    covariates,</span>
+<span id="cb167-18"><a href="Disease.html#cb167-18" tabindex="-1"></a>    <span class="at">by.x =</span> <span class="st">&quot;code&quot;</span>,</span>
+<span id="cb167-19"><a href="Disease.html#cb167-19" tabindex="-1"></a>    <span class="at">by.y =</span> <span class="st">&quot;LA.CODE&quot;</span>,</span>
+<span id="cb167-20"><a href="Disease.html#cb167-20" tabindex="-1"></a>    <span class="at">all.x =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb167-21"><a href="Disease.html#cb167-21" tabindex="-1"></a>    <span class="at">all.y =</span> <span class="cn">FALSE</span></span>
+<span id="cb167-22"><a href="Disease.html#cb167-22" tabindex="-1"></a>  )</span>
+<span id="cb167-23"><a href="Disease.html#cb167-23" tabindex="-1"></a>copd_df<span class="sc">$</span>Average.Score <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">scale</span>(copd_df<span class="sc">$</span>Average.Score))</span></code></pre></div>
 <p>To calculate the smoother SMRs, we first need to create a <em>neighborhood</em> structure. The functions <code>poly2nb()</code> and <code>nb2mat()</code> from the <code>spdep</code> package can be used to create this</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="Disease.html#cb169-1" tabindex="-1"></a><span class="co"># Create the neighborhood</span></span>
-<span id="cb169-2"><a href="Disease.html#cb169-2" tabindex="-1"></a>W.nb <span class="ot">&lt;-</span></span>
-<span id="cb169-3"><a href="Disease.html#cb169-3" tabindex="-1"></a>  <span class="fu">poly2nb</span>(england, <span class="at">row.names =</span> <span class="fu">rownames</span>(england))</span>
-<span id="cb169-4"><a href="Disease.html#cb169-4" tabindex="-1"></a></span>
-<span id="cb169-5"><a href="Disease.html#cb169-5" tabindex="-1"></a><span class="co"># Creates a matrix for following function call</span></span>
-<span id="cb169-6"><a href="Disease.html#cb169-6" tabindex="-1"></a>W.mat <span class="ot">&lt;-</span> <span class="fu">nb2mat</span>(W.nb, <span class="at">style =</span> <span class="st">&quot;B&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="Disease.html#cb168-1" tabindex="-1"></a><span class="co"># Create the neighborhood</span></span>
+<span id="cb168-2"><a href="Disease.html#cb168-2" tabindex="-1"></a>W.nb <span class="ot">&lt;-</span></span>
+<span id="cb168-3"><a href="Disease.html#cb168-3" tabindex="-1"></a>  <span class="fu">poly2nb</span>(england, <span class="at">row.names =</span> <span class="fu">rownames</span>(england))</span>
+<span id="cb168-4"><a href="Disease.html#cb168-4" tabindex="-1"></a></span>
+<span id="cb168-5"><a href="Disease.html#cb168-5" tabindex="-1"></a><span class="co"># Creates a matrix for following function call</span></span>
+<span id="cb168-6"><a href="Disease.html#cb168-6" tabindex="-1"></a>W.mat <span class="ot">&lt;-</span> <span class="fu">nb2mat</span>(W.nb, <span class="at">style =</span> <span class="st">&quot;B&quot;</span>)</span></code></pre></div>
 <p>Here, we use <em>first neighbors</em> to define the structure, so any local authority sharing a border are considered neighbors.</p>
 <p>The function <code>S.CARleroux()</code> allows us to use the neighborhood structure and performs a Bayesian analysis to create a smoothed set of observed values.</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="Disease.html#cb170-1" tabindex="-1"></a><span class="co"># Running smoothing model</span></span>
-<span id="cb170-2"><a href="Disease.html#cb170-2" tabindex="-1"></a>Ex9_4 <span class="ot">&lt;-</span></span>
-<span id="cb170-3"><a href="Disease.html#cb170-3" tabindex="-1"></a>  <span class="fu">S.CARleroux</span>(</span>
-<span id="cb170-4"><a href="Disease.html#cb170-4" tabindex="-1"></a>    <span class="co"># Model Formula</span></span>
-<span id="cb170-5"><a href="Disease.html#cb170-5" tabindex="-1"></a>    <span class="at">formula =</span> Y2010 <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E2010)) <span class="sc">+</span> Average.Score,</span>
-<span id="cb170-6"><a href="Disease.html#cb170-6" tabindex="-1"></a>    <span class="co"># data frame with data</span></span>
-<span id="cb170-7"><a href="Disease.html#cb170-7" tabindex="-1"></a>    <span class="at">data =</span> copd_df,</span>
-<span id="cb170-8"><a href="Disease.html#cb170-8" tabindex="-1"></a>    <span class="co"># Choosing Poisson Regression</span></span>
-<span id="cb170-9"><a href="Disease.html#cb170-9" tabindex="-1"></a>    <span class="at">family =</span> <span class="st">&quot;poisson&quot;</span>,</span>
-<span id="cb170-10"><a href="Disease.html#cb170-10" tabindex="-1"></a>    <span class="co"># Neighborhood matrix</span></span>
-<span id="cb170-11"><a href="Disease.html#cb170-11" tabindex="-1"></a>    <span class="at">W =</span> W.mat,</span>
-<span id="cb170-12"><a href="Disease.html#cb170-12" tabindex="-1"></a>    <span class="co"># Number of burn in samples</span></span>
-<span id="cb170-13"><a href="Disease.html#cb170-13" tabindex="-1"></a>    <span class="at">burnin =</span> <span class="dv">20000</span>,</span>
-<span id="cb170-14"><a href="Disease.html#cb170-14" tabindex="-1"></a>    <span class="co"># Number of MCMC samples</span></span>
-<span id="cb170-15"><a href="Disease.html#cb170-15" tabindex="-1"></a>    <span class="at">n.sample =</span> <span class="dv">100000</span>,</span>
-<span id="cb170-16"><a href="Disease.html#cb170-16" tabindex="-1"></a>    <span class="at">thin =</span> <span class="dv">10</span>,</span>
-<span id="cb170-17"><a href="Disease.html#cb170-17" tabindex="-1"></a>    <span class="at">rho =</span> <span class="dv">1</span></span>
-<span id="cb170-18"><a href="Disease.html#cb170-18" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="Disease.html#cb169-1" tabindex="-1"></a><span class="co"># Running smoothing model</span></span>
+<span id="cb169-2"><a href="Disease.html#cb169-2" tabindex="-1"></a>Ex9_4 <span class="ot">&lt;-</span></span>
+<span id="cb169-3"><a href="Disease.html#cb169-3" tabindex="-1"></a>  <span class="fu">S.CARleroux</span>(</span>
+<span id="cb169-4"><a href="Disease.html#cb169-4" tabindex="-1"></a>    <span class="co"># Model Formula</span></span>
+<span id="cb169-5"><a href="Disease.html#cb169-5" tabindex="-1"></a>    <span class="at">formula =</span> Y2010 <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E2010)) <span class="sc">+</span> Average.Score,</span>
+<span id="cb169-6"><a href="Disease.html#cb169-6" tabindex="-1"></a>    <span class="co"># data frame with data</span></span>
+<span id="cb169-7"><a href="Disease.html#cb169-7" tabindex="-1"></a>    <span class="at">data =</span> copd_df,</span>
+<span id="cb169-8"><a href="Disease.html#cb169-8" tabindex="-1"></a>    <span class="co"># Choosing Poisson Regression</span></span>
+<span id="cb169-9"><a href="Disease.html#cb169-9" tabindex="-1"></a>    <span class="at">family =</span> <span class="st">&quot;poisson&quot;</span>,</span>
+<span id="cb169-10"><a href="Disease.html#cb169-10" tabindex="-1"></a>    <span class="co"># Neighborhood matrix</span></span>
+<span id="cb169-11"><a href="Disease.html#cb169-11" tabindex="-1"></a>    <span class="at">W =</span> W.mat,</span>
+<span id="cb169-12"><a href="Disease.html#cb169-12" tabindex="-1"></a>    <span class="co"># Number of burn in samples</span></span>
+<span id="cb169-13"><a href="Disease.html#cb169-13" tabindex="-1"></a>    <span class="at">burnin =</span> <span class="dv">20000</span>,</span>
+<span id="cb169-14"><a href="Disease.html#cb169-14" tabindex="-1"></a>    <span class="co"># Number of MCMC samples</span></span>
+<span id="cb169-15"><a href="Disease.html#cb169-15" tabindex="-1"></a>    <span class="at">n.sample =</span> <span class="dv">100000</span>,</span>
+<span id="cb169-16"><a href="Disease.html#cb169-16" tabindex="-1"></a>    <span class="at">thin =</span> <span class="dv">10</span>,</span>
+<span id="cb169-17"><a href="Disease.html#cb169-17" tabindex="-1"></a>    <span class="at">rho =</span> <span class="dv">1</span></span>
+<span id="cb169-18"><a href="Disease.html#cb169-18" tabindex="-1"></a>  )</span></code></pre></div>
 <p>We can extract the new smoother values from the model output and divide them by the expected values in order to compare both methods.</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r foldable"><code class="sourceCode r"><span id="cb171-1"><a href="Disease.html#cb171-1" tabindex="-1"></a><span class="co"># Creating a dataset with smoothed SMRs in 2010</span></span>
-<span id="cb171-2"><a href="Disease.html#cb171-2" tabindex="-1"></a>SMR2010 <span class="ot">&lt;-</span> Ex9_4<span class="sc">$</span>fitted.values <span class="sc">/</span>  copd_df<span class="sc">$</span>E2010</span>
-<span id="cb171-3"><a href="Disease.html#cb171-3" tabindex="-1"></a>SMR_smooth <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(SMR2010, <span class="at">row.names =</span> <span class="fu">rownames</span>(observed))</span>
-<span id="cb171-4"><a href="Disease.html#cb171-4" tabindex="-1"></a><span class="co"># Printing first six rows of smoothed SMRs</span></span>
-<span id="cb171-5"><a href="Disease.html#cb171-5" tabindex="-1"></a><span class="fu">head</span>(SMR_smooth)</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r foldable"><code class="sourceCode r"><span id="cb170-1"><a href="Disease.html#cb170-1" tabindex="-1"></a><span class="co"># Creating a dataset with smoothed SMRs in 2010</span></span>
+<span id="cb170-2"><a href="Disease.html#cb170-2" tabindex="-1"></a>SMR2010 <span class="ot">&lt;-</span> Ex9_4<span class="sc">$</span>fitted.values <span class="sc">/</span>  copd_df<span class="sc">$</span>E2010</span>
+<span id="cb170-3"><a href="Disease.html#cb170-3" tabindex="-1"></a>SMR_smooth <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(SMR2010, <span class="at">row.names =</span> <span class="fu">rownames</span>(observed))</span>
+<span id="cb170-4"><a href="Disease.html#cb170-4" tabindex="-1"></a><span class="co"># Printing first six rows of smoothed SMRs</span></span>
+<span id="cb170-5"><a href="Disease.html#cb170-5" tabindex="-1"></a><span class="fu">head</span>(SMR_smooth)</span></code></pre></div>
 <pre><code>##        SMR2010
 ## 00AA 0.6760759
 ## 00AB 1.3185626
@@ -1017,8 +1018,8 @@ Keep in mind that in the stan model the we are sampling the standard deviation o
 ## 00AD 0.9438893
 ## 00AE 0.7487042
 ## 00AF 0.8297144</code></pre>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r foldable"><code class="sourceCode r"><span id="cb173-1"><a href="Disease.html#cb173-1" tabindex="-1"></a><span class="co"># Summarizing smoothed SMRs</span></span>
-<span id="cb173-2"><a href="Disease.html#cb173-2" tabindex="-1"></a><span class="fu">summary</span>(SMR_smooth)</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r foldable"><code class="sourceCode r"><span id="cb172-1"><a href="Disease.html#cb172-1" tabindex="-1"></a><span class="co"># Summarizing smoothed SMRs</span></span>
+<span id="cb172-2"><a href="Disease.html#cb172-2" tabindex="-1"></a><span class="fu">summary</span>(SMR_smooth)</span></code></pre></div>
 <pre><code>##     SMR2010      
 ##  Min.   :0.6020  
 ##  1st Qu.:0.7913  
@@ -1026,8 +1027,8 @@ Keep in mind that in the stan model the we are sampling the standard deviation o
 ##  Mean   :0.9638  
 ##  3rd Qu.:1.0805  
 ##  Max.   :1.7960</code></pre>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r foldable"><code class="sourceCode r"><span id="cb175-1"><a href="Disease.html#cb175-1" tabindex="-1"></a><span class="co"># Summary of the parameters under the CAR model.</span></span>
-<span id="cb175-2"><a href="Disease.html#cb175-2" tabindex="-1"></a>Ex9_4<span class="sc">$</span>summary.results[]</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r foldable"><code class="sourceCode r"><span id="cb174-1"><a href="Disease.html#cb174-1" tabindex="-1"></a><span class="co"># Summary of the parameters under the CAR model.</span></span>
+<span id="cb174-2"><a href="Disease.html#cb174-2" tabindex="-1"></a>Ex9_4<span class="sc">$</span>summary.results[]</span></code></pre></div>
 <pre><code>##                  Mean    2.5%   97.5% n.sample % accept n.effective Geweke.diag
 ## (Intercept)   -0.0688 -0.0840 -0.0534     8000     38.9      7806.4         0.9
 ## Average.Score  0.1814  0.1569  0.2069     8000     38.9      2471.8         1.1
@@ -1035,23 +1036,23 @@ Keep in mind that in the stan model the we are sampling the standard deviation o
 ## rho            1.0000  1.0000  1.0000       NA       NA          NA          NA</code></pre>
 <!-- QUESTION: What do we want the latent effect or the fitted values? -->
 <p>Use <code>ggplot()</code> and <code>geom_sf()</code> to plot the map of the latent spatial effect.</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r foldable"><code class="sourceCode r"><span id="cb177-1"><a href="Disease.html#cb177-1" tabindex="-1"></a>observed <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">rownames_to_column</span>(observed, <span class="st">&quot;ID&quot;</span>)</span>
-<span id="cb177-2"><a href="Disease.html#cb177-2" tabindex="-1"></a>phi_car <span class="ot">&lt;-</span>  Ex9_4<span class="sc">$</span>samples<span class="sc">$</span>phi</span>
-<span id="cb177-3"><a href="Disease.html#cb177-3" tabindex="-1"></a></span>
-<span id="cb177-4"><a href="Disease.html#cb177-4" tabindex="-1"></a>latent_car_df  <span class="ot">&lt;-</span>  <span class="fu">data.frame</span>(</span>
-<span id="cb177-5"><a href="Disease.html#cb177-5" tabindex="-1"></a>  <span class="at">phi_mean =</span> <span class="fu">apply</span>(phi_car, <span class="dv">2</span>, mean),</span>
-<span id="cb177-6"><a href="Disease.html#cb177-6" tabindex="-1"></a>  <span class="at">phi_sd =</span> <span class="fu">apply</span>(phi_car, <span class="dv">2</span>, sd)</span>
-<span id="cb177-7"><a href="Disease.html#cb177-7" tabindex="-1"></a>)</span>
-<span id="cb177-8"><a href="Disease.html#cb177-8" tabindex="-1"></a><span class="co"># Combine latent spatial effect with england dataset</span></span>
-<span id="cb177-9"><a href="Disease.html#cb177-9" tabindex="-1"></a>latent_car_df<span class="sc">$</span>ID <span class="ot">&lt;-</span> observed<span class="sc">$</span>ID</span>
-<span id="cb177-10"><a href="Disease.html#cb177-10" tabindex="-1"></a>latent_car_england <span class="ot">&lt;-</span>  <span class="fu">merge</span>(england, latent_car_df, <span class="at">by =</span> <span class="st">&quot;ID&quot;</span>)</span>
-<span id="cb177-11"><a href="Disease.html#cb177-11" tabindex="-1"></a><span class="co"># Creating map of smoothed SMRs in England in 2010</span></span>
-<span id="cb177-12"><a href="Disease.html#cb177-12" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb177-13"><a href="Disease.html#cb177-13" tabindex="-1"></a>  <span class="co"># Choose spatial object and column for plotting</span></span>
-<span id="cb177-14"><a href="Disease.html#cb177-14" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> latent_car_england, <span class="fu">aes</span>(<span class="at">fill =</span> phi_mean)) <span class="sc">+</span></span>
-<span id="cb177-15"><a href="Disease.html#cb177-15" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&#39;Latent effects CARbayes&#39;</span>) <span class="sc">+</span></span>
-<span id="cb177-16"><a href="Disease.html#cb177-16" tabindex="-1"></a>  <span class="co"># Clear background and plot borders</span></span>
-<span id="cb177-17"><a href="Disease.html#cb177-17" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r foldable"><code class="sourceCode r"><span id="cb176-1"><a href="Disease.html#cb176-1" tabindex="-1"></a>observed <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">rownames_to_column</span>(observed, <span class="st">&quot;ID&quot;</span>)</span>
+<span id="cb176-2"><a href="Disease.html#cb176-2" tabindex="-1"></a>phi_car <span class="ot">&lt;-</span>  Ex9_4<span class="sc">$</span>samples<span class="sc">$</span>phi</span>
+<span id="cb176-3"><a href="Disease.html#cb176-3" tabindex="-1"></a></span>
+<span id="cb176-4"><a href="Disease.html#cb176-4" tabindex="-1"></a>latent_car_df  <span class="ot">&lt;-</span>  <span class="fu">data.frame</span>(</span>
+<span id="cb176-5"><a href="Disease.html#cb176-5" tabindex="-1"></a>  <span class="at">phi_mean =</span> <span class="fu">apply</span>(phi_car, <span class="dv">2</span>, mean),</span>
+<span id="cb176-6"><a href="Disease.html#cb176-6" tabindex="-1"></a>  <span class="at">phi_sd =</span> <span class="fu">apply</span>(phi_car, <span class="dv">2</span>, sd)</span>
+<span id="cb176-7"><a href="Disease.html#cb176-7" tabindex="-1"></a>)</span>
+<span id="cb176-8"><a href="Disease.html#cb176-8" tabindex="-1"></a><span class="co"># Combine latent spatial effect with england dataset</span></span>
+<span id="cb176-9"><a href="Disease.html#cb176-9" tabindex="-1"></a>latent_car_df<span class="sc">$</span>ID <span class="ot">&lt;-</span> observed<span class="sc">$</span>ID</span>
+<span id="cb176-10"><a href="Disease.html#cb176-10" tabindex="-1"></a>latent_car_england <span class="ot">&lt;-</span>  <span class="fu">merge</span>(england, latent_car_df, <span class="at">by =</span> <span class="st">&quot;ID&quot;</span>)</span>
+<span id="cb176-11"><a href="Disease.html#cb176-11" tabindex="-1"></a><span class="co"># Creating map of smoothed SMRs in England in 2010</span></span>
+<span id="cb176-12"><a href="Disease.html#cb176-12" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb176-13"><a href="Disease.html#cb176-13" tabindex="-1"></a>  <span class="co"># Choose spatial object and column for plotting</span></span>
+<span id="cb176-14"><a href="Disease.html#cb176-14" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> latent_car_england, <span class="fu">aes</span>(<span class="at">fill =</span> phi_mean)) <span class="sc">+</span></span>
+<span id="cb176-15"><a href="Disease.html#cb176-15" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&#39;Latent effects CARbayes&#39;</span>) <span class="sc">+</span></span>
+<span id="cb176-16"><a href="Disease.html#cb176-16" tabindex="-1"></a>  <span class="co"># Clear background and plot borders</span></span>
+<span id="cb176-17"><a href="Disease.html#cb176-17" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code></pre></div>
 <p><img src="_main_files/figure-html/Ex%209.4%20carbayes%20map%20smoothed%20SMRs-1.png" width="672" /></p>
 </div>
 <div id="example-9.5-fitting-a-conditional-model-using-inla" class="section level2 unnumbered hasAnchor">
@@ -1059,17 +1060,17 @@ Keep in mind that in the stan model the we are sampling the standard deviation o
 <p>This example uses the <a href="https://github.com/spacetime-environ/stepi2/blob/main/data/copd/englandlocalauthority.shp">englandlocalauthority.shp</a>, <a href="https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityobserved.csv">copdmortalityobserved.csv</a>, and
 <a href="https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityexpected.csv">copdmortalityexpected.csv</a> datasets from Chapter 6.</p>
 <!-- TODO: Show output for this model  -->
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="Disease.html#cb178-1" tabindex="-1"></a><span class="co"># run the INLA model</span></span>
-<span id="cb178-2"><a href="Disease.html#cb178-2" tabindex="-1"></a>Ex9_5 <span class="ot">&lt;-</span> <span class="fu">inla</span>(</span>
-<span id="cb178-3"><a href="Disease.html#cb178-3" tabindex="-1"></a>  Y2010 <span class="sc">~</span> Average.Score <span class="sc">+</span> <span class="fu">f</span>(ID  , <span class="at">model =</span> <span class="st">&quot;besag&quot;</span>, <span class="at">graph =</span> <span class="st">&quot;UK.adj&quot;</span>),</span>
-<span id="cb178-4"><a href="Disease.html#cb178-4" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">&quot;poisson&quot;</span>,</span>
-<span id="cb178-5"><a href="Disease.html#cb178-5" tabindex="-1"></a>  <span class="at">E =</span> E2010,</span>
-<span id="cb178-6"><a href="Disease.html#cb178-6" tabindex="-1"></a>  <span class="at">data =</span> copd_df,</span>
-<span id="cb178-7"><a href="Disease.html#cb178-7" tabindex="-1"></a>  <span class="at">control.predictor =</span> <span class="fu">list</span>(<span class="at">compute =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb178-8"><a href="Disease.html#cb178-8" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="Disease.html#cb177-1" tabindex="-1"></a><span class="co"># run the INLA model</span></span>
+<span id="cb177-2"><a href="Disease.html#cb177-2" tabindex="-1"></a>Ex9_5 <span class="ot">&lt;-</span> <span class="fu">inla</span>(</span>
+<span id="cb177-3"><a href="Disease.html#cb177-3" tabindex="-1"></a>  Y2010 <span class="sc">~</span> Average.Score <span class="sc">+</span> <span class="fu">f</span>(ID  , <span class="at">model =</span> <span class="st">&quot;besag&quot;</span>, <span class="at">graph =</span> <span class="st">&quot;UK.adj&quot;</span>),</span>
+<span id="cb177-4"><a href="Disease.html#cb177-4" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">&quot;poisson&quot;</span>,</span>
+<span id="cb177-5"><a href="Disease.html#cb177-5" tabindex="-1"></a>  <span class="at">E =</span> E2010,</span>
+<span id="cb177-6"><a href="Disease.html#cb177-6" tabindex="-1"></a>  <span class="at">data =</span> copd_df,</span>
+<span id="cb177-7"><a href="Disease.html#cb177-7" tabindex="-1"></a>  <span class="at">control.predictor =</span> <span class="fu">list</span>(<span class="at">compute =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb177-8"><a href="Disease.html#cb177-8" tabindex="-1"></a>)</span></code></pre></div>
 <p>Summarize the results</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="Disease.html#cb179-1" tabindex="-1"></a><span class="co"># Summarizing smoothed SMRs</span></span>
-<span id="cb179-2"><a href="Disease.html#cb179-2" tabindex="-1"></a><span class="fu">summary</span>(Ex9_5)</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="Disease.html#cb178-1" tabindex="-1"></a><span class="co"># Summarizing smoothed SMRs</span></span>
+<span id="cb178-2"><a href="Disease.html#cb178-2" tabindex="-1"></a><span class="fu">summary</span>(Ex9_5)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ##    c(&quot;inla.core(formula = formula, family = family, contrasts = contrasts, 
@@ -1090,7 +1091,7 @@ Keep in mind that in the stan model the we are sampling the standard deviation o
 ##    = inla.mode, safe = FALSE, debug = debug, &quot;, &quot; .parent.frame = 
 ##    .parent.frame)&quot;) 
 ## Time used:
-##     Pre = 0.623, Running = 0.24, Post = 0.0627, Total = 0.925 
+##     Pre = 0.577, Running = 0.314, Post = 0.0489, Total = 0.94 
 ## Fixed effects:
 ##                 mean    sd 0.025quant 0.5quant 0.975quant   mode kld
 ## (Intercept)   -0.069 0.008     -0.084   -0.069     -0.054 -0.069   0
@@ -1108,23 +1109,23 @@ Keep in mind that in the stan model the we are sampling the standard deviation o
 ##  is computed 
 ## Posterior summaries for the linear predictor and the fitted values are computed
 ## (Posterior marginals needs also &#39;control.compute=list(return.marginals.predictor=TRUE)&#39;)</code></pre>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r foldable"><code class="sourceCode r"><span id="cb181-1"><a href="Disease.html#cb181-1" tabindex="-1"></a>observed <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">rownames_to_column</span>(observed, <span class="st">&quot;ID&quot;</span>)</span>
-<span id="cb181-2"><a href="Disease.html#cb181-2" tabindex="-1"></a>phi_car <span class="ot">&lt;-</span>  Ex9_5<span class="sc">$</span>summary.random<span class="sc">$</span>ID</span>
-<span id="cb181-3"><a href="Disease.html#cb181-3" tabindex="-1"></a></span>
-<span id="cb181-4"><a href="Disease.html#cb181-4" tabindex="-1"></a>latent_car_df  <span class="ot">&lt;-</span>  <span class="fu">data.frame</span>(</span>
-<span id="cb181-5"><a href="Disease.html#cb181-5" tabindex="-1"></a>  <span class="at">phi_mean =</span> phi_car<span class="sc">$</span>mean,</span>
-<span id="cb181-6"><a href="Disease.html#cb181-6" tabindex="-1"></a>  <span class="at">phi_sd =</span> phi_car<span class="sc">$</span>sd</span>
-<span id="cb181-7"><a href="Disease.html#cb181-7" tabindex="-1"></a>)</span>
-<span id="cb181-8"><a href="Disease.html#cb181-8" tabindex="-1"></a><span class="co"># Combine latent spatial effect with england dataset</span></span>
-<span id="cb181-9"><a href="Disease.html#cb181-9" tabindex="-1"></a>latent_car_df<span class="sc">$</span>ID <span class="ot">&lt;-</span> observed<span class="sc">$</span>ID</span>
-<span id="cb181-10"><a href="Disease.html#cb181-10" tabindex="-1"></a>latent_car_england <span class="ot">&lt;-</span>  <span class="fu">merge</span>(england, latent_car_df, <span class="at">by =</span> <span class="st">&quot;ID&quot;</span>)</span>
-<span id="cb181-11"><a href="Disease.html#cb181-11" tabindex="-1"></a><span class="co"># Creating map of smoothed SMRs in England in 2010</span></span>
-<span id="cb181-12"><a href="Disease.html#cb181-12" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb181-13"><a href="Disease.html#cb181-13" tabindex="-1"></a>  <span class="co"># Choose spatial object and column for plotting</span></span>
-<span id="cb181-14"><a href="Disease.html#cb181-14" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> latent_car_england, <span class="fu">aes</span>(<span class="at">fill =</span> phi_mean)) <span class="sc">+</span></span>
-<span id="cb181-15"><a href="Disease.html#cb181-15" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&#39;Latent effects INLA&#39;</span>) <span class="sc">+</span></span>
-<span id="cb181-16"><a href="Disease.html#cb181-16" tabindex="-1"></a>  <span class="co"># Clear background and plot borders</span></span>
-<span id="cb181-17"><a href="Disease.html#cb181-17" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r foldable"><code class="sourceCode r"><span id="cb180-1"><a href="Disease.html#cb180-1" tabindex="-1"></a>observed <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">rownames_to_column</span>(observed, <span class="st">&quot;ID&quot;</span>)</span>
+<span id="cb180-2"><a href="Disease.html#cb180-2" tabindex="-1"></a>phi_car <span class="ot">&lt;-</span>  Ex9_5<span class="sc">$</span>summary.random<span class="sc">$</span>ID</span>
+<span id="cb180-3"><a href="Disease.html#cb180-3" tabindex="-1"></a></span>
+<span id="cb180-4"><a href="Disease.html#cb180-4" tabindex="-1"></a>latent_car_df  <span class="ot">&lt;-</span>  <span class="fu">data.frame</span>(</span>
+<span id="cb180-5"><a href="Disease.html#cb180-5" tabindex="-1"></a>  <span class="at">phi_mean =</span> phi_car<span class="sc">$</span>mean,</span>
+<span id="cb180-6"><a href="Disease.html#cb180-6" tabindex="-1"></a>  <span class="at">phi_sd =</span> phi_car<span class="sc">$</span>sd</span>
+<span id="cb180-7"><a href="Disease.html#cb180-7" tabindex="-1"></a>)</span>
+<span id="cb180-8"><a href="Disease.html#cb180-8" tabindex="-1"></a><span class="co"># Combine latent spatial effect with england dataset</span></span>
+<span id="cb180-9"><a href="Disease.html#cb180-9" tabindex="-1"></a>latent_car_df<span class="sc">$</span>ID <span class="ot">&lt;-</span> observed<span class="sc">$</span>ID</span>
+<span id="cb180-10"><a href="Disease.html#cb180-10" tabindex="-1"></a>latent_car_england <span class="ot">&lt;-</span>  <span class="fu">merge</span>(england, latent_car_df, <span class="at">by =</span> <span class="st">&quot;ID&quot;</span>)</span>
+<span id="cb180-11"><a href="Disease.html#cb180-11" tabindex="-1"></a><span class="co"># Creating map of smoothed SMRs in England in 2010</span></span>
+<span id="cb180-12"><a href="Disease.html#cb180-12" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb180-13"><a href="Disease.html#cb180-13" tabindex="-1"></a>  <span class="co"># Choose spatial object and column for plotting</span></span>
+<span id="cb180-14"><a href="Disease.html#cb180-14" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> latent_car_england, <span class="fu">aes</span>(<span class="at">fill =</span> phi_mean)) <span class="sc">+</span></span>
+<span id="cb180-15"><a href="Disease.html#cb180-15" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">&#39;Latent effects INLA&#39;</span>) <span class="sc">+</span></span>
+<span id="cb180-16"><a href="Disease.html#cb180-16" tabindex="-1"></a>  <span class="co"># Clear background and plot borders</span></span>
+<span id="cb180-17"><a href="Disease.html#cb180-17" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code></pre></div>
 <p><img src="_main_files/figure-html/Ex%209.5%20inla%20smoothed%20SMRs-1.png" width="672" /></p>
 <!-- ## Example 9.6: Fitting a Leroux Model using Nimble, Stan and CARBayes -->
 <!-- This example uses the [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityobserved.csv), and -->
