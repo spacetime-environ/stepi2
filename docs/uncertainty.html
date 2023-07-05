@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 Uncertainty and its reduction | Spatio-temporal methods in environmental epidemiology</title>
-  <meta name="description" content="Chapter 3 Uncertainty and its reduction | Spatio-temporal methods in environmental epidemiology" />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <title>Chapter 3 Uncertainty and its reduction | Spatio-Temporal Methods in Environmental Epidemiology with R</title>
+  <meta name="description" content="Chapter 3 Uncertainty and its reduction | Spatio-Temporal Methods in Environmental Epidemiology with R" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 Uncertainty and its reduction | Spatio-temporal methods in environmental epidemiology" />
+  <meta property="og:title" content="Chapter 3 Uncertainty and its reduction | Spatio-Temporal Methods in Environmental Epidemiology with R" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/img/cover.jpg" />
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Uncertainty and its reduction | Spatio-temporal methods in environmental epidemiology" />
+  <meta name="twitter:title" content="Chapter 3 Uncertainty and its reduction | Spatio-Temporal Methods in Environmental Epidemiology with R" />
   
   
   <meta name="twitter:image" content="/img/cover.jpg" />
@@ -23,13 +23,13 @@
 <meta name="author" content="Gavin Shaddick, James V. Zidek, and Alexandra M. Schmidt" />
 
 
-<meta name="date" content="2023-04-26" />
+<meta name="date" content="2023-07-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="prev" href="basics.html"/>
 <link rel="next" href="data.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -133,26 +133,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Spatio-temporal methods in environmental epidemiology using R</a></li>
+<li><a href="./">Spatio-temporal methods in environmental epidemiology</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="chapter" data-level="" data-path="preface-2nd-edition.html"><a href="preface-2nd-edition.html"><i class="fa fa-check"></i>Preface (2nd edition)</a></li>
-<li class="chapter" data-level="1" data-path="why.html"><a href="why.html"><i class="fa fa-check"></i><b>1</b> Why spatio-temporal epidemiology?</a>
-<ul>
-<li class="chapter" data-level="" data-path="why.html"><a href="why.html#example-1.5"><i class="fa fa-check"></i>Example 1.5</a></li>
-</ul></li>
+<li class="chapter" data-level="1" data-path="why.html"><a href="why.html"><i class="fa fa-check"></i><b>1</b> Why spatio-temporal epidemiology?</a></li>
 <li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Epidemiology-the basics</a>
 <ul>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.9-estimating-the-smr-using-a-poisson-glm"><i class="fa fa-check"></i>Example 2.9: Estimating the SMR using a Poisson GLM</a></li>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.10-estimating-the-smr-using-quasi-likelihood"><i class="fa fa-check"></i>Example 2.10: Estimating the SMR using quasi-likelihood</a></li>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.11-modelling-differences-in-smrs-in-relation-to-differences-in-exposures"><i class="fa fa-check"></i>Example 2.11: Modelling differences in SMRs in relation to differences in exposures</a></li>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.12-modelling-the-risks-associated-with-lagged-effects-of-air-pollution"><i class="fa fa-check"></i>Example 2.12: Modelling the risks associated with lagged effects of air pollution</a></li>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.13-estimating-the-odds-ratio-in-a-case-control-study-using-a-logistic-model"><i class="fa fa-check"></i>Example 2.13: Estimating the odds ratio in a case-control study using a logistic model</a></li>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.14-estimating-the-odds-ratio-of-asthma-associated-with-proximity-to-roads"><i class="fa fa-check"></i>Example 2.14: Estimating the odds ratio of asthma associated with proximity to roads</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.7-estimating-the-smr-using-a-poisson-glm"><i class="fa fa-check"></i>Example 2.7: Estimating the SMR using a Poisson GLM</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.8-estimating-the-smr-using-quasi-likelihood"><i class="fa fa-check"></i>Example 2.8: Estimating the SMR using quasi-likelihood</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.9-modelling-differences-in-smrs-in-relation-to-differences-in-exposures"><i class="fa fa-check"></i>Example 2.9: Modelling differences in SMRs in relation to differences in exposures</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.10-modelling-the-risks-associated-with-lagged-effects-of-air-pollution"><i class="fa fa-check"></i>Example 2.10: Modelling the risks associated with lagged effects of air pollution</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.10-estimating-the-odds-ratio-in-a-case-control-study-using-a-logistic-model"><i class="fa fa-check"></i>Example 2.10: Estimating the odds ratio in a case-control study using a logistic model</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.11-estimating-the-odds-ratio-of-asthma-associated-with-proximity-to-roads"><i class="fa fa-check"></i>Example 2.11: Estimating the odds ratio of asthma associated with proximity to roads</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="uncertainty.html"><a href="uncertainty.html"><i class="fa fa-check"></i><b>3</b> Uncertainty and its reduction</a></li>
-<li class="chapter" data-level="4" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>4</b> Data: increasing information and reducing uncertainty</a></li>
+<li class="chapter" data-level="3" data-path="uncertainty.html"><a href="uncertainty.html"><i class="fa fa-check"></i><b>3</b> Uncertainty and its reduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="uncertainty.html"><a href="uncertainty.html#supplementary-material"><i class="fa fa-check"></i>Supplementary Material</a>
+<ul>
+<li class="chapter" data-level="" data-path="uncertainty.html"><a href="uncertainty.html#more-on-qualitative-uncertainty"><i class="fa fa-check"></i>More on qualitative uncertainty</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>4</b> Data: increasing information and reducing uncertainty</a>
+<ul>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#getting-to-know-the-structure-of-dataframes"><i class="fa fa-check"></i>Getting to know the structure of dataframes</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#extracting-and-creating-variables"><i class="fa fa-check"></i>Extracting and creating variables</a></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="embracing.html"><a href="embracing.html"><i class="fa fa-check"></i><b>5</b> Embracing uncertainty: the Bayesian approach</a></li>
 <li class="chapter" data-level="6" data-path="tactics.html"><a href="tactics.html"><i class="fa fa-check"></i><b>6</b> Tactics-implementing uncertainty models</a>
 <ul>
@@ -167,7 +173,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="tactics.html"><a href="tactics.html#stan"><i class="fa fa-check"></i>Stan</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="Strategies.html"><a href="Strategies.html"><i class="fa fa-check"></i><b>7</b> Strategies implementing uncertainty models</a></li>
+<li class="chapter" data-level="7" data-path="Strategies.html"><a href="Strategies.html"><i class="fa fa-check"></i><b>7</b> Strategies implementing uncertainty models</a>
+<ul>
+<li class="chapter" data-level="" data-path="Strategies.html"><a href="Strategies.html#example-7.6-model-choice-in-studies-of-air-pollution-and-health"><i class="fa fa-check"></i>Example 7.6 Model choice in studies of air pollution and health</a>
+<ul>
+<li class="chapter" data-level="" data-path="Strategies.html"><a href="Strategies.html#nimble-1"><i class="fa fa-check"></i>Nimble</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="trusted.html"><a href="trusted.html"><i class="fa fa-check"></i><b>8</b> But can the data be trusted</a>
 <ul>
 <li class="chapter" data-level="" data-path="trusted.html"><a href="trusted.html#solutions-to-selected-exercises"><i class="fa fa-check"></i>Solutions to Selected Exercises</a>
@@ -179,12 +191,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.1-empirical-bayes-and-bayes-smoothing-of-copd-mortality-for-2010"><i class="fa fa-check"></i>Example 9.1: Empirical Bayes and Bayes smoothing of COPD mortality for 2010</a>
 <ul>
-<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#nimble-1"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#nimble-2"><i class="fa fa-check"></i>Nimble</a></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#stan-1"><i class="fa fa-check"></i>Stan</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.3-fitting-a-conditional-spatial-model-in-nimble-and-stan"><i class="fa fa-check"></i>Example 9.3: Fitting a conditional spatial model in <code>nimble</code> and <code>stan</code></a>
 <ul>
-<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#nimble-2"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#nimble-3"><i class="fa fa-check"></i>Nimble</a></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#stan-2"><i class="fa fa-check"></i>Stan</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.4-fitting-a-conditional-spatial-model-using-carbayes"><i class="fa fa-check"></i>Example 9.4: Fitting a conditional spatial model using CARBayes</a></li>
@@ -192,30 +204,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10" data-path="hazards.html"><a href="hazards.html"><i class="fa fa-check"></i><b>10</b> Environmental hazards-spatial models</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="hazards.html"><a href="hazards.html#example-10.1-spatial-patterns-in-lead-concentrations-in-the-soil-of-the"><i class="fa fa-check"></i><b>10.1</b> Example 10.1 Spatial patterns in lead concentrations in the soil of the</a></li>
-<li class="chapter" data-level="10.2" data-path="hazards.html"><a href="hazards.html#example-10.2-examining-the-log-concentrations-of-lead-in-the-meuse-river"><i class="fa fa-check"></i><b>10.2</b> Example 10.2: Examining the log concentrations of lead in the Meuse River</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-example-10.1-spatial-patterns-of-benzene-concentrations-in-montreal-qc-canada"><i class="fa fa-check"></i>EXTRA: Example 10.1: Spatial patterns of benzene concentrations in Montreal, QC, Canada</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-example-10.2-examining-the-log-concentrations-of-benzene-in-montreal"><i class="fa fa-check"></i>EXTRA: Example 10.2: Examining the log concentrations of benzene in Montreal</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.5-variogram"><i class="fa fa-check"></i>Example 10.5: Variogram</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.6-basic-spatial-modelling-and-prediction-of-benzene-in-montreal"><i class="fa fa-check"></i>Example 10.6 Basic spatial modelling and prediction of benzene in Montreal</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.9-spatial-modelling-of-benzene-in-montreal"><i class="fa fa-check"></i>Example 10.9 Spatial modelling of Benzene in Montreal</a>
-<ul>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#nimble-3"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#stan-3"><i class="fa fa-check"></i>Stan</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.10-spatial-predictions"><i class="fa fa-check"></i>Example 10.10: Spatial predictions</a>
-<ul>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#nimble-4"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#stan-4"><i class="fa fa-check"></i>Stan</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.11-inla-creating-a-mesh"><i class="fa fa-check"></i>Example 10.11: INLA, creating a mesh</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.12-fitting-an-spde-model-using-rinla-benzene-concentration-in-montreal"><i class="fa fa-check"></i>Example 10.12: Fitting an SPDE model using R–INLA: benzene concentration in Montreal</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.13-directional-variograms"><i class="fa fa-check"></i>Example 10.13: Directional variograms</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.1-spatial-patterns-in-lead-concentrations-in-the-soil-of-the-meuse-river-flood-plain"><i class="fa fa-check"></i>Example 10.1 Spatial patterns in lead concentrations in the soil of the Meuse River flood plain</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.2-examining-the-log-concentrations-of-lead-in-the-meuse-river-flood-plain"><i class="fa fa-check"></i>Example 10.2: Examining the log concentrations of lead in the Meuse River flood plain</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.3-mapping-the-locations-of-ozone-monitoring-sites-in-new-york-state"><i class="fa fa-check"></i>Example 10.3: Mapping the locations of ozone monitoring sites in New York State</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.6-spatial-prediction-of-temperatures-in-california"><i class="fa fa-check"></i>Example 10.6: Spatial prediction of temperatures in California</a></li>
+<li class="chapter" data-level="10.1" data-path="hazards.html"><a href="hazards.html#example-10.8-spatial-prediction-of-no2-in-europe"><i class="fa fa-check"></i><b>10.1</b> Example 10.8 Spatial prediction of NO2 in Europe</a></li>
+<li class="chapter" data-level="10.2" data-path="hazards.html"><a href="hazards.html#example-10.12-plotting-directional-variograms-for-temperatures-in-california"><i class="fa fa-check"></i><b>10.2</b> Example 10.12 Plotting directional variograms for temperatures in California</a></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.14-spatial-modeling-of-malaria-in-gambia"><i class="fa fa-check"></i>Example 10.14: Spatial modeling of malaria in Gambia</a>
 <ul>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#nimble-4"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#stan-3"><i class="fa fa-check"></i>Stan</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#supplementary-material-1"><i class="fa fa-check"></i>Supplementary Material</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.1-spatial-patterns-of-benzene-concentrations-in-montreal-qc-canada"><i class="fa fa-check"></i>Extra 10.1: Spatial patterns of benzene concentrations in Montreal, QC, Canada</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.2-examining-the-log-concentrations-of-benzene-in-montreal"><i class="fa fa-check"></i>Extra 10.2: Examining the log concentrations of benzene in Montreal</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.5-variogram"><i class="fa fa-check"></i>Extra 10.5: Variogram</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.6-basic-spatial-modelling-and-prediction-of-benzene-in-montreal"><i class="fa fa-check"></i>Extra 10.6 Basic spatial modelling and prediction of benzene in Montreal</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.8-spatial-modelling-of-benzene-in-montreal"><i class="fa fa-check"></i>Extra 10.8 Spatial modelling of Benzene in Montreal</a>
+<ul>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#nimble-5"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#stan-4"><i class="fa fa-check"></i>Stan</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.9-spatial-predictions"><i class="fa fa-check"></i>Extra 10.9: Spatial predictions</a>
+<ul>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#nimble-6"><i class="fa fa-check"></i>Nimble</a></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#stan-5"><i class="fa fa-check"></i>Stan</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.10-inla-creating-a-mesh"><i class="fa fa-check"></i>Extra 10.10: INLA, creating a mesh</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.12-fitting-an-spde-model-using-rinla-benzene-concentration-in-montreal"><i class="fa fa-check"></i>Extra 10.12: Fitting an SPDE model using R–INLA: benzene concentration in Montreal</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.13-directional-variograms"><i class="fa fa-check"></i>Extra 10.13: Directional variograms</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="Time.html"><a href="Time.html"><i class="fa fa-check"></i><b>11</b> Time-why it also matters</a>
 <ul>
@@ -223,23 +240,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.2-low-pass-filtering-of-carbon-monoxide-levels-using-the-moving-average"><i class="fa fa-check"></i>Example 11.2 Low-pass filtering of carbon monoxide levels using the moving average</a></li>
 <li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.13-forecasting-ozone-levels"><i class="fa fa-check"></i>Example 11.13 Forecasting ozone levels</a></li>
 <li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.14-forecasting-volcanic-ash"><i class="fa fa-check"></i>Example 11.14 Forecasting volcanic ash</a></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.16-fitting-a-random-walk-model-to-pm10-concentrations-in-london"><i class="fa fa-check"></i>Example 11.16 Fitting a random walk model to PM10 concentrations in London</a>
+</ul></li>
+<li class="chapter" data-level="12" data-path="exposure.html"><a href="exposure.html"><i class="fa fa-check"></i><b>12</b> Exposure assessment-over space and time</a>
 <ul>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#nimble-6"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#stan-6"><i class="fa fa-check"></i>Stan</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.16-extra-implementation-of-a-dynamic-linear-model-uk-ozone-data"><i class="fa fa-check"></i>Example 11.16 EXTRA Implementation of a dynamic linear model: UK ozone data</a>
+<li class="chapter" data-level="" data-path="exposure.html"><a href="exposure.html#example-idk-spatio-temporal-model-for-the-uk-ozone-data"><i class="fa fa-check"></i>Example IDK: Spatio-temporal model for the UK ozone data</a>
 <ul>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#nimble-7"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#stan-7"><i class="fa fa-check"></i>Stan</a></li>
+<li class="chapter" data-level="" data-path="exposure.html"><a href="exposure.html#nimble-7"><i class="fa fa-check"></i>Nimble</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#solutions-to-selected-exercises-1"><i class="fa fa-check"></i>Solutions to Selected Exercises</a></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#exercise-11.11"><i class="fa fa-check"></i>Exercise 11.11</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="exposure.html"><a href="exposure.html"><i class="fa fa-check"></i><b>12</b> Exposure assessment-over space and time</a></li>
 <li class="chapter" data-level="13" data-path="causality.html"><a href="causality.html"><i class="fa fa-check"></i><b>13</b> Causality-roadblocks on the way to it</a>
 <ul>
-<li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#solutions-to-selected-exercises-2"><i class="fa fa-check"></i>Solutions to Selected Exercises</a>
+<li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#solutions-to-selected-exercises-1"><i class="fa fa-check"></i>Solutions to Selected Exercises</a>
 <ul>
 <li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#question-13.16-load-the-italy-and-china-data-described-in-example-13.3-and-included-in-the-supplementary-bookdown-material-into-r."><i class="fa fa-check"></i>Question 13.16: Load the Italy and China data, described in Example 13.3, and included in the supplementary Bookdown material into R.</a></li>
 <li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#question-13.17-using-the-italy-and-china-data-stratified-by-the-age-groups-70-and-geq-70-obtain-empirical-estimates-of-p_1-and-p_2-as-defined-in-an-sdis.-in-the-following-questions-assume-that-p_1-and-p_2-are-the-population-values."><i class="fa fa-check"></i>Question 13.17: Using the Italy and China data stratified by the age groups <span class="math inline">\(&lt;70\)</span> and <span class="math inline">\(\geq 70\)</span>, obtain empirical estimates of <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span>, as defined in an SDis. In the following questions, assume that <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span> are the population values.</a></li>
@@ -262,7 +273,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Spatio-temporal methods in environmental epidemiology</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Spatio-Temporal Methods in Environmental Epidemiology with R</a>
           </h1>
         </div>
 
@@ -272,15 +283,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="uncertainty" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Uncertainty and its reduction<a href="uncertainty.html#uncertainty" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This chapter contains a discussion of uncertainty, both in terms of statistical modelling and quantification but also in the wider setting of sources of uncertainty outside those normally encountered in statistics. From this chapter, the reader will have gained an understanding of the following topics:</p>
+<p>This chapter contains a discussion of uncertainty, both in terms of statistical modelling and quantification, but also in the wider setting of sources of uncertainty outside those normally encountered in statistics. From this chapter, the reader will have gained an understanding of the following topics:</p>
 <ul>
-<li>Uncertainty can be dichotomised as either qualitative or quantitative, with the former allowing consideration of a wide variety of sources of uncertainty that would be difficult, if not impossible, to quantify mathematically.</li>
+<li>Uncertainty can be dichotomized as either qualitative or quantitative, with the former allowing consideration of a wide variety of sources of uncertainty that would be difficult, if not impossible, to quantify mathematically.</li>
 <li>Quantitative uncertainty can be thought of as comprising both aleatory and epistemic components, the former representing stochastic uncertainty and the latter subjective uncertainty.</li>
 <li>Methods for assessing uncertainty including eliciting prior information from experts and sensitivity analysis.</li>
 <li>Indexing quantitative uncertainty using the variance and entropy of the distribution of a random quantity.</li>
 <li>Uncertainty in post-normal science derives from a wide variety of issues and can lead to high levels of that uncertainty with serious consequences. Understanding uncertainty is therefore a vital feature of modern environmental epidemiology.</li>
 </ul>
+<div id="supplementary-material" class="section level2 unnumbered hasAnchor">
+<h2>Supplementary Material<a href="uncertainty.html#supplementary-material" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="more-on-qualitative-uncertainty" class="section level3 unnumbered hasAnchor">
+<h3>More on qualitative uncertainty<a href="uncertainty.html#more-on-qualitative-uncertainty" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The NUSAP matrix consists of five columns, each of which represents one of five generic assessment criteria . The first three of these refer mainly to quantitative elements involved in generating the
+knowledge base: (i) numerical; (ii) units and (ii) spread. The latter two primarily represent qualitative uncertainty: (iv) assessment and (v) pedigree. Each row of the matrix contains the basic objects involved in the uncertainty analysis. Entries under (i) numerical might for example, the relative risk associated with short–term changes in air pollution for instance with the appropriate units given in (ii) the unit column. Spread is a measure of uncertainty in an estimate or prediction for the quantity defined in columns (i) and (ii) , and in the air pollution example might be the standard error or confidence interval associated with the risk estimate. Columns (i), (ii) and (iii) therefore capture the information that is available from standard statistical approaches.</p>
+<p>The final two columns act as an aid to recording this more general uncertainty with entries in the (iv) assessment column usually be a numerical quantity summarizing the result of a pedigree analysis. This pedigree analysis would consist of an organized discussion amongst experts, possibly from a wide variety of subject areas and interests, charged with determining the uncertainty in the relevant knowledge base related to the overall objectives of the analysis.</p>
+<div class="blackbox">
+<div class="center">
+<p><strong>Example S.1: The health impact of VOCs</strong></p>
+</div>
+<p>The NUSAP matrix would be designed created to fit the specific context and process component being assessed, for example the quality of the data or the quality of a complex model. Here we will focus on the pedigree and assessment in an example of the health impact of VOCS. We concentrate on the pedigree analysis and show how the example of
+such a consultation can itself be expressed as a pedigree matrix.</p>
+<p>Based on interest in emissions of volatile organic compound (VOC) emissions from paint, a study was undertaken to assess the uncertainties associated with annual emissions in the Netherlands, . As part of this study a pedigree matrix was
+used in order to allow qualitative uncertainties to be incorporated into the assessment of monitoring data. An abbreviated version of the pedigree matrix appears in <strong>Table 1</strong> which shows how scores are to be assigned by experts according to four different pedigree criteria when considering a particular type of paint. In this case, ‘Proxy’ might relate to inference of VOC emissions based on national paint sales, ‘Empirical’ to the degree to which direct measurements were used for the assessment, ‘Method’ to methodological rigour in making the measurements and ‘validation’ the comparison between measurements over a long time frame.</p>
+<p>Differences in emissions will arise from the different uses of paint, which can be classified into five categories including SHI for ship construction and DIY for do–it–yourself (DIY) construction. There will also be variations based on whether paint is produced locally or imported. In addition, thinner which is added to the paint is also a source of emissions and will thus lead to differences in emissions. This would lead to four emission estimates for each class for which for SHI and DIY have an annual VOC totals for 1998 of 2.4 and 11.3 ktonnes respectively with the total across the five classes being 32.2 ktonnes of emissions from paint purchased nationally. The overall sum of annual VOC emission for both national and imported paints is 51.6 ktonnes.</p>
+<p>However the components of these total emissions are found in a variety of ways and some will be more certain than others and here the pedigree analysis can help in assessing the relative uncertainties and how they might combine in the aggregation. For example, calculations made on national sales data of VOC emissions for paint resulting in an estimate of 6.6 ktonnes. In this case a uncertainty score of 4 was assigned for Method reflecting the relative robustness of this approach. In contrast the estimate of the proportion of paint that had thinner added, 28%, in DIY construction was imputed rather than measured and was scored only 2 for Method since the value was considered to be no more than an educated guess.</p>
+<p>Such an analysis was done for each each source of VOCs for a total of fifteen pedigree analyses on each of the four pedigree criteria above. There were only fifteen and not 5 × 4 = 20 since ten of the twenty fell into into just six categories. The result was a 15 × 4 (pedigree) matrix with a number between 0 and 4 appearing in each cell. Expressing the row columns as a percentage of the maximum value of 16 gives a measure of the overall strength of evidence for each the categories . In this analysis, National-DIY category got the highest score of 0.8 with the National-SHI getting a lower score of 0.7.</p>
+<p>The results led to a number of conclusions. For example the assumed VOC percentage for imported paint had one of the two weakest uncertainty assessments pointing to a lack of requisite knowledge and the need for improvements in the way these VOC emissions are assessed.</p>
+<p>Diagnostic analyses of the scores are also possible. The diagnostic diagram is one tool for doing this. It aims to compare qualitative and quantitative uncertainties in a search for discrepancies. More precisely, it plots sensitivity to inputs against strengths. Each input parameter was randomly varied around its specified value, independently of the other parameters, and for each simulation the contribution of the component VOC’s contribution to a paint class’s total VOC was determined. It was found that the contribution from the imported VOC percentage was by far the greatest at 82.0%. When plotted against its strength score of 0.3, it indicated a strong outlier and singled out this component as needing further information and analysis. Overall the NUSAP analysis led to a number of important insights into the paint monitoring program.</p>
+<div class="figure">
+<img src="img/Table1SMChpt3.png" alt="The pedigree matrix for the VOC data. It gives the scoring criteria based on evaluators’ assessments with respect to the various criteria." width="100%" />
+<p class="caption">
+(#fig:Table 1)The pedigree matrix for the VOC data. It gives the scoring criteria based on evaluators’ assessments with respect to the various criteria.
+</p>
+</div>
+</div>
 
+</div>
+</div>
 </div>
             </section>
 
@@ -319,7 +359,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/03-Chpt3.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/03-Chpt3.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -330,7 +370,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"download": ["_main.pdf", "_main.epub"],
 "search": {
 "engine": "fuse",
 "options": null

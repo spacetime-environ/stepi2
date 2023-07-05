@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Epidemiology-the basics | Spatio-temporal methods in environmental epidemiology</title>
-  <meta name="description" content="Chapter 2 Epidemiology-the basics | Spatio-temporal methods in environmental epidemiology" />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <title>Chapter 2 Epidemiology-the basics | Spatio-Temporal Methods in Environmental Epidemiology with R</title>
+  <meta name="description" content="Chapter 2 Epidemiology-the basics | Spatio-Temporal Methods in Environmental Epidemiology with R" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Epidemiology-the basics | Spatio-temporal methods in environmental epidemiology" />
+  <meta property="og:title" content="Chapter 2 Epidemiology-the basics | Spatio-Temporal Methods in Environmental Epidemiology with R" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/img/cover.jpg" />
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Epidemiology-the basics | Spatio-temporal methods in environmental epidemiology" />
+  <meta name="twitter:title" content="Chapter 2 Epidemiology-the basics | Spatio-Temporal Methods in Environmental Epidemiology with R" />
   
   
   <meta name="twitter:image" content="/img/cover.jpg" />
@@ -23,13 +23,13 @@
 <meta name="author" content="Gavin Shaddick, James V. Zidek, and Alexandra M. Schmidt" />
 
 
-<meta name="date" content="2023-04-26" />
+<meta name="date" content="2023-07-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="prev" href="why.html"/>
 <link rel="next" href="uncertainty.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -133,26 +133,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Spatio-temporal methods in environmental epidemiology using R</a></li>
+<li><a href="./">Spatio-temporal methods in environmental epidemiology</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="chapter" data-level="" data-path="preface-2nd-edition.html"><a href="preface-2nd-edition.html"><i class="fa fa-check"></i>Preface (2nd edition)</a></li>
-<li class="chapter" data-level="1" data-path="why.html"><a href="why.html"><i class="fa fa-check"></i><b>1</b> Why spatio-temporal epidemiology?</a>
-<ul>
-<li class="chapter" data-level="" data-path="why.html"><a href="why.html#example-1.5"><i class="fa fa-check"></i>Example 1.5</a></li>
-</ul></li>
+<li class="chapter" data-level="1" data-path="why.html"><a href="why.html"><i class="fa fa-check"></i><b>1</b> Why spatio-temporal epidemiology?</a></li>
 <li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Epidemiology-the basics</a>
 <ul>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.9-estimating-the-smr-using-a-poisson-glm"><i class="fa fa-check"></i>Example 2.9: Estimating the SMR using a Poisson GLM</a></li>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.10-estimating-the-smr-using-quasi-likelihood"><i class="fa fa-check"></i>Example 2.10: Estimating the SMR using quasi-likelihood</a></li>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.11-modelling-differences-in-smrs-in-relation-to-differences-in-exposures"><i class="fa fa-check"></i>Example 2.11: Modelling differences in SMRs in relation to differences in exposures</a></li>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.12-modelling-the-risks-associated-with-lagged-effects-of-air-pollution"><i class="fa fa-check"></i>Example 2.12: Modelling the risks associated with lagged effects of air pollution</a></li>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.13-estimating-the-odds-ratio-in-a-case-control-study-using-a-logistic-model"><i class="fa fa-check"></i>Example 2.13: Estimating the odds ratio in a case-control study using a logistic model</a></li>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.14-estimating-the-odds-ratio-of-asthma-associated-with-proximity-to-roads"><i class="fa fa-check"></i>Example 2.14: Estimating the odds ratio of asthma associated with proximity to roads</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.7-estimating-the-smr-using-a-poisson-glm"><i class="fa fa-check"></i>Example 2.7: Estimating the SMR using a Poisson GLM</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.8-estimating-the-smr-using-quasi-likelihood"><i class="fa fa-check"></i>Example 2.8: Estimating the SMR using quasi-likelihood</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.9-modelling-differences-in-smrs-in-relation-to-differences-in-exposures"><i class="fa fa-check"></i>Example 2.9: Modelling differences in SMRs in relation to differences in exposures</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.10-modelling-the-risks-associated-with-lagged-effects-of-air-pollution"><i class="fa fa-check"></i>Example 2.10: Modelling the risks associated with lagged effects of air pollution</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.10-estimating-the-odds-ratio-in-a-case-control-study-using-a-logistic-model"><i class="fa fa-check"></i>Example 2.10: Estimating the odds ratio in a case-control study using a logistic model</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.11-estimating-the-odds-ratio-of-asthma-associated-with-proximity-to-roads"><i class="fa fa-check"></i>Example 2.11: Estimating the odds ratio of asthma associated with proximity to roads</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="uncertainty.html"><a href="uncertainty.html"><i class="fa fa-check"></i><b>3</b> Uncertainty and its reduction</a></li>
-<li class="chapter" data-level="4" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>4</b> Data: increasing information and reducing uncertainty</a></li>
+<li class="chapter" data-level="3" data-path="uncertainty.html"><a href="uncertainty.html"><i class="fa fa-check"></i><b>3</b> Uncertainty and its reduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="uncertainty.html"><a href="uncertainty.html#supplementary-material"><i class="fa fa-check"></i>Supplementary Material</a>
+<ul>
+<li class="chapter" data-level="" data-path="uncertainty.html"><a href="uncertainty.html#more-on-qualitative-uncertainty"><i class="fa fa-check"></i>More on qualitative uncertainty</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>4</b> Data: increasing information and reducing uncertainty</a>
+<ul>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#getting-to-know-the-structure-of-dataframes"><i class="fa fa-check"></i>Getting to know the structure of dataframes</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#extracting-and-creating-variables"><i class="fa fa-check"></i>Extracting and creating variables</a></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="embracing.html"><a href="embracing.html"><i class="fa fa-check"></i><b>5</b> Embracing uncertainty: the Bayesian approach</a></li>
 <li class="chapter" data-level="6" data-path="tactics.html"><a href="tactics.html"><i class="fa fa-check"></i><b>6</b> Tactics-implementing uncertainty models</a>
 <ul>
@@ -167,7 +173,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="tactics.html"><a href="tactics.html#stan"><i class="fa fa-check"></i>Stan</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="Strategies.html"><a href="Strategies.html"><i class="fa fa-check"></i><b>7</b> Strategies implementing uncertainty models</a></li>
+<li class="chapter" data-level="7" data-path="Strategies.html"><a href="Strategies.html"><i class="fa fa-check"></i><b>7</b> Strategies implementing uncertainty models</a>
+<ul>
+<li class="chapter" data-level="" data-path="Strategies.html"><a href="Strategies.html#example-7.6-model-choice-in-studies-of-air-pollution-and-health"><i class="fa fa-check"></i>Example 7.6 Model choice in studies of air pollution and health</a>
+<ul>
+<li class="chapter" data-level="" data-path="Strategies.html"><a href="Strategies.html#nimble-1"><i class="fa fa-check"></i>Nimble</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="trusted.html"><a href="trusted.html"><i class="fa fa-check"></i><b>8</b> But can the data be trusted</a>
 <ul>
 <li class="chapter" data-level="" data-path="trusted.html"><a href="trusted.html#solutions-to-selected-exercises"><i class="fa fa-check"></i>Solutions to Selected Exercises</a>
@@ -179,12 +191,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.1-empirical-bayes-and-bayes-smoothing-of-copd-mortality-for-2010"><i class="fa fa-check"></i>Example 9.1: Empirical Bayes and Bayes smoothing of COPD mortality for 2010</a>
 <ul>
-<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#nimble-1"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#nimble-2"><i class="fa fa-check"></i>Nimble</a></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#stan-1"><i class="fa fa-check"></i>Stan</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.3-fitting-a-conditional-spatial-model-in-nimble-and-stan"><i class="fa fa-check"></i>Example 9.3: Fitting a conditional spatial model in <code>nimble</code> and <code>stan</code></a>
 <ul>
-<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#nimble-2"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#nimble-3"><i class="fa fa-check"></i>Nimble</a></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#stan-2"><i class="fa fa-check"></i>Stan</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.4-fitting-a-conditional-spatial-model-using-carbayes"><i class="fa fa-check"></i>Example 9.4: Fitting a conditional spatial model using CARBayes</a></li>
@@ -192,30 +204,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10" data-path="hazards.html"><a href="hazards.html"><i class="fa fa-check"></i><b>10</b> Environmental hazards-spatial models</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="hazards.html"><a href="hazards.html#example-10.1-spatial-patterns-in-lead-concentrations-in-the-soil-of-the"><i class="fa fa-check"></i><b>10.1</b> Example 10.1 Spatial patterns in lead concentrations in the soil of the</a></li>
-<li class="chapter" data-level="10.2" data-path="hazards.html"><a href="hazards.html#example-10.2-examining-the-log-concentrations-of-lead-in-the-meuse-river"><i class="fa fa-check"></i><b>10.2</b> Example 10.2: Examining the log concentrations of lead in the Meuse River</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-example-10.1-spatial-patterns-of-benzene-concentrations-in-montreal-qc-canada"><i class="fa fa-check"></i>EXTRA: Example 10.1: Spatial patterns of benzene concentrations in Montreal, QC, Canada</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-example-10.2-examining-the-log-concentrations-of-benzene-in-montreal"><i class="fa fa-check"></i>EXTRA: Example 10.2: Examining the log concentrations of benzene in Montreal</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.5-variogram"><i class="fa fa-check"></i>Example 10.5: Variogram</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.6-basic-spatial-modelling-and-prediction-of-benzene-in-montreal"><i class="fa fa-check"></i>Example 10.6 Basic spatial modelling and prediction of benzene in Montreal</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.9-spatial-modelling-of-benzene-in-montreal"><i class="fa fa-check"></i>Example 10.9 Spatial modelling of Benzene in Montreal</a>
-<ul>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#nimble-3"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#stan-3"><i class="fa fa-check"></i>Stan</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.10-spatial-predictions"><i class="fa fa-check"></i>Example 10.10: Spatial predictions</a>
-<ul>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#nimble-4"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#stan-4"><i class="fa fa-check"></i>Stan</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.11-inla-creating-a-mesh"><i class="fa fa-check"></i>Example 10.11: INLA, creating a mesh</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.12-fitting-an-spde-model-using-rinla-benzene-concentration-in-montreal"><i class="fa fa-check"></i>Example 10.12: Fitting an SPDE model using R–INLA: benzene concentration in Montreal</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.13-directional-variograms"><i class="fa fa-check"></i>Example 10.13: Directional variograms</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.1-spatial-patterns-in-lead-concentrations-in-the-soil-of-the-meuse-river-flood-plain"><i class="fa fa-check"></i>Example 10.1 Spatial patterns in lead concentrations in the soil of the Meuse River flood plain</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.2-examining-the-log-concentrations-of-lead-in-the-meuse-river-flood-plain"><i class="fa fa-check"></i>Example 10.2: Examining the log concentrations of lead in the Meuse River flood plain</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.3-mapping-the-locations-of-ozone-monitoring-sites-in-new-york-state"><i class="fa fa-check"></i>Example 10.3: Mapping the locations of ozone monitoring sites in New York State</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.6-spatial-prediction-of-temperatures-in-california"><i class="fa fa-check"></i>Example 10.6: Spatial prediction of temperatures in California</a></li>
+<li class="chapter" data-level="10.1" data-path="hazards.html"><a href="hazards.html#example-10.8-spatial-prediction-of-no2-in-europe"><i class="fa fa-check"></i><b>10.1</b> Example 10.8 Spatial prediction of NO2 in Europe</a></li>
+<li class="chapter" data-level="10.2" data-path="hazards.html"><a href="hazards.html#example-10.12-plotting-directional-variograms-for-temperatures-in-california"><i class="fa fa-check"></i><b>10.2</b> Example 10.12 Plotting directional variograms for temperatures in California</a></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.14-spatial-modeling-of-malaria-in-gambia"><i class="fa fa-check"></i>Example 10.14: Spatial modeling of malaria in Gambia</a>
 <ul>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#nimble-4"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#stan-3"><i class="fa fa-check"></i>Stan</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#supplementary-material-1"><i class="fa fa-check"></i>Supplementary Material</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.1-spatial-patterns-of-benzene-concentrations-in-montreal-qc-canada"><i class="fa fa-check"></i>Extra 10.1: Spatial patterns of benzene concentrations in Montreal, QC, Canada</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.2-examining-the-log-concentrations-of-benzene-in-montreal"><i class="fa fa-check"></i>Extra 10.2: Examining the log concentrations of benzene in Montreal</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.5-variogram"><i class="fa fa-check"></i>Extra 10.5: Variogram</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.6-basic-spatial-modelling-and-prediction-of-benzene-in-montreal"><i class="fa fa-check"></i>Extra 10.6 Basic spatial modelling and prediction of benzene in Montreal</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.8-spatial-modelling-of-benzene-in-montreal"><i class="fa fa-check"></i>Extra 10.8 Spatial modelling of Benzene in Montreal</a>
+<ul>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#nimble-5"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#stan-4"><i class="fa fa-check"></i>Stan</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.9-spatial-predictions"><i class="fa fa-check"></i>Extra 10.9: Spatial predictions</a>
+<ul>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#nimble-6"><i class="fa fa-check"></i>Nimble</a></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#stan-5"><i class="fa fa-check"></i>Stan</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.10-inla-creating-a-mesh"><i class="fa fa-check"></i>Extra 10.10: INLA, creating a mesh</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.12-fitting-an-spde-model-using-rinla-benzene-concentration-in-montreal"><i class="fa fa-check"></i>Extra 10.12: Fitting an SPDE model using R–INLA: benzene concentration in Montreal</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.13-directional-variograms"><i class="fa fa-check"></i>Extra 10.13: Directional variograms</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="Time.html"><a href="Time.html"><i class="fa fa-check"></i><b>11</b> Time-why it also matters</a>
 <ul>
@@ -223,23 +240,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.2-low-pass-filtering-of-carbon-monoxide-levels-using-the-moving-average"><i class="fa fa-check"></i>Example 11.2 Low-pass filtering of carbon monoxide levels using the moving average</a></li>
 <li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.13-forecasting-ozone-levels"><i class="fa fa-check"></i>Example 11.13 Forecasting ozone levels</a></li>
 <li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.14-forecasting-volcanic-ash"><i class="fa fa-check"></i>Example 11.14 Forecasting volcanic ash</a></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.16-fitting-a-random-walk-model-to-pm10-concentrations-in-london"><i class="fa fa-check"></i>Example 11.16 Fitting a random walk model to PM10 concentrations in London</a>
+</ul></li>
+<li class="chapter" data-level="12" data-path="exposure.html"><a href="exposure.html"><i class="fa fa-check"></i><b>12</b> Exposure assessment-over space and time</a>
 <ul>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#nimble-6"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#stan-6"><i class="fa fa-check"></i>Stan</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.16-extra-implementation-of-a-dynamic-linear-model-uk-ozone-data"><i class="fa fa-check"></i>Example 11.16 EXTRA Implementation of a dynamic linear model: UK ozone data</a>
+<li class="chapter" data-level="" data-path="exposure.html"><a href="exposure.html#example-idk-spatio-temporal-model-for-the-uk-ozone-data"><i class="fa fa-check"></i>Example IDK: Spatio-temporal model for the UK ozone data</a>
 <ul>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#nimble-7"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#stan-7"><i class="fa fa-check"></i>Stan</a></li>
+<li class="chapter" data-level="" data-path="exposure.html"><a href="exposure.html#nimble-7"><i class="fa fa-check"></i>Nimble</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#solutions-to-selected-exercises-1"><i class="fa fa-check"></i>Solutions to Selected Exercises</a></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#exercise-11.11"><i class="fa fa-check"></i>Exercise 11.11</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="exposure.html"><a href="exposure.html"><i class="fa fa-check"></i><b>12</b> Exposure assessment-over space and time</a></li>
 <li class="chapter" data-level="13" data-path="causality.html"><a href="causality.html"><i class="fa fa-check"></i><b>13</b> Causality-roadblocks on the way to it</a>
 <ul>
-<li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#solutions-to-selected-exercises-2"><i class="fa fa-check"></i>Solutions to Selected Exercises</a>
+<li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#solutions-to-selected-exercises-1"><i class="fa fa-check"></i>Solutions to Selected Exercises</a>
 <ul>
 <li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#question-13.16-load-the-italy-and-china-data-described-in-example-13.3-and-included-in-the-supplementary-bookdown-material-into-r."><i class="fa fa-check"></i>Question 13.16: Load the Italy and China data, described in Example 13.3, and included in the supplementary Bookdown material into R.</a></li>
 <li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#question-13.17-using-the-italy-and-china-data-stratified-by-the-age-groups-70-and-geq-70-obtain-empirical-estimates-of-p_1-and-p_2-as-defined-in-an-sdis.-in-the-following-questions-assume-that-p_1-and-p_2-are-the-population-values."><i class="fa fa-check"></i>Question 13.17: Using the Italy and China data stratified by the age groups <span class="math inline">\(&lt;70\)</span> and <span class="math inline">\(\geq 70\)</span>, obtain empirical estimates of <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span>, as defined in an SDis. In the following questions, assume that <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span> are the population values.</a></li>
@@ -262,7 +273,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Spatio-temporal methods in environmental epidemiology</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Spatio-Temporal Methods in Environmental Epidemiology with R</a>
           </h1>
         </div>
 
@@ -274,19 +285,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 2</span> Epidemiology-the basics<a href="basics.html#basics" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>This chapter contains the basic principles of epidemiological analysis and how estimates of the risks associated with exposures can be obtained. From this chapter, the reader will have gained an understanding of the following topics:</p>
 <ul>
-<li>Methods for expressing risk and their use with different types of epidemiological study.</li>
-<li>Calculating risks based on calculations of the expected number of health counts in an area, allowing for the age–sex structure of the underlying population.</li>
-<li>The use of generalised linear models (GLMS) to model counts of disease and case–control indicators.</li>
-<li>Modelling the effect of exposures on health and allowing for the possible effects of covariates.</li>
-<li>Cumulative exposures to environmental hazards.</li>
+<li><p>Methods for expressing risk and their use with different types of epidemiological study.</p></li>
+<li><p>Calculating risks based on calculations of the expected number of health counts in an area, allowing for the age–sex structure of the underlying population.</p></li>
+<li><p>The use of generalised linear models (GLMS) to model counts of disease and case–control indicators.</p></li>
+<li><p>Modelling the effect of exposures on health and allowing for the possible effects of covariates.</p></li>
+<li><p>Cumulative exposures to environmental hazards.</p></li>
 </ul>
-<div id="example-2.9-estimating-the-smr-using-a-poisson-glm" class="section level2 unnumbered hasAnchor">
-<h2>Example 2.9: Estimating the SMR using a Poisson GLM<a href="basics.html#example-2.9-estimating-the-smr-using-a-poisson-glm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="basics.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding MLE and SE of log(SMR) = beta0 on one single area</span></span>
-<span id="cb8-2"><a href="basics.html#cb8-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">29</span>  <span class="co"># Total observed death</span></span>
-<span id="cb8-3"><a href="basics.html#cb8-3" aria-hidden="true" tabindex="-1"></a>E <span class="ot">&lt;-</span> <span class="fl">19.88</span> <span class="co"># Expected deaths</span></span>
-<span id="cb8-4"><a href="basics.html#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="basics.html#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(y <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)), <span class="at">family =</span> <span class="st">&quot;poisson&quot;</span>))</span></code></pre></div>
+<div id="example-2.7-estimating-the-smr-using-a-poisson-glm" class="section level2 unnumbered hasAnchor">
+<h2>Example 2.7: Estimating the SMR using a Poisson GLM<a href="basics.html#example-2.7-estimating-the-smr-using-a-poisson-glm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We consider the observed and expected number of cases of respiratory mortality
+in small areas in the UK from a study examining the long-term effects of air pollution
+(Elliott, Shaddick, Wakefield, de Hoogh, &amp; Briggs, 2007). Taking a single area (a
+ward) that had a population of 1601, the observed counts of deaths in people over 65
+years old was 29 compared to the expected number which was 19.88. The SMR is
+therefore 29/19.88 = 1.46.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="basics.html#cb2-1" tabindex="-1"></a><span class="co"># Finding MLE and SE of log(SMR) = beta0 on one single area</span></span>
+<span id="cb2-2"><a href="basics.html#cb2-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">29</span>  <span class="co"># Total observed death</span></span>
+<span id="cb2-3"><a href="basics.html#cb2-3" tabindex="-1"></a>E <span class="ot">&lt;-</span> <span class="fl">19.88</span> <span class="co"># Expected deaths</span></span>
+<span id="cb2-4"><a href="basics.html#cb2-4" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="basics.html#cb2-5" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(y <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)), <span class="at">family =</span> <span class="st">&quot;poisson&quot;</span>))</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = y ~ offset(log(E)), family = &quot;poisson&quot;)
@@ -307,68 +324,92 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## AIC: 7.2109
 ## 
 ## Number of Fisher Scoring iterations: 3</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="basics.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding MLE and SE of log(SMR) = beta0 over multiple areas</span></span>
-<span id="cb10-2"><a href="basics.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(Y <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)), <span class="at">family =</span> <span class="st">&quot;poisson&quot;</span>, <span class="at">data =</span> data))</span></code></pre></div>
+<p>Noting that the linear predictor, and thus the coefficient of interest, <span class="math inline">\(\beta_0\)</span>, is on the log scale, the estimate of the SMR = <span class="math inline">\(\exp(\beta_0) = \exp(0.3776) = 1.458\)</span>. The standard error of the estimate of beta_0 can be used to construct a 95% confidence interval: <span class="math inline">\(\hat{\beta_0} \pm 1.96 \times se(\hat{\beta_0}) = (0.014, 0.741)\)</span>. Again this is on the log–scale and so the exponent is taken of both the lower and upper limits; <span class="math inline">\((\exp(0.014), \exp(0.741))\)</span>. The SMR in this case is therefore 1.458 (95% CI; 1.013 – 2.099) meaning that the number of observed cases of disease in the area is significantly greater than that expected based on the age–sex profile of the population.</p>
+<p>We now consider the estimation of the SMR over more than a single area; in this case, we use the observed counts and expected numbers for <span class="math inline">\(N=393\)</span> areas. The parameter, <span class="math inline">\(\beta_0\)</span>, now corresponds to the log of the overall SMR using data from all the areas, i.e. <span class="math inline">\(\frac{\sum^{393}_{i=1} O_i}{\sum^{393}_{i=1} E_i}\)</span>. From the data, this is 8282/7250.2 = 1.142 with the log of this being 0.133.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="basics.html#cb4-1" tabindex="-1"></a><span class="co"># Finding MLE and SE of log(SMR) = beta0 over multiple areas</span></span>
+<span id="cb4-2"><a href="basics.html#cb4-2" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(Y <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)), <span class="at">family =</span> <span class="st">&quot;poisson&quot;</span>, <span class="at">data =</span> data))</span></code></pre></div>
+<p>We can see that the estimate of the SMR will be <span class="math inline">\(\exp(0.13305)=1.142\)</span>, the overall SMR for all the areas. The 95% CI will be <span class="math inline">\(\exp(0.112) - \exp(0.155) = 1.118 - 1.167\)</span>, indicating an overall increased risk of respiratory mortality in these areas compared to what might be expected if they experienced the same mortality rates (by age and sex) as the national population.</p>
 </div>
-<div id="example-2.10-estimating-the-smr-using-quasi-likelihood" class="section level2 unnumbered hasAnchor">
-<h2>Example 2.10: Estimating the SMR using quasi-likelihood<a href="basics.html#example-2.10-estimating-the-smr-using-quasi-likelihood" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="basics.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using quasi-likelihood to find the MLE and standard error of log(SMR) = beta0</span></span>
-<span id="cb11-2"><a href="basics.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(y <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)), <span class="at">family=</span><span class="st">&quot;quasipoisson&quot;</span>), <span class="at">data =</span> data)</span></code></pre></div>
+<div id="example-2.8-estimating-the-smr-using-quasi-likelihood" class="section level2 unnumbered hasAnchor">
+<h2>Example 2.8: Estimating the SMR using quasi-likelihood<a href="basics.html#example-2.8-estimating-the-smr-using-quasi-likelihood" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The R code for using quasi-likelihood to find the MLE of the <span class="math inline">\(\log\)</span>(SMR)<span class="math inline">\(=\beta_0\)</span> and its standard error using the data from the previous example would be</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="basics.html#cb5-1" tabindex="-1"></a><span class="co"># Using quasi-likelihood to find the MLE and standard error of log(SMR) = beta0</span></span>
+<span id="cb5-2"><a href="basics.html#cb5-2" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(y <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)), <span class="at">family=</span><span class="st">&quot;quasipoisson&quot;</span>), <span class="at">data =</span> data)</span></code></pre></div>
+<p>Note that the estimate itself is the same as with the Poisson case, but the standard error has increased from 0.01099 to 0.02078, reflecting the over-dispersion which is present, with the dispersion parameter having been estimated to be over 3. The 95% confidence interval will therefore be wider; <span class="math inline">\(\exp(0.092)- \exp(0.133) = 1.096- 1.190\)</span>, with the increase in width reflecting the extra uncertainty that is present.</p>
 </div>
-<div id="example-2.11-modelling-differences-in-smrs-in-relation-to-differences-in-exposures" class="section level2 unnumbered hasAnchor">
-<h2>Example 2.11: Modelling differences in SMRs in relation to differences in exposures<a href="basics.html#example-2.11-modelling-differences-in-smrs-in-relation-to-differences-in-exposures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="basics.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fitting a model to estimate the relative risk associated with air pollution</span></span>
-<span id="cb12-2"><a href="basics.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(Y <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)) <span class="sc">+</span> X1, <span class="at">family=</span><span class="st">&quot;poisson&quot;</span>, <span class="at">data=</span>data))</span>
-<span id="cb12-3"><a href="basics.html#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="basics.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Fitting a model to estimate the relative risk associated with air pollution </span></span>
-<span id="cb12-5"><a href="basics.html#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># using a Quasi-Poisson approach</span></span>
-<span id="cb12-6"><a href="basics.html#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(Y <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)) <span class="sc">+</span> X1, <span class="at">family =</span> <span class="st">&quot;quasipoisson&quot;</span>, <span class="at">data =</span> data))</span>
-<span id="cb12-7"><a href="basics.html#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-8"><a href="basics.html#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Fitting a Poisson GLM with air pollution and deprivation</span></span>
-<span id="cb12-9"><a href="basics.html#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(Y <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)) <span class="sc">+</span> X1 <span class="sc">+</span> X2, <span class="at">family =</span> <span class="st">&quot;poisson&quot;</span>, <span class="at">data =</span> data))</span>
-<span id="cb12-10"><a href="basics.html#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-11"><a href="basics.html#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Fitting a Quasi-Poisson GLM with air pollution and deprivation</span></span>
-<span id="cb12-12"><a href="basics.html#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(Y <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)) <span class="sc">+</span> X1 <span class="sc">+</span> X2, <span class="at">family =</span> <span class="st">&quot;quasipoisson&quot;</span>, <span class="at">data =</span></span>
-<span id="cb12-13"><a href="basics.html#cb12-13" aria-hidden="true" tabindex="-1"></a>              data))</span></code></pre></div>
-<p>Perform tests between the deviances of two models.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="basics.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Test 1: Effect on Quasi-Poisson models with and without deprivation</span></span>
-<span id="cb13-2"><a href="basics.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(</span>
-<span id="cb13-3"><a href="basics.html#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glm</span>(Y <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)) <span class="sc">+</span> X1, <span class="at">family =</span> <span class="st">&quot;quasipoisson&quot;</span>, <span class="at">data =</span> data),</span>
-<span id="cb13-4"><a href="basics.html#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Model 1</span></span>
-<span id="cb13-5"><a href="basics.html#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glm</span>(Y <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)) <span class="sc">+</span> X1 <span class="sc">+</span> X2, <span class="at">family =</span> <span class="st">&quot;quasipoisson&quot;</span>, <span class="at">data =</span> data),</span>
-<span id="cb13-6"><a href="basics.html#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Model2</span></span>
-<span id="cb13-7"><a href="basics.html#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">test =</span> <span class="st">&quot;Chisq&quot;</span></span>
-<span id="cb13-8"><a href="basics.html#cb13-8" aria-hidden="true" tabindex="-1"></a>) <span class="co"># Chi-Squared test</span></span>
-<span id="cb13-9"><a href="basics.html#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="basics.html#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Test 2: Effect on Quasi-Poisson models with and without air pollution</span></span>
-<span id="cb13-11"><a href="basics.html#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(</span>
-<span id="cb13-12"><a href="basics.html#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glm</span>(Y <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)) <span class="sc">+</span> X1 <span class="sc">+</span> X2, <span class="at">family =</span> <span class="st">&quot;quasipoisson&quot;</span>, <span class="at">data =</span> data),</span>
-<span id="cb13-13"><a href="basics.html#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Model 1</span></span>
-<span id="cb13-14"><a href="basics.html#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glm</span>(Y <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)) <span class="sc">+</span> X2, <span class="at">family =</span> <span class="st">&quot;quasipoisson&quot;</span>, <span class="at">data =</span> data),</span>
-<span id="cb13-15"><a href="basics.html#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Model 2</span></span>
-<span id="cb13-16"><a href="basics.html#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">test =</span> <span class="st">&quot;Chisq&quot;</span></span>
-<span id="cb13-17"><a href="basics.html#cb13-17" aria-hidden="true" tabindex="-1"></a>) <span class="co"># Chi-Squared test</span></span></code></pre></div>
+<div id="example-2.9-modelling-differences-in-smrs-in-relation-to-differences-in-exposures" class="section level2 unnumbered hasAnchor">
+<h2>Example 2.9: Modelling differences in SMRs in relation to differences in exposures<a href="basics.html#example-2.9-modelling-differences-in-smrs-in-relation-to-differences-in-exposures" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We now consider the possible effects of air pollution in relation to the
+SMRs observed in the different areas; the exposure, <span class="math inline">\(X_{i1}\)</span> for each area being
+the annual average of measurements from monitoring sites located within the
+health area. In addition, we consider the possible effects of a covariate; in this case, the covariate is a measure of deprivation known as the Carstairs score.</p>
+<p>Smoking is known to be a major risk factor for respiratory illness, and
+it is known that smoking habits vary with social class (Kleinschmidt, Hills, &amp; Elliott, 1995) and may therefore correlate with pollution levels, and act as a potential confounder. Although routine data on smoking levels at small area level are not available in Great Britain, strong correlations have, however, been demonstrated on several occasions between smoking rates and the Carstairs index of deprivation, which has also been shown to be a strong predictor of disease risk (Carstairs &amp; Morris, 1989). The index is derived from a weighted aggregation of data on four census variables: unemployment, overcrowding, car ownership and social class.</p>
+<p>The R code for fitting a model to estimate the relative risk associated with air pollution in this case is as follows:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="basics.html#cb6-1" tabindex="-1"></a><span class="co"># Fitting a model to estimate the relative risk associated with air pollution</span></span>
+<span id="cb6-2"><a href="basics.html#cb6-2" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(Y <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)) <span class="sc">+</span> X1, <span class="at">family=</span><span class="st">&quot;poisson&quot;</span>, <span class="at">data=</span>data_df))</span></code></pre></div>
+<p>In this case, the effect of air pollution is highly significant and the associated relative risk will be <span class="math inline">\(\exp(\beta_1) = \exp(0.07972) = 1.082\)</span>, indicating an increase in risk of 8.2% associated with every increase of one unit in air pollution (in this case, the units are 10<span class="math inline">\(\mu\)</span>gm<span class="math inline">\(^{-3}\)</span>).</p>
+<p>Using a quasi-likelihood approach again results in the same estimate but with a larger standard error.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="basics.html#cb7-1" tabindex="-1"></a><span class="co"># Fitting a model to estimate the relative risk associated with air pollution </span></span>
+<span id="cb7-2"><a href="basics.html#cb7-2" tabindex="-1"></a><span class="co"># using a Quasi-Poisson approach</span></span>
+<span id="cb7-3"><a href="basics.html#cb7-3" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(Y <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)) <span class="sc">+</span> X1, <span class="at">family =</span> <span class="st">&quot;quasipoisson&quot;</span>, <span class="at">data =</span> data_df))</span></code></pre></div>
+<p>The 95% CIs are 1.0615 – 1.1049 for the Poisson case and 1.0434 – 1.1241 when using quasi-likelihood; both indicating that the increase in risk is significant, with the wider intervals in the quasi-likelihood case again reflecting the extra uncertainty associated with the over-dispersion.</p>
+<p>Adding the deprivation score, <span class="math inline">\(X_2\)</span>, to the model might be expected to reduce the risk associated with air pollution as areas which are highly polluted are likely to also be deprived and deprived areas, with some exceptions, have higher rates of disease. It is therefore a confounder in the relationship between air pollution and health.</p>
+<p>The R code for a model with both air pollution and deprivation is asfollows:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="basics.html#cb8-1" tabindex="-1"></a><span class="co">#Fitting a Poisson GLM with air pollution and deprivation</span></span>
+<span id="cb8-2"><a href="basics.html#cb8-2" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(Y <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)) <span class="sc">+</span> X1 <span class="sc">+</span> X2, <span class="at">family =</span> <span class="st">&quot;poisson&quot;</span>, <span class="at">data =</span> data_df))</span></code></pre></div>
+<p>It can be seen that adding deprivation to the model has resulted in a reduction in the size of the effect associated with air pollution, for which the RR has changed from 1.083 to 1.026 (95% CI; 1.004 – 1.049). The effect of deprivation is also significant, with an increase in risk of 5.3% (RR = <span class="math inline">\(\exp(0.051302)=1.053\)</span>) associated with a unit increase in Carstairs score.</p>
+<p>When using quasi-likelihood, the estimates of relative risk are the same, but again they have wider confidence intervals.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="basics.html#cb9-1" tabindex="-1"></a><span class="co"># Fitting a Quasi-Poisson GLM with air pollution and deprivation</span></span>
+<span id="cb9-2"><a href="basics.html#cb9-2" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">glm</span>(Y <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)) <span class="sc">+</span> X1 <span class="sc">+</span> X2, <span class="at">family =</span> <span class="st">&quot;quasipoisson&quot;</span>, <span class="at">data =</span></span>
+<span id="cb9-3"><a href="basics.html#cb9-3" tabindex="-1"></a>              data_df))</span></code></pre></div>
+<p>This gives a RR for air pollution of 1.026 (95% CI; 0.993 – 1.060) and for deprivation a RR of 1.053 (95% CI; 1.045 – 1.061) which in this case leads to the effect of air pollution being non-significant. This suggests that it is deprivation that is playing a large part in the differences in SMRs observed in the different areas. Note the amount of the widening of the intervals is reduced as there is less over-dispersion; some of the extra-Poisson variability has thus been `explained’ by deprivation.</p>
+<p>The effect of adding deprivation to the model can be assessed by calculating the change in deviance between two models; (i) with air pollution and (ii) with both air pollution and deprivation. A significant difference in deviance will indicate that deprivation is a significant risk factor.</p>
+<p>The R code to perform a test between the deviances of the two models is as follows:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="basics.html#cb10-1" tabindex="-1"></a><span class="do">## Test 1: Effect on Quasi-Poisson models with and without deprivation</span></span>
+<span id="cb10-2"><a href="basics.html#cb10-2" tabindex="-1"></a><span class="fu">anova</span>(</span>
+<span id="cb10-3"><a href="basics.html#cb10-3" tabindex="-1"></a>  <span class="fu">glm</span>(Y <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)) <span class="sc">+</span> X1, <span class="at">family =</span> <span class="st">&quot;quasipoisson&quot;</span>, <span class="at">data =</span> data),</span>
+<span id="cb10-4"><a href="basics.html#cb10-4" tabindex="-1"></a>  <span class="co"># Model 1</span></span>
+<span id="cb10-5"><a href="basics.html#cb10-5" tabindex="-1"></a>  <span class="fu">glm</span>(Y <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)) <span class="sc">+</span> X1 <span class="sc">+</span> X2, <span class="at">family =</span> <span class="st">&quot;quasipoisson&quot;</span>, <span class="at">data =</span> data),</span>
+<span id="cb10-6"><a href="basics.html#cb10-6" tabindex="-1"></a>  <span class="co"># Model2</span></span>
+<span id="cb10-7"><a href="basics.html#cb10-7" tabindex="-1"></a>  <span class="at">test =</span> <span class="st">&quot;Chisq&quot;</span></span>
+<span id="cb10-8"><a href="basics.html#cb10-8" tabindex="-1"></a>) <span class="co"># Chi-Squared test</span></span></code></pre></div>
+<p>This shows that deprivation has a highly significant effect on the risk of respiratory mortality. Using this method, the effect of taking air pollution out of the model can also be assessed, which proves to have a non-significant change in deviance; this indicates that when deprivation is included in the model the estimated risk associated with air pollution is non-significant.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="basics.html#cb11-1" tabindex="-1"></a><span class="do">## Test 2: Effect on Quasi-Poisson models with and without air pollution</span></span>
+<span id="cb11-2"><a href="basics.html#cb11-2" tabindex="-1"></a><span class="fu">anova</span>(</span>
+<span id="cb11-3"><a href="basics.html#cb11-3" tabindex="-1"></a>  <span class="fu">glm</span>(Y <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)) <span class="sc">+</span> X1 <span class="sc">+</span> X2, <span class="at">family =</span> <span class="st">&quot;quasipoisson&quot;</span>, <span class="at">data =</span> data),</span>
+<span id="cb11-4"><a href="basics.html#cb11-4" tabindex="-1"></a>  <span class="co"># Model 1</span></span>
+<span id="cb11-5"><a href="basics.html#cb11-5" tabindex="-1"></a>  <span class="fu">glm</span>(Y <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)) <span class="sc">+</span> X2, <span class="at">family =</span> <span class="st">&quot;quasipoisson&quot;</span>, <span class="at">data =</span> data),</span>
+<span id="cb11-6"><a href="basics.html#cb11-6" tabindex="-1"></a>  <span class="co"># Model 2</span></span>
+<span id="cb11-7"><a href="basics.html#cb11-7" tabindex="-1"></a>  <span class="at">test =</span> <span class="st">&quot;Chisq&quot;</span></span>
+<span id="cb11-8"><a href="basics.html#cb11-8" tabindex="-1"></a>) <span class="co"># Chi-Squared test</span></span></code></pre></div>
 </div>
-<div id="example-2.12-modelling-the-risks-associated-with-lagged-effects-of-air-pollution" class="section level2 unnumbered hasAnchor">
-<h2>Example 2.12: Modelling the risks associated with lagged effects of air pollution<a href="basics.html#example-2.12-modelling-the-risks-associated-with-lagged-effects-of-air-pollution" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="basics.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Fitting quasi-poisson model</span></span>
-<span id="cb14-2"><a href="basics.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glm</span>(</span>
-<span id="cb14-3"><a href="basics.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> Y <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)) <span class="sc">+</span> X1 <span class="sc">+</span> X1t1 <span class="sc">+</span> X1t2,</span>
-<span id="cb14-4"><a href="basics.html#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">family  =</span> <span class="st">&quot;quasipoisson&quot;</span>,</span>
-<span id="cb14-5"><a href="basics.html#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data    =</span> data</span>
-<span id="cb14-6"><a href="basics.html#cb14-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div id="example-2.10-modelling-the-risks-associated-with-lagged-effects-of-air-pollution" class="section level2 unnumbered hasAnchor">
+<h2>Example 2.10: Modelling the risks associated with lagged effects of air pollution<a href="basics.html#example-2.10-modelling-the-risks-associated-with-lagged-effects-of-air-pollution" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Following on from the previous example, we might fit the annual averages from the previous three years, <span class="math inline">\(X_{it}, X_{i(t-1)}, X_{i(t-2)}\)</span>. The R code to do this is as follows:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="basics.html#cb12-1" tabindex="-1"></a><span class="do">## Fitting quasi-poisson model</span></span>
+<span id="cb12-2"><a href="basics.html#cb12-2" tabindex="-1"></a><span class="fu">glm</span>(</span>
+<span id="cb12-3"><a href="basics.html#cb12-3" tabindex="-1"></a>  <span class="at">formula =</span> Y <span class="sc">~</span> <span class="fu">offset</span>(<span class="fu">log</span>(E)) <span class="sc">+</span> X1 <span class="sc">+</span> X1t1 <span class="sc">+</span> X1t2,</span>
+<span id="cb12-4"><a href="basics.html#cb12-4" tabindex="-1"></a>  <span class="at">family  =</span> <span class="st">&quot;quasipoisson&quot;</span>,</span>
+<span id="cb12-5"><a href="basics.html#cb12-5" tabindex="-1"></a>  <span class="at">data    =</span> data</span>
+<span id="cb12-6"><a href="basics.html#cb12-6" tabindex="-1"></a>)</span></code></pre></div>
 </div>
-<div id="example-2.13-estimating-the-odds-ratio-in-a-case-control-study-using-a-logistic-model" class="section level2 unnumbered hasAnchor">
-<h2>Example 2.13: Estimating the odds ratio in a case-control study using a logistic model<a href="basics.html#example-2.13-estimating-the-odds-ratio-in-a-case-control-study-using-a-logistic-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="basics.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Fitting Odds Ratio</span></span>
-<span id="cb15-2"><a href="basics.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glm</span>(<span class="at">formula =</span> Y <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb15-3"><a href="basics.html#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>,</span>
-<span id="cb15-4"><a href="basics.html#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data)</span></code></pre></div>
+<div id="example-2.10-estimating-the-odds-ratio-in-a-case-control-study-using-a-logistic-model" class="section level2 unnumbered hasAnchor">
+<h2>Example 2.10: Estimating the odds ratio in a case-control study using a logistic model<a href="basics.html#example-2.10-estimating-the-odds-ratio-in-a-case-control-study-using-a-logistic-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In a study of asthma of whether children living near main roads require higher levels of asthma treatment than those who live further away, cases and controls were grouped according to whether or not they lived within 150 m of a main road . Of the 1066 cases, 172 lived within 150m of a main road with the corresponding number of controls being 464 (out of 6233).</p>
+<p>The MLE of the probability that an individual is a case can be found using R as follows:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="basics.html#cb13-1" tabindex="-1"></a><span class="do">## Fitting Odds Ratio</span></span>
+<span id="cb13-2"><a href="basics.html#cb13-2" tabindex="-1"></a><span class="fu">glm</span>(<span class="at">formula =</span> Y <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb13-3"><a href="basics.html#cb13-3" tabindex="-1"></a>    <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>,</span>
+<span id="cb13-4"><a href="basics.html#cb13-4" tabindex="-1"></a>    <span class="at">data =</span> data_df)</span></code></pre></div>
+<p>The estimate <span class="math inline">\(-1.76594\)</span> is on the log–odds scale. This can be converted back to the probability scale as, <span class="math inline">\(\frac{\exp(-1.76594)}{(1 + \exp(-1.76594)} = 0.146\)</span> which is the same as the proportion of cases (1066/6233).</p>
 </div>
-<div id="example-2.14-estimating-the-odds-ratio-of-asthma-associated-with-proximity-to-roads" class="section level2 unnumbered hasAnchor">
-<h2>Example 2.14: Estimating the odds ratio of asthma associated with proximity to roads<a href="basics.html#example-2.14-estimating-the-odds-ratio-of-asthma-associated-with-proximity-to-roads" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="basics.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Fitting Odds Ratio</span></span>
-<span id="cb16-2"><a href="basics.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glm</span>(Y <span class="sc">~</span> X, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="at">data =</span> data)</span></code></pre></div>
+<div id="example-2.11-estimating-the-odds-ratio-of-asthma-associated-with-proximity-to-roads" class="section level2 unnumbered hasAnchor">
+<h2>Example 2.11: Estimating the odds ratio of asthma associated with proximity to roads<a href="basics.html#example-2.11-estimating-the-odds-ratio-of-asthma-associated-with-proximity-to-roads" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We now estimate the effects of living near to a main road on asthma. The R code to do this is as follows:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="basics.html#cb14-1" tabindex="-1"></a><span class="do">## Fitting Odds Ratio</span></span>
+<span id="cb14-2"><a href="basics.html#cb14-2" tabindex="-1"></a><span class="fu">glm</span>(Y <span class="sc">~</span> X, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="at">data =</span> data)</span></code></pre></div>
+<p>Here, the odds ratio associated with living close to a main road is <span class="math inline">\(\exp(0.87216) = 2.391\)</span> (95% CI; 1.981 – 2.889. This indicates that there is a significant increase in risk of asthma in the children under study associated with their living close to a main road. Of course there may be confounders, such as parental smoking, which may affect this. If available, these confounders could be added to the model in the same way as seen in the Poisson example.</p>
 
 </div>
 </div>
@@ -409,7 +450,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-Chpt2.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-Chpt2.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -420,7 +461,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"download": ["_main.pdf", "_main.epub"],
 "search": {
 "engine": "fuse",
 "options": null
