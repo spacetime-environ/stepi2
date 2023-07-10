@@ -23,47 +23,32 @@ The Book now has a  GitHub site (https://spacetime-environ.github.io/stepi2) tha
 
 The authors remain indebted to all those individuals and institutions named above in the Preface to the first edition. To this list we now add, acknowledge, and warmly thank, individuals who helped put this revision together:
 
-- Ms Mariana Carmona Baes inspired the creation of the Bookdown format for the examples on the GitHub site associated with the second Edition;
+- Ms Mariana Carmona Baez inspired the creation of the Bookdown format for the examples on the GitHub site associated with the second Edition;
 - Dr. Sara Zapata-Marin together with Mariana provided the code and analyses for the worked examples using Bookdown and helped develop the GitHub site they can be accessed;
 - Mr Paritosh Kumar Roy provided the code for the forward-filtering-backward-sampling algorithm discussed in Chapter 11;
 - Mr. Johnny Li assisted with a number of software issues and assembled solutions for selected exercises;
 - Laís P. Freitas for her inspired graphic on the front cover, of spatio-temporal processes combined with their epidemiological impacts;
-
 - Dr. Joe Watson for help in assembling his preferential sampling software for modelling the effect.
-
 - Dr. Matthew L. Thomas for providing code, models, data and ideas related to the examples based on the WHO air quality database and modeling air pollutants in Europe.
+
 
 A big thanks also to Mr. Rob Calver, Senior Publisher-Mathematics, Statistics, and Physics. Chapman and Hall/CRD, Taylor and Francis Group for his advice and encouragement. Also, to Shashi Kumar on publisher's Helpdesk for assistance with the Latex file. Finally, thank you, Lynne Zidek, for an enormous amount of help in coordinating and managing the revision. 
 
-In the Second Edition,   R code is now fully listed in the examples where it is used.  These examples are provided as in the first edition, along with embedded R code and details on the use of specific R packages and other software. 
+In the Second Edition,   R code is now fully listed in the examples where it is used.  These examples are provided as in the first edition, along with embedded R code and details on the use of specific R packages and other software.
 
  Additional code, data and examples are provided on the Book's GitHub site along with other online resources associated with the book.  These can be found on the GitHub site for the book. 
 
 The following is a list of what has has been added to the first edition:
 
-
-- dramatic new advances in spatio-temporal modelling, especially R packages for implementing those models, notably
-		with NIMBLE and STAN, which replace the outdated WinBugs used in the first edition;
-
-- a new chapter on data science that includes such things as data wrangling along with a clear description; 
-		of the complimentary roles of data modelling, process modelling and parameter modelling;
-
+- dramatic new advances in spatio-temporal modelling, especially R packages for implementing those models, notably with NIMBLE and STAN, which replace the outdated WinBugs used in the first edition;
+- a new chapter on data science that includes such things as data wrangling along with a clear description; of the complimentary roles of data modelling, process modelling and parameter modelling;
 - listed code for software used in examples;
-
 - modern computational methods, including INLA, together with code for implementation are provided;
-
-- a new section on causality showing how the comparison of the impact of Covid in China and Italy are 
-		completely reversed when Simpson decomposition is applied:
-
-- the R code needed for the examples is now fully listed in the text with additional code in R Bookdown posted on the book's
- 		GitHub site;
+- a new section on causality showing how the comparison of the impact of Covid in China and Italy are completely reversed when Simpson decomposition is applied;
+- the R code needed for the examples is now fully listed in the text with additional code in R Bookdown posted on the book's GitHub site;
 - solutions to selected problems appear in the GitHub site;
-
 - how to wrap a deterministic model in a stochastic shell by a  unified approach to physical and statistical modeling;
-
-- an illustration of how a build such as shell is illustrated by application to a deterministic model for the spread of an
- 		infectious disease.
-
+- an illustration of how a build such as shell is illustrated by application to a deterministic model for the spread of an infectious disease.
 - new sections on causality and confounders, including the relationship of Simpson's paradox with process models.
 
 

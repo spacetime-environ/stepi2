@@ -3,16 +3,28 @@
 This chapter contains the basic principles of epidemiological analysis and how estimates of the risks associated with exposures can be obtained. From this chapter, the reader will have gained an understanding of the following topics:
 
 - Methods for expressing risk and their use with different types of epidemiological study.
+
 - Calculating risks based on calculations of the expected number of health counts in an area, allowing for the age--sex structure of the underlying population.
+
 - The use of generalised linear models (GLMS) to model counts of disease and case--control indicators.
+
 - Modelling the effect of exposures on health and allowing for the possible effects of covariates.
+
 - Cumulative exposures to environmental hazards.
 
 
-## Example 2.9: Estimating the SMR using a Poisson GLM {-}
+## Example 2.7: Estimating the SMR using a Poisson GLM {-}
+
+We consider the observed and expected number of cases of respiratory mortality
+in small areas in the UK from a study examining the long-term effects of air pollution
+(Elliott, Shaddick, Wakefield, de Hoogh, & Briggs, 2007). Taking a single area (a
+ward) that had a population of 1601, the observed counts of deaths in people over 65
+years old was 29 compared to the expected number which was 19.88. The SMR is
+therefore 29/19.88 = 1.46.
+
+```{r Ex 2.7 smr poisson one location}
 
 
-```{r Ex 2.9 smr poisson one location}
 
 # Finding MLE and SE of log(SMR) = beta0 on one single area
 y <- 29  # Total observed death
@@ -22,44 +34,91 @@ summary(glm(y ~ offset(log(E)), family = "poisson"))
 
 ```
 
-```{r Ex 2.9 smr poisson multiple locations, eval = FALSE}
+Noting that the linear predictor, and thus the coefficient of interest, $\beta_0$, is on the log scale, the estimate of the SMR = $\exp(\beta_0) = \exp(0.3776) = 1.458$. The standard error of the estimate of beta_0 can be used to construct a 95\% confidence interval: $\hat{\beta_0} \pm 1.96 \times se(\hat{\beta_0}) = (0.014, 0.741)$. Again this is on the log--scale and so the exponent is taken of both the lower and upper limits; $(\exp(0.014), \exp(0.741))$. The SMR in this case is therefore 1.458 (95\% CI; 1.013 -- 2.099) meaning that the number of observed cases of disease in the area is significantly greater than that expected based on the age--sex profile of the population. 
+
+We now consider the estimation of the SMR over more than a single area; in this case, we use the observed counts and expected numbers for $N=393$ areas. The parameter, $\beta_0$,  now corresponds to the log of the overall SMR using data from all the areas, i.e. $\frac{\sum^{393}_{i=1} O_i}{\sum^{393}_{i=1} E_i}$. From the data, this is 8282/7250.2 = 1.142 with the log of this being 0.133.
+
+```{r Ex 2.7 smr poisson multiple locations, eval = FALSE}
 # Finding MLE and SE of log(SMR) = beta0 over multiple areas
 summary(glm(Y ~ offset(log(E)), family = "poisson", data = data))
 
 ```
 
+We can see that the estimate of the SMR will be $\exp(0.13305)=1.142$, the overall SMR for all the areas. The 95\% CI will be $\exp(0.112) - \exp(0.155) = 1.118 - 1.167$, indicating an overall increased risk of respiratory mortality in these areas compared to what might be expected if they experienced the same mortality rates (by age and sex) as the national population. 
 
-## Example 2.10: Estimating the SMR using quasi-likelihood {-}
+## Example 2.8: Estimating the SMR using quasi-likelihood {-}
 
-```{r Ex 2.10 smr quasi-likelihood, eval = FALSE}
+The  R code for using quasi-likelihood to find the MLE of the $\log$(SMR)$=\beta_0$  and its standard error using the data from the previous example would be
+
+
+```{r Ex 2.8 smr quasi-likelihood, eval = FALSE}
 # Using quasi-likelihood to find the MLE and standard error of log(SMR) = beta0
 summary(glm(y ~ offset(log(E)), family="quasipoisson"), data = data)
 
 ```
 
+Note that the estimate itself is the same as with the Poisson case, but the standard error has increased from 0.01099 to 0.02078, reflecting the over-dispersion which is present, with the dispersion parameter having been estimated to be over 3. The 95\% confidence interval will therefore be wider;  $\exp(0.092)- \exp(0.133) = 1.096- 1.190$, with the increase in width reflecting the extra uncertainty that is present. 
 
-## Example 2.11: Modelling differences in SMRs in relation to differences in exposures {-}
+## Example 2.9: Modelling differences in SMRs in relation to differences in exposures {-}
 
-```{r Ex 2.11 relative risk, eval = FALSE}
+We now consider the possible effects of air pollution in relation to the
+SMRs observed in the different areas; the exposure, $X_{i1}$ for each area being
+the annual average of measurements from monitoring sites located within the
+health area. In addition, we consider the possible effects of a covariate; in this case, the covariate is a measure of deprivation known as the Carstairs score. 
+
+Smoking is known to be a major risk factor for respiratory illness, and
+it is known that smoking habits vary with social class (Kleinschmidt, Hills, & Elliott, 1995) and may therefore correlate with pollution levels, and act as a potential confounder. Although routine data on smoking levels at small area level are not available in Great Britain, strong correlations have, however, been demonstrated on several occasions between smoking rates and the Carstairs index of deprivation, which has also been shown to be a strong predictor of disease risk (Carstairs & Morris, 1989). The index is derived from a weighted aggregation of data on four census variables: unemployment, overcrowding, car ownership and social class.
+
+The R code for fitting a model to estimate the relative risk associated with air pollution in this case is as follows:
+
+```{r Ex 2.9a relative risk, eval = FALSE}
 # Fitting a model to estimate the relative risk associated with air pollution
-summary(glm(Y ~ offset(log(E)) + X1, family="poisson", data=data))
+summary(glm(Y ~ offset(log(E)) + X1, family="poisson", data=data_df))
+```
 
+
+In this case, the effect of air pollution is highly significant and the associated relative risk will be $\exp(\beta_1) = \exp(0.07972) = 1.082$, indicating an increase in risk of 8.2\% associated with every increase of one unit in air pollution (in this case, the units are 10$\mu$gm$^{-3}$). 
+
+Using a quasi-likelihood approach again results in the same estimate but with a larger standard error.
+
+```{r Ex 2.9b relative risk, eval = FALSE}
 # Fitting a model to estimate the relative risk associated with air pollution 
 # using a Quasi-Poisson approach
-summary(glm(Y ~ offset(log(E)) + X1, family = "quasipoisson", data = data))
+summary(glm(Y ~ offset(log(E)) + X1, family = "quasipoisson", data = data_df))
+```
 
+
+The 95\% CIs are 1.0615 -- 1.1049 for the Poisson case and 1.0434 -- 1.1241 when using quasi-likelihood; both indicating that the increase in risk is significant, with the wider intervals in the quasi-likelihood case again reflecting the extra uncertainty associated with the over-dispersion. 
+
+Adding the deprivation score, $X_2$, to the model might be expected to reduce the risk associated with air pollution as areas which are highly polluted are likely to also be deprived and deprived areas, with some exceptions, have higher rates of disease. It is therefore a confounder in the relationship between air pollution and health. 
+
+
+The R code for a model with both air pollution and deprivation is as\break follows:
+
+```{r Ex 2.9c relative risk, eval = FALSE}
 #Fitting a Poisson GLM with air pollution and deprivation
-summary(glm(Y ~ offset(log(E)) + X1 + X2, family = "poisson", data = data))
+summary(glm(Y ~ offset(log(E)) + X1 + X2, family = "poisson", data = data_df))
+```
 
+
+It can be seen that adding deprivation to the model has resulted in a reduction in the size of the effect associated with air pollution, for which the RR has changed from 1.083 to 1.026 (95\% CI; 1.004 -- 1.049). The effect of deprivation is also significant, with an increase in risk of 5.3\% (RR = $\exp(0.051302)=1.053$) associated with a unit increase in Carstairs score.
+
+When using quasi-likelihood, the estimates of relative risk are the same, but again they have wider confidence intervals.
+
+```{r Ex 2.9d relative risk, eval = FALSE}
 # Fitting a Quasi-Poisson GLM with air pollution and deprivation
 summary(glm(Y ~ offset(log(E)) + X1 + X2, family = "quasipoisson", data =
-              data))
+              data_df))
 
 ```
 
-Perform tests between the deviances of two models.
+This gives a RR for air pollution of 1.026 (95\% CI; 0.993 -- 1.060) and for deprivation a RR of 1.053 (95\% CI; 1.045 -- 1.061) which in this case leads to the effect of air pollution being non-significant. This suggests that it is deprivation that is playing a large part in the differences in SMRs observed in the different areas. Note the amount of the widening of the intervals is reduced as there is less over-dispersion; some of the extra-Poisson variability has thus  been `explained' by deprivation.
 
-```{r Ex 2.11 tests, eval = FALSE}
+The effect of adding deprivation to the model can be assessed by calculating the change in deviance between two models; (i) with air pollution and (ii) with both air pollution and deprivation. A significant difference in deviance will indicate that deprivation is a significant risk factor. 
+
+The R code to perform a test between the deviances of the two models is as follows:
+
+```{r Ex 2.9e tests, eval = FALSE}
 
 ## Test 1: Effect on Quasi-Poisson models with and without deprivation
 anova(
@@ -69,7 +128,11 @@ anova(
   # Model2
   test = "Chisq"
 ) # Chi-Squared test
+```
 
+This shows that deprivation has a highly significant effect on the risk of respiratory mortality. Using this method, the effect of taking air pollution out of the model can also be assessed, which proves to have a non-significant change in deviance; this indicates that when deprivation is included in the model the estimated risk associated with air pollution is non-significant.
+
+```{r Ex 2.9f tests, eval = FALSE}
 ## Test 2: Effect on Quasi-Poisson models with and without air pollution
 anova(
   glm(Y ~ offset(log(E)) + X1 + X2, family = "quasipoisson", data = data),
@@ -81,7 +144,10 @@ anova(
 
 ```
 
-## Example 2.12: Modelling the risks associated with lagged effects of air pollution {-}
+## Example 2.10: Modelling the risks associated with lagged effects of air pollution {-}
+
+
+Following on from the previous example, we might fit the annual averages from the previous three years, $X_{it}, X_{i(t-1)}, X_{i(t-2)}$. The R code to do this is as follows:
 
 ```{r Ex 2.12 lagged effects, eval = FALSE}
 ## Fitting quasi-poisson model
@@ -92,18 +158,27 @@ glm(
 )
 ```
 
-## Example 2.13: Estimating the odds ratio in a case-control study using a logistic model {-}  
+## Example 2.10: Estimating the odds ratio in a case-control study using a logistic model {-}  
 
-```{r Ex 2.13 odds ratio, eval = FALSE}
+In a study of asthma of whether children living near main roads require higher levels of asthma treatment than those who live further away, cases and controls were grouped according to whether or not they lived within 150 m of a main road  \cite{livingstone1996people}. Of the 1066 cases, 172 lived within 150m of a main road with the corresponding number of controls being 464 (out of 6233).
+
+The MLE of the probability that an individual is a case can be found using R as follows:
+
+```{r Ex 2.10 odds ratio, eval = FALSE}
 ## Fitting Odds Ratio
 glm(formula = Y ~ 1,
     family = "binomial",
-    data = data)
+    data = data_df)
 ```
 
-## Example 2.14: Estimating the odds ratio of asthma associated with proximity to roads {-}
+The estimate $-1.76594$ is on the log--odds scale. This can be converted back to the probability scale as, $\frac{\exp(-1.76594)}{(1 + \exp(-1.76594)} = 0.146$ which is the same as the proportion of cases (1066/6233).
 
-```{r Ex 2.14 odds ratio asma, eval = FALSE}
+## Example 2.11: Estimating the odds ratio of asthma associated with proximity to roads {-}
+
+
+We now estimate the effects of living near to a main road on asthma. The R code to do this is as follows:
+
+```{r Ex 2.11 odds ratio asma, eval = FALSE}
 ## Fitting Odds Ratio
 glm(Y ~ X, family = "binomial", data = data)
 
@@ -111,3 +186,4 @@ glm(Y ~ X, family = "binomial", data = data)
 
 
 
+Here, the odds ratio associated with living close to a main road is $\exp(0.87216) = 2.391$ (95\% CI;  1.981 -- 2.889. This indicates that there is a significant increase in risk of asthma in the children under study associated with their living close to a main road. Of course there may be confounders, such as parental smoking, which may affect this. If available, these confounders could be added to the model in the same way as seen in the Poisson example. 

@@ -1,22 +1,53 @@
-# Tactics-implementing uncertainty models {#tactics}
+# Approaches to Bayesian Computation {#computation}
 
-This chapter describes methods for implementing Bayesian models when their complexity means that simple, analytic solutions may not be available. From this chapter, the reader will have gained an understanding of the following topics:
+This chapter describes methods for implementing Bayesian models when their complexity means that simple, analytic solutions may not be available. The reader will have gained an understanding of the following topics:
+- analytical approximations to the posterior distribution;
+- use of samples from a posterior distribution for inference and Monte Carlo integration;
+- methods for direct sampling such as importance and rejection sampling;
+- Markov Chain Monte Carlo (MCMC) and methods for obtaining samples from the required posterior distribution including Metropolis--Hastings and Gibbs algorithms;
+- use of NIMBLE and RStan packages to fit Bayesian models using Gibbs sampling; 
+- Integrated Nested Laplace Approximations (INLA) as a method for performing efficient Bayesian inference including the use of R-INLA to implement a wide variety of latent Gaussian models.
 
-- Analytical approximations to the posterior distribution.
-- Using samples from a posterior distribution for inference and Monte Carlo integration.
-- Methods for direct sampling such as importance and rejection sampling.
-- Markov Chain Monte Carlo (MCMC) and methods for obtaining samples from the required posterior distribution including Metropolis–Hastings and Gibbs algorithms.
-- Using `nimble` and `stan` to fit Bayesian models using Gibbs sampling.
-- Integrated Nested Laplace Approximations (INLA) as a method for performing efficient Bayesian inference including the use of R–INLA to implement a wide variety of latent process models.
 
-
-## Example 6.2: Chronic obstructive pulmonary disease (COPD) in England {-} 
+## Example 6.2: Gibbs sampling with a Poisson-Gamma model - hospital admissions for chronic obstructive pulmonary disease (COPD) for England between 2001-2010 {-} 
 
 We now look at example into the hospital admission rates for chronic obstructive pulmonary disease (COPD) in England between 2001–2010. 
 
 In England, there are 324 local authority administrative areas each with an observed and expected number of cases. The expected numbers were calculated using indirect standardization by applying the age–sex specific rates for the whole of England to the age–sex population profile of each of
 the areas.
 
+
+We show the full conditional distributions for a Poisson model where the prior distribution on the rates is Gamma, that is, $y_i \mid \theta_, E_i \sim Poi(\theta_i E_i)$ where $E_i$ is the  expected number of cases in area $i$. In particular, let $\mathbf{y} = (y_1, ..., y_N)$ be a   $N$-dimensional vector with observed counts on  the total number of 
+hospital admissions for chronic obstructive pulmonary disease (COPD) for England between 2001 and 2010. The expected numbers of hospital admissions by local authority  were computed as described in Chapter 2, Section 2.1.
+
+
+If we assign a Gamma prior to the random effects $\theta_i$, i.e., $\theta_i \sim Gamma(a, b)$ for $i=1, \dots N$, and independent exponential distributions to the hyperparameters $a$ and $b$   then we can find the full conditional distributions required for Gibbs sampling. 
+
+The joint  posterior is proportional to
+
+\begin{eqnarray} \nonumber
+p(a, b, \mathbf{\theta} | \mathbf{y}) &\propto& \prod^N	_{i=1} \frac{\left(\theta_i E_i\right)^{y_i}}{y_i!} \exp(-\theta_i E_i) \, \frac{b^{a}}{\Gamma (a) }\theta_i^{a-1} e^{-b \theta_i}  \\ \nonumber 
+&& \times \lambda_{a} \exp(-\lambda_{a}) \, \lambda_{b}\exp(-\lambda_{b}),
+\end{eqnarray}
+and the full conditionals are:
+\begin{enumerate}
+\item Posterior full conditional for each $\theta_i$, $i=1,\dots,N$:
+$$
+p(\theta_i | \mathbf{\theta}_{-i}, a, b, \mathbf{y}) \propto  \theta_i^{y_i+a-1} \exp[-(E_i+b)\theta_i],
+$$
+which is the kernel of a Gamma distribution with parameters $y_i+a$ and $E_i+b$;
+\item Posterior full conditional for $b$:
+$$
+p(b | \mathbf{\theta}, a, \mathbf{y}) \propto 
+	b^{N a} \exp\left[-\left(\sum^N_{i=1}\theta_i + \lambda_{b}\right)b\right],
+$$
+which is the kernel of a Gamma distribution with parameters $Na+1$ and $(\sum^N_{i=1}\theta_i + \lambda_{b})$;
+\item Posterior full conditional for $a$:
+$$
+p(a | \mathbf{\theta}, b, \mathbf{y})  \propto  \frac{\left(b^N \prod^N_{i=1}\theta_i\right)^{a-1}}{\Gamma (a)^N },
+$$
+which does not have a closed form. We propose to sample from $p(a | \mathbf{\theta}, b, \mathbf{y})$ through a random walk, Metropolis-Hastings step. As $a$ must be strictly positive, the proposal is a log-normal distribution whose associated normal distribution has mean at the logarithm of the current value and some fixed variance, say $u$, that needs to be tuned.
+\end{enumerate}
 
 For this example, the following packages are needed `ggplot2` and  `sf`. 
 
@@ -36,7 +67,7 @@ To create SMR maps, we need to read in the relevant shapefiles.
 - [copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityexpected.csv) contains the **expected** number of hospital admissions in England by local authority. 
 
 ```{r Ex 6.2 read files, class.source = 'foldable' }
-# Reading in borders
+# Reading in the borders of the shape file
 england <- read_sf("data/copd/englandlocalauthority.shp")
 
 # Reading in data
@@ -70,7 +101,7 @@ summary(expected)
 
 Calculate the raw SMRs as.
 
-$$ \text{SMR} = \dfrac{observed}{expected}$$
+$$ \text{SMR} = \frac{observed}{expected}$$
 
 ```{r Ex 6.2 SMRs}
 
@@ -112,7 +143,7 @@ SMRspatial_raw <- merge(england, SMR_raw, by = "ID")
 
 ```
 
-Use `ggplot()` and `geom_sf()` to create a map which colours the local authorities by the raw SMR estimate.
+Use `ggplot()` and `geom_sf()` to create a choropleth map such that local authorities are colored by the raw SMR estimate.
 
 ```{r Ex 6.2 map, class.source = 'foldable', fig.align = 'center'}
 
@@ -140,7 +171,7 @@ ggplot() +
 
 ### Modelling a Poisson-Gamma with an MCMC implemented in `R` {-}
 
-The following code shows how to implement the MCMC using only `R` for the COPD example.
+The following code shows how to implement the MCMC using `R` for the COPD example.
 
 First, the constants are defined and the necessary vectors are initialized. 
 
@@ -190,13 +221,11 @@ fitted[1, ] <- rpois(N, E * theta[1, ])
 
 # Starting from l=2 as l=1 contains the initial values
 for(l in 2:L) {
-  # Sampling from the posterior full conditional of each theta_i
+
+# Sampling from the posterior full conditional of each theta_i
   for (i in 1:N)
-    theta[l, i] <- rgamma(1, (y[i] + a[(l - 1)]), rate = (E[i] + b[(l -
-                                                                      1)]))
+    theta[l, i] <- rgamma(1, (y[i] + a[(l - 1)]), rate = (E[i] + b[(l - 1)]))
   # Sampling from the posterior full conditional of b
-  # b[l] <- b[l-1]
-  # REVIEW: is this part of the comment?
   b[l] <- rgamma(1, (N * a[(l - 1)] + 1), rate = (sum(theta[l, ]) + lambda_b))
   # Metropolis-Hastings step to sample from the full conditional of "a"
   # the new value receives the current value in case the proposed
@@ -205,13 +234,13 @@ for(l in 2:L) {
   # Proposal in the log-scale
   laprop <- rnorm(1, log(a[l - 1]), u)
   aprop <- exp(laprop)
-  num <-
-    N * (aprop * (log(b[l])) - lgamma(aprop)) + (aprop - 1) * sum(log(theta[l, ])) -
+  #computing the numerator of the M-H step
+  num <- N * (aprop * (log(b[l])) - lgamma(aprop)) + (aprop - 1) * sum(log(theta[l, ])) -
     aprop * lambda_a + log(aprop)
-  den <-
-    N * (a[l - 1] * (log(b[l])) - lgamma(a[l - 1])) +
-    (a[(l - 1)] - 1) * sum(log(theta[l, ])) -
-    a[(l - 1)] * lambda_a + log(a[(l - 1)])
+  #computing the denominator of the M-H step
+  den <- N * (a[l - 1] * (log(b[l])) - lgamma(a[l - 1])) +
+    (a[(l - 1)] - 1) * sum(log(theta[l, ])) - a[(l - 1)] * lambda_a + log(a[(l - 1)])
+  #computing the M-H ratio
   ratio <- exp(num - den)
   unif <- runif(1)
   # Change the current value if the proposed value is accepted
@@ -226,7 +255,7 @@ After running the MCMC, we should check if the chains have converged
 
 ```{r Ex 6.2 MCMC convergence}
 
-# Number of burn in samples
+# Number of burn in samples and thinning
 burnin <- 20000
 thin <- 30
 # MCMC samples
@@ -240,7 +269,7 @@ par(mfrow = c(2, 2))
 plot(a[seqaux], type = "l", bty = "n")
 hist(a[seqaux], prob = 1, main = "")
 lines(xx, dexp(xx, lambda_a), col = 2, lwd = 2)
-
+acf(a[seqaux])
 # COMBAK: This chains are not looking great
 
 # Plot for "b"

@@ -124,6 +124,7 @@ ggmap(NYmap) + geom_point(
 # most likely all the data has to be divided by 10
 
 library(geoR)
+library(gstat)
 library(sp)
 
 ### First we load the data
@@ -285,7 +286,7 @@ no2_utm <-
   group_by(zone2) |> 
   mutate(utm_x = get_utm(x, y, zone2, loc = "x"),
          utm_y = get_utm(x, y, zone2, loc = "y"))|> as.data.frame() |> 
-  select(utm_x, utm_y, Altitude, Country, AirPollutionLevel)  |> 
+  dplyr::select(utm_x, utm_y, Altitude, Country, AirPollutionLevel)  |> 
  mutate( ID = c(1:896))
 
 no2_utm_geo <- no2_utm  
@@ -448,7 +449,7 @@ covs_grid_utm <-
   group_by(zone2) |> 
   mutate(utm_x = get_utm(x, y, zone2, loc = "x"),
          utm_y = get_utm(x, y, zone2, loc = "y"))|> as.data.frame() |> 
-  select(id, utm_x, utm_y, starts_with("eu_dem_v11")) |> 
+  dplyr::select(id, utm_x, utm_y, starts_with("eu_dem_v11")) |> 
   gather(layer, altitude, -c(id, utm_x, utm_y), na.rm = TRUE) 
 
 
@@ -1163,7 +1164,7 @@ obsDist <- fields::rdist(obsCoords)
 ```
 
 
-```{r Extra 10.8 nimble model, error = FALSE, message = FALSE, results='hide', cache = TRUE}
+```{r Extra 10.8 nimble model, error = FALSE, message = FALSE, results='hide'}
 
 Extra10_9Code <-  nimbleCode ({
   # Covariance matrix spatial effect
@@ -1207,7 +1208,7 @@ inits <- list( sigma = 0.1, phi_inv = 6/max(obsDist), tau = 0.1)
 start_time <- Sys.time()
 
 mcmc.out <- nimbleMCMC(
-  code = Example10_9Code,
+  code = Extra10_9Code,
   constants = constants,
   data = ex.data,
   inits = inits,

@@ -1,3 +1,41 @@
 # Data: increasing information and reducing uncertainty  {#data}
 
-This is a new chapter
+There is a rich history of collecting environmental data and recently there has been an explosion in quantity and complexity of data related to the environment, from monitoring, satellite remote sensing, numerical modelling and many other sources. This chapter provides an introduction to the variety of different sources of data that are available and methods for obtaining, manipulating and processing data using the [Tidyverse](https://www.tidyverse.org/) in R so that it is a form that can be readily used for analysis. The reader will have gained an understanding of the following topics: 
+
+- How the Tidyverse can be used for data wrangling; 
+
+- The importance of visualization in communication and understanding;
+
+- How R can be used to summarize and visualize data;
+
+- The use of shapefiles to produce maps in R;
+
+- How to calculate expected numbers and SMRs in practice;
+
+- How to perform health impact analysis.
+
+## Getting to know the structure of dataframes  {-}
+
+Once a dataframe has been loaded into R we can examine it and perform analysis. Initially, we can understand our dataset by finding
+the number of observations and variables in data frames by using the
+\texttt{nrow()} and \texttt{ncol()} functions, respectively.
+
+We will load and analyse data from the World Health Organization's
+Global Air Pollution database. The data is open source and can be
+downloaded from the WHO's website in \texttt{.csv} format. It contains
+over 11,000 measurements of fine particulate matter air pollution (PM2.5
+and PM10) for the years 2010-2019 and details of the locations of
+monitoring sites. We can import this into R and convert it to a
+dataframe either by using the \texttt{read.csv} 
+
+```{r Structure of data frames, eval = TRUE}
+# import the dataset from a .csv file
+WHO_GM_Database <- read.csv("data/WHOGMDatabase.csv")
+# Viewing the structure of the variables within the WHO Air Pollution dataset
+str(WHO_GM_Database)
+```
+
+A quick way of viewing the dataset to see the data are using the names(), str() and head() functions. The names() function will display the variable names within a dataframe. The str() function will display the structure of the dataset, and the head() function will display the first 6 rows in the dataframe
+
+## Extracting and creating variables  {-}
+
