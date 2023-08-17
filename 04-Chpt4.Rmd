@@ -1,4 +1,4 @@
-# Data: increasing information and reducing uncertainty  {#data}
+# Extracting information from data  {#data}
 
 There is a rich history of collecting environmental data and recently there has been an explosion in quantity and complexity of data related to the environment, from monitoring, satellite remote sensing, numerical modelling and many other sources. This chapter provides an introduction to the variety of different sources of data that are available and methods for obtaining, manipulating and processing data using the [Tidyverse](https://www.tidyverse.org/) in R so that it is a form that can be readily used for analysis. The reader will have gained an understanding of the following topics: 
 
@@ -8,7 +8,7 @@ There is a rich history of collecting environmental data and recently there has 
 
 - How R can be used to summarize and visualize data;
 
-- The use of shapefiles to produce maps in R;
+- The use of shape files to produce maps in R;
 
 - How to calculate expected numbers and SMRs in practice;
 
@@ -38,4 +38,529 @@ str(WHO_GM_Database)
 A quick way of viewing the dataset to see the data are using the names(), str() and head() functions. The names() function will display the variable names within a dataframe. The str() function will display the structure of the dataset, and the head() function will display the first 6 rows in the dataframe
 
 ## Extracting and creating variables  {-}
+```{r Extracting and creating variables, eval = TRUE}
+# Extracting the variable Year from WHO_GM_Database and assign to a new variable called Year
+YearOfMeasurement <- WHO_GM_Database[,'Year']
 
+# show the first 5 entries in YearOfMeasurement
+YearOfMeasurement[1:5]
+
+
+# Extracting the row (or observation) from WHO_GM_Database and assign to a new variable called FirstRow
+FirstRow <- WHO_GM_Database[1,]
+
+# Show the first 10 entries in FirstRow
+FirstRow[1:10]
+
+# Extracting the 3rd row for Year from WHO_GM_Database
+WHO_GM_Database[3,'Year']
+
+```
+
+Alternatively, you can extract variables from the dataframes by using the
+\texttt{\$} operator. We first specify the dataset, then give the name of
+the variable that we want. Let's extract the variable \texttt{Year} from
+\texttt{WHO\_GM\_Database}.
+
+```{r Extracting Variable-1, eval = TRUE}
+# Extracting the variable a from WHO_GM_Database, and show the first 3 entries
+WHO_GM_Database$Year[1:3]
+```
+Creating a new variable within a data frame is straightforward. Let's
+create a variable \texttt{TimeSince2010} within \texttt{WHO\_GM\_Database} which is the difference between \texttt{Year} and 2010. For this we ex- tract the variable \texttt{Year} from \texttt{WHO\_GM\_Database} and subtract 2010. In the dataframe, \texttt{Year} is a character variable (which you can see using \texttt{str(WHO\_GM\_Database)}) and we will need to convert this to a numeric variable before performing the calculation.
+
+```{r Convert variable, eval = TRUE}
+# convert Year to a numeric variable
+
+WHO_GM_Database$Year <- as.numeric(WHO_GM_Database$Year)
+
+# Extracting Year a from WHO_GM_Database,subtract 2000 and make a new variable in the WHO_GM_Database dataframe. For clarity, we will only show the first 3 entries
+
+WHO_GM_Database$TimeSince2010 <- WHO_GM_Database$Year - 2000
+WHO_GM_Database$TimeSince2010[1:3]
+```
+
+## Simple manipulations using Tidyverse  {-}
+
+Again, we will use the \texttt{WHO\_GM\_Database} data frame and will start by looking at some basic operations, such as subsetting, sorting and adding new columns.
+
+One operation we often want to do is to extract a subset of rows according to some criterion. For example, we may want to extract all rows of the iris dataset that correspond to the versicolor species. In Tidyverse, we can use a function called \texttt{filter()}. For clarity, we will show the first 3 rows of the output
+
+### Filter rows in Tidyverse {-}
+
+```{r Filter rows, eval = TRUE}
+
+require("tidyverse")
+filter(WHO_GM_Database, Year == 2019)[1:3,]
+```
+
+### Sorting rows in Tidyverse {-}
+
+The \texttt{arrange()} function will sort the \texttt{WHO\_GM\_Database} data by \texttt{CountryName} (alphabetically) and then by \texttt{Year} (numerically). Again, for
+clarify we will show only the first few rows of the data (9 rows) 
+
+```{r Sort rows, eval = TRUE}
+arrange(WHO_GM_Database,CountryName, Year)[1:9,]
+```
+
+### Select columns in Tidyverse {-}
+
+Now let's say that we wish to select just the \texttt{CountryName}, \texttt{Year} and \texttt{PM25} columns from the data set and assign it to a new dataset, \texttt{WHO\_GM\_Database\_reduced}. In Tidyverse we can use the \texttt{select()} function:
+
+```{r Select columns, eval = TRUE}
+WHO_GM_Database_selectcolumns <- select(WHO_GM_Database, CountryName, Year, PM25)
+head(WHO_GM_Database_selectcolumns)
+```
+
+There is even a set of functions to help extract columns based on
+pattern matching, e.g.
+```{r Select columns-1, eval = TRUE}
+WHO_GM_Database_selectcolumns2 <- select(WHO_GM_Database, starts_with("Country"))
+head(WHO_GM_Database_selectcolumns2)
+```
+Note that we can also remove columns using an \texttt{-} operator, e.g.
+
+```{r Select columns-2, eval = TRUE}
+WHO_GM_Database_selectcolumns3 <- select(WHO_GM_Database, -starts_with("SDG"))
+head(WHO_GM_Database_selectcolumns3)
+```
+
+```{r Select columns-3, eval = TRUE}
+WHO_GM_Database_selectcolumns4 <- select(WHO_GM_Database, -SDG1Region, -SDG2Region, SDG3Region)
+head(WHO_GM_Database_selectcolumns4)
+```
+
+### Adding columns {-}
+
+Finally, let's add a new column representing the different between \texttt{Year} and 2000 as before, but using the \texttt{Tidyverse}. To avoid over-riding the first version we will call it \texttt{TimeSince2010\_tidy} and for clarity will only show the first
+three rows.
+
+```{r Add columns, eval = TRUE}
+WHO_GM_Database$Year <- as.numeric(WHO_GM_Database$Year)
+mutate(WHO_GM_Database, TimeSince2010_tidy = Year - 2000)[1:2,]
+```
+
+### Pipes {-}
+
+Piping comes from Unix scripting, and simply means a chain of commands, such that
+the results from each command feed into the next one. It can be helpful in making
+code more succinct, and uses the pipe operator %>% to chain functions together.
+
+For example, the following will filter the dataframe to extract rows when the year
+is 2019 and then how the first 6 rows using the head function.
+
+```{r Pipes, eval = TRUE}
+WHO_GM_Database %>% filter(Year == 2019) %>% head()
+```
+
+### Chaining pipes {-}
+
+Pipes can be chained together multiple times. For example:
+
+```{r Chaining pipes, eval = TRUE}
+WHO_GM_Database$Year <- as.numeric(WHO_GM_Database$Year)
+
+WHO_GM_Database %>%
+filter(Year == 2019) %>% select(CountryName, Year, PM25, -starts_with("SDG")) %>% mutate(TimeSince2010_tidy = Year - 2000) %>% arrange(CountryName, Year) %>%
+head()
+```
+
+### Grouping and summarizing {-}
+
+A common thing we might want to do is to produce summaries of some
+variable for different subsets of the data. For example, we might want
+the mean values of \texttt{PM25} for each \texttt{CountryName}. The
+dplyr package (within \texttt{Tidyverse}) provides a function
+group\_by() that allows us to group data, and summarize() that allows us
+to summarize data.
+
+In this case, we can think of what we want to do as \texttt{grouping} the
+data by \texttt{CountryName} and then averaging the \texttt{PM25} values
+within each group. Note that there are missing values in \texttt{PM25,}
+as in some locations only \texttt{PM10} is measured, and vice-versa. We
+use \texttt{mean(PM25,\ na.rm=TRUE)} to exclude missing values when
+calculating the mean.
+
+```{r Grouping, eval = TRUE}
+WHO_GM_Database %>% 
+  group_by(CountryName) %>%
+summarize(mn = mean(PM25, na.rm=TRUE))
+```
+
+### Summarize {-}
+
+The summarize() function applies a function to a dataframe or subsets of a
+data frame. For example, we can produce a table of estimates for the mean and variance of both PM25 lengths and PM10, within each CountryName.
+
+```{r Summarize, eval = TRUE}
+WHO_GM_Database %>% 
+  group_by(CountryName) %>%
+summarize(MeanPM25 = mean(PM25, na.rm=TRUE), MeanPM10 = mean(PM10, na.rm=TRUE), VarPM25 = var(PM25, na.rm=TRUE), VarPM10 = var(PM10, na.rm=TRUE))
+```
+
+## Example 4.1: Health impacts associated with outdoor air pollution {-}
+
+We now demonstrate how using dataframes and the \texttt{Tidyverse} can
+allow us to perform a health impact analysis of air pollution very
+efficiently. We will be calculating the annual number of deaths
+attributable to PM\(_{2.5}\).
+
+
+We wish to estimate the annual number of deaths attributable to
+PM\(_{2.5}\) air pollution. In order to do this, we need
+
+- a relative risk (RR),
+
+- the population at risk for the areas of interest,
+
+- the overall mortality rate (OMR), and
+
+- a baseline value for air pollution (for which there is no associated increase in risk).
+
+
+In this example, we use a RR of 1.06 per 10\(\mu gm^{-3}\), the
+population at risk is 1 million and an overall mortality rate of 80 per
+10000. We first enter this information into \texttt{R} by assigning
+these values to a series of variables. We first enter this
+information into R by assigning these values to a series of variables.
+
+```{r Example4.1, eval = TRUE}
+# Relative Risk
+RR <- 1.06
+
+# Size of population
+Population <- 1000000
+
+# Unit for the Relative Risk
+RR_unit <- 10
+
+# Overall mortality count, used for calculating the overall mortality rate
+OMR_count <- 80
+
+# Denominator (population at risk), used for calculating the overall mortality rate. 
+OMR_pop <- 10000
+
+# Mortality rate
+OMR = OMR_count/OMR_pop
+OMR
+
+# Baseline value of PM2.5 for which there is no increased risk
+baseline <- 5
+
+# Population attributable fraction
+#PAF = (Proportion of population exposed*(RR-1))/(Proportion of population exposed*(RR-1)+1). 
+#In this case the proportion of the population exposed is one. 
+
+PAF = (RR-1)/RR
+PAF
+```
+
+In this example, we will calculate the attributable deaths for
+increments of 10\(\mu gm^{-3}\), however the following code is general
+and will work for any increments.
+
+```{r Example4.1-1, eval = TRUE}
+# PM2.5 categories
+PM2.5.cats <- c(5,15,25,35,45,55,65,75,85,95,105)
+
+# Create a dataframe containing the PM2.5 categoriess
+Impacts <- data.frame(PM2.5.cats)
+```
+
+
+We now calculate the increases in risk for each category of
+PM\(_{2.5}\). For each category, we find the increase in risk compared
+to the baseline.
+
+For the second category, with PM\(_{2.5}\) = 15, the risk will be 1.06
+(the original RR) as this is 10\(\mu gm^{-3}\) (one unit) greater than
+the baseline.
+
+For the next category, PM\(_{2.5}\) is 10\(\mu\)gm\(^{-3}\) higher than
+the previous category (one unit in terms of the RR) and so the risk in
+that category again be increased by a factor of 1.06 (on that of the
+previous category). In this case, the relative risk (with respect to
+baseline) is therefore \texttt{1.06\ *\ 1.06\ =\ 1.1236}.
+
+For the next category, PM\(_{2.5}\) = 25 which is again
+10\(\mu\)gm\(^{-3}\) (one unit in terms of the RR) higher, and so the
+relative risk is 1.06 multiplies by the previous value,
+i.e.~\texttt{1.06\ *\ 1.1236\ =\ \ 1.191016}.
+
+We can calculate the relative risks for each category (relative to
+baseline) in \texttt{R}. For each category, we find the number of units
+from baseline and repeatedly multiply the RR by this number. This is
+equivalent to raising the RR to the power of (Category-Baseline)/Units,
+e.g.
+\[\mbox{RR}^{\left( \frac{\mbox{Category-Baseline}}{\mbox{Units}}\right)}\]
+
+We add another column to the Impacts dataframe containing these values.
+
+```{r Example4.1-2, eval = TRUE}
+# Calculating Relative Risks 
+Impacts <- mutate(Impacts, RR = RR^((Impacts$PM2.5.cats - baseline)/RR_unit))
+```
+
+Once we have the RR for each pollution level, we can calculate the rate
+for each category. This is found by applying the risks to the overall
+rate. Again, we add these numbers to the Impacts dataframe as an
+additional column using \texttt{mutate}. To use this function, we need
+to add columns which contains replications of the \texttt{OMR} and
+\texttt{Population}.
+
+```{r Example4.1-3, eval = TRUE}
+# Create an additional column containing replication of the OMR
+Impacts$OMR <- rep(OMR, nrow(Impacts))
+Impacts$Population <- rep(Population, nrow(Impacts))
+# Calculating the rates in each category
+Impacts <- mutate(Impacts, Rate = RR * OMR)
+# Add the PAFs for each category
+Impacts <- mutate(Impacts, PAF = RR * (RR-1)/RR)
+# Add the number of (expected) deaths  per year for each category
+Impacts <- mutate(Impacts, DeathsPerYear = Rate * Population)
+```
+
+For each category, we need to calculate the extra deaths (with reference to the overall rate). The number of deaths for the reference category is the first number in the \texttt{DeathsPerYear} column.
+
+```{r Example4.1-4, eval = TRUE}
+# The reference number of deaths
+Impacts$DeathsPerYear[1]
+# make into a vector by using the rep (replicate) function and add to the dataframe
+Impacts$ReferenceDeaths <- rep(Impacts$DeathsPerYear[1], nrow(Impacts))
+
+# We can then calculate the excess numbers of deaths for each category
+Impacts <- mutate(Impacts, ExtraDeaths = DeathsPerYear - ReferenceDeaths)
+```
+
+
+For each category, we then want to calculate the number of deaths
+gained. These are the difference between the values in each category. We can find these using the \texttt{diff()} function. This will produce a set of differences for which the length is one less than the number of rows in our Impacts dataframe. We need to add a zero to this to ensure that they line up when we add them as another column.
+
+```{r Example4.1-5, eval = TRUE}
+# Calculate the number of deaths gained
+diff(Impacts$ExtraDeaths)
+
+# We can now add these gains to the main Impacts dataframe
+Impacts$Gain <- c(0,diff(Impacts$ExtraDeaths))
+
+# Show the results 
+Impacts
+```
+
+## Example 4.3. Mapping cancer incidence in Southern and Eastern Serbia {-}
+
+In this example, we will see how to use \texttt{R} to create maps and
+then map the values of data within a dataframe. We will create a map of
+South and East Serbia. and creating expected number of cases and SIRs of
+cancer in City of Bor. To create maps, we use something called
+`shapefiles'. Shapefiles contain location, shape, and attributes of
+geographic features such as country borders. The files SE\_Serbia.shp,
+and SE\_Serbia.dbf contain the location, shape, and attributes of South
+and East Serbia by district. These were obtained from
+\url{http://www.gadm.org}. On this website you can download
+administrative boundaries for almost every country in the world.
+
+We will use the following files:
+
+- shapefiles and information for South and East Serbia split by administrative district (\texttt{SE\_Serbia.shp},   \texttt{SE\_Serbia.dbf})
+- population counts and density for South and East Serbia split by administrative district (\texttt{SE\_Serbia.csv})
+- population counts and incidence rates of all cancers, by age group and sex in City of Bor (\texttt{Bor\_Rates.csv}), 
+- observed counts of all cancers cancer, by age group and sex in City of
+  Bor (\texttt{Bor\_Observed.csv})
+
+These need to be in the working directory, which can be set using the
+\texttt{setwd()} function.
+
+
+For this example, we need the following packages:
+
+- \texttt{sp}: Package to use spatial objects.
+- \texttt{spdep}: Package to use spatial objects.
+- \texttt{rgdal}: Package to load and manipulate spatial data.
+- \texttt{CARBayes}: Package to fit spatial GLMMs which contains some useful functions for manipulating spatial data
+- \texttt{RColorBrewer}: Package to give scaled colours for plots.
+- \texttt{raster}: Package to work with rasters.
+- \texttt{rworldmap}: Package to plot maps.
+
+
+Use the \texttt{install.packages()} function or the packages window in
+the bottom right pane of RStudio to download and install the packages
+that we need. We use the \texttt{library()} function to load the
+required packages into the \texttt{R} library.
+
+```{r Example4.3-1, eval = TRUE}
+# Loading required packages
+library(spdep)
+library(shapefiles)
+library(sp)
+library(CARBayes)
+library(rgdal)
+library(RColorBrewer)
+library(raster)
+library(rworldmap)
+
+# a function from a previous version of CARBayes that we use here
+source("./functions/combine.data.shapefile.R")
+```
+
+### Creating maps of Southern and Eastern Serbia {-}
+
+To create maps, we use something called `shapefiles'. Shapefiles contain
+location, shape, and attributes of geographic features such as country
+borders. The files \texttt{SE\_Serbia.shp}, and \texttt{SE\_Serbia.dbf}
+contain the location, shape, and attributes of South and East Serbia by
+district. These were obtained from \url{http://www.gadm.org}. The
+functions \texttt{read.shp()} and \texttt{read.dbf()} will read these
+shapefiles into \texttt{R}.
+
+```{r Example4.3-1a, eval = TRUE}
+# Reading in borders
+shp_Serbia <- read.shp(shp.name = "./data/SE_Serbia.shp")
+dbf_Serbia <- read.dbf(dbf.name = "./data/SE_Serbia.dbf")
+# Read population data for Serbia 
+pop_Serbia <- read.csv('./data/SE_Serbia.csv')
+```
+
+To check that the data has been read into \texttt{R} correctly, we can
+use the \texttt{head()} and function, which prints the first six rows of
+a dataset.
+
+```{r Example4.3-2, eval = TRUE}
+# Printing first six rows
+head(pop_Serbia)
+# Combining population data and the shapefile
+Serbia <- combine.data.shapefile ( data = pop_Serbia , #Dataset to attach
+shp = shp_Serbia,#Shapefile
+dbf = dbf_Serbia ) #Database file
+
+# Scaling population counts ( to 1000 s )
+Serbia $ Pop_2011 <- Serbia$Pop_2011 / 1000
+
+# Creating map of population counts in Serbia
+spplot (obj = Serbia , # Spatial object to be plotted
+zcol = c ( "Pop_2011" ) , # Choice of the column the object you are plotting .
+main = " Population ( in 1000 s ) " , # Plot title
+at= seq (0 ,400 , length.out =20), # Break points for legend
+col = 'black', # Colour for borders
+col.regions = colorRampPalette(brewer.pal(9, 'Blues'))(20)) # Create a set of colours
+```
+
+### Example 4.4 Cancer in Bor {-}
+
+
+We will work through an example of creating expected counts and a standarized morbidity ratio (SMR) using data on all types of cancer (except skin) in the Muncipality of Bor, Serbia between 2001 and 2015.
+
+###Expected Numbers {-}
+
+In order to calculate SMRs, we need to estimate the number of cases we expect in Bor per year, based on their age-sex profiles. To calculate expected numbers, we use indirect standardization.
+
+For indirect standardization, we take the age and sex-specific rates
+from the reference population (in this example, Serbia) and convert them into the mortality rate we would observe if those reference rates were true for the age and sex-structure of the population of interest (in this example, Bor). Therefore, we require
+
+- population counts by age and sex for Bor
+- the age and sex-specific incidence rates for cancer in Serbia.
+
+The file \texttt{Bor\_Populations.csv} contain the populations and incidence rates required by age and sex. These are in csv format, so we use the \texttt{read.csv()} function.
+
+```{r Example4.4-1, eval = TRUE}
+# Reading in observed numbers of hospital admissions in England by local authority
+Bor_Rates <- read.csv(file="./data/Bor_Rates.csv")
+```
+
+To check that the data has been read into \texttt{R} correctly, and to
+familiarise ourselves with the data, we can summarize it using the
+\texttt{summary()} function. This will allow us to check for anomalies
+in our data.\\
+
+```{r Example4.4-2, eval = TRUE}
+# Summarising first six rows of the Rates and populations of Bor
+summary(Bor_Rates)
+```
+We can see that \texttt{Bor\_Rates} has the following variables:
+
+- \texttt{City} - Name of City,
+- \texttt{Sex} - Sex category,
+- \texttt{AgeGroup} - Age categories, in 5-yearly groups,
+- \texttt{Pop} - Population count,
+- \texttt{Incidence\_Serbia} - Incidence rates of cancer in \emph{Serbia} per year
+- \texttt{Incidence\_SE\_Serbia} - Incidence rates of cancer in \emph{South and East Serbia} per year
+
+
+Now that we have read in the population and the incidence rates required, we calculate the expected number as follows \[E = \sum_{k}N_k \times r_k\] where \(r_k\) are the age- and sex-specific rates of obtaining cancer in Serbia and \(N_k\) are the
+population counts by age and sex in Bor.
+
+In \texttt{R} we can calculate each of the \(N_k \times r_k\) by multiplying the columns containing the Serbian incidence rates and the population profile of Bor. We add another column to the \texttt{Bor\_Rates} dataframe containing these values. Remember that to extract and assign columns in a dataframe we use the \texttt{\$}
+operator.
+
+```{r Example4.4-4, eval = TRUE}
+# Calculating the expected number by Settlement, age and sex 
+# using the Serbian incidence rates and Bor population profiles
+Bor_Rates$Expected <- Bor_Rates$Incidence_Serbia * Bor_Rates$Pop
+```
+
+### Calculating SMRs {-}
+The observed number of cases of cancer by sex in the Municipality of Bor
+need to be read into \texttt{R}. These are in csv format, so we use the
+\texttt{read.csv()} function.
+
+```{r Example4.4-4a, eval = TRUE}
+# Reading in observed numbers of hospital admissions in England by local authority
+Bor_Observed <- read.csv(file="./data/Bor_Observed.csv")
+```
+
+To check that the data has been read into \texttt{R} correctly, we can use the \texttt{head()} function, which prints the first six rows of a dataset.
+
+```{r Example4.4-5, eval = TRUE}
+# Printing first six rows of the observed counts 
+head(Bor_Observed)
+```
+
+
+We can see that \texttt{Bor\_Observed} has the following variables:
+
+- \texttt{City} - Name of City,
+- \texttt{Sex} - Sex category,
+- \texttt{Observed} - Observed number of cases of cancer between 2001 and 2015
+
+```{r Example4.4-7, eval = TRUE}
+# Summing all expected cases by Settlement and Sex
+Bor_Expected <- aggregate(Expected ~ City + Sex, # Variable to sum over ~ Variables to Stratify by
+                          data = Bor_Rates, # Dataset name
+                          sum) # Function to summarize over 
+```
+
+
+Remember, we calculated expected numbers for one specific year, whereas
+the observed counts are over 10 years (2001-2015). For the SMRs, we
+assume that the population remains the same across that time period and
+multiply the expected cases by 15.
+
+
+
+```{r Example4.4-8, eval = TRUE}
+# Multiplying the number of cases by 15 to obtain expected cases between 2001 and 2015
+Bor_Expected$Expected <- 15 * Bor_Expected$Expected  
+```
+
+To compare the observed and expected counts, we need to merge the two datasets \texttt{Bor\_Expected} and \texttt{Bor\_Observed} together. We do this using the \texttt{merge()} function.
+
+```{r Example4.4-9, eval = TRUE}
+# Merging files together 
+Bor <- merge(Bor_Expected, # First file to merge
+             Bor_Observed, # Second file to merge
+             by = c('City','Sex')) # Variables to merge
+```
+
+Now that we have observed and expected numbers of cancer cases, we can calculate raw SMRs. Remember that 
+$$
+\mbox{SMR} = \frac{\mbox{observed}}{\mbox{expected}}
+$$ 
+We add another column to the \texttt{Bor} dataframe containing these values.
+
+```{r Example4.4-10, eval = TRUE}
+# Calculating SMR by sex
+Bor$SMR <- Bor$Observed / Bor$Expected
+
+# Printing the results 
+Bor
+```  

@@ -30,24 +30,24 @@ p(a, b, \mathbf{\theta} | \mathbf{y}) &\propto& \prod^N	_{i=1} \frac{\left(\thet
 && \times \lambda_{a} \exp(-\lambda_{a}) \, \lambda_{b}\exp(-\lambda_{b}),
 \end{eqnarray}
 and the full conditionals are:
-\begin{enumerate}
-\item Posterior full conditional for each $\theta_i$, $i=1,\dots,N$:
-$$
+
+- Posterior full conditional for each $\theta_i$, $i=1,\dots,N$:
+\begin{eqnarray}
 p(\theta_i | \mathbf{\theta}_{-i}, a, b, \mathbf{y}) \propto  \theta_i^{y_i+a-1} \exp[-(E_i+b)\theta_i],
-$$
+\end{eqnarray}
 which is the kernel of a Gamma distribution with parameters $y_i+a$ and $E_i+b$;
-\item Posterior full conditional for $b$:
-$$
+- Posterior full conditional for $b$:
+\begin{eqnarray}
 p(b | \mathbf{\theta}, a, \mathbf{y}) \propto 
 	b^{N a} \exp\left[-\left(\sum^N_{i=1}\theta_i + \lambda_{b}\right)b\right],
-$$
+\end{eqnarray}
 which is the kernel of a Gamma distribution with parameters $Na+1$ and $(\sum^N_{i=1}\theta_i + \lambda_{b})$;
-\item Posterior full conditional for $a$:
-$$
+- Posterior full conditional for $a$:
+\begin{eqnarray}
 p(a | \mathbf{\theta}, b, \mathbf{y})  \propto  \frac{\left(b^N \prod^N_{i=1}\theta_i\right)^{a-1}}{\Gamma (a)^N },
-$$
+\end{eqnarray}
 which does not have a closed form. We propose to sample from $p(a | \mathbf{\theta}, b, \mathbf{y})$ through a random walk, Metropolis-Hastings step. As $a$ must be strictly positive, the proposal is a log-normal distribution whose associated normal distribution has mean at the logarithm of the current value and some fixed variance, say $u$, that needs to be tuned.
-\end{enumerate}
+
 
 For this example, the following packages are needed `ggplot2` and  `sf`. 
 
@@ -60,7 +60,7 @@ library(sf)
 
 ```
 
-To create SMR maps, we need to read in the relevant shapefiles. 
+To create SMR maps, we need to load the relevant shapefiles into the `R` session. 
 
 - [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/englandlocalauthority.shp) and [englandlocalauthority.dbf](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/englandlocalauthority.dbf) contain the location, shape, and attributes of English local authorities. The function `read_sf()` from the `sf` package  will read these shapefiles into `R`.
 - [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityobserved.csv) contains the **observed**  number of hospital admissions in England by local authority. You can find this data by clicking.
@@ -69,14 +69,9 @@ To create SMR maps, we need to read in the relevant shapefiles.
 ```{r Ex 6.2 read files, class.source = 'foldable' }
 # Reading in the borders of the shape file
 england <- read_sf("data/copd/englandlocalauthority.shp")
-
-# Reading in data
-observed <-
-  read.csv(file = "data/copd/copdmortalityobserved.csv", row.names = 1)
-
-expected <-
-  read.csv(file = "data/copd/copdmortalityexpected.csv", row.names = 1)
-
+# Reading the data
+observed <-read.csv(file = "data/copd/copdmortalityobserved.csv", row.names = 1)
+expected <-read.csv(file = "data/copd/copdmortalityexpected.csv", row.names = 1)
 ```
 
 Print summaries of the observed and expected counts.
@@ -88,18 +83,15 @@ head(observed)
 
 # Printing first six rows of the expected counts
 head(expected)
-
 # Summarising the observed counts
 summary(observed)
-
 # Summarising the expected counts
 summary(expected)
-
 ```
 
 ### Modelling the raw  standardized mortality rates (SMRs) {-}
 
-Calculate the raw SMRs as.
+Calculate the raw SMRs as
 
 $$ \text{SMR} = \frac{observed}{expected}$$
 
@@ -109,8 +101,7 @@ SMR_raw <- observed[, -1] / expected
 
 # Rename columns
 names(SMR_raw) <-
-  c(
-    "SMR2001",
+  c("SMR2001",
     "SMR2002",
     "SMR2003",
     "SMR2004",
@@ -121,26 +112,20 @@ names(SMR_raw) <-
     "SMR2009",
     "SMR2010"
   )
-
 # Printing first six rows of raw SMRs
 head(SMR_raw)
-
 # Summarising raw SMRs
 summary(SMR_raw)
-
 ```
 
 
 Attach the values of the raw SMRs to the shapefiles. The function `merge()` allows us to combine a data frame with a shapefile to plot later.
 
 ```{r Ex 6.2 combine smr and shapefiles, class.source = 'foldable'}
-
 # Convert row names to ID column
 SMR_raw <- tibble::rownames_to_column(SMR_raw, "ID")
-
 # Combine raw SMRs and shapefiles
 SMRspatial_raw <- merge(england, SMR_raw, by = "ID") 
-
 ```
 
 Use `ggplot()` and `geom_sf()` to create a choropleth map such that local authorities are colored by the raw SMR estimate.
@@ -148,12 +133,11 @@ Use `ggplot()` and `geom_sf()` to create a choropleth map such that local author
 ```{r Ex 6.2 map, class.source = 'foldable', fig.align = 'center'}
 
 # Creating breaks for legend in plot
-range <-
-  seq(min(SMR_raw$SMR2010) - 0.01,
+range <-seq(min(SMR_raw$SMR2010) - 0.01,
       max(SMR_raw$SMR2010) + 0.01,
       length.out = 11)
 
-# Creating map of Raw SMRs in England in 2010
+# Creating the map of Raw SMRs in England in 2010
 ggplot() +
   # Choose spatial object and column for plotting
   geom_sf(data = SMRspatial_raw, aes(fill = SMR2010)) + 
@@ -169,28 +153,144 @@ ggplot() +
 
 ```
 
-### Modelling a Poisson-Gamma with an MCMC implemented in `R` {-}
+### MCMC implementation of the Poisson-Gamma model in `R` {-}
 
 The following code shows how to implement the MCMC using `R` for the COPD example.
-
-First, the constants are defined and the necessary vectors are initialized. 
+We start by defining the constants and the vectors that will be used in the code. 
 
 
 ```{r Ex 6.2 MCMC const, cache = TRUE }
-
 # observations
 y <- observed$Y2010
 # offset
 E <- expected$E2010
 # Number of MCMC iterations
-L <- 80000
+L <- 20000
 
 ## Initialize objects used in MCMC
 # Matrix for sampled values of parameter theta_i 
-theta <-
-  matrix(ncol = length(y), nrow = L)
+theta <-matrix(ncol = length(y), nrow = L)
 # Matrix for fitted values 
-fitted <- theta
+fitted <-theta
+# Vector for sampled values of hyper-parameter a
+a <- c() 
+# Vector for sampled values of hyper-parameter b
+b <- c() 
+
+## Define constants
+# Sample size
+N <- length(y)
+# Parameter of exponential prior for a
+lambda_a <- 1
+# Parameter of exponential prior for b
+lambda_b <- 1
+# standard deviation of the proposal distribution of log a
+u <- 0.1 
+# Initialize theta
+theta[1, ] <- y / E
+# Initial value sampled from the prior for a
+# REVIEW: In the example of the book theta ~ Ga(a,a) not Ga(a,b)
+a <- rexp(1, lambda_a)
+# Initial value sampled from the prior for b
+b <- rexp(1, lambda_b) 
+fitted[1, ] <- rpois(N, E * theta[1, ])
+
+
+# Once all the constants and initial values are set we can run the MCMC. 
+# The following code shows the MCMC implementation of a Poisson-Gamma model using only `R`.
+# Starting from l=2 as l=1 contains the initial values
+for(l in 2:L) {
+
+# Sampling from the posterior full conditional of each theta_i
+  for (i in 1:N)
+    theta[l, i] <- rgamma(1, (y[i] + a[(l - 1)]), rate = (E[i] + b[(l - 1)]))
+  # Sampling from the posterior full conditional of b
+  b[l] <- rgamma(1, (N * a[(l - 1)] + 1), rate = (sum(theta[l, ]) + lambda_b))
+  # Metropolis-Hastings step to sample from the full conditional of "a"
+  # the new value receives the current value in case the proposed
+  # value is rejected
+  a[l] <- a[l - 1]
+  # Proposal in the log-scale
+  laprop <- rnorm(1, log(a[l - 1]), u)
+  aprop <- exp(laprop)
+  #computing the numerator of the M-H step
+  num <- N * (aprop * (log(b[l])) - lgamma(aprop)) + (aprop - 1) * sum(log(theta[l, ])) -
+    aprop * lambda_a + log(aprop)
+  #computing the denominator of the M-H step
+  den <- N * (a[l - 1] * (log(b[l])) - lgamma(a[l - 1])) + (a[(l - 1)] - 1) * sum(log(theta[l, ])) - 
+    a[(l - 1)] * lambda_a + log(a[(l - 1)])
+  #computing the M-H ratio
+  ratio <- exp(num - den)
+  unif <- runif(1)
+  # Change the current value if the proposed value is accepted
+  if (unif < ratio)
+    a[l] <- aprop
+  fitted[l,] <- rpois(N, E * theta[l,])
+}
+
+```
+After running the MCMC, check convergence of the chains using trace plots, autocorrelation functions and functions from the `coda` package.
+
+```{r Ex 6.2 MCMC convergence}
+
+# Number of burn in samples and thinning
+burnin <- 10000
+thin <- 10
+# MCMC samples
+seqaux <- seq(burnin, L, by = thin)
+
+# Trace-plots of the parameters
+xx <- seq(0, 20, length = 3000)
+
+par(mfrow = c(3, 2),pty="m")
+# Plot for "a"
+#traceplot for the posterior sample of parameters 'a' and 'b'
+plot(a[seqaux], type = "l", bty = "n",xlab="Iterations",ylab="a")
+plot(b[seqaux], type = "l", bty = "n",xlab="Iterations",ylab="b")
+#histogram of the posterior distribution of parameter 'a'
+hist(a[seqaux], prob = 1, main = "",)
+#prior distribution of parameter "a'
+lines(xx, dexp(xx, lambda_a), col = 2, lwd = 2)
+hist(b[seqaux], prob = 1, main = "")
+#prior distribution of parameter "a'
+lines(xx, dexp(xx, lambda_b), col = 2, lwd = 2)
+#autocorrelation function of the sampled values of parameter 'a'
+acf(a[seqaux],main="ACF for a")
+acf(b[seqaux],main="ACF for b")
+# Traceplots of the posterior samples of some of the theta's
+par(mfrow = c(3, 3))
+for (i in 1:9)
+  plot(theta[seqaux, i], type = "l", bty = "n",xlab='Iteration',ylab=expression(paste(theta,i)))
+```
+
+Other diagnostic tools that can be assessed are the effective sample size (ESS) and `Rhat`. This can be done using the package `coda`.
+
+```{r Ex 6.2 ESS and Rhat}
+paste0("ESS a: ", coda::effectiveSize(a[seqaux]))
+paste0("ESS b: ", coda::effectiveSize(b[seqaux]))
+paste0("ESS theta[1]: ", coda::effectiveSize(theta[seqaux, 1]))
+paste0("ESS theta[10]: ",coda::effectiveSize(theta[seqaux, 10]))
+```
+Clearly, from the trace-plots and the ESS the sampled values for parameters `a` and `b` have resulted in poor convergence. The MCMC should be run again and the variance of the proposal of `a` should be tuned.
+
+
+```{r Ex 6.2 MCMC tuning, cache = TRUE }
+# observations
+y <- observed$Y2010
+# offset
+E <- expected$E2010
+# Number of MCMC iterations
+L <- 20000
+burnin<-5000
+check<-100
+attempt<-0
+accept<-0
+
+## Initialize objects used in MCMC
+# Matrix for sampled values of parameter theta_i 
+theta <-matrix(ncol = length(y), nrow = L)
+# Matrix for fitted values 
+fitted <-theta
 # Vector for sampled values of hyper-parameter a
 a <- c() 
 # Vector for sampled values of hyper-parameter b
@@ -214,19 +314,16 @@ a <- rexp(1, lambda_a)
 b <- rexp(1, lambda_b) 
 fitted[1, ] <- rpois(N, E * theta[1, ])
 
-
 # Once all the constants and initial values are set we can run the MCMC. 
 # The following code shows the MCMC implementation of a Poisson-Gamma model using only `R`.
-
-
 # Starting from l=2 as l=1 contains the initial values
 for(l in 2:L) {
 
 # Sampling from the posterior full conditional of each theta_i
   for (i in 1:N)
-    theta[l, i] <- rgamma(1, (y[i] + a[(l - 1)]), rate = (E[i] + b[(l - 1)]))
+    theta[l, i] <- rgamma(1, shape=(y[i] + a[(l - 1)]), rate =(E[i] + b[(l - 1)]))
   # Sampling from the posterior full conditional of b
-  b[l] <- rgamma(1, (N * a[(l - 1)] + 1), rate = (sum(theta[l, ]) + lambda_b))
+  b[l] <- rgamma(1, shape=(N * a[(l - 1)] + 1), rate=(sum(theta[l, ]) + lambda_b))
   # Metropolis-Hastings step to sample from the full conditional of "a"
   # the new value receives the current value in case the proposed
   # value is rejected
@@ -235,71 +332,34 @@ for(l in 2:L) {
   laprop <- rnorm(1, log(a[l - 1]), u)
   aprop <- exp(laprop)
   #computing the numerator of the M-H step
-  num <- N * (aprop * (log(b[l])) - lgamma(aprop)) + (aprop - 1) * sum(log(theta[l, ])) -
+  num <- N * ((aprop) * (log(b[l])) - lgamma(aprop)) + (aprop - 1) * sum(log(theta[l, ])) -
     aprop * lambda_a + log(aprop)
   #computing the denominator of the M-H step
-  den <- N * (a[l - 1] * (log(b[l])) - lgamma(a[l - 1])) +
+  den <- N * ((a[l - 1]) * (log(b[l])) - lgamma(a[l - 1])) +
     (a[(l - 1)] - 1) * sum(log(theta[l, ])) - a[(l - 1)] * lambda_a + log(a[(l - 1)])
   #computing the M-H ratio
+  attempt<-attempt+1
   ratio <- exp(num - den)
   unif <- runif(1)
   # Change the current value if the proposed value is accepted
-  if (unif < ratio)
+  if (unif < ratio){
+    accept<-accept+1
     a[l] <- aprop
+  }
+  # TUNING!
+  if(l<burnin & attempt==check){
+    print(paste0("Can sd of ", round(u,3),
+                   " for a gave acc rate ",accept/attempt)) 
+      if(accept/attempt<0.2){u<-u*0.8}
+      if(accept/attempt>0.6){u<-u*1.2}
+      accept <- attempt <- 0  
+    }
   fitted[l,] <- rpois(N, E * theta[l,])
 }
 
 ```
 
-After running the MCMC, we should check if the chains have converged
 
-```{r Ex 6.2 MCMC convergence}
-
-# Number of burn in samples and thinning
-burnin <- 20000
-thin <- 30
-# MCMC samples
-seqaux <- seq(burnin, L, by = thin)
-
-# Trace-plots of the parameters
-xx <- seq(0, 6, length = 2000)
-
-par(mfrow = c(2, 2))
-# Plot for "a"
-plot(a[seqaux], type = "l", bty = "n")
-hist(a[seqaux], prob = 1, main = "")
-lines(xx, dexp(xx, lambda_a), col = 2, lwd = 2)
-acf(a[seqaux])
-# COMBAK: This chains are not looking great
-
-# Plot for "b"
-plot(b[seqaux], type = "l", bty = "n")
-hist(b[seqaux], prob = 1, main = "")
-lines(xx, dexp(xx, lambda_b), col = 2, lwd = 2)
-
-# Traceplots of theta's
-
-par(mfrow = c(3, 3))
-for (i in 1:9)
-  plot(theta[seqaux, i], type = "l", bty = "n")
-
-```
-
-<!-- TODO: Add effective size and paragraph about acceptance ratio -->
-
-Given the convergence issues, we can also check the estimated sampled size and Rhat using the package `coda`.
-
-```{r Ex 6.2 ESS and Rhat}
-
-paste0("ESS a: ", coda::effectiveSize(a[seqaux]))
-paste0("ESS b: ", coda::effectiveSize(b[seqaux]))
-paste0("ESS theta[1]: ", coda::effectiveSize(theta[seqaux, 1]))
-paste0("ESS theta[10]: ",coda::effectiveSize(theta[seqaux, 10]))
-
-  
-```
-
-The variances for the parameters `a` and `b` is lower than the recommended minimum of 100. We will go back to this in Chapter 8. 
 
 Now that we have guaranteed the convergence of the chains, we can look at the posterior summaries.
 
@@ -355,8 +415,75 @@ abline(a = 0, b = 1)
 
 ```
 
+## Code for the Poisson-Gamma model in Nimble {-}
+```{r Ex 6.2 model nimble, results='hide', results='hide', message = FALSE, warning = FALSE, cache = TRUE}
+require("nimble")
+# Define the model 
+Example6_2Code <- nimbleCode({
+  for (i in 1:N) {
+    Y[i] ~ dpois(mu[i])
+    log(mu[i]) <- log(E[i]) + theta[i]
+    theta[i] ~ dgamma(a,b)
+  }
+  
+  # Priors
+  a ~ dexp(1)
+  b ~ dexp(1)
+  
+})
+
+# Read the data and define the constants, data and initials lists for the `Nimble` model.
+
+ex.const <- list(
+  E = expected$E2010,
+  N=length(observed$Y2010))
+
+ex.data <- list(Y = observed$Y2010)
+
+inits <- function()
+  list(theta = rgamma(length(y),1,1),a=rexp(1,1),b=rexp(1,1))
+
+# Define parameters to monitor and run the model
+
+params <- c("a", "b", "theta")
+
+mcmc.out <- nimbleMCMC(
+  code = Example6_2Code,
+  data = ex.data,
+  constants = ex.const,
+  inits = inits,
+  monitors = params,
+  niter = 22000,
+  nburnin = 2000,
+  thin = 10,
+  WAIC = TRUE,
+  nchains = 2,
+  samplesAsCodaMCMC = TRUE
+)
+
+```
+
+```{r Ex 6.2 model nimble}
+
+mvSamples <- mcmc.out$samples
+
+#trace plots of beta1
+plot(mvSamples[, c("a")])
+plot(mvSamples[, c("b")])
+```
 
 ## Example 6.3: Fitting a Poisson regression model {-}
+
+In this example, we consider the Poisson log-linear model seen in Chapter 2, Section 2.7. We consider the observed and expected number of cases of respiratory mortality in small areas in the UK from a study examining the long-term effects of air pollution (Elliott, Shaddick, Wakefield, de Hoogh, & Briggs, 2007).
+
+\begin{eqnarray}
+\label{eqn:cum1c2}  \log \mu_{l} =  \beta_0 +  \beta_1
+X_{l} + \beta_{d}X_{l}
+\end{eqnarray}
+where $\beta_1$ represents the effect of exposure  and $\beta_d$ is the
+effect of the area-level covariate.\exsp
+
+
 ### Nimble {-}
 
 ```{r Ex 6.3 nimble clean, echo = FALSE, include=FALSE, warning=FALSE, message= FALSE, results='hide'}
@@ -374,14 +501,12 @@ library("nimble")
 ```
 
 
-The following code is used to fit the Poisson log-linear model seen in Chapter 2 Section ... using `Nimble`
-
-First, define the model in Nimble. 
+The NIMBLE code to fit this model is as follows:
 
 ```{r Ex 6.3 model nimble, results='hide', results='hide', message = FALSE, warning = FALSE, cache = TRUE}
 
 # Define the model 
-Example5_3Code <- nimbleCode({
+Example6_3Code <- nimbleCode({
   for (i in 1:N) {
     Y[i] ~ dpois(mu[i])
     log(mu[i]) <- log(E[i]) + beta0 + beta1 * X1[i] + beta2 * X2[i]
@@ -422,7 +547,7 @@ inits <- function()
 params <- c("beta0", "beta1", "beta2", "base", "RR")
 
 mcmc.out <- nimbleMCMC(
-  code = Example5_3Code,
+  code = Example6_3Code,
   data = ex.data,
   constants = ex.const,
   inits = inits,
@@ -431,7 +556,7 @@ mcmc.out <- nimbleMCMC(
   nburnin = 2000,
   thin = 10,
   WAIC = TRUE,
-  nchains = 2,
+  nchains = 3,
   samplesAsCodaMCMC = TRUE
 )
 
@@ -439,20 +564,19 @@ mcmc.out <- nimbleMCMC(
 
 
 
-Check the WAIC. 
+<!-- Check the WAIC.  -->
 
-```{r Ex 6.3 nimble WAIC}
+<!-- ```{r Ex 6.3 nimble WAIC} -->
 
-mcmc.out$WAIC
+<!-- mcmc.out$WAIC -->
 
-```
+<!-- ``` -->
 
-Show the trace plots and posterior summaries for each of the parameters.
+Checking the trace plots and posterior summaries for each of the parameters.
 
 ```{r Ex 6.3 nimble traceplots}
 
 mvSamples <- mcmc.out$samples
-
 #trace plots of beta1
 plot(mvSamples[, c("beta1")])
 
@@ -462,16 +586,14 @@ plot(mvSamples[, c("base")])
 #trace plots of RR
 plot(mvSamples[, c("RR")])
 
-#posterior summary of base
-summary(mvSamples[, c("base")])
-
-#posterior summary of RR
-summary(mvSamples[, c("RR")])
+#posterior summary of base and RR
+summary(mvSamples[, c("base","RR")])
 
 ```
-
+The baseline relative risk is estimated at 1.105 with limits of the 95% posterior credible interval equal to 1.12 and 1.154.
 
 ### Stan {-}
+We now run the same example in Stan.
 
 ```{r Ex 6.3 clean stan, echo = FALSE, include=FALSE, warning=FALSE, message= FALSE, results='hide'}
 
@@ -517,6 +639,8 @@ Example6_3_Stan  <- stan(
 )
 
 ```
+
+Checking the traceplots and posterior summaries of the parameters.
 
 ```{r Ex 6.3 stan traceplots}
 rstan::traceplot(Example6_3_Stan,
