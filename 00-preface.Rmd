@@ -1,4 +1,4 @@
-# PREFACE TO SECOND EDITION {#preface2ndedition} {-}
+# PREFACE TO SECOND EDITION {-}
 
 The overall aims and academic level of the revision remain the same as those of the first edition. Briefly, it aims to explore the interface between environmental epidemiology (EE) and spatio-temporal (ST) modelling.  Its intended audience: graduate students in epidemiology with an intermediate-level background in statistics, and graduate students in statistics.  The original steered a course between and cut-and-paste style cookbook and a scholarly work on underlying theory. 
 

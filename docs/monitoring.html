@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 14 Better monitoring network design-getting better measurements | Spatio-Temporal Methods in Environmental Epidemiology with R</title>
-  <meta name="description" content="Chapter 14 Better monitoring network design-getting better measurements | Spatio-Temporal Methods in Environmental Epidemiology with R" />
+  <title>Chapter 14 Better monitoring network design-getting better measurements | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition</title>
+  <meta name="description" content="Chapter 14 Better monitoring network design-getting better measurements | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition" />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 14 Better monitoring network design-getting better measurements | Spatio-Temporal Methods in Environmental Epidemiology with R" />
+  <meta property="og:title" content="Chapter 14 Better monitoring network design-getting better measurements | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/img/cover.jpg" />
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 14 Better monitoring network design-getting better measurements | Spatio-Temporal Methods in Environmental Epidemiology with R" />
+  <meta name="twitter:title" content="Chapter 14 Better monitoring network design-getting better measurements | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition" />
   
   
   <meta name="twitter:image" content="/img/cover.jpg" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Gavin Shaddick, James V. Zidek, and Alexandra M. Schmidt" />
 
 
-<meta name="date" content="2023-07-05" />
+<meta name="date" content="2023-08-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -137,9 +137,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="chapter" data-level="" data-path="preface-2nd-edition.html"><a href="preface-2nd-edition.html"><i class="fa fa-check"></i>Preface (2nd edition)</a></li>
-<li class="chapter" data-level="1" data-path="why.html"><a href="why.html"><i class="fa fa-check"></i><b>1</b> Why spatio-temporal epidemiology?</a></li>
-<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Epidemiology-the basics</a>
+<li class="chapter" data-level="" data-path="preface-to-second-edition.html"><a href="preface-to-second-edition.html"><i class="fa fa-check"></i>PREFACE TO SECOND EDITION</a></li>
+<li class="chapter" data-level="1" data-path="why.html"><a href="why.html"><i class="fa fa-check"></i><b>1</b> An overview of spatio-temporal epidemiology and knowledge discovery?</a></li>
+<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> An introduction to modelling health risks and impacts</a>
 <ul>
 <li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.7-estimating-the-smr-using-a-poisson-glm"><i class="fa fa-check"></i>Example 2.7: Estimating the SMR using a Poisson GLM</a></li>
 <li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.8-estimating-the-smr-using-quasi-likelihood"><i class="fa fa-check"></i>Example 2.8: Estimating the SMR using quasi-likelihood</a></li>
@@ -148,40 +148,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.10-estimating-the-odds-ratio-in-a-case-control-study-using-a-logistic-model"><i class="fa fa-check"></i>Example 2.10: Estimating the odds ratio in a case-control study using a logistic model</a></li>
 <li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.11-estimating-the-odds-ratio-of-asthma-associated-with-proximity-to-roads"><i class="fa fa-check"></i>Example 2.11: Estimating the odds ratio of asthma associated with proximity to roads</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="uncertainty.html"><a href="uncertainty.html"><i class="fa fa-check"></i><b>3</b> Uncertainty and its reduction</a>
+<li class="chapter" data-level="3" data-path="uncertainty.html"><a href="uncertainty.html"><i class="fa fa-check"></i><b>3</b> The importance of uncertainty: assessment and quantification</a>
 <ul>
 <li class="chapter" data-level="" data-path="uncertainty.html"><a href="uncertainty.html#supplementary-material"><i class="fa fa-check"></i>Supplementary Material</a>
 <ul>
 <li class="chapter" data-level="" data-path="uncertainty.html"><a href="uncertainty.html#more-on-qualitative-uncertainty"><i class="fa fa-check"></i>More on qualitative uncertainty</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>4</b> Data: increasing information and reducing uncertainty</a>
+<li class="chapter" data-level="4" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>4</b> Extracting information from data</a>
 <ul>
 <li class="chapter" data-level="" data-path="data.html"><a href="data.html#getting-to-know-the-structure-of-dataframes"><i class="fa fa-check"></i>Getting to know the structure of dataframes</a></li>
 <li class="chapter" data-level="" data-path="data.html"><a href="data.html#extracting-and-creating-variables"><i class="fa fa-check"></i>Extracting and creating variables</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#simple-manipulations-using-tidyverse"><i class="fa fa-check"></i>Simple manipulations using Tidyverse</a>
+<ul>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#filter-rows-in-tidyverse"><i class="fa fa-check"></i>Filter rows in Tidyverse</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#sorting-rows-in-tidyverse"><i class="fa fa-check"></i>Sorting rows in Tidyverse</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#select-columns-in-tidyverse"><i class="fa fa-check"></i>Select columns in Tidyverse</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#adding-columns"><i class="fa fa-check"></i>Adding columns</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#pipes"><i class="fa fa-check"></i>Pipes</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#chaining-pipes"><i class="fa fa-check"></i>Chaining pipes</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#grouping-and-summarizing"><i class="fa fa-check"></i>Grouping and summarizing</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#summarize"><i class="fa fa-check"></i>Summarize</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#example-4.1-health-impacts-associated-with-outdoor-air-pollution"><i class="fa fa-check"></i>Example 4.1: Health impacts associated with outdoor air pollution</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#example-4.3.-mapping-cancer-incidence-in-southern-and-eastern-serbia"><i class="fa fa-check"></i>Example 4.3. Mapping cancer incidence in Southern and Eastern Serbia</a>
+<ul>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#creating-maps-of-southern-and-eastern-serbia"><i class="fa fa-check"></i>Creating maps of Southern and Eastern Serbia</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#example-4.4-cancer-in-bor"><i class="fa fa-check"></i>Example 4.4 Cancer in Bor</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#calculating-smrs"><i class="fa fa-check"></i>Calculating SMRs</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="embracing.html"><a href="embracing.html"><i class="fa fa-check"></i><b>5</b> Embracing uncertainty: the Bayesian approach</a></li>
-<li class="chapter" data-level="6" data-path="tactics.html"><a href="tactics.html"><i class="fa fa-check"></i><b>6</b> Tactics-implementing uncertainty models</a>
+<li class="chapter" data-level="6" data-path="computation.html"><a href="computation.html"><i class="fa fa-check"></i><b>6</b> Approaches to Bayesian Computation</a>
 <ul>
-<li class="chapter" data-level="" data-path="tactics.html"><a href="tactics.html#example-6.2-chronic-obstructive-pulmonary-disease-copd-in-england"><i class="fa fa-check"></i>Example 6.2: Chronic obstructive pulmonary disease (COPD) in England</a>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#example-6.2-gibbs-sampling-with-a-poisson-gamma-model---hospital-admissions-for-chronic-obstructive-pulmonary-disease-copd-for-england-between-2001-2010"><i class="fa fa-check"></i>Example 6.2: Gibbs sampling with a Poisson-Gamma model - hospital admissions for chronic obstructive pulmonary disease (COPD) for England between 2001-2010</a>
 <ul>
-<li class="chapter" data-level="" data-path="tactics.html"><a href="tactics.html#modelling-the-raw-standardized-mortality-rates-smrs"><i class="fa fa-check"></i>Modelling the raw standardized mortality rates (SMRs)</a></li>
-<li class="chapter" data-level="" data-path="tactics.html"><a href="tactics.html#modelling-a-poisson-gamma-with-an-mcmc-implemented-in-r"><i class="fa fa-check"></i>Modelling a Poisson-Gamma with an MCMC implemented in <code>R</code></a></li>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#modelling-the-raw-standardized-mortality-rates-smrs"><i class="fa fa-check"></i>Modelling the raw standardized mortality rates (SMRs)</a></li>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#mcmc-implementation-of-the-poisson-gamma-model-in-r"><i class="fa fa-check"></i>MCMC implementation of the Poisson-Gamma model in <code>R</code></a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="tactics.html"><a href="tactics.html#example-6.3-fitting-a-poisson-regression-model"><i class="fa fa-check"></i>Example 6.3: Fitting a Poisson regression model</a>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#code-for-the-poisson-gamma-model-in-nimble"><i class="fa fa-check"></i>Code for the Poisson-Gamma model in Nimble</a></li>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#example-6.3-fitting-a-poisson-regression-model"><i class="fa fa-check"></i>Example 6.3: Fitting a Poisson regression model</a>
 <ul>
-<li class="chapter" data-level="" data-path="tactics.html"><a href="tactics.html#nimble"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="tactics.html"><a href="tactics.html#stan"><i class="fa fa-check"></i>Stan</a></li>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#nimble"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#stan"><i class="fa fa-check"></i>Stan</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="Strategies.html"><a href="Strategies.html"><i class="fa fa-check"></i><b>7</b> Strategies implementing uncertainty models</a>
+<li class="chapter" data-level="7" data-path="Strategies.html"><a href="Strategies.html"><i class="fa fa-check"></i><b>7</b> Strategies for modelling</a>
 <ul>
-<li class="chapter" data-level="" data-path="Strategies.html"><a href="Strategies.html#example-7.6-model-choice-in-studies-of-air-pollution-and-health"><i class="fa fa-check"></i>Example 7.6 Model choice in studies of air pollution and health</a>
+<li class="chapter" data-level="" data-path="Strategies.html"><a href="Strategies.html#example-7.6-variable-selection-in-land-use-regression-using-lasso-and-horseshoe-priors"><i class="fa fa-check"></i>Example 7.6 Variable selection in land use regression using lasso and horseshoe priors</a>
 <ul>
 <li class="chapter" data-level="" data-path="Strategies.html"><a href="Strategies.html#nimble-1"><i class="fa fa-check"></i>Nimble</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="trusted.html"><a href="trusted.html"><i class="fa fa-check"></i><b>8</b> But can the data be trusted</a>
+<li class="chapter" data-level="8" data-path="trusted.html"><a href="trusted.html"><i class="fa fa-check"></i><b>8</b> The challenges of working with real-world data</a>
 <ul>
 <li class="chapter" data-level="" data-path="trusted.html"><a href="trusted.html#solutions-to-selected-exercises"><i class="fa fa-check"></i>Solutions to Selected Exercises</a>
 <ul>
@@ -274,7 +293,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Spatio-Temporal Methods in Environmental Epidemiology with R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition</a>
           </h1>
         </div>
 

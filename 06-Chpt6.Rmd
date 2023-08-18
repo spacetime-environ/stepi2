@@ -463,7 +463,7 @@ mcmc.out <- nimbleMCMC(
 
 ```
 
-```{r Ex 6.2 model nimble}
+```{r Ex 6.2 output nimble}
 
 mvSamples <- mcmc.out$samples
 
