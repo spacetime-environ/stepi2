@@ -14,8 +14,6 @@ Strategies
 trusted
 Disease
 hazards
-example-10.8-spatial-prediction-of-no2-in-europe
-example-10.12-plotting-directional-variograms-for-temperatures-in-california
 Time
 exposure
 causality

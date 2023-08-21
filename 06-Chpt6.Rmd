@@ -1,12 +1,18 @@
 # Approaches to Bayesian Computation {#computation}
 
 This chapter describes methods for implementing Bayesian models when their complexity means that simple, analytic solutions may not be available. The reader will have gained an understanding of the following topics:
-- analytical approximations to the posterior distribution;
-- use of samples from a posterior distribution for inference and Monte Carlo integration;
-- methods for direct sampling such as importance and rejection sampling;
-- Markov Chain Monte Carlo (MCMC) and methods for obtaining samples from the required posterior distribution including Metropolis--Hastings and Gibbs algorithms;
-- use of NIMBLE and RStan packages to fit Bayesian models using Gibbs sampling; 
-- Integrated Nested Laplace Approximations (INLA) as a method for performing efficient Bayesian inference including the use of R-INLA to implement a wide variety of latent Gaussian models.
+
+  - analytical approximations to the posterior distribution;
+  
+  - use of samples from a posterior distribution for inference and Monte Carlo integration;
+  
+  - methods for direct sampling such as importance and rejection sampling;
+  
+  - Markov Chain Monte Carlo (MCMC) and methods for obtaining samples from the required posterior distribution including Metropolis--Hastings and Gibbs algorithms;
+  
+  - use of NIMBLE and RStan packages to fit Bayesian models using Gibbs sampling; 
+  
+  - Integrated Nested Laplace Approximations (INLA) as a method for performing efficient Bayesian inference including the use of R-INLA to implement a wide variety of latent Gaussian models.
 
 
 ## Example 6.2: Gibbs sampling with a Poisson-Gamma model - hospital admissions for chronic obstructive pulmonary disease (COPD) for England between 2001-2010 {-} 

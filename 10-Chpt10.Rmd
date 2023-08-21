@@ -182,7 +182,7 @@ spplot(x["var1.var"], main = "ordinary kriging variance", sp.layout = list(monit
 ```
 
 
-## Example 10.8 Spatial prediction of NO2 in Europe
+## Example 10.8 Spatial prediction of NO2 in Europe {-}
 
 ```{r Ex 10.8 clean nimble, include = FALSE}
 rm(list = ls())
@@ -515,7 +515,8 @@ cut_grid$pred <- covs_grid_utm$pred
 ggplot() + geom_sf(data = cut_grid, colour = NA, aes(fill = pred)) + 
   ditch_the_axes + scale_fill_viridis_c(direction = -1, name = bquote("log" ~NO[2]* " concentration"))
 ``` 
-## Example 10.10 Creating a mesh: black smoke monitoring locations in the UK
+
+## Example 10.10 Creating a mesh: black smoke monitoring locations in the UK {-}
 
 ```{r Ex 10.10 create mesh, eval = FALSE}
 mesh = inla.mesh.create(
@@ -542,7 +543,7 @@ points(locations ,
 ```
 
 
-## Example 10.12 Plotting directional variograms for temperatures in California
+## Example 10.12 Plotting directional variograms for temperatures in California {-}
 
 ```{r Ex 10.12 clean, include = FALSE}
 rm(list=ls())
@@ -967,7 +968,7 @@ S_summary_df$village <-
 ## Supplementary Material {-}
 
 
-## Extra 10.1: Spatial patterns of benzene concentrations in Montreal, QC, Canada {-}
+### Extra 10.1: Spatial patterns of benzene concentrations in Montreal, QC, Canada {-}
 
 Map the locations of the monitoring stations in Montreal.
 
@@ -1029,7 +1030,7 @@ plot(benzene_geodata)
 ```
 
 
-## Extra 10.2: Examining the log concentrations of benzene in Montreal {-}
+### Extra 10.2: Examining the log concentrations of benzene in Montreal {-}
 
 ```{r Extra 10.2 plot hist and qqplot log}
 # Histogram for the log of the benzene concentration
@@ -1041,7 +1042,7 @@ qqline(log(benzene$Benzene))
 
 ```
 
-## Extra 10.5: Variogram {-}
+### Extra 10.5: Variogram {-}
 
 ```{r Extra 10.5 plot variogram}
 library(gstat)
@@ -1077,7 +1078,7 @@ plot_coord_variog <- plot(benzene_vgm, benzene_vgm_fit, bty = "n")
 plot_grid(plot_inter_variog, plot_coord_variog, labels = "auto")
 ```
 
-## Extra 10.6 Basic spatial modelling and prediction of benzene in Montreal {-}
+### Extra 10.6 Basic spatial modelling and prediction of benzene in Montreal {-}
 
 
 ```{r Extra 10.6 kriging predictions, message = FALSE, warning=FALSE, error=FALSE}
@@ -1119,11 +1120,11 @@ plot_grid(krig_pred, krig_var, labels = "auto")
 
 ```
 
-## Extra 10.8 Spatial modelling of Benzene in Montreal {-}
+### Extra 10.8 Spatial modelling of Benzene in Montreal {-}
 
 This example uses the [montreal_benzene_apr.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/voc/montreal_benzene_apr.csv)
 
-### Nimble {-}
+#### Nimble {-}
 
 
 ```{r Extra 10.8 load data, message = FALSE, warning=FALSE, error=FALSE}
@@ -1343,7 +1344,7 @@ predict_res_dt$post.mean[1:5]
 predict_res_dt$post.var[1:5]
 ```
 
-### Stan {-}
+#### Stan {-}
 
 ```{r Extra 10.8 load stan, message=FALSE, echo = FALSE, warning=FALSE, message= FALSE}
 # load rstan with options
@@ -1537,10 +1538,10 @@ plot_grid(stan_pred, stan_var, labels = "auto")
 
 ```
 
-## Extra 10.9: Spatial predictions {-}
+### Extra 10.9: Spatial predictions {-}
 
 
-### Nimble {-}
+#### Nimble {-}
 
 ```{r Extra 10.9 nimble prediction mcmc}
 # NOTE: I am just doing for 5 locations (please double-check my equations) and it instead of running in 2 minutes it runs in 6 (in case you want to highlight that). But we should discuss the order of this cause I am doing the predictions with Paritosh's code in the previous section.
@@ -1683,7 +1684,7 @@ plot(mcmc.out$samples[, c("phi")], bty = "n", main = "phi")
 mcmc.out$summary$all.chains
 ```
 
-### Stan{-}
+#### Stan{-}
 
 ```{r Extra 10.9 stan load data}
 
@@ -1772,7 +1773,7 @@ summary_exp_stan$summary
 ```
 
 
-## Extra 10.10: INLA, creating a mesh {-}
+### Extra 10.10: INLA, creating a mesh {-}
 
 This example uses the [montreal_benzene_apr.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/voc/montreal_benzene_apr.csv)
 
@@ -1806,7 +1807,7 @@ plot(mesh , col="gray", main="")
 
 ```
 
-## Extra 10.12: Fitting an SPDE model using R–INLA: benzene concentration in Montreal {-}
+### Extra 10.12: Fitting an SPDE model using R–INLA: benzene concentration in Montreal {-}
 
 ```{r Extra 10.12 spde inla, warning=FALSE}
 # Field std . dev . for theta =0
@@ -1838,7 +1839,7 @@ model = inla(
 model$summary.fixed
 ```
 
-## Extra 10.13: Directional variograms {-}
+### Extra 10.13: Directional variograms {-}
 
 ```{r Extra 10.13 directional variogram, error = FALSE, message = FALSE, results='hide'}
 ### Compute and plot the directional variogram
