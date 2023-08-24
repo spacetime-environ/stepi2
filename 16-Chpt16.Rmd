@@ -1,26 +1,39 @@
-# Course {-}
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
 
-The following is an example of a structure for a course that might be delivered to epidemiologists with an intermediate level of statistics or statistics students who had an interest in epidemiological analysis.
+# Course {.unnumbered}
 
-Reference is given to the material in the chapters in the book together with suggested times that might be dedicated to that material. 
+The following is an example of a structure for a course that might be
+delivered to epidemiologists with an intermediate level of statistics or
+statistics students who had an interest in epidemiological analysis.
 
-+------------------------------------+---------------+--------------------+
-| Chapter                            | Sections      | Suggested timing   |
-+====================================+===============+====================+
-| Chapter 1:                         |               | 0.5 Week plus      |
-| Why spatio-temporal epidemiology?  | All           | background reading |
-|                                    |               |                    |
-+------------------------------------+---------------+--------------------+
-| Chapter 2: Modelling health risks  |    All        |       1 Week       |
-|                                    |    excluding  |                    |
-|                                    |    2.6-2.7    |                    |
-+------------------------------------+---------------+--------------------+
-| Chapter 3: The importance          |  3.1-3.4      |    0.5 Week        |
-|            of uncertainty          |    inclusive  |                    |
-+------------------------------------+---------------+--------------------+
-| Chapter 4:  Embracing uncertainty: |  4.1-4.5      |    0.5 Week        |
-|            the Bayesian approach   |    inclusive  |                    |
-+------------------------------------+---------------+--------------------+
-| Chapter 5:  The Bayesian approach  |  5.1-5.3      |      2 Weeks       |
-|            in practice             |    5.7, 5.8   |                    |
-+------------------------------------+---------------+--------------------+
+Reference is given to the material in the chapters in the book together
+with suggested times that might be dedicated to that material.
+
++--------------------------------+----------------+-----------------+
+| Chapter                        | Sections       | Suggested       |
+|                                |                | timing          |
++================================+================+=================+
+| Chapter 1: Why spatio-temporal | All            | 0.5 Week plus   |
+| epidemiology?                  |                | background      |
+|                                |                | reading         |
++--------------------------------+----------------+-----------------+
+| Chapter 2: Modelling health    | All excluding  | ```             |
+| risks                          | 2.6-2.7        |   1 Week        |
+|                                |                | ```             |
++--------------------------------+----------------+-----------------+
+| Chapter 3: The importance of   | 3.1-3.4        | 0.5 Week        |
+| uncertainty                    | inclusive      |                 |
++--------------------------------+----------------+-----------------+
+| Chapter 4: Embracing           | 4.1-4.5        | 0.5 Week        |
+| uncertainty: the Bayesian      | inclusive      |                 |
+| approach                       |                |                 |
++--------------------------------+----------------+-----------------+
+| Chapter 5: The Bayesian        | 5.1-5.3 5.7,   | ```             |
+| approach in practice           | 5.8            |  2 Weeks        |
+|                                |                | ```             |
++--------------------------------+----------------+-----------------+
+

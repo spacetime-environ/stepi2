@@ -1,4 +1,4 @@
-# Epidemiology-the basics {#basics}
+# An introduction to modelling health risks and impacts {#basics}
 
 This chapter contains the basic principles of epidemiological analysis and how estimates of the risks associated with exposures can be obtained. From this chapter, the reader will have gained an understanding of the following topics:
 

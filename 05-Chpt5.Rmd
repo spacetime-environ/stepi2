@@ -1,9 +1,9 @@
 # Embracing uncertainty: the Bayesian approach {#embracing} 
 
-This chapter introduces the Bayesian approach which provides a natural framework for dealing with uncertainty and also for fitting the models that will be encountered later in the book. From this chapter, the reader will have gained an understanding of the following topics:
+This chapter introduces the Bayesian approach, which provides a natural framework for dealing with uncertainty and also for fitting the models that will be encountered later in the book.  The reader will have gained an understanding of the following topics: 
 
-- The use of prior distributions to capture beliefs before data are observed.
-- The combination of prior beliefs and information from data to obtain posterior beliefs.
-- The manipulation of prior distributions with likelihoods to formulate posterior distributions and why conjugate priors are useful in this regard.
-- The difference between informative and non-informative priors.
-- The use of the posterior distribution for inference and methods for calculating summary measures.
+- use of prior distributions to capture beliefs before data are observed; 
+- combining prior beliefs and information from data to obtain posterior beliefs; 
+- manipulation of prior distributions with likelihoods to formulate posterior distributions and why conjugate priors are useful in this regard;
+- the differences between informative and non-informative priors;
+- use of the posterior distribution for inference and methods for calculating summary measures.       

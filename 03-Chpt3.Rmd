@@ -1,4 +1,4 @@
-# Uncertainty and its reduction {#uncertainty}
+# The importance of uncertainty: assessment and quantification {#uncertainty}
 
 This chapter contains a discussion of uncertainty, both in terms of statistical modelling and quantification, but also in the wider setting of sources of uncertainty outside those normally encountered in statistics. From this chapter, the reader will have gained an understanding of the following topics:
 

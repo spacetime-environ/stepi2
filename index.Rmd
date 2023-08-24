@@ -1,5 +1,5 @@
 --- 
-title: "Spatio-Temporal Methods in Environmental Epidemiology with R"
+title: "Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition"
 author: "Gavin Shaddick, James V. Zidek, and Alexandra M. Schmidt"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -7,7 +7,7 @@ output:
   html_document:
       code_folding: hide
       toc: true
-      toc_depth: 2
+      toc_depth: 1
       toc_float:
         collapsed: false
         smooth_scroll: false

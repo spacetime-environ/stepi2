@@ -1,43 +1,46 @@
----
-output:
-  pdf_document: default
-  html_document: default
-  word_document: default
----
-# Strategies implementing uncertainty models  {#Strategies}
+# Strategies for modelling  {#Strategies}
 
-This chapter considers both some of the wider issues related to modelling and the generalisability of results and more
-technical material on the effect of covariates and model selection. From this chapter, the reader will have gained an
-understanding of the following topics:
+This chapter considers both some wider issues related to modelling and the generalisability of results, together with more technical material on the effect of covariates and model selection.  The reader will have gained an understanding of the following topics:
 
-- Why having contrasts in the variables of interest is important in assessing the effects they have on the response
-variable.
-- The biases that may arise in the presence of covariates and how covariates can affect variable selection and model
-choice.
-- Hierarchical models and how that can be used to acknowledge dependence between observations.
-- There are issues with using p–values as measures of evidence against a null hypothesis. Basing scientific conclusions
-on it can lead to non-reproducible results.
-- The use of predictions from exposure models including acknowledging the additional uncertainty involved when
-using predictions as inputs to a health model.
-- Methods for performing model selection, including the pros and cons of automatic selection procedures.
-- Model selection within the Bayesian setting and how the models themselves can be incorporated into the estimation
-process using Bayesian Model Averaging.
+- why having contrasts in the variables of interest is important in assessing the effects they have on the response variable;
+
+- biases that may arise in the presence of covariates and how covariates can affect variable selection  and model choice;
+
+- hierarchical models and how that can be used to acknowledge dependence between observations;
+
+- the issues associated with the use of  p-values  as  measures of evidence against a null hypothesis and why basing scientific conclusions on it can lead to non-reproducible results;
+
+- use of predictions from exposure models,  including acknowledging the additional uncertainty involved when using predictions as inputs to a health model;
+
+- methods for performing model selection, including the pros and cons of automatic selection procedures;
+
+- model selection within the Bayesian setting, and how the models themselves can be incorporated into the estimation process using Bayesian Model Averaging.
 
 
-## Example 7.6 Model choice in studies of air pollution and health {-}
 
+## Example 7.6 Variable selection in land use regression using lasso and horseshoe priors {-}
+
+This example is based on the Volatile Organic Compound (VOC) data analyzed by [Zapata-Marin et al. (2022)](https://journals.lww.com/environepidem/Fulltext/2022/10000/Spatial_modeling_of_ambient_concentrations_of.7.aspx). 
+VOCs are components of the complex mixture of air pollutants within cities and can cause various adverse health effects. 
+VOCs concentrations were measured over 2-week periods, for three monitoring campaigns between 2005 and 2006 across over 130 locations in Montreal, QC, Canada. The data analyzed in this example is ethylbenzene observed during April 2006.
+
+Land-use variables were available as a proportion of the area of each buffer covered by each specific variable. In this example, we explore the land-use variables using circular buffers at 1,000-m radii around each monitoring location. The land use variables include Building_100m,Government and Institutional, Residential, Population,Roads,Total NOx.
+
+Below we read the data and plot the monitoring locations with solid circles proportional to the observed value of ethylbenzene. 
 ```{r Example 7.6 load data, message = FALSE, warning=FALSE, error=FALSE}
 library(dplyr)
 library(geoR)
 library(GGally)
 library(ggmap)
 library(ggplot2)
+library(sp)
 library(spdep)
 library(nimble)
 # Load data on benzene concentration in Montreal
 ethylbenzene <- read.csv("data/montreal_ethylbenzene.csv")
-# TODO: Add description of the data, this is the April campaign
 ```
+
+We start by mapping the locations of the monitoring sites across Montreal. The diameter of the circles are proportional to the observed concentration of ethylbenzene.
 
 ```{r Example 7.6 map data, message = FALSE, warning=FALSE, error=FALSE}
 # create a new variable in "sp" format and define coordinates
@@ -65,6 +68,8 @@ ggmap(MontrelEthylbenzeneMap) + geom_point(
 
 ```
 
+We now perform a simple exploratory data analysis using the ggpairs command. It provides the empirical distribution of each of the variables as well as pairwise correlations among them. We transform two variables, Building and Total NOx to obtain a more symmetric empirical distributions. The greatest observed correlation among the variables is 0.614, between Roads and Population.
+
 ```{r Ex 7.6 load covariates}
 
 lur <- read.csv("data/VOC_predictors.csv")
@@ -72,28 +77,35 @@ colnames(lur)
 
 lur$X <- lur$X/1000
 lur$Y <- lur$Y/1000
+lur$lbuild<-sqrt(lur$Building_100m)
+lur$lNOx<-log(lur$Tot_NOx_1000m)
 ```
 ```{r Ex 7.6 join covariates and data}
-ggpairs(lur[,-c(1:3)], title="correlogram with ggpairs()", progress = FALSE)
+
+#removing X, Y, ID, Building_100m and Tot_NOx_1000m from the plot
+ggpairs(lur[,-c(1:3,4,9)], title="correlogram with ggpairs()", progress = FALSE)
 
 ```
-Since Average and Total traffic are highly correlated, as well as Average and Total NOx, we will just use one of them.
+<!--Since Average and Total traffic are highly correlated, as well as Average and Total NOx, we will just use one of them.-->
+
+We now fit a linear model to the log(Ethylbenzene) that includes the log of buildings, government and institutional buildings, residential areas, population, roads and log of NOx:
 
 ```{r Ex 7.6 choose covs}
-lur_ethyl <- lur |> select( ends_with("0m"), "X", "Y","Ethylbenzene")
+#lur_ethyl <- lur |> select( ends_with("0m"), "X", "Y","Ethylbenzene")
 
 # Fit a glm
 
-glm(
-  log(Ethylbenzene) ~ X + Y  +
-    Building_100m +  Government.and.Institutional_1000m + Residential_1000m + 
-    Pop_1000m + Roads_1000m, data = lur_ethyl )
+fit_glm<-glm(log(Ethylbenzene) ~ X + Y  +
+    lbuild +  Government.and.Institutional_1000m + Residential_1000m + 
+    Pop_1000m + Roads_1000m+lNOx, data = lur )
+summary(fit_glm)
 
 ```
+Variables log(building), population and lNOx are positively associated with log(Ethylbenzene). We now fit a linear model in Nimble using a Lasso prior for the coefficients of the variables.
+
 
 ### Nimble {-}
 
-Lasso regression
 
 ```{r Ex 7.6 nimble lasso}
 
@@ -106,13 +118,13 @@ Ex7_6LassoCode <- nimbleCode({
   
   # Prior specification
   for (j in 1:p) {
-    beta[j] ~ ddexp(0, scale = taub * taue)
+    beta[j] ~ ddexp(0, scale = 1/(taub * taue))
   }
   
   taue  ~  dgamma(0.1, 0.1)
   sigma <- 1/taue
   taub  ~  dgamma(0.1, 0.1)
-  beta0  ~ dnorm(0, 0.01)
+  beta0  ~ dnorm(0, 10)
 
 })
 
@@ -120,15 +132,15 @@ Ex7_6LassoCode <- nimbleCode({
 
 
 
-
 ```{r Ex 7_6 nimble lasso run model, message = FALSE, cache = TRUE, results='hide'}
-X <-  lur_ethyl |> dplyr::select( ends_with("0m"), "X", "Y")
+X <-  lur |> dplyr::select( "lbuild", "Government.and.Institutional_1000m","Residential_1000m", 
+    "Pop_1000m","Roads_1000m","lNOx", "X", "Y")
 
 constants <-
-  list(n = nrow(lur_ethyl), p = ncol(X))
+  list(n = nrow(lur), p = ncol(X))
 
 ex.data <-
-  list(y = log(lur_ethyl$Ethylbenzene),
+  list(y = log(lur$Ethylbenzene),
        X = scale(X))
 params <- c( "beta0",  "beta", "taub","taue", "sigma")
 
@@ -136,7 +148,7 @@ inits <- list( sigma = 0.1, tau = 0.1)
 # Run model in nimble
 start_time <- Sys.time()
 
-mcmc.out <- nimbleMCMC(
+mcmc.out.lasso <- nimbleMCMC(
   code = Ex7_6LassoCode,
   constants = constants,
   data = ex.data,
@@ -156,36 +168,42 @@ run_time
 ```
 
 ```{r Ex 7.6 nimble lasso traceplot }
-min(coda::effectiveSize(mcmc.out$samples))
-plot(mcmc.out$samples[, c("beta0")], bty = "n", main = "beta0")
-plot(mcmc.out$samples[, c("beta[1]")], bty = "n", main = "beta1")
-plot(mcmc.out$samples[, c("beta[2]")], bty = "n", main = "beta2")
-plot(mcmc.out$samples[, c("beta[3]")], bty = "n", main = "beta3")
-plot(mcmc.out$samples[, c("beta[4]")], bty = "n", main = "beta4")
-plot(mcmc.out$samples[, c("beta[5]")], bty = "n", main = "beta5")
-plot(mcmc.out$samples[, c("beta[6]")], bty = "n", main = "beta6")
-plot(mcmc.out$samples[, c("beta[7]")], bty = "n", main = "beta7")
-plot(mcmc.out$samples[, c("beta[8]")], bty = "n", main = "beta8")
-plot(mcmc.out$samples[, c("sigma")], bty = "n", main = "sigma")
-plot(mcmc.out$samples[, c("taue")], bty = "n", main = "taue")
-plot(mcmc.out$samples[, c("taub")], bty = "n", main = "taub")
+min(coda::effectiveSize(mcmc.out.lasso$samples))
+plot(mcmc.out.lasso$samples[, c("beta0")], bty = "n", main = "beta0")
+plot(mcmc.out.lasso$samples[, c("beta[1]")], bty = "n", main = "beta1")
+plot(mcmc.out.lasso$samples[, c("beta[2]")], bty = "n", main = "beta2")
+plot(mcmc.out.lasso$samples[, c("beta[3]")], bty = "n", main = "beta3")
+plot(mcmc.out.lasso$samples[, c("beta[4]")], bty = "n", main = "beta4")
+plot(mcmc.out.lasso$samples[, c("beta[5]")], bty = "n", main = "beta5")
+plot(mcmc.out.lasso$samples[, c("beta[6]")], bty = "n", main = "beta6")
+plot(mcmc.out.lasso$samples[, c("beta[7]")], bty = "n", main = "beta7")
+plot(mcmc.out.lasso$samples[, c("beta[8]")], bty = "n", main = "beta8")
+plot(mcmc.out.lasso$samples[, c("sigma")], bty = "n", main = "sigma")
+plot(mcmc.out.lasso$samples[, c("taue")], bty = "n", main = "taue")
+plot(mcmc.out.lasso$samples[, c("taub")], bty = "n", main = "taub")
 
 ```
 
+
 ```{r Ex 7_6 nimble lasso posterior summary}
 beta_var  <- paste0("beta[", 1:ncol(X), "]") 
-post_summary <- mcmc.out$summary$all.chains |> as.data.frame() 
-post_summary <- post_summary[beta_var,]
+#posterior summaries of all the parameters in the model
+post_summary_lasso <- mcmc.out.lasso$summary$all.chains |> as.data.frame() 
+post_summary_lasso <- post_summary_lasso[beta_var,]
 
-post_summary$variable <- colnames(X)
+post_summary_lasso$variable <- colnames(X)
 
-ggplot(post_summary,
+ggplot(post_summary_lasso,
        aes(x = variable)) + 
   geom_pointrange(aes(y = Mean, ymin =`95%CI_low`, ymax =`95%CI_upp`)) + 
   geom_hline(yintercept = 0) +
   theme_classic() + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 ```
+
+Under the Lasso prior specification, only the logarithm of Building_100m is associated with the logarithm of ethylbenzene. 
+
+Next, we perform the analysis assuming a horseshoe prior for the coefficient.:
 ```{r Ex 7_6 nimble horseshoe}
 
 Ex7_6HorseshoeCode <- nimbleCode({
@@ -198,35 +216,33 @@ Ex7_6HorseshoeCode <- nimbleCode({
 
   # Prior specification
   for(j in 1:p){
-    beta[j] ~ dnorm(0, var = lambda)
+    beta[j] ~ dnorm(0, sd = lambda[j]*tau)
+    lambda[j] ~ T(dt(mu = 0, sigma = 1, df = 1), 0, Inf)
   }
-  lambda ~ T(dt(mu = 0, sigma = tau, df = 1), 0, Inf)
-  tau  ~ T(dt(mu = 0, sigma = nu, df = 1), 0, Inf)
-  nu <- sqrt(nu2)
-  nu2 ~  dgamma(0.01, 0.01)
-  sigma ~ T(dt(mu = 0, sigma = 1, df = 1), 0, Inf)
-  beta0  ~ dnorm(0,0.01)
+  tau  ~ T(dt(mu = 0, sigma = 1, df = 1), 0, Inf)
+  sigma  ~ T(dt(mu = 0, sigma = 1, df = 1), 0, Inf)
+  beta0  ~ dnorm(0,sd=10)
 
 })
 
 ```
 
-```{r Ex 7_6 nimble horseshoe run model, message = FALSE, cache = TRUE, results='hide'}
+```{r Ex 7_6 nimble horseshoe run model, message = FALSE, cache = TRUE, results='hide' }
 set.seed(321)
 
 constants <-
-  list(n = nrow(lur_ethyl), p = ncol(X))
-
+  list(n = nrow(lur), p = ncol(X))
+#using the scaled covariates
 ex.data <-
-  list(y = log(lur_ethyl$Ethylbenzene),
+  list(y = log(lur$Ethylbenzene),
        X = scale(X))
-params <- c( "beta0",  "beta", "tau", "sigma", "lambda", "nu")
+params <- c( "beta0",  "beta", "tau", "sigma", "lambda")
 
 inits <- list( sigma = 0.1, tau = 0.1)
 # Run model in nimble
 start_time <- Sys.time()
 
-mcmc.out <- nimbleMCMC(
+mcmc.out.hs <- nimbleMCMC(
   code = Ex7_6HorseshoeCode,
   constants = constants,
   data = ex.data,
@@ -249,32 +265,29 @@ run_time
 
 
 ```{r Ex 7.6 nimble horseshoe traceplot }
-min(coda::effectiveSize(mcmc.out$samples))
-plot(mcmc.out$samples[, c("beta0")], bty = "n", main = "beta0")
-plot(mcmc.out$samples[, c("beta[1]")], bty = "n", main = "beta1")
-plot(mcmc.out$samples[, c("beta[2]")], bty = "n", main = "beta2")
-plot(mcmc.out$samples[, c("beta[3]")], bty = "n", main = "beta3")
-plot(mcmc.out$samples[, c("beta[4]")], bty = "n", main = "beta4")
-plot(mcmc.out$samples[, c("beta[5]")], bty = "n", main = "beta5")
-plot(mcmc.out$samples[, c("beta[6]")], bty = "n", main = "beta6")
-plot(mcmc.out$samples[, c("beta[7]")], bty = "n", main = "beta7")
-plot(mcmc.out$samples[, c("beta[8]")], bty = "n", main = "beta8")
-plot(mcmc.out$samples[, c("sigma")], bty = "n", main = "sigma")
-plot(mcmc.out$samples[, c("tau")], bty = "n", main = "tau")
-plot(mcmc.out$samples[, c("lambda")], bty = "n", main = "lambda")
-plot(mcmc.out$samples[, c("nu")], bty = "n", main = "nu")
-
+min(coda::effectiveSize(mcmc.out.hs$samples))
+plot(mcmc.out.hs$samples[, c("beta0")], bty = "n", main = "beta0")
+plot(mcmc.out.hs$samples[, c("beta[1]")], bty = "n", main = "beta1")
+plot(mcmc.out.hs$samples[, c("beta[2]")], bty = "n", main = "beta2")
+plot(mcmc.out.hs$samples[, c("beta[3]")], bty = "n", main = "beta3")
+plot(mcmc.out.hs$samples[, c("beta[4]")], bty = "n", main = "beta4")
+plot(mcmc.out.hs$samples[, c("beta[5]")], bty = "n", main = "beta5")
+plot(mcmc.out.hs$samples[, c("beta[6]")], bty = "n", main = "beta6")
+plot(mcmc.out.hs$samples[, c("beta[7]")], bty = "n", main = "beta7")
+plot(mcmc.out.hs$samples[, c("beta[8]")], bty = "n", main = "beta8")
+plot(mcmc.out.hs$samples[, c("sigma")], bty = "n", main = "sigma")
+plot(mcmc.out.hs$samples[, c("tau")], bty = "n", main = "tau")
 ```
 
  
 ```{r Ex 7_6 nimble horseshoe posterior summary}
 beta_var  <- paste0("beta[", 1:ncol(X), "]") 
-post_summary <- mcmc.out$summary$all.chains |> as.data.frame() 
-post_summary <- post_summary[beta_var,]
+post_summary_hs <- mcmc.out.hs$summary$all.chains |> as.data.frame() 
+post_summary_hs <- post_summary_hs[beta_var,]
 
-post_summary$variable <- colnames(X)
+post_summary_hs$variable <- colnames(X)
 
-ggplot(post_summary,
+ggplot(post_summary_hs,
        aes(x = variable)) + 
   geom_pointrange(aes(y = Mean, ymin =`95%CI_low`, ymax =`95%CI_upp`)) + 
   geom_hline(yintercept = 0) +

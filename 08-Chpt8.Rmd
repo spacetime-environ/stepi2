@@ -1,4 +1,4 @@
-# But can the data be trusted {#trusted}
+# The challenges of working with real-world data {#trusted}
 
 This chapter considers some of the issues that will arise when dealing with 'real data’. Data will commonly have missing
 values and may be measured with error. This error might be random or may be due to systematic patterns in how it was
@@ -27,7 +27,7 @@ install.packages(
 
 After INLA is installed load all the necessary packages.
 
-```{r Ex load packages }
+```{r Exercise load packages, results='hide' }
 library(INLA)
 library(mvtnorm)
 library(boot)
@@ -39,14 +39,13 @@ library(ggplot2)
 
 This example uses the [BlackSmokePrefData.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/black_smoke/BlackSmokePrefData.csv) file. 
 
-```{r data clean and standardize}
+```{r Exercise data clean and standardize}
 
 BlackSmokePrefData <- read.csv("data/black_smoke/BlackSmokePrefData.csv")
 
 head(BlackSmokePrefData)
 
 ## standardize location coordinates
-
 sd_x <- sd(BlackSmokePrefData[, c(2)])
 sd_y <- sd(BlackSmokePrefData[, c(3)])
 
@@ -56,7 +55,8 @@ BlackSmokePrefData[, 3] <- BlackSmokePrefData[, 3] / sd_y
 
 We need to reshape the data to have one observation per row, as required by INLA.
 
-```{r reshape}
+```{r Exercise reshape}
+
 yearmeans = colMeans(BlackSmokePrefData[, -c(1, 2, 3)], na.rm = T)  ## save means for each year
 
 BlackSmokePrefData <-
@@ -76,7 +76,7 @@ BlackSmokePrefData$bsmoke = log(BlackSmokePrefData$bsmoke)
 
 Producing the 2-d mesh of the UK:
 
-```{r mesh analysis, cache = TRUE}
+```{r Exercise mesh analysis, cache = TRUE}
 no_sites = as.numeric(length(unique(BlackSmokePrefData$site))) # number of sites
 no_T = as.numeric(length(unique(BlackSmokePrefData$year))) # number of years
 
@@ -110,7 +110,7 @@ points(BlackSmokePrefData$east, BlackSmokePrefData$north, col = "red")
 
 Now we define and fit our INLA model.
 
-```{r model, results = 'hide', message = FALSE, cache = TRUE}
+```{r Exercise model, results = 'hide', message = FALSE, cache = TRUE}
 spde_obj = inla.spde2.pcmatern(
   mesh = mesh,
   alpha = 2,
@@ -205,7 +205,7 @@ out.naive = inla(
 
 We can now take posteriors from the model.
 
-```{r posterior}
+```{r Exercise posterior}
 
 m_samples = 50
 
@@ -219,7 +219,7 @@ for (i in 1:m_samples)
 
 Finally, summarize and plot the outputs:
 
-```{r summarize}
+```{r Exercise summarize}
 stepsize = 5000 / sd_x
 nxy = round(c(diff(range(
   BlackSmokePrefData$east
@@ -236,6 +236,11 @@ proj_grid = inla.mesh.projector(
 A.grid = inla.spde.make.A(mesh,
                           loc = cbind(BlackSmokePrefData$east, BlackSmokePrefData$north))
 
+
+```
+
+
+```{r Exercise placeholders}
 ## define placeholders
 
 tmp2 = matrix(0, nrow = no_T, ncol = mesh$n)
@@ -253,25 +258,30 @@ for (i in 1:m_samples) {
     # loop over the years
   {
     Post_Array2[i, j,] <- samp[[i]]$latent['Intercept:1'] + # Intercept
-      samp[[i]]$latent[which(startsWith(prefix = 'year:', x = names(samp[[i]]$latent)))][j] * year[j] + # linear fixed effect
+      samp[[i]]$latent[which(base::startsWith(prefix = 'year:', 
+                                        x = names(samp[[i]]$latent)))][j] * year[j] + # linear fixed effect
       #samp[[i]]$latent['year_2'] * year2[j] + # quadratic fixed effect
-      as.numeric(samp[[i]]$latent[which(startsWith(prefix = 'spatial.field:', x = names(samp[[i]]$latent)))]) + # Spatial Intercept
-      as.numeric(samp[[i]]$latent[which(startsWith(prefix = 'spatial.field.copy:', x = names(samp[[i]]$latent)))]) * year[j] + # Spatial linear slope
-      as.numeric(samp[[i]]$latent[which(startsWith(prefix = 'spatial.field.copy2:', x = names(samp[[i]]$latent)))]) * year2[j]  # Spatial quadratic slope
+      as.numeric(samp[[i]]$latent[which(base::startsWith(prefix = 'spatial.field:', x = names(samp[[i]]$latent)))]) + # Spatial Intercept
+      as.numeric(samp[[i]]$latent[base::which(startsWith(prefix = 'spatial.field.copy:', x = names(samp[[i]]$latent)))]) * year[j] + # Spatial linear slope
+      as.numeric(samp[[i]]$latent[which(base::startsWith(prefix = 'spatial.field.copy2:', x = names(samp[[i]]$latent)))]) * year2[j]  # Spatial quadratic slope
     # Project onto the site locations and add random site-specific effects #
     Post_Sites_Array2[i, j,] = as.numeric(A.grid %*% Post_Array2[i, j,]) +
-      as.numeric(samp[[i]]$latent[which(startsWith(prefix = 'spatial_ind:', x = names(samp[[i]]$latent)))[1:no_sites]]) + # random Intercept
-      as.numeric(samp[[i]]$latent[which(startsWith(prefix = 'spatial_ind2:', x = names(samp[[i]]$latent)))[no_sites +
+      as.numeric(samp[[i]]$latent[which(base::startsWith(prefix = 'spatial_ind:', x = names(samp[[i]]$latent)))[1:no_sites]]) + # random Intercept
+      as.numeric(samp[[i]]$latent[which(base::startsWith(prefix = 'spatial_ind2:', x = names(samp[[i]]$latent)))[no_sites +
                                                                                                              (1:no_sites)]]) * year[j] # random slope
     # Extract the random intercepts #
-    RI_array[i, j,] = as.numeric(samp[[i]]$latent[which(startsWith(prefix = 'spatial_ind:', x = names(samp[[i]]$latent)))[1:no_sites]])
+    RI_array[i, j,] = as.numeric(samp[[i]]$latent[which(base::startsWith(prefix = 'spatial_ind:', x = names(samp[[i]]$latent)))[1:no_sites]])
     
     # Extract the random slopes #
-    RS_array[i, j,] = as.numeric(samp[[i]]$latent[which(startsWith(prefix = 'spatial_ind2:', x = names(samp[[i]]$latent)))[no_sites +
+    RS_array[i, j,] = as.numeric(samp[[i]]$latent[which(base::startsWith(prefix = 'spatial_ind2:', x = names(samp[[i]]$latent)))[no_sites +
                                                                                                                              (1:no_sites)]])
   }
 }
 
+
+```
+
+```{r Exercise summarizing}
 ## summarizing
 
 Post_mean2 <-
@@ -299,6 +309,9 @@ RS_array <-
     mean(x, na.rm = TRUE)
   }))
 
+```
+
+```{r Exercise placeholders uniform grid and observed}
 ## placeholders for uniform grid posterior blacksmoke values (not necessarily in dataset)
 
 post_Matrix_grid_mean2 = array(NA, dim = c(nxy[1], nxy[2], no_T))
@@ -367,6 +380,11 @@ Grid_df_2 = data.frame(
   )
 )
 
+
+```
+
+
+```{r Exercise plotting}
 ## plotting
 
 Grid_plot_2 = ggplot(aes(
@@ -384,6 +402,8 @@ Grid_plot_2 = ggplot(aes(
   xlab('year') + ylab('posterior mean bs on transformed scale') +
   ggtitle(
     'Naive posterior means of BS at the selected, unselected sites and across the UK (R1, R0 and Whole UK resp.). '
-  )
+  ) + theme_classic()
 Grid_plot_2
+
 ```
+

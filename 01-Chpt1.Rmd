@@ -1,4 +1,4 @@
-# Why spatio-temporal epidemiology? {#why}
+# An overview of spatio-temporal epidemiology and knowledge discovery? {#why}
 
 This book provides a comprehensive treatment of  methods for spatio-temporal modelling and their use in epidemiological studies. Throughout the book,  we present examples of spatio-temporal modelling within a Bayesian framework and describe how  data can be used to update knowledge, together with in-depth consideration of the  role of uncertainty. 
 

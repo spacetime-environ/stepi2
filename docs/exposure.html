@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 12 Exposure assessment-over space and time | Spatio-temporal methods in environmental epidemiology</title>
-  <meta name="description" content="Chapter 12 Exposure assessment-over space and time | Spatio-temporal methods in environmental epidemiology" />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <title>Chapter 12 Exposure assessment-over space and time | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition</title>
+  <meta name="description" content="Chapter 12 Exposure assessment-over space and time | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 12 Exposure assessment-over space and time | Spatio-temporal methods in environmental epidemiology" />
+  <meta property="og:title" content="Chapter 12 Exposure assessment-over space and time | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/img/cover.jpg" />
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 12 Exposure assessment-over space and time | Spatio-temporal methods in environmental epidemiology" />
+  <meta name="twitter:title" content="Chapter 12 Exposure assessment-over space and time | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition" />
   
   
   <meta name="twitter:image" content="/img/cover.jpg" />
@@ -23,13 +23,13 @@
 <meta name="author" content="Gavin Shaddick, James V. Zidek, and Alexandra M. Schmidt" />
 
 
-<meta name="date" content="2023-04-26" />
+<meta name="date" content="2023-08-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="prev" href="Time.html"/>
 <link rel="next" href="causality.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -133,42 +133,74 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Spatio-temporal methods in environmental epidemiology using R</a></li>
+<li><a href="./">Spatio-temporal methods in environmental epidemiology</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="chapter" data-level="" data-path="preface-2nd-edition.html"><a href="preface-2nd-edition.html"><i class="fa fa-check"></i>Preface (2nd edition)</a></li>
-<li class="chapter" data-level="1" data-path="why.html"><a href="why.html"><i class="fa fa-check"></i><b>1</b> Why spatio-temporal epidemiology?</a>
+<li class="chapter" data-level="" data-path="preface-to-second-edition.html"><a href="preface-to-second-edition.html"><i class="fa fa-check"></i>PREFACE TO SECOND EDITION</a></li>
+<li class="chapter" data-level="1" data-path="why.html"><a href="why.html"><i class="fa fa-check"></i><b>1</b> An overview of spatio-temporal epidemiology and knowledge discovery?</a></li>
+<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> An introduction to modelling health risks and impacts</a>
 <ul>
-<li class="chapter" data-level="" data-path="why.html"><a href="why.html#example-1.5"><i class="fa fa-check"></i>Example 1.5</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.7-estimating-the-smr-using-a-poisson-glm"><i class="fa fa-check"></i>Example 2.7: Estimating the SMR using a Poisson GLM</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.8-estimating-the-smr-using-quasi-likelihood"><i class="fa fa-check"></i>Example 2.8: Estimating the SMR using quasi-likelihood</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.9-modelling-differences-in-smrs-in-relation-to-differences-in-exposures"><i class="fa fa-check"></i>Example 2.9: Modelling differences in SMRs in relation to differences in exposures</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.10-modelling-the-risks-associated-with-lagged-effects-of-air-pollution"><i class="fa fa-check"></i>Example 2.10: Modelling the risks associated with lagged effects of air pollution</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.10-estimating-the-odds-ratio-in-a-case-control-study-using-a-logistic-model"><i class="fa fa-check"></i>Example 2.10: Estimating the odds ratio in a case-control study using a logistic model</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.11-estimating-the-odds-ratio-of-asthma-associated-with-proximity-to-roads"><i class="fa fa-check"></i>Example 2.11: Estimating the odds ratio of asthma associated with proximity to roads</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Epidemiology-the basics</a>
+<li class="chapter" data-level="3" data-path="uncertainty.html"><a href="uncertainty.html"><i class="fa fa-check"></i><b>3</b> The importance of uncertainty: assessment and quantification</a>
 <ul>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.9-estimating-the-smr-using-a-poisson-glm"><i class="fa fa-check"></i>Example 2.9: Estimating the SMR using a Poisson GLM</a></li>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.10-estimating-the-smr-using-quasi-likelihood"><i class="fa fa-check"></i>Example 2.10: Estimating the SMR using quasi-likelihood</a></li>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.11-modelling-differences-in-smrs-in-relation-to-differences-in-exposures"><i class="fa fa-check"></i>Example 2.11: Modelling differences in SMRs in relation to differences in exposures</a></li>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.12-modelling-the-risks-associated-with-lagged-effects-of-air-pollution"><i class="fa fa-check"></i>Example 2.12: Modelling the risks associated with lagged effects of air pollution</a></li>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.13-estimating-the-odds-ratio-in-a-case-control-study-using-a-logistic-model"><i class="fa fa-check"></i>Example 2.13: Estimating the odds ratio in a case-control study using a logistic model</a></li>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.14-estimating-the-odds-ratio-of-asthma-associated-with-proximity-to-roads"><i class="fa fa-check"></i>Example 2.14: Estimating the odds ratio of asthma associated with proximity to roads</a></li>
+<li class="chapter" data-level="" data-path="uncertainty.html"><a href="uncertainty.html#supplementary-material"><i class="fa fa-check"></i>Supplementary Material</a>
+<ul>
+<li class="chapter" data-level="" data-path="uncertainty.html"><a href="uncertainty.html#more-on-qualitative-uncertainty"><i class="fa fa-check"></i>More on qualitative uncertainty</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="uncertainty.html"><a href="uncertainty.html"><i class="fa fa-check"></i><b>3</b> Uncertainty and its reduction</a></li>
-<li class="chapter" data-level="4" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>4</b> Data: increasing information and reducing uncertainty</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>4</b> Extracting information from data</a>
+<ul>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#getting-to-know-the-structure-of-dataframes"><i class="fa fa-check"></i>Getting to know the structure of dataframes</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#extracting-and-creating-variables"><i class="fa fa-check"></i>Extracting and creating variables</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#simple-manipulations-using-tidyverse"><i class="fa fa-check"></i>Simple manipulations using Tidyverse</a>
+<ul>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#filter-rows-in-tidyverse"><i class="fa fa-check"></i>Filter rows in Tidyverse</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#sorting-rows-in-tidyverse"><i class="fa fa-check"></i>Sorting rows in Tidyverse</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#select-columns-in-tidyverse"><i class="fa fa-check"></i>Select columns in Tidyverse</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#adding-columns"><i class="fa fa-check"></i>Adding columns</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#pipes"><i class="fa fa-check"></i>Pipes</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#chaining-pipes"><i class="fa fa-check"></i>Chaining pipes</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#grouping-and-summarizing"><i class="fa fa-check"></i>Grouping and summarizing</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#summarize"><i class="fa fa-check"></i>Summarize</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#example-4.1-health-impacts-associated-with-outdoor-air-pollution"><i class="fa fa-check"></i>Example 4.1: Health impacts associated with outdoor air pollution</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#example-4.3.-mapping-cancer-incidence-in-southern-and-eastern-serbia"><i class="fa fa-check"></i>Example 4.3. Mapping cancer incidence in Southern and Eastern Serbia</a>
+<ul>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#creating-maps-of-southern-and-eastern-serbia"><i class="fa fa-check"></i>Creating maps of Southern and Eastern Serbia</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#example-4.4-cancer-in-bor"><i class="fa fa-check"></i>Example 4.4 Cancer in Bor</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#calculating-smrs"><i class="fa fa-check"></i>Calculating SMRs</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="embracing.html"><a href="embracing.html"><i class="fa fa-check"></i><b>5</b> Embracing uncertainty: the Bayesian approach</a></li>
-<li class="chapter" data-level="6" data-path="tactics.html"><a href="tactics.html"><i class="fa fa-check"></i><b>6</b> Tactics-implementing uncertainty models</a>
+<li class="chapter" data-level="6" data-path="computation.html"><a href="computation.html"><i class="fa fa-check"></i><b>6</b> Approaches to Bayesian Computation</a>
 <ul>
-<li class="chapter" data-level="" data-path="tactics.html"><a href="tactics.html#example-6.2-chronic-obstructive-pulmonary-disease-copd-in-england"><i class="fa fa-check"></i>Example 6.2: Chronic obstructive pulmonary disease (COPD) in England</a>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#example-6.2-gibbs-sampling-with-a-poisson-gamma-model---hospital-admissions-for-chronic-obstructive-pulmonary-disease-copd-for-england-between-2001-2010"><i class="fa fa-check"></i>Example 6.2: Gibbs sampling with a Poisson-Gamma model - hospital admissions for chronic obstructive pulmonary disease (COPD) for England between 2001-2010</a>
 <ul>
-<li class="chapter" data-level="" data-path="tactics.html"><a href="tactics.html#modelling-the-raw-standardized-mortality-rates-smrs"><i class="fa fa-check"></i>Modelling the raw standardized mortality rates (SMRs)</a></li>
-<li class="chapter" data-level="" data-path="tactics.html"><a href="tactics.html#modelling-a-poisson-gamma-with-an-mcmc-implemented-in-r"><i class="fa fa-check"></i>Modelling a Poisson-Gamma with an MCMC implemented in <code>R</code></a></li>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#modelling-the-raw-standardized-mortality-rates-smrs"><i class="fa fa-check"></i>Modelling the raw standardized mortality rates (SMRs)</a></li>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#mcmc-implementation-of-the-poisson-gamma-model-in-r"><i class="fa fa-check"></i>MCMC implementation of the Poisson-Gamma model in <code>R</code></a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="tactics.html"><a href="tactics.html#example-6.3-fitting-a-poisson-regression-model"><i class="fa fa-check"></i>Example 6.3: Fitting a Poisson regression model</a>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#code-for-the-poisson-gamma-model-in-nimble"><i class="fa fa-check"></i>Code for the Poisson-Gamma model in Nimble</a></li>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#example-6.3-fitting-a-poisson-regression-model"><i class="fa fa-check"></i>Example 6.3: Fitting a Poisson regression model</a>
 <ul>
-<li class="chapter" data-level="" data-path="tactics.html"><a href="tactics.html#nimble"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="tactics.html"><a href="tactics.html#stan"><i class="fa fa-check"></i>Stan</a></li>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#nimble"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#stan"><i class="fa fa-check"></i>Stan</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="Strategies.html"><a href="Strategies.html"><i class="fa fa-check"></i><b>7</b> Strategies implementing uncertainty models</a></li>
-<li class="chapter" data-level="8" data-path="trusted.html"><a href="trusted.html"><i class="fa fa-check"></i><b>8</b> But can the data be trusted</a>
+<li class="chapter" data-level="7" data-path="Strategies.html"><a href="Strategies.html"><i class="fa fa-check"></i><b>7</b> Strategies for modelling</a>
+<ul>
+<li class="chapter" data-level="" data-path="Strategies.html"><a href="Strategies.html#example-7.6-variable-selection-in-land-use-regression-using-lasso-and-horseshoe-priors"><i class="fa fa-check"></i>Example 7.6 Variable selection in land use regression using lasso and horseshoe priors</a>
+<ul>
+<li class="chapter" data-level="" data-path="Strategies.html"><a href="Strategies.html#nimble-1"><i class="fa fa-check"></i>Nimble</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="trusted.html"><a href="trusted.html"><i class="fa fa-check"></i><b>8</b> The challenges of working with real-world data</a>
 <ul>
 <li class="chapter" data-level="" data-path="trusted.html"><a href="trusted.html#solutions-to-selected-exercises"><i class="fa fa-check"></i>Solutions to Selected Exercises</a>
 <ul>
@@ -179,12 +211,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.1-empirical-bayes-and-bayes-smoothing-of-copd-mortality-for-2010"><i class="fa fa-check"></i>Example 9.1: Empirical Bayes and Bayes smoothing of COPD mortality for 2010</a>
 <ul>
-<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#nimble-1"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#nimble-2"><i class="fa fa-check"></i>Nimble</a></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#stan-1"><i class="fa fa-check"></i>Stan</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.3-fitting-a-conditional-spatial-model-in-nimble-and-stan"><i class="fa fa-check"></i>Example 9.3: Fitting a conditional spatial model in <code>nimble</code> and <code>stan</code></a>
 <ul>
-<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#nimble-2"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#nimble-3"><i class="fa fa-check"></i>Nimble</a></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#stan-2"><i class="fa fa-check"></i>Stan</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.4-fitting-a-conditional-spatial-model-using-carbayes"><i class="fa fa-check"></i>Example 9.4: Fitting a conditional spatial model using CARBayes</a></li>
@@ -192,29 +224,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10" data-path="hazards.html"><a href="hazards.html"><i class="fa fa-check"></i><b>10</b> Environmental hazards-spatial models</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="hazards.html"><a href="hazards.html#example-10.1-spatial-patterns-in-lead-concentrations-in-the-soil-of-the"><i class="fa fa-check"></i><b>10.1</b> Example 10.1 Spatial patterns in lead concentrations in the soil of the</a></li>
-<li class="chapter" data-level="10.2" data-path="hazards.html"><a href="hazards.html#example-10.2-examining-the-log-concentrations-of-lead-in-the-meuse-river"><i class="fa fa-check"></i><b>10.2</b> Example 10.2: Examining the log concentrations of lead in the Meuse River</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-example-10.1-spatial-patterns-of-benzene-concentrations-in-montreal-qc-canada"><i class="fa fa-check"></i>EXTRA: Example 10.1: Spatial patterns of benzene concentrations in Montreal, QC, Canada</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-example-10.2-examining-the-log-concentrations-of-benzene-in-montreal"><i class="fa fa-check"></i>EXTRA: Example 10.2: Examining the log concentrations of benzene in Montreal</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.5-variogram"><i class="fa fa-check"></i>Example 10.5: Variogram</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.6-basic-spatial-modelling-and-prediction-of-benzene-in-montreal"><i class="fa fa-check"></i>Example 10.6 Basic spatial modelling and prediction of benzene in Montreal</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.9-spatial-modelling-of-benzene-in-montreal"><i class="fa fa-check"></i>Example 10.9 Spatial modelling of Benzene in Montreal</a>
-<ul>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#nimble-3"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#stan-3"><i class="fa fa-check"></i>Stan</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.10-spatial-predictions"><i class="fa fa-check"></i>Example 10.10: Spatial predictions</a>
-<ul>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#nimble-4"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#stan-4"><i class="fa fa-check"></i>Stan</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.11-inla-creating-a-mesh"><i class="fa fa-check"></i>Example 10.11: INLA, creating a mesh</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.12-fitting-an-spde-model-using-rinla-benzene-concentration-in-montreal"><i class="fa fa-check"></i>Example 10.12: Fitting an SPDE model using R–INLA: benzene concentration in Montreal</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.13-directional-variograms"><i class="fa fa-check"></i>Example 10.13: Directional variograms</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.1-spatial-patterns-in-lead-concentrations-in-the-soil-of-the-meuse-river-flood-plain"><i class="fa fa-check"></i>Example 10.1 Spatial patterns in lead concentrations in the soil of the Meuse River flood plain</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.2-examining-the-log-concentrations-of-lead-in-the-meuse-river-flood-plain"><i class="fa fa-check"></i>Example 10.2: Examining the log concentrations of lead in the Meuse River flood plain</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.3-mapping-the-locations-of-ozone-monitoring-sites-in-new-york-state"><i class="fa fa-check"></i>Example 10.3: Mapping the locations of ozone monitoring sites in New York State</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.6-spatial-prediction-of-temperatures-in-california"><i class="fa fa-check"></i>Example 10.6: Spatial prediction of temperatures in California</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.8-spatial-prediction-of-no2-in-europe"><i class="fa fa-check"></i>Example 10.8 Spatial prediction of NO2 in Europe</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.10-creating-a-mesh-black-smoke-monitoring-locations-in-the-uk"><i class="fa fa-check"></i>Example 10.10 Creating a mesh: black smoke monitoring locations in the UK</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.12-plotting-directional-variograms-for-temperatures-in-california"><i class="fa fa-check"></i>Example 10.12 Plotting directional variograms for temperatures in California</a></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.14-spatial-modeling-of-malaria-in-gambia"><i class="fa fa-check"></i>Example 10.14: Spatial modeling of malaria in Gambia</a>
 <ul>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#nimble-5"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#stan-5"><i class="fa fa-check"></i>Stan</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#nimble-4"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#stan-3"><i class="fa fa-check"></i>Stan</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#supplementary-material-1"><i class="fa fa-check"></i>Supplementary Material</a>
+<ul>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.1-spatial-patterns-of-benzene-concentrations-in-montreal-qc-canada"><i class="fa fa-check"></i>Extra 10.1: Spatial patterns of benzene concentrations in Montreal, QC, Canada</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.2-examining-the-log-concentrations-of-benzene-in-montreal"><i class="fa fa-check"></i>Extra 10.2: Examining the log concentrations of benzene in Montreal</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.5-variogram"><i class="fa fa-check"></i>Extra 10.5: Variogram</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.6-basic-spatial-modelling-and-prediction-of-benzene-in-montreal"><i class="fa fa-check"></i>Extra 10.6 Basic spatial modelling and prediction of benzene in Montreal</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.8-spatial-modelling-of-benzene-in-montreal"><i class="fa fa-check"></i>Extra 10.8 Spatial modelling of Benzene in Montreal</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.9-spatial-predictions"><i class="fa fa-check"></i>Extra 10.9: Spatial predictions</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.10-inla-creating-a-mesh"><i class="fa fa-check"></i>Extra 10.10: INLA, creating a mesh</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.12-fitting-an-spde-model-using-rinla-benzene-concentration-in-montreal"><i class="fa fa-check"></i>Extra 10.12: Fitting an SPDE model using R–INLA: benzene concentration in Montreal</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.13-directional-variograms"><i class="fa fa-check"></i>Extra 10.13: Directional variograms</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="Time.html"><a href="Time.html"><i class="fa fa-check"></i><b>11</b> Time-why it also matters</a>
@@ -223,23 +255,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.2-low-pass-filtering-of-carbon-monoxide-levels-using-the-moving-average"><i class="fa fa-check"></i>Example 11.2 Low-pass filtering of carbon monoxide levels using the moving average</a></li>
 <li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.13-forecasting-ozone-levels"><i class="fa fa-check"></i>Example 11.13 Forecasting ozone levels</a></li>
 <li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.14-forecasting-volcanic-ash"><i class="fa fa-check"></i>Example 11.14 Forecasting volcanic ash</a></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.16-fitting-a-random-walk-model-to-pm10-concentrations-in-london"><i class="fa fa-check"></i>Example 11.16 Fitting a random walk model to PM10 concentrations in London</a>
+</ul></li>
+<li class="chapter" data-level="12" data-path="exposure.html"><a href="exposure.html"><i class="fa fa-check"></i><b>12</b> Exposure assessment-over space and time</a>
 <ul>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#nimble-6"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#stan-6"><i class="fa fa-check"></i>Stan</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.16-extra-implementation-of-a-dynamic-linear-model-uk-ozone-data"><i class="fa fa-check"></i>Example 11.16 EXTRA Implementation of a dynamic linear model: UK ozone data</a>
+<li class="chapter" data-level="" data-path="exposure.html"><a href="exposure.html#example-idk-spatio-temporal-model-for-the-uk-ozone-data"><i class="fa fa-check"></i>Example IDK: Spatio-temporal model for the UK ozone data</a>
 <ul>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#nimble-7"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#stan-7"><i class="fa fa-check"></i>Stan</a></li>
+<li class="chapter" data-level="" data-path="exposure.html"><a href="exposure.html#nimble-7"><i class="fa fa-check"></i>Nimble</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#solutions-to-selected-exercises-1"><i class="fa fa-check"></i>Solutions to Selected Exercises</a></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#exercise-11.11"><i class="fa fa-check"></i>Exercise 11.11</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="exposure.html"><a href="exposure.html"><i class="fa fa-check"></i><b>12</b> Exposure assessment-over space and time</a></li>
 <li class="chapter" data-level="13" data-path="causality.html"><a href="causality.html"><i class="fa fa-check"></i><b>13</b> Causality-roadblocks on the way to it</a>
 <ul>
-<li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#solutions-to-selected-exercises-2"><i class="fa fa-check"></i>Solutions to Selected Exercises</a>
+<li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#solutions-to-selected-exercises-1"><i class="fa fa-check"></i>Solutions to Selected Exercises</a>
 <ul>
 <li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#question-13.16-load-the-italy-and-china-data-described-in-example-13.3-and-included-in-the-supplementary-bookdown-material-into-r."><i class="fa fa-check"></i>Question 13.16: Load the Italy and China data, described in Example 13.3, and included in the supplementary Bookdown material into R.</a></li>
 <li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#question-13.17-using-the-italy-and-china-data-stratified-by-the-age-groups-70-and-geq-70-obtain-empirical-estimates-of-p_1-and-p_2-as-defined-in-an-sdis.-in-the-following-questions-assume-that-p_1-and-p_2-are-the-population-values."><i class="fa fa-check"></i>Question 13.17: Using the Italy and China data stratified by the age groups <span class="math inline">\(&lt;70\)</span> and <span class="math inline">\(\geq 70\)</span>, obtain empirical estimates of <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span>, as defined in an SDis. In the following questions, assume that <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span> are the population values.</a></li>
@@ -262,7 +288,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Spatio-temporal methods in environmental epidemiology</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition</a>
           </h1>
         </div>
 
@@ -280,7 +306,380 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Separability and non-separability in spatio–temporal models, and how these could be characterize using the Kronecker product of correlation matrices.</li>
 <li>Examples of the use of spatio–temporal models in modelling environmental exposures.</li>
 </ul>
+<div id="example-idk-spatio-temporal-model-for-the-uk-ozone-data" class="section level2 unnumbered hasAnchor">
+<h2>Example IDK: Spatio-temporal model for the UK ozone data<a href="exposure.html#example-idk-spatio-temporal-model-for-the-uk-ozone-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="blackbox">
+<div class="center">
+<p><strong>NOTE</strong></p>
+</div>
+<p>The code for the implementation of DLMs in Stan and Nimble was developed by Paritosh Kumar Roy. This code and other more complex DLM structures are available through his <a href="https://github.com/paritoshkroy">github</a>.</p>
+</div>
+<div id="nimble-7" class="section level3 unnumbered hasAnchor">
+<h3>Nimble<a href="exposure.html#nimble-7" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="exposure.html#cb475-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb475-2"><a href="exposure.html#cb475-2" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb475-3"><a href="exposure.html#cb475-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb475-4"><a href="exposure.html#cb475-4" tabindex="-1"></a><span class="fu">library</span>(nimble, <span class="at">warn.conflicts =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb475-5"><a href="exposure.html#cb475-5" tabindex="-1"></a><span class="fu">library</span>(nleqslv)</span>
+<span id="cb475-6"><a href="exposure.html#cb475-6" tabindex="-1"></a></span>
+<span id="cb475-7"><a href="exposure.html#cb475-7" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;functions/FFBS_functions_nimble.R&quot;</span>)</span>
+<span id="cb475-8"><a href="exposure.html#cb475-8" tabindex="-1"></a></span>
+<span id="cb475-9"><a href="exposure.html#cb475-9" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/ozone/uk_o3.rda&quot;</span>)</span>
+<span id="cb475-10"><a href="exposure.html#cb475-10" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/ozone/uk_temp.rda&quot;</span>)</span>
+<span id="cb475-11"><a href="exposure.html#cb475-11" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/ozone/uk_wind.rda&quot;</span>)</span>
+<span id="cb475-12"><a href="exposure.html#cb475-12" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/ozone/uk_pollutant_coords.rda&quot;</span>)</span>
+<span id="cb475-13"><a href="exposure.html#cb475-13" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/ozone/uk_pollutant_date.rda&quot;</span>)</span>
+<span id="cb475-14"><a href="exposure.html#cb475-14" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
+<pre><code>##  [1] &quot;coords&quot;                      &quot;date&quot;                       
+##  [3] &quot;ddlm_moms_invariant&quot;         &quot;ddlm_multi_obs&quot;             
+##  [5] &quot;ddlm_uoms&quot;                   &quot;ddlm_uous&quot;                  
+##  [7] &quot;hyperParameterInvGamma&quot;      &quot;nim_bsample&quot;                
+##  [9] &quot;nim_chol2inv&quot;                &quot;nim_diag&quot;                   
+## [11] &quot;nim_ffbs_moms&quot;               &quot;nim_ffbs_moms_invariant&quot;    
+## [13] &quot;nim_ffbs_uoms&quot;               &quot;nim_ffbs_uous&quot;              
+## [15] &quot;nim_ffbs_woodbury&quot;           &quot;nim_kf_moms&quot;                
+## [17] &quot;nim_postfit_uoms&quot;            &quot;nim_postfit_uous&quot;           
+## [19] &quot;nim_woodbury&quot;                &quot;nimSummary&quot;                 
+## [21] &quot;o3&quot;                          &quot;rdlm_moms_invariant&quot;        
+## [23] &quot;rdlm_multi_obs&quot;              &quot;rdlm_uoms&quot;                  
+## [25] &quot;rdlm_uous&quot;                   &quot;sampler_ffbs_moms_invariant&quot;
+## [27] &quot;sampler_ffbs_uoms&quot;           &quot;sampler_ffbs_uous&quot;          
+## [29] &quot;sampler_ffbseta&quot;             &quot;temp&quot;                       
+## [31] &quot;wind&quot;</code></pre>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="exposure.html#cb477-1" tabindex="-1"></a>Example12_O3_Nimble <span class="ot">&lt;-</span> <span class="fu">nimbleCode</span>({</span>
+<span id="cb477-2"><a href="exposure.html#cb477-2" tabindex="-1"></a>  sigma <span class="sc">~</span> <span class="fu">T</span>(<span class="fu">dt</span>(<span class="at">mu =</span> <span class="dv">0</span>, <span class="at">sigma =</span> <span class="dv">1</span>, <span class="at">df =</span> <span class="dv">1</span>), <span class="dv">0</span>, <span class="cn">Inf</span>)</span>
+<span id="cb477-3"><a href="exposure.html#cb477-3" tabindex="-1"></a>  tau <span class="sc">~</span> <span class="fu">T</span>(<span class="fu">dt</span>(<span class="at">mu =</span> <span class="dv">0</span>, <span class="at">sigma =</span> <span class="dv">1</span>, <span class="at">df =</span> <span class="dv">1</span>), <span class="dv">0</span>, <span class="cn">Inf</span>)</span>
+<span id="cb477-4"><a href="exposure.html#cb477-4" tabindex="-1"></a>  phi_inv <span class="sc">~</span> <span class="fu">dgamma</span>(<span class="at">shape =</span> aPhi, <span class="at">rate =</span> bPhi)</span>
+<span id="cb477-5"><a href="exposure.html#cb477-5" tabindex="-1"></a>  phi <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> phi_inv</span>
+<span id="cb477-6"><a href="exposure.html#cb477-6" tabindex="-1"></a>  Vt[<span class="dv">1</span><span class="sc">:</span>n, <span class="dv">1</span><span class="sc">:</span>n] <span class="ot">&lt;-</span></span>
+<span id="cb477-7"><a href="exposure.html#cb477-7" tabindex="-1"></a>    (sigma <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>obs_dist_mat[<span class="dv">1</span><span class="sc">:</span>n, <span class="dv">1</span><span class="sc">:</span>n] <span class="sc">/</span> phi) <span class="sc">+</span> (tau <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">*</span> <span class="fu">identityMatrix</span>(<span class="at">d =</span> n)</span>
+<span id="cb477-8"><a href="exposure.html#cb477-8" tabindex="-1"></a>  </span>
+<span id="cb477-9"><a href="exposure.html#cb477-9" tabindex="-1"></a>  sqrt_Wt_diag[<span class="dv">1</span>] <span class="sc">~</span> <span class="fu">T</span>(<span class="fu">dt</span>(<span class="at">mu =</span> <span class="dv">0</span>, <span class="at">sigma =</span> <span class="dv">1</span>, <span class="at">df =</span> <span class="dv">1</span>), <span class="dv">0</span>, <span class="cn">Inf</span>)</span>
+<span id="cb477-10"><a href="exposure.html#cb477-10" tabindex="-1"></a>  sqrt_Wt_diag[<span class="dv">2</span>] <span class="sc">~</span> <span class="fu">T</span>(<span class="fu">dt</span>(<span class="at">mu =</span> <span class="dv">0</span>, <span class="at">sigma =</span> <span class="dv">1</span>, <span class="at">df =</span> <span class="dv">1</span>), <span class="dv">0</span>, <span class="cn">Inf</span>)</span>
+<span id="cb477-11"><a href="exposure.html#cb477-11" tabindex="-1"></a>  sqrt_Wt_diag[<span class="dv">3</span>] <span class="sc">~</span> <span class="fu">T</span>(<span class="fu">dt</span>(<span class="at">mu =</span> <span class="dv">0</span>, <span class="at">sigma =</span> <span class="dv">1</span>, <span class="at">df =</span> <span class="dv">1</span>), <span class="dv">0</span>, <span class="cn">Inf</span>)</span>
+<span id="cb477-12"><a href="exposure.html#cb477-12" tabindex="-1"></a>  Wt[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="fu">nim_diag</span>(<span class="at">x =</span> sqrt_Wt_diag[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>] <span class="sc">^</span> <span class="dv">2</span>)</span>
+<span id="cb477-13"><a href="exposure.html#cb477-13" tabindex="-1"></a>  </span>
+<span id="cb477-14"><a href="exposure.html#cb477-14" tabindex="-1"></a>  yt[<span class="dv">1</span><span class="sc">:</span>n, <span class="dv">1</span><span class="sc">:</span>Tt] <span class="sc">~</span> <span class="fu">ddlm_multi_obs</span>(</span>
+<span id="cb477-15"><a href="exposure.html#cb477-15" tabindex="-1"></a>    <span class="at">Ft =</span> Ft[<span class="dv">1</span><span class="sc">:</span>p, <span class="dv">1</span><span class="sc">:</span>n, <span class="dv">1</span><span class="sc">:</span>Tt],</span>
+<span id="cb477-16"><a href="exposure.html#cb477-16" tabindex="-1"></a>    <span class="at">Vt =</span> Vt[<span class="dv">1</span><span class="sc">:</span>n, <span class="dv">1</span><span class="sc">:</span>n],</span>
+<span id="cb477-17"><a href="exposure.html#cb477-17" tabindex="-1"></a>    <span class="at">Gt =</span> Gt[<span class="dv">1</span><span class="sc">:</span>p, <span class="dv">1</span><span class="sc">:</span>p],</span>
+<span id="cb477-18"><a href="exposure.html#cb477-18" tabindex="-1"></a>    <span class="at">Wt =</span> Wt[<span class="dv">1</span><span class="sc">:</span>p, <span class="dv">1</span><span class="sc">:</span>p],</span>
+<span id="cb477-19"><a href="exposure.html#cb477-19" tabindex="-1"></a>    <span class="at">m0 =</span> m0[<span class="dv">1</span><span class="sc">:</span>p],</span>
+<span id="cb477-20"><a href="exposure.html#cb477-20" tabindex="-1"></a>    <span class="at">C0 =</span> C0[<span class="dv">1</span><span class="sc">:</span>p, <span class="dv">1</span><span class="sc">:</span>p]</span>
+<span id="cb477-21"><a href="exposure.html#cb477-21" tabindex="-1"></a>  )</span>
+<span id="cb477-22"><a href="exposure.html#cb477-22" tabindex="-1"></a>  </span>
+<span id="cb477-23"><a href="exposure.html#cb477-23" tabindex="-1"></a>  <span class="co"># one can sample theta after fitting the model, using the posterior samples</span></span>
+<span id="cb477-24"><a href="exposure.html#cb477-24" tabindex="-1"></a>  <span class="co"># otherwise, sampling here is okay.</span></span>
+<span id="cb477-25"><a href="exposure.html#cb477-25" tabindex="-1"></a>  theta[<span class="dv">1</span><span class="sc">:</span>p, <span class="dv">1</span><span class="sc">:</span>(Tt <span class="sc">+</span> <span class="dv">1</span>)] <span class="ot">&lt;-</span></span>
+<span id="cb477-26"><a href="exposure.html#cb477-26" tabindex="-1"></a>    <span class="fu">nim_ffbs_woodbury</span>(</span>
+<span id="cb477-27"><a href="exposure.html#cb477-27" tabindex="-1"></a>      <span class="at">yt =</span> yt[<span class="dv">1</span><span class="sc">:</span>n, <span class="dv">1</span><span class="sc">:</span>Tt],</span>
+<span id="cb477-28"><a href="exposure.html#cb477-28" tabindex="-1"></a>      <span class="at">Ft =</span> Ft[<span class="dv">1</span><span class="sc">:</span>p, <span class="dv">1</span><span class="sc">:</span>n, <span class="dv">1</span><span class="sc">:</span>Tt],</span>
+<span id="cb477-29"><a href="exposure.html#cb477-29" tabindex="-1"></a>      <span class="at">Vt =</span> Vt[<span class="dv">1</span><span class="sc">:</span>n, <span class="dv">1</span><span class="sc">:</span>n],</span>
+<span id="cb477-30"><a href="exposure.html#cb477-30" tabindex="-1"></a>      <span class="at">Gt =</span> Gt[<span class="dv">1</span><span class="sc">:</span>p, <span class="dv">1</span><span class="sc">:</span>p],</span>
+<span id="cb477-31"><a href="exposure.html#cb477-31" tabindex="-1"></a>      <span class="at">Wt =</span> Wt[<span class="dv">1</span><span class="sc">:</span>p, <span class="dv">1</span><span class="sc">:</span>p],</span>
+<span id="cb477-32"><a href="exposure.html#cb477-32" tabindex="-1"></a>      <span class="at">m0 =</span> m0[<span class="dv">1</span><span class="sc">:</span>p],</span>
+<span id="cb477-33"><a href="exposure.html#cb477-33" tabindex="-1"></a>      <span class="at">C0 =</span> C0[<span class="dv">1</span><span class="sc">:</span>p, <span class="dv">1</span><span class="sc">:</span>p]</span>
+<span id="cb477-34"><a href="exposure.html#cb477-34" tabindex="-1"></a>    )</span>
+<span id="cb477-35"><a href="exposure.html#cb477-35" tabindex="-1"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="exposure.html#cb478-1" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: I need to ask Paritosh about the ddlm_multi_obs function, it is missing </span></span>
+<span id="cb478-2"><a href="exposure.html#cb478-2" tabindex="-1"></a><span class="co"># in the functions file</span></span>
+<span id="cb478-3"><a href="exposure.html#cb478-3" tabindex="-1"></a></span>
+<span id="cb478-4"><a href="exposure.html#cb478-4" tabindex="-1"></a><span class="co"># Model specification</span></span>
+<span id="cb478-5"><a href="exposure.html#cb478-5" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">dim</span>(o3)[<span class="dv">1</span>]</span>
+<span id="cb478-6"><a href="exposure.html#cb478-6" tabindex="-1"></a>Tt <span class="ot">&lt;-</span> <span class="fu">dim</span>(o3)[<span class="dv">2</span>]</span>
+<span id="cb478-7"><a href="exposure.html#cb478-7" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb478-8"><a href="exposure.html#cb478-8" tabindex="-1"></a>Ft <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="dv">0</span>, <span class="at">dim =</span> <span class="fu">c</span>(p,n,Tt))</span>
+<span id="cb478-9"><a href="exposure.html#cb478-9" tabindex="-1"></a><span class="fu">str</span>(Ft)</span>
+<span id="cb478-10"><a href="exposure.html#cb478-10" tabindex="-1"></a>Ft[<span class="dv">1</span>,<span class="dv">1</span><span class="sc">:</span>n,<span class="dv">1</span><span class="sc">:</span>Tt] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb478-11"><a href="exposure.html#cb478-11" tabindex="-1"></a>Ft[<span class="dv">2</span>,<span class="dv">1</span><span class="sc">:</span>n,<span class="dv">1</span><span class="sc">:</span>Tt] <span class="ot">&lt;-</span> temp</span>
+<span id="cb478-12"><a href="exposure.html#cb478-12" tabindex="-1"></a>Ft[<span class="dv">3</span>,<span class="dv">1</span><span class="sc">:</span>n,<span class="dv">1</span><span class="sc">:</span>Tt] <span class="ot">&lt;-</span> wind</span>
+<span id="cb478-13"><a href="exposure.html#cb478-13" tabindex="-1"></a></span>
+<span id="cb478-14"><a href="exposure.html#cb478-14" tabindex="-1"></a>Gt <span class="ot">&lt;-</span> <span class="fu">diag</span>(p)</span>
+<span id="cb478-15"><a href="exposure.html#cb478-15" tabindex="-1"></a>Gt</span>
+<span id="cb478-16"><a href="exposure.html#cb478-16" tabindex="-1"></a></span>
+<span id="cb478-17"><a href="exposure.html#cb478-17" tabindex="-1"></a><span class="co"># initials</span></span>
+<span id="cb478-18"><a href="exposure.html#cb478-18" tabindex="-1"></a></span>
+<span id="cb478-19"><a href="exposure.html#cb478-19" tabindex="-1"></a>m0 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">mean</span>(o3),<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb478-20"><a href="exposure.html#cb478-20" tabindex="-1"></a>C0 <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="at">x=</span><span class="fu">c</span>(<span class="fl">1e2</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb478-21"><a href="exposure.html#cb478-21" tabindex="-1"></a></span>
+<span id="cb478-22"><a href="exposure.html#cb478-22" tabindex="-1"></a>sqrt_Wt_diag <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.1</span>,<span class="fl">0.06</span>,<span class="fl">0.06</span>)</span>
+<span id="cb478-23"><a href="exposure.html#cb478-23" tabindex="-1"></a>Wt <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="at">x =</span> sqrt_Wt_diag<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb478-24"><a href="exposure.html#cb478-24" tabindex="-1"></a></span>
+<span id="cb478-25"><a href="exposure.html#cb478-25" tabindex="-1"></a>tau <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb478-26"><a href="exposure.html#cb478-26" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb478-27"><a href="exposure.html#cb478-27" tabindex="-1"></a></span>
+<span id="cb478-28"><a href="exposure.html#cb478-28" tabindex="-1"></a>coords_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(coords, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;longitude&quot;</span>, <span class="st">&quot;latitude&quot;</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb478-29"><a href="exposure.html#cb478-29" tabindex="-1"></a>  <span class="fu">st_set_crs</span>(<span class="dv">4326</span>)</span>
+<span id="cb478-30"><a href="exposure.html#cb478-30" tabindex="-1"></a>obs_dist_mat <span class="ot">&lt;-</span> <span class="fu">st_distance</span>(coords_sf)</span>
+<span id="cb478-31"><a href="exposure.html#cb478-31" tabindex="-1"></a>obs_dist_mat <span class="ot">&lt;-</span> units<span class="sc">::</span><span class="fu">set_units</span>(obs_dist_mat, km)</span>
+<span id="cb478-32"><a href="exposure.html#cb478-32" tabindex="-1"></a>obs_dist_mat <span class="ot">&lt;-</span> units<span class="sc">::</span><span class="fu">set_units</span>(obs_dist_mat, <span class="cn">NULL</span>)</span>
+<span id="cb478-33"><a href="exposure.html#cb478-33" tabindex="-1"></a>obs_max_dist <span class="ot">&lt;-</span> <span class="fu">max</span>(obs_dist_mat)</span>
+<span id="cb478-34"><a href="exposure.html#cb478-34" tabindex="-1"></a>obs_max_dist</span>
+<span id="cb478-35"><a href="exposure.html#cb478-35" tabindex="-1"></a>obs_med_dist <span class="ot">&lt;-</span> <span class="fu">median</span>(obs_dist_mat)</span>
+<span id="cb478-36"><a href="exposure.html#cb478-36" tabindex="-1"></a>obs_med_dist</span>
+<span id="cb478-37"><a href="exposure.html#cb478-37" tabindex="-1"></a>phi <span class="ot">&lt;-</span> obs_med_dist <span class="sc">/</span> <span class="dv">6</span></span>
+<span id="cb478-38"><a href="exposure.html#cb478-38" tabindex="-1"></a>phi</span>
+<span id="cb478-39"><a href="exposure.html#cb478-39" tabindex="-1"></a>Vt <span class="ot">&lt;-</span></span>
+<span id="cb478-40"><a href="exposure.html#cb478-40" tabindex="-1"></a>  (sigma <span class="sc">^</span> <span class="dv">2</span>) <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>obs_dist_mat <span class="sc">/</span> phi) <span class="sc">+</span> <span class="fu">diag</span>(<span class="at">x =</span> tau <span class="sc">^</span> <span class="dv">2</span>, <span class="at">nrow =</span> n, <span class="at">ncol =</span> n)</span>
+<span id="cb478-41"><a href="exposure.html#cb478-41" tabindex="-1"></a></span>
+<span id="cb478-42"><a href="exposure.html#cb478-42" tabindex="-1"></a></span>
+<span id="cb478-43"><a href="exposure.html#cb478-43" tabindex="-1"></a>hyperPars <span class="ot">&lt;-</span></span>
+<span id="cb478-44"><a href="exposure.html#cb478-44" tabindex="-1"></a>  <span class="fu">nleqslv</span>(</span>
+<span id="cb478-45"><a href="exposure.html#cb478-45" tabindex="-1"></a>    <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>),</span>
+<span id="cb478-46"><a href="exposure.html#cb478-46" tabindex="-1"></a>    hyperParameterInvGamma,</span>
+<span id="cb478-47"><a href="exposure.html#cb478-47" tabindex="-1"></a>    <span class="at">lower =</span> <span class="dv">10</span>,</span>
+<span id="cb478-48"><a href="exposure.html#cb478-48" tabindex="-1"></a>    <span class="at">upper =</span> obs_med_dist,</span>
+<span id="cb478-49"><a href="exposure.html#cb478-49" tabindex="-1"></a>    <span class="at">prob =</span> <span class="fl">0.98</span></span>
+<span id="cb478-50"><a href="exposure.html#cb478-50" tabindex="-1"></a>  )</span>
+<span id="cb478-51"><a href="exposure.html#cb478-51" tabindex="-1"></a>prior_phi <span class="ot">&lt;-</span></span>
+<span id="cb478-52"><a href="exposure.html#cb478-52" tabindex="-1"></a>  <span class="dv">1</span> <span class="sc">/</span> <span class="fu">rgamma</span>(<span class="at">n =</span> <span class="dv">1000</span>,</span>
+<span id="cb478-53"><a href="exposure.html#cb478-53" tabindex="-1"></a>             <span class="at">shape =</span>  hyperPars<span class="sc">$</span>x[<span class="dv">1</span>],</span>
+<span id="cb478-54"><a href="exposure.html#cb478-54" tabindex="-1"></a>             <span class="at">rate =</span> hyperPars<span class="sc">$</span>x[<span class="dv">2</span>])</span>
+<span id="cb478-55"><a href="exposure.html#cb478-55" tabindex="-1"></a></span>
+<span id="cb478-56"><a href="exposure.html#cb478-56" tabindex="-1"></a>const_list <span class="ot">&lt;-</span></span>
+<span id="cb478-57"><a href="exposure.html#cb478-57" tabindex="-1"></a>  <span class="fu">list</span>(</span>
+<span id="cb478-58"><a href="exposure.html#cb478-58" tabindex="-1"></a>    <span class="at">n =</span> n,</span>
+<span id="cb478-59"><a href="exposure.html#cb478-59" tabindex="-1"></a>    <span class="at">Tt =</span> Tt,</span>
+<span id="cb478-60"><a href="exposure.html#cb478-60" tabindex="-1"></a>    <span class="at">p =</span> p,</span>
+<span id="cb478-61"><a href="exposure.html#cb478-61" tabindex="-1"></a>    <span class="at">m0 =</span> m0,</span>
+<span id="cb478-62"><a href="exposure.html#cb478-62" tabindex="-1"></a>    <span class="at">C0 =</span> C0,</span>
+<span id="cb478-63"><a href="exposure.html#cb478-63" tabindex="-1"></a>    <span class="at">aPhi =</span> hyperPars<span class="sc">$</span>x[<span class="dv">1</span>],</span>
+<span id="cb478-64"><a href="exposure.html#cb478-64" tabindex="-1"></a>    <span class="at">bPhi =</span> hyperPars<span class="sc">$</span>x[<span class="dv">2</span>]</span>
+<span id="cb478-65"><a href="exposure.html#cb478-65" tabindex="-1"></a>  )</span>
+<span id="cb478-66"><a href="exposure.html#cb478-66" tabindex="-1"></a>dat_list <span class="ot">&lt;-</span></span>
+<span id="cb478-67"><a href="exposure.html#cb478-67" tabindex="-1"></a>  <span class="fu">list</span>(</span>
+<span id="cb478-68"><a href="exposure.html#cb478-68" tabindex="-1"></a>    <span class="at">yt =</span> o3,</span>
+<span id="cb478-69"><a href="exposure.html#cb478-69" tabindex="-1"></a>    <span class="at">Ft =</span> Ft,</span>
+<span id="cb478-70"><a href="exposure.html#cb478-70" tabindex="-1"></a>    <span class="at">Gt =</span> Gt,</span>
+<span id="cb478-71"><a href="exposure.html#cb478-71" tabindex="-1"></a>    <span class="at">obs_dist_mat =</span> obs_dist_mat</span>
+<span id="cb478-72"><a href="exposure.html#cb478-72" tabindex="-1"></a>  )</span>
+<span id="cb478-73"><a href="exposure.html#cb478-73" tabindex="-1"></a>init_list <span class="ot">&lt;-</span></span>
+<span id="cb478-74"><a href="exposure.html#cb478-74" tabindex="-1"></a>  <span class="fu">list</span>(</span>
+<span id="cb478-75"><a href="exposure.html#cb478-75" tabindex="-1"></a>    <span class="at">tau =</span> <span class="fl">0.1</span>,</span>
+<span id="cb478-76"><a href="exposure.html#cb478-76" tabindex="-1"></a>    <span class="at">sigma =</span> <span class="dv">1</span>,</span>
+<span id="cb478-77"><a href="exposure.html#cb478-77" tabindex="-1"></a>    <span class="at">sqrt_Wt_diag =</span> <span class="fu">rep</span>(<span class="fl">0.01</span>, p),</span>
+<span id="cb478-78"><a href="exposure.html#cb478-78" tabindex="-1"></a>    <span class="at">phi_inv =</span> <span class="dv">6</span> <span class="sc">/</span> obs_max_dist</span>
+<span id="cb478-79"><a href="exposure.html#cb478-79" tabindex="-1"></a>  )</span>
+<span id="cb478-80"><a href="exposure.html#cb478-80" tabindex="-1"></a></span>
+<span id="cb478-81"><a href="exposure.html#cb478-81" tabindex="-1"></a>Rmodel <span class="ot">&lt;-</span></span>
+<span id="cb478-82"><a href="exposure.html#cb478-82" tabindex="-1"></a>  <span class="fu">nimbleModel</span>(</span>
+<span id="cb478-83"><a href="exposure.html#cb478-83" tabindex="-1"></a>    Example12_O3_Nimble,</span>
+<span id="cb478-84"><a href="exposure.html#cb478-84" tabindex="-1"></a>    <span class="at">constants =</span> const_list,</span>
+<span id="cb478-85"><a href="exposure.html#cb478-85" tabindex="-1"></a>    <span class="at">data =</span> dat_list,</span>
+<span id="cb478-86"><a href="exposure.html#cb478-86" tabindex="-1"></a>    <span class="at">inits =</span> init_list</span>
+<span id="cb478-87"><a href="exposure.html#cb478-87" tabindex="-1"></a>  )</span>
+<span id="cb478-88"><a href="exposure.html#cb478-88" tabindex="-1"></a>Rmodel<span class="sc">$</span><span class="fu">calculate</span>()</span>
+<span id="cb478-89"><a href="exposure.html#cb478-89" tabindex="-1"></a><span class="co"># -4862795</span></span>
+<span id="cb478-90"><a href="exposure.html#cb478-90" tabindex="-1"></a>Rmodel<span class="sc">$</span><span class="fu">initializeInfo</span>()</span>
+<span id="cb478-91"><a href="exposure.html#cb478-91" tabindex="-1"></a>Cmodel <span class="ot">&lt;-</span> <span class="fu">compileNimble</span>(Rmodel, <span class="at">showCompilerOutput =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb478-92"><a href="exposure.html#cb478-92" tabindex="-1"></a>conf <span class="ot">&lt;-</span></span>
+<span id="cb478-93"><a href="exposure.html#cb478-93" tabindex="-1"></a>  <span class="fu">configureMCMC</span>(Rmodel,</span>
+<span id="cb478-94"><a href="exposure.html#cb478-94" tabindex="-1"></a>                <span class="at">monitors =</span> <span class="fu">c</span>(<span class="st">&quot;tau&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;phi&quot;</span>, <span class="st">&quot;sqrt_Wt_diag&quot;</span>, <span class="st">&quot;theta&quot;</span>))</span>
+<span id="cb478-95"><a href="exposure.html#cb478-95" tabindex="-1"></a></span>
+<span id="cb478-96"><a href="exposure.html#cb478-96" tabindex="-1"></a>conf<span class="sc">$</span><span class="fu">removeSampler</span>(<span class="at">target =</span> <span class="st">&quot;sqrt_Wt_diag[1]&quot;</span>)</span>
+<span id="cb478-97"><a href="exposure.html#cb478-97" tabindex="-1"></a>conf<span class="sc">$</span><span class="fu">addSampler</span>(</span>
+<span id="cb478-98"><a href="exposure.html#cb478-98" tabindex="-1"></a>  <span class="at">target =</span> <span class="st">&quot;sqrt_Wt_diag[1]&quot;</span>,</span>
+<span id="cb478-99"><a href="exposure.html#cb478-99" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;RW&quot;</span>,</span>
+<span id="cb478-100"><a href="exposure.html#cb478-100" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">list</span>(</span>
+<span id="cb478-101"><a href="exposure.html#cb478-101" tabindex="-1"></a>    <span class="at">log =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb478-102"><a href="exposure.html#cb478-102" tabindex="-1"></a>    <span class="at">adaptive =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb478-103"><a href="exposure.html#cb478-103" tabindex="-1"></a>    <span class="at">adaptInterval =</span> <span class="dv">100</span>,</span>
+<span id="cb478-104"><a href="exposure.html#cb478-104" tabindex="-1"></a>    <span class="at">adaptFactorExponent =</span> <span class="fl">0.8</span>,</span>
+<span id="cb478-105"><a href="exposure.html#cb478-105" tabindex="-1"></a>    <span class="at">scale =</span> <span class="fl">0.5</span></span>
+<span id="cb478-106"><a href="exposure.html#cb478-106" tabindex="-1"></a>  ) ,</span>
+<span id="cb478-107"><a href="exposure.html#cb478-107" tabindex="-1"></a>  <span class="at">silent =</span> <span class="cn">TRUE</span></span>
+<span id="cb478-108"><a href="exposure.html#cb478-108" tabindex="-1"></a>)</span>
+<span id="cb478-109"><a href="exposure.html#cb478-109" tabindex="-1"></a></span>
+<span id="cb478-110"><a href="exposure.html#cb478-110" tabindex="-1"></a>conf<span class="sc">$</span><span class="fu">removeSampler</span>(<span class="at">target =</span> <span class="st">&quot;sqrt_Wt_diag[2]&quot;</span>)</span>
+<span id="cb478-111"><a href="exposure.html#cb478-111" tabindex="-1"></a>conf<span class="sc">$</span><span class="fu">addSampler</span>(</span>
+<span id="cb478-112"><a href="exposure.html#cb478-112" tabindex="-1"></a>  <span class="at">target =</span> <span class="st">&quot;sqrt_Wt_diag[2]&quot;</span>,</span>
+<span id="cb478-113"><a href="exposure.html#cb478-113" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;RW&quot;</span>,</span>
+<span id="cb478-114"><a href="exposure.html#cb478-114" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">list</span>(</span>
+<span id="cb478-115"><a href="exposure.html#cb478-115" tabindex="-1"></a>    <span class="at">log =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb478-116"><a href="exposure.html#cb478-116" tabindex="-1"></a>    <span class="at">adaptive =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb478-117"><a href="exposure.html#cb478-117" tabindex="-1"></a>    <span class="at">adaptInterval =</span> <span class="dv">100</span>,</span>
+<span id="cb478-118"><a href="exposure.html#cb478-118" tabindex="-1"></a>    <span class="at">adaptFactorExponent =</span> <span class="fl">0.8</span>,</span>
+<span id="cb478-119"><a href="exposure.html#cb478-119" tabindex="-1"></a>    <span class="at">scale =</span> <span class="fl">0.5</span></span>
+<span id="cb478-120"><a href="exposure.html#cb478-120" tabindex="-1"></a>  ) ,</span>
+<span id="cb478-121"><a href="exposure.html#cb478-121" tabindex="-1"></a>  <span class="at">silent =</span> <span class="cn">TRUE</span></span>
+<span id="cb478-122"><a href="exposure.html#cb478-122" tabindex="-1"></a>)</span>
+<span id="cb478-123"><a href="exposure.html#cb478-123" tabindex="-1"></a></span>
+<span id="cb478-124"><a href="exposure.html#cb478-124" tabindex="-1"></a>conf<span class="sc">$</span><span class="fu">removeSampler</span>(<span class="at">target =</span> <span class="st">&quot;sqrt_Wt_diag[3]&quot;</span>)</span>
+<span id="cb478-125"><a href="exposure.html#cb478-125" tabindex="-1"></a>conf<span class="sc">$</span><span class="fu">addSampler</span>(</span>
+<span id="cb478-126"><a href="exposure.html#cb478-126" tabindex="-1"></a>  <span class="at">target =</span> <span class="st">&quot;sqrt_Wt_diag[3]&quot;</span>,</span>
+<span id="cb478-127"><a href="exposure.html#cb478-127" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;RW&quot;</span>,</span>
+<span id="cb478-128"><a href="exposure.html#cb478-128" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">list</span>(</span>
+<span id="cb478-129"><a href="exposure.html#cb478-129" tabindex="-1"></a>    <span class="at">log =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb478-130"><a href="exposure.html#cb478-130" tabindex="-1"></a>    <span class="at">adaptive =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb478-131"><a href="exposure.html#cb478-131" tabindex="-1"></a>    <span class="at">adaptInterval =</span> <span class="dv">100</span>,</span>
+<span id="cb478-132"><a href="exposure.html#cb478-132" tabindex="-1"></a>    <span class="at">adaptFactorExponent =</span> <span class="fl">0.8</span>,</span>
+<span id="cb478-133"><a href="exposure.html#cb478-133" tabindex="-1"></a>    <span class="at">scale =</span> <span class="fl">0.5</span></span>
+<span id="cb478-134"><a href="exposure.html#cb478-134" tabindex="-1"></a>  ) ,</span>
+<span id="cb478-135"><a href="exposure.html#cb478-135" tabindex="-1"></a>  <span class="at">silent =</span> <span class="cn">TRUE</span></span>
+<span id="cb478-136"><a href="exposure.html#cb478-136" tabindex="-1"></a>)</span>
+<span id="cb478-137"><a href="exposure.html#cb478-137" tabindex="-1"></a></span>
+<span id="cb478-138"><a href="exposure.html#cb478-138" tabindex="-1"></a>conf<span class="sc">$</span><span class="fu">removeSampler</span>(<span class="at">target =</span> <span class="st">&quot;phi_inv&quot;</span>)</span>
+<span id="cb478-139"><a href="exposure.html#cb478-139" tabindex="-1"></a>conf<span class="sc">$</span><span class="fu">addSampler</span>(</span>
+<span id="cb478-140"><a href="exposure.html#cb478-140" tabindex="-1"></a>  <span class="at">target =</span> <span class="st">&quot;phi_inv&quot;</span>,</span>
+<span id="cb478-141"><a href="exposure.html#cb478-141" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;RW&quot;</span>,</span>
+<span id="cb478-142"><a href="exposure.html#cb478-142" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">list</span>(</span>
+<span id="cb478-143"><a href="exposure.html#cb478-143" tabindex="-1"></a>    <span class="at">log =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb478-144"><a href="exposure.html#cb478-144" tabindex="-1"></a>    <span class="at">adaptive =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb478-145"><a href="exposure.html#cb478-145" tabindex="-1"></a>    <span class="at">adaptInterval =</span> <span class="dv">100</span>,</span>
+<span id="cb478-146"><a href="exposure.html#cb478-146" tabindex="-1"></a>    <span class="at">adaptFactorExponent =</span> <span class="fl">0.8</span>,</span>
+<span id="cb478-147"><a href="exposure.html#cb478-147" tabindex="-1"></a>    <span class="at">scale =</span> <span class="fl">0.5</span></span>
+<span id="cb478-148"><a href="exposure.html#cb478-148" tabindex="-1"></a>  ) ,</span>
+<span id="cb478-149"><a href="exposure.html#cb478-149" tabindex="-1"></a>  <span class="at">silent =</span> <span class="cn">TRUE</span></span>
+<span id="cb478-150"><a href="exposure.html#cb478-150" tabindex="-1"></a>)</span>
+<span id="cb478-151"><a href="exposure.html#cb478-151" tabindex="-1"></a></span>
+<span id="cb478-152"><a href="exposure.html#cb478-152" tabindex="-1"></a>conf<span class="sc">$</span><span class="fu">removeSampler</span>(<span class="at">target =</span> <span class="st">&quot;sigma&quot;</span>)</span>
+<span id="cb478-153"><a href="exposure.html#cb478-153" tabindex="-1"></a>conf<span class="sc">$</span><span class="fu">addSampler</span>(</span>
+<span id="cb478-154"><a href="exposure.html#cb478-154" tabindex="-1"></a>  <span class="at">target =</span> <span class="st">&quot;sigma&quot;</span>,</span>
+<span id="cb478-155"><a href="exposure.html#cb478-155" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;RW&quot;</span>,</span>
+<span id="cb478-156"><a href="exposure.html#cb478-156" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">list</span>(</span>
+<span id="cb478-157"><a href="exposure.html#cb478-157" tabindex="-1"></a>    <span class="at">log =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb478-158"><a href="exposure.html#cb478-158" tabindex="-1"></a>    <span class="at">adaptive =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb478-159"><a href="exposure.html#cb478-159" tabindex="-1"></a>    <span class="at">adaptInterval =</span> <span class="dv">100</span>,</span>
+<span id="cb478-160"><a href="exposure.html#cb478-160" tabindex="-1"></a>    <span class="at">adaptFactorExponent =</span> <span class="fl">0.8</span>,</span>
+<span id="cb478-161"><a href="exposure.html#cb478-161" tabindex="-1"></a>    <span class="at">scale =</span> <span class="fl">0.5</span></span>
+<span id="cb478-162"><a href="exposure.html#cb478-162" tabindex="-1"></a>  ) ,</span>
+<span id="cb478-163"><a href="exposure.html#cb478-163" tabindex="-1"></a>  <span class="at">silent =</span> <span class="cn">TRUE</span></span>
+<span id="cb478-164"><a href="exposure.html#cb478-164" tabindex="-1"></a>)</span>
+<span id="cb478-165"><a href="exposure.html#cb478-165" tabindex="-1"></a></span>
+<span id="cb478-166"><a href="exposure.html#cb478-166" tabindex="-1"></a>conf<span class="sc">$</span><span class="fu">removeSampler</span>(<span class="at">target =</span> <span class="st">&quot;tau&quot;</span>)</span>
+<span id="cb478-167"><a href="exposure.html#cb478-167" tabindex="-1"></a>conf<span class="sc">$</span><span class="fu">addSampler</span>(</span>
+<span id="cb478-168"><a href="exposure.html#cb478-168" tabindex="-1"></a>  <span class="at">target =</span> <span class="st">&quot;tau&quot;</span>,</span>
+<span id="cb478-169"><a href="exposure.html#cb478-169" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;RW&quot;</span>,</span>
+<span id="cb478-170"><a href="exposure.html#cb478-170" tabindex="-1"></a>  <span class="at">control =</span> <span class="fu">list</span>(</span>
+<span id="cb478-171"><a href="exposure.html#cb478-171" tabindex="-1"></a>    <span class="at">log =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb478-172"><a href="exposure.html#cb478-172" tabindex="-1"></a>    <span class="at">adaptive =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb478-173"><a href="exposure.html#cb478-173" tabindex="-1"></a>    <span class="at">adaptInterval =</span> <span class="dv">100</span>,</span>
+<span id="cb478-174"><a href="exposure.html#cb478-174" tabindex="-1"></a>    <span class="at">adaptFactorExponent =</span> <span class="fl">0.8</span>,</span>
+<span id="cb478-175"><a href="exposure.html#cb478-175" tabindex="-1"></a>    <span class="at">scale =</span> <span class="fl">0.5</span></span>
+<span id="cb478-176"><a href="exposure.html#cb478-176" tabindex="-1"></a>  ) ,</span>
+<span id="cb478-177"><a href="exposure.html#cb478-177" tabindex="-1"></a>  <span class="at">silent =</span> <span class="cn">TRUE</span></span>
+<span id="cb478-178"><a href="exposure.html#cb478-178" tabindex="-1"></a>)</span>
+<span id="cb478-179"><a href="exposure.html#cb478-179" tabindex="-1"></a></span>
+<span id="cb478-180"><a href="exposure.html#cb478-180" tabindex="-1"></a>conf<span class="sc">$</span><span class="fu">printSamplers</span>(<span class="at">byType =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb478-181"><a href="exposure.html#cb478-181" tabindex="-1"></a>conf<span class="sc">$</span><span class="fu">printSamplers</span>(<span class="at">executionOrder =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb478-182"><a href="exposure.html#cb478-182" tabindex="-1"></a></span>
+<span id="cb478-183"><a href="exposure.html#cb478-183" tabindex="-1"></a>Rmcmc <span class="ot">&lt;-</span> <span class="fu">buildMCMC</span>(conf)</span>
+<span id="cb478-184"><a href="exposure.html#cb478-184" tabindex="-1"></a>Cmcmc <span class="ot">&lt;-</span></span>
+<span id="cb478-185"><a href="exposure.html#cb478-185" tabindex="-1"></a>  <span class="fu">compileNimble</span>(</span>
+<span id="cb478-186"><a href="exposure.html#cb478-186" tabindex="-1"></a>    Rmcmc,</span>
+<span id="cb478-187"><a href="exposure.html#cb478-187" tabindex="-1"></a>    <span class="at">project =</span> Cmodel,</span>
+<span id="cb478-188"><a href="exposure.html#cb478-188" tabindex="-1"></a>    <span class="at">resetFunctions =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb478-189"><a href="exposure.html#cb478-189" tabindex="-1"></a>    <span class="at">showCompilerOutput =</span> <span class="cn">FALSE</span></span>
+<span id="cb478-190"><a href="exposure.html#cb478-190" tabindex="-1"></a>  )</span>
+<span id="cb478-191"><a href="exposure.html#cb478-191" tabindex="-1"></a></span>
+<span id="cb478-192"><a href="exposure.html#cb478-192" tabindex="-1"></a>niter <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb478-193"><a href="exposure.html#cb478-193" tabindex="-1"></a>nburnin <span class="ot">&lt;-</span> <span class="fl">0.5</span> <span class="sc">*</span> niter</span>
+<span id="cb478-194"><a href="exposure.html#cb478-194" tabindex="-1"></a>nthin <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb478-195"><a href="exposure.html#cb478-195" tabindex="-1"></a>start_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb478-196"><a href="exposure.html#cb478-196" tabindex="-1"></a>post_samples <span class="ot">&lt;-</span></span>
+<span id="cb478-197"><a href="exposure.html#cb478-197" tabindex="-1"></a>  <span class="fu">runMCMC</span>(</span>
+<span id="cb478-198"><a href="exposure.html#cb478-198" tabindex="-1"></a>    Cmcmc,</span>
+<span id="cb478-199"><a href="exposure.html#cb478-199" tabindex="-1"></a>    <span class="at">niter =</span> niter,</span>
+<span id="cb478-200"><a href="exposure.html#cb478-200" tabindex="-1"></a>    <span class="at">nburnin =</span> nburnin,</span>
+<span id="cb478-201"><a href="exposure.html#cb478-201" tabindex="-1"></a>    <span class="at">thin =</span> nthin,</span>
+<span id="cb478-202"><a href="exposure.html#cb478-202" tabindex="-1"></a>    <span class="at">nchains =</span> <span class="dv">2</span>,</span>
+<span id="cb478-203"><a href="exposure.html#cb478-203" tabindex="-1"></a>    <span class="at">samplesAsCodaMCMC =</span> <span class="cn">TRUE</span></span>
+<span id="cb478-204"><a href="exposure.html#cb478-204" tabindex="-1"></a>  )</span>
+<span id="cb478-205"><a href="exposure.html#cb478-205" tabindex="-1"></a>end_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb478-206"><a href="exposure.html#cb478-206" tabindex="-1"></a>run_time <span class="ot">&lt;-</span> end_time <span class="sc">-</span> start_time</span>
+<span id="cb478-207"><a href="exposure.html#cb478-207" tabindex="-1"></a>run_time</span></code></pre></div>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="exposure.html#cb479-1" tabindex="-1"></a><span class="fu">library</span>(coda)</span>
+<span id="cb479-2"><a href="exposure.html#cb479-2" tabindex="-1"></a>post_summary <span class="ot">&lt;-</span> <span class="fu">nimSummary</span>(post_samples)</span>
+<span id="cb479-3"><a href="exposure.html#cb479-3" tabindex="-1"></a>post_summary[<span class="fu">c</span>(<span class="st">&#39;tau&#39;</span>,<span class="st">&#39;sigma&#39;</span>,<span class="st">&#39;phi&#39;</span>,<span class="st">&#39;sqrt_Wt_diag[1]&#39;</span>,<span class="st">&#39;sqrt_Wt_diag[2]&#39;</span>,<span class="st">&#39;sqrt_Wt_diag[3]&#39;</span>),]</span>
+<span id="cb479-4"><a href="exposure.html#cb479-4" tabindex="-1"></a></span>
+<span id="cb479-5"><a href="exposure.html#cb479-5" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb479-6"><a href="exposure.html#cb479-6" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb479-7"><a href="exposure.html#cb479-7" tabindex="-1"></a><span class="fu">library</span>(tidybayes)</span>
+<span id="cb479-8"><a href="exposure.html#cb479-8" tabindex="-1"></a>tidy_post_samples <span class="ot">&lt;-</span> post_samples <span class="sc">%&gt;%</span> <span class="fu">tidy_draws</span>()</span>
+<span id="cb479-9"><a href="exposure.html#cb479-9" tabindex="-1"></a>tidy_post_samples</span>
+<span id="cb479-10"><a href="exposure.html#cb479-10" tabindex="-1"></a></span>
+<span id="cb479-11"><a href="exposure.html#cb479-11" tabindex="-1"></a>tidy_post_samples <span class="sc">%&gt;%</span></span>
+<span id="cb479-12"><a href="exposure.html#cb479-12" tabindex="-1"></a>  <span class="fu">select</span>(.chain,.iteration,.draw,tau,sigma,phi,<span class="fu">starts_with</span>(<span class="st">&quot;sqrt_Wt_diag&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb479-13"><a href="exposure.html#cb479-13" tabindex="-1"></a>  <span class="fu">gather</span>(vars,value,<span class="sc">-</span>.chain,<span class="sc">-</span>.iteration,<span class="sc">-</span>.draw) <span class="sc">%&gt;%</span></span>
+<span id="cb479-14"><a href="exposure.html#cb479-14" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>.iteration,<span class="at">y=</span>value)) <span class="sc">+</span></span>
+<span id="cb479-15"><a href="exposure.html#cb479-15" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="fu">factor</span>(.chain)), <span class="at">size =</span> <span class="fl">0.25</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb479-16"><a href="exposure.html#cb479-16" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>vars, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>) <span class="sc">+</span></span>
+<span id="cb479-17"><a href="exposure.html#cb479-17" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb479-18"><a href="exposure.html#cb479-18" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb479-19"><a href="exposure.html#cb479-19" tabindex="-1"></a>        <span class="at">strip.background =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb479-20"><a href="exposure.html#cb479-20" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">&quot;./figures/traceplot_integrated_model_ukO3Data55Sites.png&quot;</span>, <span class="at">height =</span> <span class="dv">6</span>, <span class="at">width =</span> <span class="dv">12</span>)</span>
+<span id="cb479-21"><a href="exposure.html#cb479-21" tabindex="-1"></a></span>
+<span id="cb479-22"><a href="exposure.html#cb479-22" tabindex="-1"></a></span>
+<span id="cb479-23"><a href="exposure.html#cb479-23" tabindex="-1"></a>tidy_post_samples <span class="sc">%&gt;%</span></span>
+<span id="cb479-24"><a href="exposure.html#cb479-24" tabindex="-1"></a>  <span class="fu">select</span>(.chain, .iteration, .draw,</span>
+<span id="cb479-25"><a href="exposure.html#cb479-25" tabindex="-1"></a>         <span class="fu">starts_with</span>(<span class="st">&quot;theta[1, 1]&quot;</span>),</span>
+<span id="cb479-26"><a href="exposure.html#cb479-26" tabindex="-1"></a>         <span class="fu">starts_with</span>(<span class="st">&quot;theta[1, 2]&quot;</span>),</span>
+<span id="cb479-27"><a href="exposure.html#cb479-27" tabindex="-1"></a>         <span class="fu">starts_with</span>(<span class="st">&quot;theta[1, 3]&quot;</span>),</span>
+<span id="cb479-28"><a href="exposure.html#cb479-28" tabindex="-1"></a>         <span class="fu">starts_with</span>(<span class="st">&quot;theta[1, 4]&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb479-29"><a href="exposure.html#cb479-29" tabindex="-1"></a>  <span class="fu">gather</span>(vars,value,<span class="sc">-</span>.chain,<span class="sc">-</span>.iteration,<span class="sc">-</span>.draw) <span class="sc">%&gt;%</span></span>
+<span id="cb479-30"><a href="exposure.html#cb479-30" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>.iteration,<span class="at">y=</span>value)) <span class="sc">+</span></span>
+<span id="cb479-31"><a href="exposure.html#cb479-31" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="fu">factor</span>(.chain)), <span class="at">size =</span> <span class="fl">0.25</span>, </span>
+<span id="cb479-32"><a href="exposure.html#cb479-32" tabindex="-1"></a>            <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb479-33"><a href="exposure.html#cb479-33" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>vars, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>) <span class="sc">+</span></span>
+<span id="cb479-34"><a href="exposure.html#cb479-34" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb479-35"><a href="exposure.html#cb479-35" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb479-36"><a href="exposure.html#cb479-36" tabindex="-1"></a>        <span class="at">strip.background =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb479-37"><a href="exposure.html#cb479-37" tabindex="-1"></a></span>
+<span id="cb479-38"><a href="exposure.html#cb479-38" tabindex="-1"></a></span>
+<span id="cb479-39"><a href="exposure.html#cb479-39" tabindex="-1"></a>tidy_post_samples <span class="sc">%&gt;%</span></span>
+<span id="cb479-40"><a href="exposure.html#cb479-40" tabindex="-1"></a>  <span class="fu">select</span>(.chain, .iteration, .draw,</span>
+<span id="cb479-41"><a href="exposure.html#cb479-41" tabindex="-1"></a>         <span class="fu">starts_with</span>(<span class="st">&quot;theta[2, 1]&quot;</span>),</span>
+<span id="cb479-42"><a href="exposure.html#cb479-42" tabindex="-1"></a>         <span class="fu">starts_with</span>(<span class="st">&quot;theta[2, 2]&quot;</span>),</span>
+<span id="cb479-43"><a href="exposure.html#cb479-43" tabindex="-1"></a>         <span class="fu">starts_with</span>(<span class="st">&quot;theta[2, 3]&quot;</span>),</span>
+<span id="cb479-44"><a href="exposure.html#cb479-44" tabindex="-1"></a>         <span class="fu">starts_with</span>(<span class="st">&quot;theta[2, 4]&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb479-45"><a href="exposure.html#cb479-45" tabindex="-1"></a>  <span class="fu">gather</span>(vars,value,<span class="sc">-</span>.chain,<span class="sc">-</span>.iteration,<span class="sc">-</span>.draw) <span class="sc">%&gt;%</span></span>
+<span id="cb479-46"><a href="exposure.html#cb479-46" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>.iteration,<span class="at">y=</span>value)) <span class="sc">+</span></span>
+<span id="cb479-47"><a href="exposure.html#cb479-47" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="fu">factor</span>(.chain)), <span class="at">size =</span> <span class="fl">0.25</span>, </span>
+<span id="cb479-48"><a href="exposure.html#cb479-48" tabindex="-1"></a>            <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb479-49"><a href="exposure.html#cb479-49" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>vars, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>) <span class="sc">+</span></span>
+<span id="cb479-50"><a href="exposure.html#cb479-50" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb479-51"><a href="exposure.html#cb479-51" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb479-52"><a href="exposure.html#cb479-52" tabindex="-1"></a>        <span class="at">strip.background =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb479-53"><a href="exposure.html#cb479-53" tabindex="-1"></a></span>
+<span id="cb479-54"><a href="exposure.html#cb479-54" tabindex="-1"></a></span>
+<span id="cb479-55"><a href="exposure.html#cb479-55" tabindex="-1"></a>tidy_post_samples <span class="sc">%&gt;%</span></span>
+<span id="cb479-56"><a href="exposure.html#cb479-56" tabindex="-1"></a>  <span class="fu">select</span>(.chain, .iteration, .draw,</span>
+<span id="cb479-57"><a href="exposure.html#cb479-57" tabindex="-1"></a>         <span class="fu">starts_with</span>(<span class="st">&quot;theta[3, 1]&quot;</span>),</span>
+<span id="cb479-58"><a href="exposure.html#cb479-58" tabindex="-1"></a>         <span class="fu">starts_with</span>(<span class="st">&quot;theta[3, 2]&quot;</span>),</span>
+<span id="cb479-59"><a href="exposure.html#cb479-59" tabindex="-1"></a>         <span class="fu">starts_with</span>(<span class="st">&quot;theta[3, 3]&quot;</span>),</span>
+<span id="cb479-60"><a href="exposure.html#cb479-60" tabindex="-1"></a>         <span class="fu">starts_with</span>(<span class="st">&quot;theta[3, 4]&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb479-61"><a href="exposure.html#cb479-61" tabindex="-1"></a>  <span class="fu">gather</span>(vars,value,<span class="sc">-</span>.chain,<span class="sc">-</span>.iteration,<span class="sc">-</span>.draw) <span class="sc">%&gt;%</span></span>
+<span id="cb479-62"><a href="exposure.html#cb479-62" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>.iteration,<span class="at">y=</span>value)) <span class="sc">+</span></span>
+<span id="cb479-63"><a href="exposure.html#cb479-63" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="fu">factor</span>(.chain)), <span class="at">size =</span> <span class="fl">0.25</span>, </span>
+<span id="cb479-64"><a href="exposure.html#cb479-64" tabindex="-1"></a>            <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb479-65"><a href="exposure.html#cb479-65" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>vars, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>) <span class="sc">+</span></span>
+<span id="cb479-66"><a href="exposure.html#cb479-66" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb479-67"><a href="exposure.html#cb479-67" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb479-68"><a href="exposure.html#cb479-68" tabindex="-1"></a>        <span class="at">strip.background =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb479-69"><a href="exposure.html#cb479-69" tabindex="-1"></a></span>
+<span id="cb479-70"><a href="exposure.html#cb479-70" tabindex="-1"></a></span>
+<span id="cb479-71"><a href="exposure.html#cb479-71" tabindex="-1"></a>post_sum_theta <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(post_summary) <span class="sc">%&gt;%</span>  <span class="fu">rownames_to_column</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb479-72"><a href="exposure.html#cb479-72" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(rowname, <span class="st">&quot;theta&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb479-73"><a href="exposure.html#cb479-73" tabindex="-1"></a>  <span class="fu">separate</span>(rowname, <span class="at">into=</span><span class="fu">c</span>(<span class="st">&quot;x1&quot;</span>,<span class="st">&quot;x2&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb479-74"><a href="exposure.html#cb479-74" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">component =</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">&quot;.*?([0-9]+).*&quot;</span>, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">1&quot;</span>, x1))) <span class="sc">%&gt;%</span></span>
+<span id="cb479-75"><a href="exposure.html#cb479-75" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">&quot;.*?([0-9]+).*&quot;</span>, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">1&quot;</span>, x2))) <span class="sc">%&gt;%</span></span>
+<span id="cb479-76"><a href="exposure.html#cb479-76" tabindex="-1"></a>  <span class="fu">select</span>(component,time,q2<span class="fl">.5</span>,q50,q97<span class="fl">.5</span>)</span>
+<span id="cb479-77"><a href="exposure.html#cb479-77" tabindex="-1"></a><span class="fu">str</span>(post_sum_theta)</span>
+<span id="cb479-78"><a href="exposure.html#cb479-78" tabindex="-1"></a></span>
+<span id="cb479-79"><a href="exposure.html#cb479-79" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> post_sum_theta, <span class="fu">aes</span>(<span class="at">x =</span> time)) <span class="sc">+</span> </span>
+<span id="cb479-80"><a href="exposure.html#cb479-80" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> q2<span class="fl">.5</span>,<span class="at">ymax =</span> q97<span class="fl">.5</span>), <span class="at">fill =</span> <span class="st">&quot;lightgray&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>)<span class="sc">+</span></span>
+<span id="cb479-81"><a href="exposure.html#cb479-81" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="fu">aes</span>(<span class="at">y =</span> q50), <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">size =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb479-82"><a href="exposure.html#cb479-82" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>component, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>, </span>
+<span id="cb479-83"><a href="exposure.html#cb479-83" tabindex="-1"></a>             <span class="at">labeller =</span> <span class="fu">label_bquote</span>(theta[.(component)])) <span class="sc">+</span></span>
+<span id="cb479-84"><a href="exposure.html#cb479-84" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb479-85"><a href="exposure.html#cb479-85" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Time&quot;</span>) <span class="sc">+</span></span>
+<span id="cb479-86"><a href="exposure.html#cb479-86" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb479-87"><a href="exposure.html#cb479-87" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb479-88"><a href="exposure.html#cb479-88" tabindex="-1"></a>        <span class="at">strip.background =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb479-89"><a href="exposure.html#cb479-89" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">&quot;./figures/states_integrated_model_ukO3Data55Sites.png&quot;</span>, <span class="at">height =</span> <span class="dv">3</span>, <span class="at">width =</span> <span class="dv">12</span>)</span></code></pre></div>
 
+</div>
+</div>
 </div>
             </section>
 
@@ -319,7 +718,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/12-Chpt12.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/12-Chpt12.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -330,7 +729,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"download": ["_main.pdf", "_main.epub"],
 "search": {
 "engine": "fuse",
 "options": null

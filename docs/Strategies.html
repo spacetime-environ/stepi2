@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 Strategies implementing uncertainty models | Spatio-temporal methods in environmental epidemiology</title>
-  <meta name="description" content="Chapter 7 Strategies implementing uncertainty models | Spatio-temporal methods in environmental epidemiology" />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <title>Chapter 7 Strategies for modelling | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition</title>
+  <meta name="description" content="Chapter 7 Strategies for modelling | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 Strategies implementing uncertainty models | Spatio-temporal methods in environmental epidemiology" />
+  <meta property="og:title" content="Chapter 7 Strategies for modelling | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/img/cover.jpg" />
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 Strategies implementing uncertainty models | Spatio-temporal methods in environmental epidemiology" />
+  <meta name="twitter:title" content="Chapter 7 Strategies for modelling | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition" />
   
   
   <meta name="twitter:image" content="/img/cover.jpg" />
@@ -23,14 +23,14 @@
 <meta name="author" content="Gavin Shaddick, James V. Zidek, and Alexandra M. Schmidt" />
 
 
-<meta name="date" content="2023-04-26" />
+<meta name="date" content="2023-08-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  
-<link rel="prev" href="tactics.html"/>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<link rel="prev" href="computation.html"/>
 <link rel="next" href="trusted.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -133,42 +133,74 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Spatio-temporal methods in environmental epidemiology using R</a></li>
+<li><a href="./">Spatio-temporal methods in environmental epidemiology</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="chapter" data-level="" data-path="preface-2nd-edition.html"><a href="preface-2nd-edition.html"><i class="fa fa-check"></i>Preface (2nd edition)</a></li>
-<li class="chapter" data-level="1" data-path="why.html"><a href="why.html"><i class="fa fa-check"></i><b>1</b> Why spatio-temporal epidemiology?</a>
+<li class="chapter" data-level="" data-path="preface-to-second-edition.html"><a href="preface-to-second-edition.html"><i class="fa fa-check"></i>PREFACE TO SECOND EDITION</a></li>
+<li class="chapter" data-level="1" data-path="why.html"><a href="why.html"><i class="fa fa-check"></i><b>1</b> An overview of spatio-temporal epidemiology and knowledge discovery?</a></li>
+<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> An introduction to modelling health risks and impacts</a>
 <ul>
-<li class="chapter" data-level="" data-path="why.html"><a href="why.html#example-1.5"><i class="fa fa-check"></i>Example 1.5</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.7-estimating-the-smr-using-a-poisson-glm"><i class="fa fa-check"></i>Example 2.7: Estimating the SMR using a Poisson GLM</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.8-estimating-the-smr-using-quasi-likelihood"><i class="fa fa-check"></i>Example 2.8: Estimating the SMR using quasi-likelihood</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.9-modelling-differences-in-smrs-in-relation-to-differences-in-exposures"><i class="fa fa-check"></i>Example 2.9: Modelling differences in SMRs in relation to differences in exposures</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.10-modelling-the-risks-associated-with-lagged-effects-of-air-pollution"><i class="fa fa-check"></i>Example 2.10: Modelling the risks associated with lagged effects of air pollution</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.10-estimating-the-odds-ratio-in-a-case-control-study-using-a-logistic-model"><i class="fa fa-check"></i>Example 2.10: Estimating the odds ratio in a case-control study using a logistic model</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.11-estimating-the-odds-ratio-of-asthma-associated-with-proximity-to-roads"><i class="fa fa-check"></i>Example 2.11: Estimating the odds ratio of asthma associated with proximity to roads</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Epidemiology-the basics</a>
+<li class="chapter" data-level="3" data-path="uncertainty.html"><a href="uncertainty.html"><i class="fa fa-check"></i><b>3</b> The importance of uncertainty: assessment and quantification</a>
 <ul>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.9-estimating-the-smr-using-a-poisson-glm"><i class="fa fa-check"></i>Example 2.9: Estimating the SMR using a Poisson GLM</a></li>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.10-estimating-the-smr-using-quasi-likelihood"><i class="fa fa-check"></i>Example 2.10: Estimating the SMR using quasi-likelihood</a></li>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.11-modelling-differences-in-smrs-in-relation-to-differences-in-exposures"><i class="fa fa-check"></i>Example 2.11: Modelling differences in SMRs in relation to differences in exposures</a></li>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.12-modelling-the-risks-associated-with-lagged-effects-of-air-pollution"><i class="fa fa-check"></i>Example 2.12: Modelling the risks associated with lagged effects of air pollution</a></li>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.13-estimating-the-odds-ratio-in-a-case-control-study-using-a-logistic-model"><i class="fa fa-check"></i>Example 2.13: Estimating the odds ratio in a case-control study using a logistic model</a></li>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.14-estimating-the-odds-ratio-of-asthma-associated-with-proximity-to-roads"><i class="fa fa-check"></i>Example 2.14: Estimating the odds ratio of asthma associated with proximity to roads</a></li>
+<li class="chapter" data-level="" data-path="uncertainty.html"><a href="uncertainty.html#supplementary-material"><i class="fa fa-check"></i>Supplementary Material</a>
+<ul>
+<li class="chapter" data-level="" data-path="uncertainty.html"><a href="uncertainty.html#more-on-qualitative-uncertainty"><i class="fa fa-check"></i>More on qualitative uncertainty</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="uncertainty.html"><a href="uncertainty.html"><i class="fa fa-check"></i><b>3</b> Uncertainty and its reduction</a></li>
-<li class="chapter" data-level="4" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>4</b> Data: increasing information and reducing uncertainty</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>4</b> Extracting information from data</a>
+<ul>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#getting-to-know-the-structure-of-dataframes"><i class="fa fa-check"></i>Getting to know the structure of dataframes</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#extracting-and-creating-variables"><i class="fa fa-check"></i>Extracting and creating variables</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#simple-manipulations-using-tidyverse"><i class="fa fa-check"></i>Simple manipulations using Tidyverse</a>
+<ul>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#filter-rows-in-tidyverse"><i class="fa fa-check"></i>Filter rows in Tidyverse</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#sorting-rows-in-tidyverse"><i class="fa fa-check"></i>Sorting rows in Tidyverse</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#select-columns-in-tidyverse"><i class="fa fa-check"></i>Select columns in Tidyverse</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#adding-columns"><i class="fa fa-check"></i>Adding columns</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#pipes"><i class="fa fa-check"></i>Pipes</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#chaining-pipes"><i class="fa fa-check"></i>Chaining pipes</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#grouping-and-summarizing"><i class="fa fa-check"></i>Grouping and summarizing</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#summarize"><i class="fa fa-check"></i>Summarize</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#example-4.1-health-impacts-associated-with-outdoor-air-pollution"><i class="fa fa-check"></i>Example 4.1: Health impacts associated with outdoor air pollution</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#example-4.3.-mapping-cancer-incidence-in-southern-and-eastern-serbia"><i class="fa fa-check"></i>Example 4.3. Mapping cancer incidence in Southern and Eastern Serbia</a>
+<ul>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#creating-maps-of-southern-and-eastern-serbia"><i class="fa fa-check"></i>Creating maps of Southern and Eastern Serbia</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#example-4.4-cancer-in-bor"><i class="fa fa-check"></i>Example 4.4 Cancer in Bor</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#calculating-smrs"><i class="fa fa-check"></i>Calculating SMRs</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="embracing.html"><a href="embracing.html"><i class="fa fa-check"></i><b>5</b> Embracing uncertainty: the Bayesian approach</a></li>
-<li class="chapter" data-level="6" data-path="tactics.html"><a href="tactics.html"><i class="fa fa-check"></i><b>6</b> Tactics-implementing uncertainty models</a>
+<li class="chapter" data-level="6" data-path="computation.html"><a href="computation.html"><i class="fa fa-check"></i><b>6</b> Approaches to Bayesian Computation</a>
 <ul>
-<li class="chapter" data-level="" data-path="tactics.html"><a href="tactics.html#example-6.2-chronic-obstructive-pulmonary-disease-copd-in-england"><i class="fa fa-check"></i>Example 6.2: Chronic obstructive pulmonary disease (COPD) in England</a>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#example-6.2-gibbs-sampling-with-a-poisson-gamma-model---hospital-admissions-for-chronic-obstructive-pulmonary-disease-copd-for-england-between-2001-2010"><i class="fa fa-check"></i>Example 6.2: Gibbs sampling with a Poisson-Gamma model - hospital admissions for chronic obstructive pulmonary disease (COPD) for England between 2001-2010</a>
 <ul>
-<li class="chapter" data-level="" data-path="tactics.html"><a href="tactics.html#modelling-the-raw-standardized-mortality-rates-smrs"><i class="fa fa-check"></i>Modelling the raw standardized mortality rates (SMRs)</a></li>
-<li class="chapter" data-level="" data-path="tactics.html"><a href="tactics.html#modelling-a-poisson-gamma-with-an-mcmc-implemented-in-r"><i class="fa fa-check"></i>Modelling a Poisson-Gamma with an MCMC implemented in <code>R</code></a></li>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#modelling-the-raw-standardized-mortality-rates-smrs"><i class="fa fa-check"></i>Modelling the raw standardized mortality rates (SMRs)</a></li>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#mcmc-implementation-of-the-poisson-gamma-model-in-r"><i class="fa fa-check"></i>MCMC implementation of the Poisson-Gamma model in <code>R</code></a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="tactics.html"><a href="tactics.html#example-6.3-fitting-a-poisson-regression-model"><i class="fa fa-check"></i>Example 6.3: Fitting a Poisson regression model</a>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#code-for-the-poisson-gamma-model-in-nimble"><i class="fa fa-check"></i>Code for the Poisson-Gamma model in Nimble</a></li>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#example-6.3-fitting-a-poisson-regression-model"><i class="fa fa-check"></i>Example 6.3: Fitting a Poisson regression model</a>
 <ul>
-<li class="chapter" data-level="" data-path="tactics.html"><a href="tactics.html#nimble"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="tactics.html"><a href="tactics.html#stan"><i class="fa fa-check"></i>Stan</a></li>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#nimble"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#stan"><i class="fa fa-check"></i>Stan</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="Strategies.html"><a href="Strategies.html"><i class="fa fa-check"></i><b>7</b> Strategies implementing uncertainty models</a></li>
-<li class="chapter" data-level="8" data-path="trusted.html"><a href="trusted.html"><i class="fa fa-check"></i><b>8</b> But can the data be trusted</a>
+<li class="chapter" data-level="7" data-path="Strategies.html"><a href="Strategies.html"><i class="fa fa-check"></i><b>7</b> Strategies for modelling</a>
+<ul>
+<li class="chapter" data-level="" data-path="Strategies.html"><a href="Strategies.html#example-7.6-variable-selection-in-land-use-regression-using-lasso-and-horseshoe-priors"><i class="fa fa-check"></i>Example 7.6 Variable selection in land use regression using lasso and horseshoe priors</a>
+<ul>
+<li class="chapter" data-level="" data-path="Strategies.html"><a href="Strategies.html#nimble-1"><i class="fa fa-check"></i>Nimble</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="trusted.html"><a href="trusted.html"><i class="fa fa-check"></i><b>8</b> The challenges of working with real-world data</a>
 <ul>
 <li class="chapter" data-level="" data-path="trusted.html"><a href="trusted.html#solutions-to-selected-exercises"><i class="fa fa-check"></i>Solutions to Selected Exercises</a>
 <ul>
@@ -179,12 +211,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.1-empirical-bayes-and-bayes-smoothing-of-copd-mortality-for-2010"><i class="fa fa-check"></i>Example 9.1: Empirical Bayes and Bayes smoothing of COPD mortality for 2010</a>
 <ul>
-<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#nimble-1"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#nimble-2"><i class="fa fa-check"></i>Nimble</a></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#stan-1"><i class="fa fa-check"></i>Stan</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.3-fitting-a-conditional-spatial-model-in-nimble-and-stan"><i class="fa fa-check"></i>Example 9.3: Fitting a conditional spatial model in <code>nimble</code> and <code>stan</code></a>
 <ul>
-<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#nimble-2"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#nimble-3"><i class="fa fa-check"></i>Nimble</a></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#stan-2"><i class="fa fa-check"></i>Stan</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.4-fitting-a-conditional-spatial-model-using-carbayes"><i class="fa fa-check"></i>Example 9.4: Fitting a conditional spatial model using CARBayes</a></li>
@@ -192,29 +224,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10" data-path="hazards.html"><a href="hazards.html"><i class="fa fa-check"></i><b>10</b> Environmental hazards-spatial models</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="hazards.html"><a href="hazards.html#example-10.1-spatial-patterns-in-lead-concentrations-in-the-soil-of-the"><i class="fa fa-check"></i><b>10.1</b> Example 10.1 Spatial patterns in lead concentrations in the soil of the</a></li>
-<li class="chapter" data-level="10.2" data-path="hazards.html"><a href="hazards.html#example-10.2-examining-the-log-concentrations-of-lead-in-the-meuse-river"><i class="fa fa-check"></i><b>10.2</b> Example 10.2: Examining the log concentrations of lead in the Meuse River</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-example-10.1-spatial-patterns-of-benzene-concentrations-in-montreal-qc-canada"><i class="fa fa-check"></i>EXTRA: Example 10.1: Spatial patterns of benzene concentrations in Montreal, QC, Canada</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-example-10.2-examining-the-log-concentrations-of-benzene-in-montreal"><i class="fa fa-check"></i>EXTRA: Example 10.2: Examining the log concentrations of benzene in Montreal</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.5-variogram"><i class="fa fa-check"></i>Example 10.5: Variogram</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.6-basic-spatial-modelling-and-prediction-of-benzene-in-montreal"><i class="fa fa-check"></i>Example 10.6 Basic spatial modelling and prediction of benzene in Montreal</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.9-spatial-modelling-of-benzene-in-montreal"><i class="fa fa-check"></i>Example 10.9 Spatial modelling of Benzene in Montreal</a>
-<ul>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#nimble-3"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#stan-3"><i class="fa fa-check"></i>Stan</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.10-spatial-predictions"><i class="fa fa-check"></i>Example 10.10: Spatial predictions</a>
-<ul>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#nimble-4"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#stan-4"><i class="fa fa-check"></i>Stan</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.11-inla-creating-a-mesh"><i class="fa fa-check"></i>Example 10.11: INLA, creating a mesh</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.12-fitting-an-spde-model-using-rinla-benzene-concentration-in-montreal"><i class="fa fa-check"></i>Example 10.12: Fitting an SPDE model using R–INLA: benzene concentration in Montreal</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.13-directional-variograms"><i class="fa fa-check"></i>Example 10.13: Directional variograms</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.1-spatial-patterns-in-lead-concentrations-in-the-soil-of-the-meuse-river-flood-plain"><i class="fa fa-check"></i>Example 10.1 Spatial patterns in lead concentrations in the soil of the Meuse River flood plain</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.2-examining-the-log-concentrations-of-lead-in-the-meuse-river-flood-plain"><i class="fa fa-check"></i>Example 10.2: Examining the log concentrations of lead in the Meuse River flood plain</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.3-mapping-the-locations-of-ozone-monitoring-sites-in-new-york-state"><i class="fa fa-check"></i>Example 10.3: Mapping the locations of ozone monitoring sites in New York State</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.6-spatial-prediction-of-temperatures-in-california"><i class="fa fa-check"></i>Example 10.6: Spatial prediction of temperatures in California</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.8-spatial-prediction-of-no2-in-europe"><i class="fa fa-check"></i>Example 10.8 Spatial prediction of NO2 in Europe</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.10-creating-a-mesh-black-smoke-monitoring-locations-in-the-uk"><i class="fa fa-check"></i>Example 10.10 Creating a mesh: black smoke monitoring locations in the UK</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.12-plotting-directional-variograms-for-temperatures-in-california"><i class="fa fa-check"></i>Example 10.12 Plotting directional variograms for temperatures in California</a></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.14-spatial-modeling-of-malaria-in-gambia"><i class="fa fa-check"></i>Example 10.14: Spatial modeling of malaria in Gambia</a>
 <ul>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#nimble-5"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#stan-5"><i class="fa fa-check"></i>Stan</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#nimble-4"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#stan-3"><i class="fa fa-check"></i>Stan</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#supplementary-material-1"><i class="fa fa-check"></i>Supplementary Material</a>
+<ul>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.1-spatial-patterns-of-benzene-concentrations-in-montreal-qc-canada"><i class="fa fa-check"></i>Extra 10.1: Spatial patterns of benzene concentrations in Montreal, QC, Canada</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.2-examining-the-log-concentrations-of-benzene-in-montreal"><i class="fa fa-check"></i>Extra 10.2: Examining the log concentrations of benzene in Montreal</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.5-variogram"><i class="fa fa-check"></i>Extra 10.5: Variogram</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.6-basic-spatial-modelling-and-prediction-of-benzene-in-montreal"><i class="fa fa-check"></i>Extra 10.6 Basic spatial modelling and prediction of benzene in Montreal</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.8-spatial-modelling-of-benzene-in-montreal"><i class="fa fa-check"></i>Extra 10.8 Spatial modelling of Benzene in Montreal</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.9-spatial-predictions"><i class="fa fa-check"></i>Extra 10.9: Spatial predictions</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.10-inla-creating-a-mesh"><i class="fa fa-check"></i>Extra 10.10: INLA, creating a mesh</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.12-fitting-an-spde-model-using-rinla-benzene-concentration-in-montreal"><i class="fa fa-check"></i>Extra 10.12: Fitting an SPDE model using R–INLA: benzene concentration in Montreal</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.13-directional-variograms"><i class="fa fa-check"></i>Extra 10.13: Directional variograms</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="Time.html"><a href="Time.html"><i class="fa fa-check"></i><b>11</b> Time-why it also matters</a>
@@ -223,23 +255,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.2-low-pass-filtering-of-carbon-monoxide-levels-using-the-moving-average"><i class="fa fa-check"></i>Example 11.2 Low-pass filtering of carbon monoxide levels using the moving average</a></li>
 <li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.13-forecasting-ozone-levels"><i class="fa fa-check"></i>Example 11.13 Forecasting ozone levels</a></li>
 <li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.14-forecasting-volcanic-ash"><i class="fa fa-check"></i>Example 11.14 Forecasting volcanic ash</a></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.16-fitting-a-random-walk-model-to-pm10-concentrations-in-london"><i class="fa fa-check"></i>Example 11.16 Fitting a random walk model to PM10 concentrations in London</a>
+</ul></li>
+<li class="chapter" data-level="12" data-path="exposure.html"><a href="exposure.html"><i class="fa fa-check"></i><b>12</b> Exposure assessment-over space and time</a>
 <ul>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#nimble-6"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#stan-6"><i class="fa fa-check"></i>Stan</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.16-extra-implementation-of-a-dynamic-linear-model-uk-ozone-data"><i class="fa fa-check"></i>Example 11.16 EXTRA Implementation of a dynamic linear model: UK ozone data</a>
+<li class="chapter" data-level="" data-path="exposure.html"><a href="exposure.html#example-idk-spatio-temporal-model-for-the-uk-ozone-data"><i class="fa fa-check"></i>Example IDK: Spatio-temporal model for the UK ozone data</a>
 <ul>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#nimble-7"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#stan-7"><i class="fa fa-check"></i>Stan</a></li>
+<li class="chapter" data-level="" data-path="exposure.html"><a href="exposure.html#nimble-7"><i class="fa fa-check"></i>Nimble</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#solutions-to-selected-exercises-1"><i class="fa fa-check"></i>Solutions to Selected Exercises</a></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#exercise-11.11"><i class="fa fa-check"></i>Exercise 11.11</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="exposure.html"><a href="exposure.html"><i class="fa fa-check"></i><b>12</b> Exposure assessment-over space and time</a></li>
 <li class="chapter" data-level="13" data-path="causality.html"><a href="causality.html"><i class="fa fa-check"></i><b>13</b> Causality-roadblocks on the way to it</a>
 <ul>
-<li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#solutions-to-selected-exercises-2"><i class="fa fa-check"></i>Solutions to Selected Exercises</a>
+<li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#solutions-to-selected-exercises-1"><i class="fa fa-check"></i>Solutions to Selected Exercises</a>
 <ul>
 <li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#question-13.16-load-the-italy-and-china-data-described-in-example-13.3-and-included-in-the-supplementary-bookdown-material-into-r."><i class="fa fa-check"></i>Question 13.16: Load the Italy and China data, described in Example 13.3, and included in the supplementary Bookdown material into R.</a></li>
 <li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#question-13.17-using-the-italy-and-china-data-stratified-by-the-age-groups-70-and-geq-70-obtain-empirical-estimates-of-p_1-and-p_2-as-defined-in-an-sdis.-in-the-following-questions-assume-that-p_1-and-p_2-are-the-population-values."><i class="fa fa-check"></i>Question 13.17: Using the Italy and China data stratified by the age groups <span class="math inline">\(&lt;70\)</span> and <span class="math inline">\(\geq 70\)</span>, obtain empirical estimates of <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span>, as defined in an SDis. In the following questions, assume that <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span> are the population values.</a></li>
@@ -262,7 +288,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Spatio-temporal methods in environmental epidemiology</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition</a>
           </h1>
         </div>
 
@@ -271,32 +297,302 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="Strategies" class="section level1 hasAnchor" number="7">
-<h1><span class="header-section-number">Chapter 7</span> Strategies implementing uncertainty models<a href="Strategies.html#Strategies" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This chapter considers both some of the wider issues related to modelling and the generalisability of results and more
-technical material on the effect of covariates and model selection. From this chapter, the reader will have gained an
-understanding of the following topics:</p>
+<h1><span class="header-section-number">Chapter 7</span> Strategies for modelling<a href="Strategies.html#Strategies" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This chapter considers both some wider issues related to modelling and the generalisability of results, together with more technical material on the effect of covariates and model selection. The reader will have gained an understanding of the following topics:</p>
 <ul>
-<li>Why having contrasts in the variables of interest is important in assessing the effects they have on the response
-variable.</li>
-<li>The biases that may arise in the presence of covariates and how covariates can affect variable selection and model
-choice.</li>
-<li>Hierarchical models and how that can be used to acknowledge dependence between observations.</li>
-<li>There are issues with using p–values as measures of evidence against a null hypothesis. Basing scientific conclusions
-on it can lead to non-reproducible results.</li>
-<li>The use of predictions from exposure models including acknowledging the additional uncertainty involved when
-using predictions as inputs to a health model.</li>
-<li>Methods for performing model selection, including the pros and cons of automatic selection procedures.</li>
-<li>Model selection within the Bayesian setting and how the models themselves can be incorporated into the estimation
-process using Bayesian Model Averaging.</li>
+<li><p>why having contrasts in the variables of interest is important in assessing the effects they have on the response variable;</p></li>
+<li><p>biases that may arise in the presence of covariates and how covariates can affect variable selection and model choice;</p></li>
+<li><p>hierarchical models and how that can be used to acknowledge dependence between observations;</p></li>
+<li><p>the issues associated with the use of p-values as measures of evidence against a null hypothesis and why basing scientific conclusions on it can lead to non-reproducible results;</p></li>
+<li><p>use of predictions from exposure models, including acknowledging the additional uncertainty involved when using predictions as inputs to a health model;</p></li>
+<li><p>methods for performing model selection, including the pros and cons of automatic selection procedures;</p></li>
+<li><p>model selection within the Bayesian setting, and how the models themselves can be incorporated into the estimation process using Bayesian Model Averaging.</p></li>
 </ul>
+<div id="example-7.6-variable-selection-in-land-use-regression-using-lasso-and-horseshoe-priors" class="section level2 unnumbered hasAnchor">
+<h2>Example 7.6 Variable selection in land use regression using lasso and horseshoe priors<a href="Strategies.html#example-7.6-variable-selection-in-land-use-regression-using-lasso-and-horseshoe-priors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This example is based on the Volatile Organic Compound (VOC) data analyzed by <a href="https://journals.lww.com/environepidem/Fulltext/2022/10000/Spatial_modeling_of_ambient_concentrations_of.7.aspx">Zapata-Marin et al. (2022)</a>.
+VOCs are components of the complex mixture of air pollutants within cities and can cause various adverse health effects.
+VOCs concentrations were measured over 2-week periods, for three monitoring campaigns between 2005 and 2006 across over 130 locations in Montreal, QC, Canada. The data analyzed in this example is ethylbenzene observed during April 2006.</p>
+<p>Land-use variables were available as a proportion of the area of each buffer covered by each specific variable. In this example, we explore the land-use variables using circular buffers at 1,000-m radii around each monitoring location. The land use variables include Building_100m,Government and Institutional, Residential, Population,Roads,Total NOx.</p>
+<p>Below we read the data and plot the monitoring locations with solid circles proportional to the observed value of ethylbenzene.</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="Strategies.html#cb159-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb159-2"><a href="Strategies.html#cb159-2" tabindex="-1"></a><span class="fu">library</span>(geoR)</span>
+<span id="cb159-3"><a href="Strategies.html#cb159-3" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb159-4"><a href="Strategies.html#cb159-4" tabindex="-1"></a><span class="fu">library</span>(ggmap)</span>
+<span id="cb159-5"><a href="Strategies.html#cb159-5" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb159-6"><a href="Strategies.html#cb159-6" tabindex="-1"></a><span class="fu">library</span>(sp)</span>
+<span id="cb159-7"><a href="Strategies.html#cb159-7" tabindex="-1"></a><span class="fu">library</span>(spdep)</span>
+<span id="cb159-8"><a href="Strategies.html#cb159-8" tabindex="-1"></a><span class="fu">library</span>(nimble)</span>
+<span id="cb159-9"><a href="Strategies.html#cb159-9" tabindex="-1"></a><span class="co"># Load data on benzene concentration in Montreal</span></span>
+<span id="cb159-10"><a href="Strategies.html#cb159-10" tabindex="-1"></a>ethylbenzene <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/montreal_ethylbenzene.csv&quot;</span>)</span></code></pre></div>
+<p>We start by mapping the locations of the monitoring sites across Montreal. The diameter of the circles are proportional to the observed concentration of ethylbenzene.</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="Strategies.html#cb160-1" tabindex="-1"></a><span class="co"># create a new variable in &quot;sp&quot; format and define coordinates</span></span>
+<span id="cb160-2"><a href="Strategies.html#cb160-2" tabindex="-1"></a>ethylbenzene_geo <span class="ot">&lt;-</span> ethylbenzene</span>
+<span id="cb160-3"><a href="Strategies.html#cb160-3" tabindex="-1"></a><span class="fu">coordinates</span>(ethylbenzene_geo) <span class="ot">&lt;-</span> <span class="er">~</span> lon <span class="sc">+</span> lat</span>
+<span id="cb160-4"><a href="Strategies.html#cb160-4" tabindex="-1"></a><span class="fu">proj4string</span>(ethylbenzene_geo) <span class="ot">&lt;-</span> <span class="fu">CRS</span>(<span class="st">&quot;+proj=longlat +datum=WGS84&quot;</span>)</span>
+<span id="cb160-5"><a href="Strategies.html#cb160-5" tabindex="-1"></a><span class="co"># specify the bounding box</span></span>
+<span id="cb160-6"><a href="Strategies.html#cb160-6" tabindex="-1"></a>latLongBox <span class="ot">=</span> <span class="fu">bbox</span>(ethylbenzene_geo)</span>
+<span id="cb160-7"><a href="Strategies.html#cb160-7" tabindex="-1"></a>location <span class="ot">=</span> <span class="fu">c</span>(latLongBox[<span class="dv">1</span>, <span class="dv">1</span>] <span class="sc">-</span> <span class="fl">0.05</span>,</span>
+<span id="cb160-8"><a href="Strategies.html#cb160-8" tabindex="-1"></a>             latLongBox[<span class="dv">2</span>, <span class="dv">1</span>] <span class="sc">-</span> <span class="fl">0.05</span>,</span>
+<span id="cb160-9"><a href="Strategies.html#cb160-9" tabindex="-1"></a>             latLongBox[<span class="dv">1</span>, <span class="dv">2</span>] <span class="sc">+</span> <span class="fl">0.1</span>,</span>
+<span id="cb160-10"><a href="Strategies.html#cb160-10" tabindex="-1"></a>             latLongBox[<span class="dv">2</span>, <span class="dv">2</span>] <span class="sc">+</span> <span class="fl">0.05</span>)</span>
+<span id="cb160-11"><a href="Strategies.html#cb160-11" tabindex="-1"></a><span class="co"># create map with location dots marked on it in</span></span>
+<span id="cb160-12"><a href="Strategies.html#cb160-12" tabindex="-1"></a>MontrelEthylbenzeneMap <span class="ot">&lt;-</span></span>
+<span id="cb160-13"><a href="Strategies.html#cb160-13" tabindex="-1"></a>  <span class="fu">get_stamenmap</span>(<span class="at">bbox =</span>  location,</span>
+<span id="cb160-14"><a href="Strategies.html#cb160-14" tabindex="-1"></a>                <span class="at">zoom =</span> <span class="dv">10</span>)</span>
+<span id="cb160-15"><a href="Strategies.html#cb160-15" tabindex="-1"></a><span class="fu">ggmap</span>(MontrelEthylbenzeneMap) <span class="sc">+</span> <span class="fu">geom_point</span>(</span>
+<span id="cb160-16"><a href="Strategies.html#cb160-16" tabindex="-1"></a>  <span class="at">data =</span> ethylbenzene,</span>
+<span id="cb160-17"><a href="Strategies.html#cb160-17" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> lon,</span>
+<span id="cb160-18"><a href="Strategies.html#cb160-18" tabindex="-1"></a>      <span class="at">y =</span> lat,</span>
+<span id="cb160-19"><a href="Strategies.html#cb160-19" tabindex="-1"></a>      <span class="at">size =</span> <span class="fu">log</span>(Ethylbenzene)),</span>
+<span id="cb160-20"><a href="Strategies.html#cb160-20" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;#011f4b&quot;</span>,</span>
+<span id="cb160-21"><a href="Strategies.html#cb160-21" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.45</span></span>
+<span id="cb160-22"><a href="Strategies.html#cb160-22" tabindex="-1"></a>) <span class="sc">+</span> <span class="fu">theme_void</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/Example%207.6%20map%20data-1.png" width="672" /></p>
+<p>We now perform a simple exploratory data analysis using the ggpairs command. It provides the empirical distribution of each of the variables as well as pairwise correlations among them. We transform two variables, Building and Total NOx to obtain a more symmetric empirical distributions. The greatest observed correlation among the variables is 0.614, between Roads and Population.</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="Strategies.html#cb161-1" tabindex="-1"></a>lur <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/VOC_predictors.csv&quot;</span>)</span>
+<span id="cb161-2"><a href="Strategies.html#cb161-2" tabindex="-1"></a><span class="fu">colnames</span>(lur)</span></code></pre></div>
+<pre><code>##  [1] &quot;X&quot;                                  &quot;Y&quot;                                 
+##  [3] &quot;ID&quot;                                 &quot;Building_100m&quot;                     
+##  [5] &quot;Government.and.Institutional_1000m&quot; &quot;Residential_1000m&quot;                 
+##  [7] &quot;Pop_1000m&quot;                          &quot;Roads_1000m&quot;                       
+##  [9] &quot;Tot_NOx_1000m&quot;                      &quot;Ethylbenzene&quot;</code></pre>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="Strategies.html#cb163-1" tabindex="-1"></a>lur<span class="sc">$</span>X <span class="ot">&lt;-</span> lur<span class="sc">$</span>X<span class="sc">/</span><span class="dv">1000</span></span>
+<span id="cb163-2"><a href="Strategies.html#cb163-2" tabindex="-1"></a>lur<span class="sc">$</span>Y <span class="ot">&lt;-</span> lur<span class="sc">$</span>Y<span class="sc">/</span><span class="dv">1000</span></span>
+<span id="cb163-3"><a href="Strategies.html#cb163-3" tabindex="-1"></a>lur<span class="sc">$</span>lbuild<span class="ot">&lt;-</span><span class="fu">sqrt</span>(lur<span class="sc">$</span>Building_100m)</span>
+<span id="cb163-4"><a href="Strategies.html#cb163-4" tabindex="-1"></a>lur<span class="sc">$</span>lNOx<span class="ot">&lt;-</span><span class="fu">log</span>(lur<span class="sc">$</span>Tot_NOx_1000m)</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="Strategies.html#cb164-1" tabindex="-1"></a><span class="co">#removing X, Y, ID, Building_100m and Tot_NOx_1000m from the plot</span></span>
+<span id="cb164-2"><a href="Strategies.html#cb164-2" tabindex="-1"></a><span class="fu">ggpairs</span>(lur[,<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">9</span>)], <span class="at">title=</span><span class="st">&quot;correlogram with ggpairs()&quot;</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207.6%20join%20covariates%20and%20data-1.png" width="672" />
+<!--Since Average and Total traffic are highly correlated, as well as Average and Total NOx, we will just use one of them.--></p>
+<p>We now fit a linear model to the log(Ethylbenzene) that includes the log of buildings, government and institutional buildings, residential areas, population, roads and log of NOx:</p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="Strategies.html#cb165-1" tabindex="-1"></a><span class="co">#lur_ethyl &lt;- lur |&gt; select( ends_with(&quot;0m&quot;), &quot;X&quot;, &quot;Y&quot;,&quot;Ethylbenzene&quot;)</span></span>
+<span id="cb165-2"><a href="Strategies.html#cb165-2" tabindex="-1"></a></span>
+<span id="cb165-3"><a href="Strategies.html#cb165-3" tabindex="-1"></a><span class="co"># Fit a glm</span></span>
+<span id="cb165-4"><a href="Strategies.html#cb165-4" tabindex="-1"></a></span>
+<span id="cb165-5"><a href="Strategies.html#cb165-5" tabindex="-1"></a>fit_glm<span class="ot">&lt;-</span><span class="fu">glm</span>(<span class="fu">log</span>(Ethylbenzene) <span class="sc">~</span> X <span class="sc">+</span> Y  <span class="sc">+</span></span>
+<span id="cb165-6"><a href="Strategies.html#cb165-6" tabindex="-1"></a>    lbuild <span class="sc">+</span>  Government.and.Institutional_1000m <span class="sc">+</span> Residential_1000m <span class="sc">+</span> </span>
+<span id="cb165-7"><a href="Strategies.html#cb165-7" tabindex="-1"></a>    Pop_1000m <span class="sc">+</span> Roads_1000m<span class="sc">+</span>lNOx, <span class="at">data =</span> lur )</span>
+<span id="cb165-8"><a href="Strategies.html#cb165-8" tabindex="-1"></a><span class="fu">summary</span>(fit_glm)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = log(Ethylbenzene) ~ X + Y + lbuild + Government.and.Institutional_1000m + 
+##     Residential_1000m + Pop_1000m + Roads_1000m + lNOx, data = lur)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -0.70723  -0.18976   0.00957   0.17620   0.59346  
+## 
+## Coefficients:
+##                                      Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept)                         4.416e+00  2.229e+01   0.198   0.8434  
+## X                                  -6.006e-03  5.088e-03  -1.180   0.2409  
+## Y                                  -2.087e-04  4.729e-03  -0.044   0.9649  
+## lbuild                              2.542e-03  9.912e-04   2.565   0.0120 *
+## Government.and.Institutional_1000m  5.939e-09  1.410e-07   0.042   0.9665  
+## Residential_1000m                   1.061e-07  8.989e-08   1.180   0.2410  
+## Pop_1000m                           9.442e-06  4.908e-06   1.924   0.0575 .
+## Roads_1000m                        -8.235e-06  5.967e-06  -1.380   0.1710  
+## lNOx                                9.982e-02  4.689e-02   2.129   0.0359 *
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.06620174)
+## 
+##     Null deviance: 8.4070  on 99  degrees of freedom
+## Residual deviance: 6.0244  on 91  degrees of freedom
+## AIC: 22.852
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<p>Variables log(building), population and lNOx are positively associated with log(Ethylbenzene). We now fit a linear model in Nimble using a Lasso prior for the coefficients of the variables.</p>
+<div id="nimble-1" class="section level3 unnumbered hasAnchor">
+<h3>Nimble<a href="Strategies.html#nimble-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="Strategies.html#cb167-1" tabindex="-1"></a>Ex7_6LassoCode <span class="ot">&lt;-</span> <span class="fu">nimbleCode</span>({</span>
+<span id="cb167-2"><a href="Strategies.html#cb167-2" tabindex="-1"></a>  <span class="co"># Likelihood</span></span>
+<span id="cb167-3"><a href="Strategies.html#cb167-3" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb167-4"><a href="Strategies.html#cb167-4" tabindex="-1"></a>    y[i]   <span class="sc">~</span> <span class="fu">dnorm</span>(mu[i], <span class="at">sd =</span> sigma)</span>
+<span id="cb167-5"><a href="Strategies.html#cb167-5" tabindex="-1"></a>    mu[i] <span class="ot">&lt;-</span> beta0 <span class="sc">+</span> <span class="fu">inprod</span>(X[i, ], beta[<span class="dv">1</span><span class="sc">:</span>p])</span>
+<span id="cb167-6"><a href="Strategies.html#cb167-6" tabindex="-1"></a>  }</span>
+<span id="cb167-7"><a href="Strategies.html#cb167-7" tabindex="-1"></a>  </span>
+<span id="cb167-8"><a href="Strategies.html#cb167-8" tabindex="-1"></a>  <span class="co"># Prior specification</span></span>
+<span id="cb167-9"><a href="Strategies.html#cb167-9" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>p) {</span>
+<span id="cb167-10"><a href="Strategies.html#cb167-10" tabindex="-1"></a>    beta[j] <span class="sc">~</span> <span class="fu">ddexp</span>(<span class="dv">0</span>, <span class="at">scale =</span> <span class="dv">1</span><span class="sc">/</span>(taub <span class="sc">*</span> taue))</span>
+<span id="cb167-11"><a href="Strategies.html#cb167-11" tabindex="-1"></a>  }</span>
+<span id="cb167-12"><a href="Strategies.html#cb167-12" tabindex="-1"></a>  </span>
+<span id="cb167-13"><a href="Strategies.html#cb167-13" tabindex="-1"></a>  taue  <span class="sc">~</span>  <span class="fu">dgamma</span>(<span class="fl">0.1</span>, <span class="fl">0.1</span>)</span>
+<span id="cb167-14"><a href="Strategies.html#cb167-14" tabindex="-1"></a>  sigma <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>taue</span>
+<span id="cb167-15"><a href="Strategies.html#cb167-15" tabindex="-1"></a>  taub  <span class="sc">~</span>  <span class="fu">dgamma</span>(<span class="fl">0.1</span>, <span class="fl">0.1</span>)</span>
+<span id="cb167-16"><a href="Strategies.html#cb167-16" tabindex="-1"></a>  beta0  <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="dv">10</span>)</span>
+<span id="cb167-17"><a href="Strategies.html#cb167-17" tabindex="-1"></a></span>
+<span id="cb167-18"><a href="Strategies.html#cb167-18" tabindex="-1"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="Strategies.html#cb168-1" tabindex="-1"></a>X <span class="ot">&lt;-</span>  lur <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">select</span>( <span class="st">&quot;lbuild&quot;</span>, <span class="st">&quot;Government.and.Institutional_1000m&quot;</span>,<span class="st">&quot;Residential_1000m&quot;</span>, </span>
+<span id="cb168-2"><a href="Strategies.html#cb168-2" tabindex="-1"></a>    <span class="st">&quot;Pop_1000m&quot;</span>,<span class="st">&quot;Roads_1000m&quot;</span>,<span class="st">&quot;lNOx&quot;</span>, <span class="st">&quot;X&quot;</span>, <span class="st">&quot;Y&quot;</span>)</span>
+<span id="cb168-3"><a href="Strategies.html#cb168-3" tabindex="-1"></a></span>
+<span id="cb168-4"><a href="Strategies.html#cb168-4" tabindex="-1"></a>constants <span class="ot">&lt;-</span></span>
+<span id="cb168-5"><a href="Strategies.html#cb168-5" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">n =</span> <span class="fu">nrow</span>(lur), <span class="at">p =</span> <span class="fu">ncol</span>(X))</span>
+<span id="cb168-6"><a href="Strategies.html#cb168-6" tabindex="-1"></a></span>
+<span id="cb168-7"><a href="Strategies.html#cb168-7" tabindex="-1"></a>ex.data <span class="ot">&lt;-</span></span>
+<span id="cb168-8"><a href="Strategies.html#cb168-8" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">y =</span> <span class="fu">log</span>(lur<span class="sc">$</span>Ethylbenzene),</span>
+<span id="cb168-9"><a href="Strategies.html#cb168-9" tabindex="-1"></a>       <span class="at">X =</span> <span class="fu">scale</span>(X))</span>
+<span id="cb168-10"><a href="Strategies.html#cb168-10" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="st">&quot;beta0&quot;</span>,  <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;taub&quot;</span>,<span class="st">&quot;taue&quot;</span>, <span class="st">&quot;sigma&quot;</span>)</span>
+<span id="cb168-11"><a href="Strategies.html#cb168-11" tabindex="-1"></a></span>
+<span id="cb168-12"><a href="Strategies.html#cb168-12" tabindex="-1"></a>inits <span class="ot">&lt;-</span> <span class="fu">list</span>( <span class="at">sigma =</span> <span class="fl">0.1</span>, <span class="at">tau =</span> <span class="fl">0.1</span>)</span>
+<span id="cb168-13"><a href="Strategies.html#cb168-13" tabindex="-1"></a><span class="co"># Run model in nimble</span></span>
+<span id="cb168-14"><a href="Strategies.html#cb168-14" tabindex="-1"></a>start_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb168-15"><a href="Strategies.html#cb168-15" tabindex="-1"></a></span>
+<span id="cb168-16"><a href="Strategies.html#cb168-16" tabindex="-1"></a>mcmc.out.lasso <span class="ot">&lt;-</span> <span class="fu">nimbleMCMC</span>(</span>
+<span id="cb168-17"><a href="Strategies.html#cb168-17" tabindex="-1"></a>  <span class="at">code =</span> Ex7_6LassoCode,</span>
+<span id="cb168-18"><a href="Strategies.html#cb168-18" tabindex="-1"></a>  <span class="at">constants =</span> constants,</span>
+<span id="cb168-19"><a href="Strategies.html#cb168-19" tabindex="-1"></a>  <span class="at">data =</span> ex.data,</span>
+<span id="cb168-20"><a href="Strategies.html#cb168-20" tabindex="-1"></a>  <span class="at">inits =</span> inits,</span>
+<span id="cb168-21"><a href="Strategies.html#cb168-21" tabindex="-1"></a>  <span class="at">monitors =</span> params,</span>
+<span id="cb168-22"><a href="Strategies.html#cb168-22" tabindex="-1"></a>  <span class="at">niter =</span> <span class="dv">100000</span>,</span>
+<span id="cb168-23"><a href="Strategies.html#cb168-23" tabindex="-1"></a>  <span class="at">nburnin =</span> <span class="dv">50000</span>,</span>
+<span id="cb168-24"><a href="Strategies.html#cb168-24" tabindex="-1"></a>  <span class="at">thin =</span> <span class="dv">15</span>,</span>
+<span id="cb168-25"><a href="Strategies.html#cb168-25" tabindex="-1"></a>  <span class="at">WAIC =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb168-26"><a href="Strategies.html#cb168-26" tabindex="-1"></a>  <span class="at">nchains =</span> <span class="dv">2</span>,</span>
+<span id="cb168-27"><a href="Strategies.html#cb168-27" tabindex="-1"></a>  <span class="at">summary =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb168-28"><a href="Strategies.html#cb168-28" tabindex="-1"></a>  <span class="at">samplesAsCodaMCMC =</span> <span class="cn">TRUE</span></span>
+<span id="cb168-29"><a href="Strategies.html#cb168-29" tabindex="-1"></a>)</span>
+<span id="cb168-30"><a href="Strategies.html#cb168-30" tabindex="-1"></a>end_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb168-31"><a href="Strategies.html#cb168-31" tabindex="-1"></a>run_time <span class="ot">&lt;-</span> end_time <span class="sc">-</span> start_time</span>
+<span id="cb168-32"><a href="Strategies.html#cb168-32" tabindex="-1"></a>run_time</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="Strategies.html#cb169-1" tabindex="-1"></a><span class="fu">min</span>(coda<span class="sc">::</span><span class="fu">effectiveSize</span>(mcmc.out.lasso<span class="sc">$</span>samples))</span></code></pre></div>
+<pre><code>## [1] 4028.613</code></pre>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="Strategies.html#cb171-1" tabindex="-1"></a><span class="fu">plot</span>(mcmc.out.lasso<span class="sc">$</span>samples[, <span class="fu">c</span>(<span class="st">&quot;beta0&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;beta0&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207.6%20nimble%20lasso%20traceplot-1.png" width="672" /></p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="Strategies.html#cb172-1" tabindex="-1"></a><span class="fu">plot</span>(mcmc.out.lasso<span class="sc">$</span>samples[, <span class="fu">c</span>(<span class="st">&quot;beta[1]&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;beta1&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207.6%20nimble%20lasso%20traceplot-2.png" width="672" /></p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="Strategies.html#cb173-1" tabindex="-1"></a><span class="fu">plot</span>(mcmc.out.lasso<span class="sc">$</span>samples[, <span class="fu">c</span>(<span class="st">&quot;beta[2]&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;beta2&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207.6%20nimble%20lasso%20traceplot-3.png" width="672" /></p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="Strategies.html#cb174-1" tabindex="-1"></a><span class="fu">plot</span>(mcmc.out.lasso<span class="sc">$</span>samples[, <span class="fu">c</span>(<span class="st">&quot;beta[3]&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;beta3&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207.6%20nimble%20lasso%20traceplot-4.png" width="672" /></p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="Strategies.html#cb175-1" tabindex="-1"></a><span class="fu">plot</span>(mcmc.out.lasso<span class="sc">$</span>samples[, <span class="fu">c</span>(<span class="st">&quot;beta[4]&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;beta4&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207.6%20nimble%20lasso%20traceplot-5.png" width="672" /></p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="Strategies.html#cb176-1" tabindex="-1"></a><span class="fu">plot</span>(mcmc.out.lasso<span class="sc">$</span>samples[, <span class="fu">c</span>(<span class="st">&quot;beta[5]&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;beta5&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207.6%20nimble%20lasso%20traceplot-6.png" width="672" /></p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="Strategies.html#cb177-1" tabindex="-1"></a><span class="fu">plot</span>(mcmc.out.lasso<span class="sc">$</span>samples[, <span class="fu">c</span>(<span class="st">&quot;beta[6]&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;beta6&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207.6%20nimble%20lasso%20traceplot-7.png" width="672" /></p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="Strategies.html#cb178-1" tabindex="-1"></a><span class="fu">plot</span>(mcmc.out.lasso<span class="sc">$</span>samples[, <span class="fu">c</span>(<span class="st">&quot;beta[7]&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;beta7&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207.6%20nimble%20lasso%20traceplot-8.png" width="672" /></p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="Strategies.html#cb179-1" tabindex="-1"></a><span class="fu">plot</span>(mcmc.out.lasso<span class="sc">$</span>samples[, <span class="fu">c</span>(<span class="st">&quot;beta[8]&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;beta8&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207.6%20nimble%20lasso%20traceplot-9.png" width="672" /></p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="Strategies.html#cb180-1" tabindex="-1"></a><span class="fu">plot</span>(mcmc.out.lasso<span class="sc">$</span>samples[, <span class="fu">c</span>(<span class="st">&quot;sigma&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;sigma&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207.6%20nimble%20lasso%20traceplot-10.png" width="672" /></p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="Strategies.html#cb181-1" tabindex="-1"></a><span class="fu">plot</span>(mcmc.out.lasso<span class="sc">$</span>samples[, <span class="fu">c</span>(<span class="st">&quot;taue&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;taue&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207.6%20nimble%20lasso%20traceplot-11.png" width="672" /></p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="Strategies.html#cb182-1" tabindex="-1"></a><span class="fu">plot</span>(mcmc.out.lasso<span class="sc">$</span>samples[, <span class="fu">c</span>(<span class="st">&quot;taub&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;taub&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207.6%20nimble%20lasso%20traceplot-12.png" width="672" /></p>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="Strategies.html#cb183-1" tabindex="-1"></a>beta_var  <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;beta[&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(X), <span class="st">&quot;]&quot;</span>) </span>
+<span id="cb183-2"><a href="Strategies.html#cb183-2" tabindex="-1"></a><span class="co">#posterior summaries of all the parameters in the model</span></span>
+<span id="cb183-3"><a href="Strategies.html#cb183-3" tabindex="-1"></a>post_summary_lasso <span class="ot">&lt;-</span> mcmc.out.lasso<span class="sc">$</span>summary<span class="sc">$</span>all.chains <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>() </span>
+<span id="cb183-4"><a href="Strategies.html#cb183-4" tabindex="-1"></a>post_summary_lasso <span class="ot">&lt;-</span> post_summary_lasso[beta_var,]</span>
+<span id="cb183-5"><a href="Strategies.html#cb183-5" tabindex="-1"></a></span>
+<span id="cb183-6"><a href="Strategies.html#cb183-6" tabindex="-1"></a>post_summary_lasso<span class="sc">$</span>variable <span class="ot">&lt;-</span> <span class="fu">colnames</span>(X)</span>
+<span id="cb183-7"><a href="Strategies.html#cb183-7" tabindex="-1"></a></span>
+<span id="cb183-8"><a href="Strategies.html#cb183-8" tabindex="-1"></a><span class="fu">ggplot</span>(post_summary_lasso,</span>
+<span id="cb183-9"><a href="Strategies.html#cb183-9" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> variable)) <span class="sc">+</span> </span>
+<span id="cb183-10"><a href="Strategies.html#cb183-10" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">y =</span> Mean, <span class="at">ymin =</span><span class="st">`</span><span class="at">95%CI_low</span><span class="st">`</span>, <span class="at">ymax =</span><span class="st">`</span><span class="at">95%CI_upp</span><span class="st">`</span>)) <span class="sc">+</span> </span>
+<span id="cb183-11"><a href="Strategies.html#cb183-11" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb183-12"><a href="Strategies.html#cb183-12" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207_6%20nimble%20lasso%20posterior%20summary-1.png" width="672" /></p>
+<p>Under the Lasso prior specification, only the logarithm of Building_100m is associated with the logarithm of ethylbenzene.</p>
+<p>Next, we perform the analysis assuming a horseshoe prior for the coefficient.:</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="Strategies.html#cb184-1" tabindex="-1"></a>Ex7_6HorseshoeCode <span class="ot">&lt;-</span> <span class="fu">nimbleCode</span>({</span>
+<span id="cb184-2"><a href="Strategies.html#cb184-2" tabindex="-1"></a></span>
+<span id="cb184-3"><a href="Strategies.html#cb184-3" tabindex="-1"></a>  <span class="co"># Likelihood</span></span>
+<span id="cb184-4"><a href="Strategies.html#cb184-4" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb184-5"><a href="Strategies.html#cb184-5" tabindex="-1"></a>    y[i]   <span class="sc">~</span> <span class="fu">dnorm</span>(mu[i], <span class="at">sd =</span> sigma)</span>
+<span id="cb184-6"><a href="Strategies.html#cb184-6" tabindex="-1"></a>    mu[i] <span class="ot">&lt;-</span> beta0 <span class="sc">+</span> <span class="fu">inprod</span>(X[i,], beta[<span class="dv">1</span><span class="sc">:</span>p])</span>
+<span id="cb184-7"><a href="Strategies.html#cb184-7" tabindex="-1"></a>  }</span>
+<span id="cb184-8"><a href="Strategies.html#cb184-8" tabindex="-1"></a></span>
+<span id="cb184-9"><a href="Strategies.html#cb184-9" tabindex="-1"></a>  <span class="co"># Prior specification</span></span>
+<span id="cb184-10"><a href="Strategies.html#cb184-10" tabindex="-1"></a>  <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>p){</span>
+<span id="cb184-11"><a href="Strategies.html#cb184-11" tabindex="-1"></a>    beta[j] <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>, <span class="at">sd =</span> lambda[j]<span class="sc">*</span>tau)</span>
+<span id="cb184-12"><a href="Strategies.html#cb184-12" tabindex="-1"></a>    lambda[j] <span class="sc">~</span> <span class="fu">T</span>(<span class="fu">dt</span>(<span class="at">mu =</span> <span class="dv">0</span>, <span class="at">sigma =</span> <span class="dv">1</span>, <span class="at">df =</span> <span class="dv">1</span>), <span class="dv">0</span>, <span class="cn">Inf</span>)</span>
+<span id="cb184-13"><a href="Strategies.html#cb184-13" tabindex="-1"></a>  }</span>
+<span id="cb184-14"><a href="Strategies.html#cb184-14" tabindex="-1"></a>  tau  <span class="sc">~</span> <span class="fu">T</span>(<span class="fu">dt</span>(<span class="at">mu =</span> <span class="dv">0</span>, <span class="at">sigma =</span> <span class="dv">1</span>, <span class="at">df =</span> <span class="dv">1</span>), <span class="dv">0</span>, <span class="cn">Inf</span>)</span>
+<span id="cb184-15"><a href="Strategies.html#cb184-15" tabindex="-1"></a>  sigma  <span class="sc">~</span> <span class="fu">T</span>(<span class="fu">dt</span>(<span class="at">mu =</span> <span class="dv">0</span>, <span class="at">sigma =</span> <span class="dv">1</span>, <span class="at">df =</span> <span class="dv">1</span>), <span class="dv">0</span>, <span class="cn">Inf</span>)</span>
+<span id="cb184-16"><a href="Strategies.html#cb184-16" tabindex="-1"></a>  beta0  <span class="sc">~</span> <span class="fu">dnorm</span>(<span class="dv">0</span>,<span class="at">sd=</span><span class="dv">10</span>)</span>
+<span id="cb184-17"><a href="Strategies.html#cb184-17" tabindex="-1"></a></span>
+<span id="cb184-18"><a href="Strategies.html#cb184-18" tabindex="-1"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="Strategies.html#cb185-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">321</span>)</span>
+<span id="cb185-2"><a href="Strategies.html#cb185-2" tabindex="-1"></a></span>
+<span id="cb185-3"><a href="Strategies.html#cb185-3" tabindex="-1"></a>constants <span class="ot">&lt;-</span></span>
+<span id="cb185-4"><a href="Strategies.html#cb185-4" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">n =</span> <span class="fu">nrow</span>(lur), <span class="at">p =</span> <span class="fu">ncol</span>(X))</span>
+<span id="cb185-5"><a href="Strategies.html#cb185-5" tabindex="-1"></a><span class="co">#using the scaled covariates</span></span>
+<span id="cb185-6"><a href="Strategies.html#cb185-6" tabindex="-1"></a>ex.data <span class="ot">&lt;-</span></span>
+<span id="cb185-7"><a href="Strategies.html#cb185-7" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">y =</span> <span class="fu">log</span>(lur<span class="sc">$</span>Ethylbenzene),</span>
+<span id="cb185-8"><a href="Strategies.html#cb185-8" tabindex="-1"></a>       <span class="at">X =</span> <span class="fu">scale</span>(X))</span>
+<span id="cb185-9"><a href="Strategies.html#cb185-9" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="st">&quot;beta0&quot;</span>,  <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;tau&quot;</span>, <span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;lambda&quot;</span>)</span>
+<span id="cb185-10"><a href="Strategies.html#cb185-10" tabindex="-1"></a></span>
+<span id="cb185-11"><a href="Strategies.html#cb185-11" tabindex="-1"></a>inits <span class="ot">&lt;-</span> <span class="fu">list</span>( <span class="at">sigma =</span> <span class="fl">0.1</span>, <span class="at">tau =</span> <span class="fl">0.1</span>)</span>
+<span id="cb185-12"><a href="Strategies.html#cb185-12" tabindex="-1"></a><span class="co"># Run model in nimble</span></span>
+<span id="cb185-13"><a href="Strategies.html#cb185-13" tabindex="-1"></a>start_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb185-14"><a href="Strategies.html#cb185-14" tabindex="-1"></a></span>
+<span id="cb185-15"><a href="Strategies.html#cb185-15" tabindex="-1"></a>mcmc.out.hs <span class="ot">&lt;-</span> <span class="fu">nimbleMCMC</span>(</span>
+<span id="cb185-16"><a href="Strategies.html#cb185-16" tabindex="-1"></a>  <span class="at">code =</span> Ex7_6HorseshoeCode,</span>
+<span id="cb185-17"><a href="Strategies.html#cb185-17" tabindex="-1"></a>  <span class="at">constants =</span> constants,</span>
+<span id="cb185-18"><a href="Strategies.html#cb185-18" tabindex="-1"></a>  <span class="at">data =</span> ex.data,</span>
+<span id="cb185-19"><a href="Strategies.html#cb185-19" tabindex="-1"></a>  <span class="at">inits =</span> inits,</span>
+<span id="cb185-20"><a href="Strategies.html#cb185-20" tabindex="-1"></a>  <span class="at">monitors =</span> params,</span>
+<span id="cb185-21"><a href="Strategies.html#cb185-21" tabindex="-1"></a>  <span class="at">niter =</span> <span class="dv">100000</span>,</span>
+<span id="cb185-22"><a href="Strategies.html#cb185-22" tabindex="-1"></a>  <span class="at">nburnin =</span> <span class="dv">50000</span>,</span>
+<span id="cb185-23"><a href="Strategies.html#cb185-23" tabindex="-1"></a>  <span class="at">thin =</span> <span class="dv">15</span>,</span>
+<span id="cb185-24"><a href="Strategies.html#cb185-24" tabindex="-1"></a>  <span class="at">WAIC =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb185-25"><a href="Strategies.html#cb185-25" tabindex="-1"></a>  <span class="at">nchains =</span> <span class="dv">2</span>,</span>
+<span id="cb185-26"><a href="Strategies.html#cb185-26" tabindex="-1"></a>  <span class="at">summary =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb185-27"><a href="Strategies.html#cb185-27" tabindex="-1"></a>  <span class="at">samplesAsCodaMCMC =</span> <span class="cn">TRUE</span></span>
+<span id="cb185-28"><a href="Strategies.html#cb185-28" tabindex="-1"></a>)</span>
+<span id="cb185-29"><a href="Strategies.html#cb185-29" tabindex="-1"></a>end_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb185-30"><a href="Strategies.html#cb185-30" tabindex="-1"></a>run_time <span class="ot">&lt;-</span> end_time <span class="sc">-</span> start_time</span>
+<span id="cb185-31"><a href="Strategies.html#cb185-31" tabindex="-1"></a>run_time</span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="Strategies.html#cb186-1" tabindex="-1"></a><span class="fu">min</span>(coda<span class="sc">::</span><span class="fu">effectiveSize</span>(mcmc.out.hs<span class="sc">$</span>samples))</span></code></pre></div>
+<pre><code>## [1] 661.5456</code></pre>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="Strategies.html#cb188-1" tabindex="-1"></a><span class="fu">plot</span>(mcmc.out.hs<span class="sc">$</span>samples[, <span class="fu">c</span>(<span class="st">&quot;beta0&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;beta0&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207.6%20nimble%20horseshoe%20traceplot-1.png" width="672" /></p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="Strategies.html#cb189-1" tabindex="-1"></a><span class="fu">plot</span>(mcmc.out.hs<span class="sc">$</span>samples[, <span class="fu">c</span>(<span class="st">&quot;beta[1]&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;beta1&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207.6%20nimble%20horseshoe%20traceplot-2.png" width="672" /></p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="Strategies.html#cb190-1" tabindex="-1"></a><span class="fu">plot</span>(mcmc.out.hs<span class="sc">$</span>samples[, <span class="fu">c</span>(<span class="st">&quot;beta[2]&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;beta2&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207.6%20nimble%20horseshoe%20traceplot-3.png" width="672" /></p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="Strategies.html#cb191-1" tabindex="-1"></a><span class="fu">plot</span>(mcmc.out.hs<span class="sc">$</span>samples[, <span class="fu">c</span>(<span class="st">&quot;beta[3]&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;beta3&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207.6%20nimble%20horseshoe%20traceplot-4.png" width="672" /></p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="Strategies.html#cb192-1" tabindex="-1"></a><span class="fu">plot</span>(mcmc.out.hs<span class="sc">$</span>samples[, <span class="fu">c</span>(<span class="st">&quot;beta[4]&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;beta4&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207.6%20nimble%20horseshoe%20traceplot-5.png" width="672" /></p>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="Strategies.html#cb193-1" tabindex="-1"></a><span class="fu">plot</span>(mcmc.out.hs<span class="sc">$</span>samples[, <span class="fu">c</span>(<span class="st">&quot;beta[5]&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;beta5&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207.6%20nimble%20horseshoe%20traceplot-6.png" width="672" /></p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="Strategies.html#cb194-1" tabindex="-1"></a><span class="fu">plot</span>(mcmc.out.hs<span class="sc">$</span>samples[, <span class="fu">c</span>(<span class="st">&quot;beta[6]&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;beta6&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207.6%20nimble%20horseshoe%20traceplot-7.png" width="672" /></p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="Strategies.html#cb195-1" tabindex="-1"></a><span class="fu">plot</span>(mcmc.out.hs<span class="sc">$</span>samples[, <span class="fu">c</span>(<span class="st">&quot;beta[7]&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;beta7&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207.6%20nimble%20horseshoe%20traceplot-8.png" width="672" /></p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="Strategies.html#cb196-1" tabindex="-1"></a><span class="fu">plot</span>(mcmc.out.hs<span class="sc">$</span>samples[, <span class="fu">c</span>(<span class="st">&quot;beta[8]&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;beta8&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207.6%20nimble%20horseshoe%20traceplot-9.png" width="672" /></p>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="Strategies.html#cb197-1" tabindex="-1"></a><span class="fu">plot</span>(mcmc.out.hs<span class="sc">$</span>samples[, <span class="fu">c</span>(<span class="st">&quot;sigma&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;sigma&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207.6%20nimble%20horseshoe%20traceplot-10.png" width="672" /></p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="Strategies.html#cb198-1" tabindex="-1"></a><span class="fu">plot</span>(mcmc.out.hs<span class="sc">$</span>samples[, <span class="fu">c</span>(<span class="st">&quot;tau&quot;</span>)], <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;tau&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207.6%20nimble%20horseshoe%20traceplot-11.png" width="672" /></p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="Strategies.html#cb199-1" tabindex="-1"></a>beta_var  <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;beta[&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(X), <span class="st">&quot;]&quot;</span>) </span>
+<span id="cb199-2"><a href="Strategies.html#cb199-2" tabindex="-1"></a>post_summary_hs <span class="ot">&lt;-</span> mcmc.out.hs<span class="sc">$</span>summary<span class="sc">$</span>all.chains <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>() </span>
+<span id="cb199-3"><a href="Strategies.html#cb199-3" tabindex="-1"></a>post_summary_hs <span class="ot">&lt;-</span> post_summary_hs[beta_var,]</span>
+<span id="cb199-4"><a href="Strategies.html#cb199-4" tabindex="-1"></a></span>
+<span id="cb199-5"><a href="Strategies.html#cb199-5" tabindex="-1"></a>post_summary_hs<span class="sc">$</span>variable <span class="ot">&lt;-</span> <span class="fu">colnames</span>(X)</span>
+<span id="cb199-6"><a href="Strategies.html#cb199-6" tabindex="-1"></a></span>
+<span id="cb199-7"><a href="Strategies.html#cb199-7" tabindex="-1"></a><span class="fu">ggplot</span>(post_summary_hs,</span>
+<span id="cb199-8"><a href="Strategies.html#cb199-8" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> variable)) <span class="sc">+</span> </span>
+<span id="cb199-9"><a href="Strategies.html#cb199-9" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">y =</span> Mean, <span class="at">ymin =</span><span class="st">`</span><span class="at">95%CI_low</span><span class="st">`</span>, <span class="at">ymax =</span><span class="st">`</span><span class="at">95%CI_upp</span><span class="st">`</span>)) <span class="sc">+</span> </span>
+<span id="cb199-10"><a href="Strategies.html#cb199-10" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb199-11"><a href="Strategies.html#cb199-11" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%207_6%20nimble%20horseshoe%20posterior%20summary-1.png" width="672" /></p>
 
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="tactics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="computation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="trusted.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -328,7 +624,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/07-Chpt7.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/07-Chpt7.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -339,7 +635,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"download": ["_main.pdf", "_main.epub"],
 "search": {
 "engine": "fuse",
 "options": null
