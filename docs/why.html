@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 Why spatio-temporal epidemiology? | Spatio-temporal methods in environmental epidemiology</title>
-  <meta name="description" content="Chapter 1 Why spatio-temporal epidemiology? | Spatio-temporal methods in environmental epidemiology" />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <title>Chapter 1 Why spatio-temporal epidemiology? | Spatio-Temporal Methods in Environmental Epidemiology with R</title>
+  <meta name="description" content="Chapter 1 Why spatio-temporal epidemiology? | Spatio-Temporal Methods in Environmental Epidemiology with R" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 1 Why spatio-temporal epidemiology? | Spatio-temporal methods in environmental epidemiology" />
+  <meta property="og:title" content="Chapter 1 Why spatio-temporal epidemiology? | Spatio-Temporal Methods in Environmental Epidemiology with R" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/img/cover.jpg" />
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 Why spatio-temporal epidemiology? | Spatio-temporal methods in environmental epidemiology" />
+  <meta name="twitter:title" content="Chapter 1 Why spatio-temporal epidemiology? | Spatio-Temporal Methods in Environmental Epidemiology with R" />
   
   
   <meta name="twitter:image" content="/img/cover.jpg" />
@@ -23,14 +23,14 @@
 <meta name="author" content="Gavin Shaddick, James V. Zidek, and Alexandra M. Schmidt" />
 
 
-<meta name="date" content="2023-04-26" />
+<meta name="date" content="2023-06-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  
-<link rel="prev" href="preface-2nd-edition.html"/>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<link rel="prev" href="index.html"/>
 <link rel="next" href="basics.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -92,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -105,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -119,6 +119,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -133,25 +137,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Spatio-temporal methods in environmental epidemiology using R</a></li>
+<li><a href="./">Spatio-temporal methods in environmental epidemiology</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="chapter" data-level="" data-path="preface-2nd-edition.html"><a href="preface-2nd-edition.html"><i class="fa fa-check"></i>Preface (2nd edition)</a></li>
-<li class="chapter" data-level="1" data-path="why.html"><a href="why.html"><i class="fa fa-check"></i><b>1</b> Why spatio-temporal epidemiology?</a>
-<ul>
-<li class="chapter" data-level="" data-path="why.html"><a href="why.html#example-1.5"><i class="fa fa-check"></i>Example 1.5</a></li>
-</ul></li>
+<li class="chapter" data-level="1" data-path="why.html"><a href="why.html"><i class="fa fa-check"></i><b>1</b> Why spatio-temporal epidemiology?</a></li>
 <li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Epidemiology-the basics</a>
 <ul>
-<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.9-estimating-the-smr-using-a-poisson-glm"><i class="fa fa-check"></i>Example 2.9: Estimating the SMR using a Poisson GLM</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.7-estimating-the-smr-using-a-poisson-glm"><i class="fa fa-check"></i>Example 2.7: Estimating the SMR using a Poisson GLM</a></li>
 <li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.10-estimating-the-smr-using-quasi-likelihood"><i class="fa fa-check"></i>Example 2.10: Estimating the SMR using quasi-likelihood</a></li>
 <li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.11-modelling-differences-in-smrs-in-relation-to-differences-in-exposures"><i class="fa fa-check"></i>Example 2.11: Modelling differences in SMRs in relation to differences in exposures</a></li>
 <li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.12-modelling-the-risks-associated-with-lagged-effects-of-air-pollution"><i class="fa fa-check"></i>Example 2.12: Modelling the risks associated with lagged effects of air pollution</a></li>
 <li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.13-estimating-the-odds-ratio-in-a-case-control-study-using-a-logistic-model"><i class="fa fa-check"></i>Example 2.13: Estimating the odds ratio in a case-control study using a logistic model</a></li>
 <li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.14-estimating-the-odds-ratio-of-asthma-associated-with-proximity-to-roads"><i class="fa fa-check"></i>Example 2.14: Estimating the odds ratio of asthma associated with proximity to roads</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="uncertainty.html"><a href="uncertainty.html"><i class="fa fa-check"></i><b>3</b> Uncertainty and its reduction</a></li>
+<li class="chapter" data-level="3" data-path="uncertainty.html"><a href="uncertainty.html"><i class="fa fa-check"></i><b>3</b> Uncertainty and its reduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="uncertainty.html"><a href="uncertainty.html#supplementary-material"><i class="fa fa-check"></i>Supplementary Material</a>
+<ul>
+<li class="chapter" data-level="" data-path="uncertainty.html"><a href="uncertainty.html#more-on-qualitative-uncertainty"><i class="fa fa-check"></i>More on qualitative uncertainty</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>4</b> Data: increasing information and reducing uncertainty</a></li>
 <li class="chapter" data-level="5" data-path="embracing.html"><a href="embracing.html"><i class="fa fa-check"></i><b>5</b> Embracing uncertainty: the Bayesian approach</a></li>
 <li class="chapter" data-level="6" data-path="tactics.html"><a href="tactics.html"><i class="fa fa-check"></i><b>6</b> Tactics-implementing uncertainty models</a>
@@ -167,7 +173,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="tactics.html"><a href="tactics.html#stan"><i class="fa fa-check"></i>Stan</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="Strategies.html"><a href="Strategies.html"><i class="fa fa-check"></i><b>7</b> Strategies implementing uncertainty models</a></li>
+<li class="chapter" data-level="7" data-path="Strategies.html"><a href="Strategies.html"><i class="fa fa-check"></i><b>7</b> Strategies implementing uncertainty models</a>
+<ul>
+<li class="chapter" data-level="" data-path="Strategies.html"><a href="Strategies.html#example-7.6-model-choice-in-studies-of-air-pollution-and-health"><i class="fa fa-check"></i>Example 7.6 Model choice in studies of air pollution and health</a>
+<ul>
+<li class="chapter" data-level="" data-path="Strategies.html"><a href="Strategies.html#nimble-1"><i class="fa fa-check"></i>Nimble</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="trusted.html"><a href="trusted.html"><i class="fa fa-check"></i><b>8</b> But can the data be trusted</a>
 <ul>
 <li class="chapter" data-level="" data-path="trusted.html"><a href="trusted.html#solutions-to-selected-exercises"><i class="fa fa-check"></i>Solutions to Selected Exercises</a>
@@ -179,43 +191,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.1-empirical-bayes-and-bayes-smoothing-of-copd-mortality-for-2010"><i class="fa fa-check"></i>Example 9.1: Empirical Bayes and Bayes smoothing of COPD mortality for 2010</a>
 <ul>
-<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#nimble-1"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#nimble-2"><i class="fa fa-check"></i>Nimble</a></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#stan-1"><i class="fa fa-check"></i>Stan</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.3-fitting-a-conditional-spatial-model-in-nimble-and-stan"><i class="fa fa-check"></i>Example 9.3: Fitting a conditional spatial model in <code>nimble</code> and <code>stan</code></a>
 <ul>
-<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#nimble-2"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#nimble-3"><i class="fa fa-check"></i>Nimble</a></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#stan-2"><i class="fa fa-check"></i>Stan</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.4-fitting-a-conditional-spatial-model-using-carbayes"><i class="fa fa-check"></i>Example 9.4: Fitting a conditional spatial model using CARBayes</a></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.5-fitting-a-conditional-model-using-inla"><i class="fa fa-check"></i>Example 9.5: Fitting a conditional model using INLA</a></li>
+<li class="chapter" data-level="9.1" data-path="Disease.html"><a href="Disease.html#example-9.6-fitting-a-leroux-model-using-nimble-stan-and-carbayes"><i class="fa fa-check"></i><b>9.1</b> Example 9.6: Fitting a Leroux Model using Nimble, Stan and CARBayes</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="Disease.html"><a href="Disease.html#nimble-4"><i class="fa fa-check"></i><b>9.1.1</b> Nimble</a></li>
+<li class="chapter" data-level="9.1.2" data-path="Disease.html"><a href="Disease.html#stan-3"><i class="fa fa-check"></i><b>9.1.2</b> Stan</a></li>
+<li class="chapter" data-level="9.1.3" data-path="Disease.html"><a href="Disease.html#carbayes"><i class="fa fa-check"></i><b>9.1.3</b> CARBayes</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="hazards.html"><a href="hazards.html"><i class="fa fa-check"></i><b>10</b> Environmental hazards-spatial models</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="hazards.html"><a href="hazards.html#example-10.1-spatial-patterns-in-lead-concentrations-in-the-soil-of-the"><i class="fa fa-check"></i><b>10.1</b> Example 10.1 Spatial patterns in lead concentrations in the soil of the</a></li>
-<li class="chapter" data-level="10.2" data-path="hazards.html"><a href="hazards.html#example-10.2-examining-the-log-concentrations-of-lead-in-the-meuse-river"><i class="fa fa-check"></i><b>10.2</b> Example 10.2: Examining the log concentrations of lead in the Meuse River</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-example-10.1-spatial-patterns-of-benzene-concentrations-in-montreal-qc-canada"><i class="fa fa-check"></i>EXTRA: Example 10.1: Spatial patterns of benzene concentrations in Montreal, QC, Canada</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-example-10.2-examining-the-log-concentrations-of-benzene-in-montreal"><i class="fa fa-check"></i>EXTRA: Example 10.2: Examining the log concentrations of benzene in Montreal</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.5-variogram"><i class="fa fa-check"></i>Example 10.5: Variogram</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.6-basic-spatial-modelling-and-prediction-of-benzene-in-montreal"><i class="fa fa-check"></i>Example 10.6 Basic spatial modelling and prediction of benzene in Montreal</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.9-spatial-modelling-of-benzene-in-montreal"><i class="fa fa-check"></i>Example 10.9 Spatial modelling of Benzene in Montreal</a>
-<ul>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#nimble-3"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#stan-3"><i class="fa fa-check"></i>Stan</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.10-spatial-predictions"><i class="fa fa-check"></i>Example 10.10: Spatial predictions</a>
-<ul>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#nimble-4"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#stan-4"><i class="fa fa-check"></i>Stan</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.11-inla-creating-a-mesh"><i class="fa fa-check"></i>Example 10.11: INLA, creating a mesh</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.12-fitting-an-spde-model-using-rinla-benzene-concentration-in-montreal"><i class="fa fa-check"></i>Example 10.12: Fitting an SPDE model using R–INLA: benzene concentration in Montreal</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.13-directional-variograms"><i class="fa fa-check"></i>Example 10.13: Directional variograms</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.1-spatial-patterns-in-lead-concentrations-in-the-soil-of-the-meuse-river-flood-plain"><i class="fa fa-check"></i>Example 10.1 Spatial patterns in lead concentrations in the soil of the Meuse River flood plain</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.2-examining-the-log-concentrations-of-lead-in-the-meuse-river-flood-plain"><i class="fa fa-check"></i>Example 10.2: Examining the log concentrations of lead in the Meuse River flood plain</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.3-mapping-the-locations-of-ozone-monitoring-sites-in-new-york-state"><i class="fa fa-check"></i>Example 10.3: Mapping the locations of ozone monitoring sites in New York State</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.6-spatial-prediction-of-temperatures-in-california"><i class="fa fa-check"></i>Example 10.6: Spatial prediction of temperatures in California</a></li>
+<li class="chapter" data-level="10.1" data-path="hazards.html"><a href="hazards.html#example-10.8-spatial-prediction-of-no2-in-europe"><i class="fa fa-check"></i><b>10.1</b> Example 10.8 Spatial prediction of NO2 in Europe</a></li>
+<li class="chapter" data-level="10.2" data-path="hazards.html"><a href="hazards.html#example-10.10-creating-a-mesh-black-smoke-monitoring-locations-in-the-uk"><i class="fa fa-check"></i><b>10.2</b> Example 10.10 Creating a mesh: black smoke monitoring locations in the UK</a></li>
+<li class="chapter" data-level="10.3" data-path="hazards.html"><a href="hazards.html#example-10.12-plotting-directional-variograms-for-temperatures-in-california"><i class="fa fa-check"></i><b>10.3</b> Example 10.12 Plotting directional variograms for temperatures in California</a></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.14-spatial-modeling-of-malaria-in-gambia"><i class="fa fa-check"></i>Example 10.14: Spatial modeling of malaria in Gambia</a>
 <ul>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#nimble-5"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#stan-4"><i class="fa fa-check"></i>Stan</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#supplementary-material-1"><i class="fa fa-check"></i>Supplementary Material</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.1-spatial-patterns-of-benzene-concentrations-in-montreal-qc-canada"><i class="fa fa-check"></i>Extra 10.1: Spatial patterns of benzene concentrations in Montreal, QC, Canada</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.2-examining-the-log-concentrations-of-benzene-in-montreal"><i class="fa fa-check"></i>Extra 10.2: Examining the log concentrations of benzene in Montreal</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.5-variogram"><i class="fa fa-check"></i>Extra 10.5: Variogram</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.6-basic-spatial-modelling-and-prediction-of-benzene-in-montreal"><i class="fa fa-check"></i>Extra 10.6 Basic spatial modelling and prediction of benzene in Montreal</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.8-spatial-modelling-of-benzene-in-montreal"><i class="fa fa-check"></i>Extra 10.8 Spatial modelling of Benzene in Montreal</a>
+<ul>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#nimble-6"><i class="fa fa-check"></i>Nimble</a></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#stan-5"><i class="fa fa-check"></i>Stan</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.9-spatial-predictions"><i class="fa fa-check"></i>Extra 10.9: Spatial predictions</a>
+<ul>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#nimble-7"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#stan-6"><i class="fa fa-check"></i>Stan</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.10-inla-creating-a-mesh"><i class="fa fa-check"></i>Extra 10.10: INLA, creating a mesh</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.12-fitting-an-spde-model-using-rinla-benzene-concentration-in-montreal"><i class="fa fa-check"></i>Extra 10.12: Fitting an SPDE model using R–INLA: benzene concentration in Montreal</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.13-directional-variograms"><i class="fa fa-check"></i>Extra 10.13: Directional variograms</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="Time.html"><a href="Time.html"><i class="fa fa-check"></i><b>11</b> Time-why it also matters</a>
 <ul>
@@ -223,23 +247,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.2-low-pass-filtering-of-carbon-monoxide-levels-using-the-moving-average"><i class="fa fa-check"></i>Example 11.2 Low-pass filtering of carbon monoxide levels using the moving average</a></li>
 <li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.13-forecasting-ozone-levels"><i class="fa fa-check"></i>Example 11.13 Forecasting ozone levels</a></li>
 <li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.14-forecasting-volcanic-ash"><i class="fa fa-check"></i>Example 11.14 Forecasting volcanic ash</a></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.16-fitting-a-random-walk-model-to-pm10-concentrations-in-london"><i class="fa fa-check"></i>Example 11.16 Fitting a random walk model to PM10 concentrations in London</a>
+<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.16-implementation-of-a-dynamic-linear-model-uk-ozone-data"><i class="fa fa-check"></i>Example 11.16 Implementation of a dynamic linear model: UK ozone data</a>
 <ul>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#nimble-6"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#stan-6"><i class="fa fa-check"></i>Stan</a></li>
+<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#nimble-8"><i class="fa fa-check"></i>Nimble</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.16-extra-implementation-of-a-dynamic-linear-model-uk-ozone-data"><i class="fa fa-check"></i>Example 11.16 EXTRA Implementation of a dynamic linear model: UK ozone data</a>
+</ul></li>
+<li class="chapter" data-level="12" data-path="exposure.html"><a href="exposure.html"><i class="fa fa-check"></i><b>12</b> Exposure assessment-over space and time</a>
 <ul>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#nimble-7"><i class="fa fa-check"></i>Nimble</a></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#stan-7"><i class="fa fa-check"></i>Stan</a></li>
+<li class="chapter" data-level="" data-path="exposure.html"><a href="exposure.html#example-idk-spatio-temporal-model-for-the-uk-ozone-data"><i class="fa fa-check"></i>Example IDK: Spatio-temporal model for the UK ozone data</a>
+<ul>
+<li class="chapter" data-level="" data-path="exposure.html"><a href="exposure.html#nimble-9"><i class="fa fa-check"></i>Nimble</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#solutions-to-selected-exercises-1"><i class="fa fa-check"></i>Solutions to Selected Exercises</a></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#exercise-11.11"><i class="fa fa-check"></i>Exercise 11.11</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="exposure.html"><a href="exposure.html"><i class="fa fa-check"></i><b>12</b> Exposure assessment-over space and time</a></li>
 <li class="chapter" data-level="13" data-path="causality.html"><a href="causality.html"><i class="fa fa-check"></i><b>13</b> Causality-roadblocks on the way to it</a>
 <ul>
-<li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#solutions-to-selected-exercises-2"><i class="fa fa-check"></i>Solutions to Selected Exercises</a>
+<li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#solutions-to-selected-exercises-1"><i class="fa fa-check"></i>Solutions to Selected Exercises</a>
 <ul>
 <li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#question-13.16-load-the-italy-and-china-data-described-in-example-13.3-and-included-in-the-supplementary-bookdown-material-into-r."><i class="fa fa-check"></i>Question 13.16: Load the Italy and China data, described in Example 13.3, and included in the supplementary Bookdown material into R.</a></li>
 <li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#question-13.17-using-the-italy-and-china-data-stratified-by-the-age-groups-70-and-geq-70-obtain-empirical-estimates-of-p_1-and-p_2-as-defined-in-an-sdis.-in-the-following-questions-assume-that-p_1-and-p_2-are-the-population-values."><i class="fa fa-check"></i>Question 13.17: Using the Italy and China data stratified by the age groups <span class="math inline">\(&lt;70\)</span> and <span class="math inline">\(\geq 70\)</span>, obtain empirical estimates of <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span>, as defined in an SDis. In the following questions, assume that <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span> are the population values.</a></li>
@@ -262,7 +284,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Spatio-temporal methods in environmental epidemiology</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Spatio-Temporal Methods in Environmental Epidemiology with R</a>
           </h1>
         </div>
 
@@ -272,57 +294,71 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="why" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Why spatio-temporal epidemiology?<a href="why.html#why" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This chapter provides a overview of methods for spatio-temporal modelling and their use in epidemiological studies</p>
-<div id="example-1.5" class="section level2 unnumbered hasAnchor">
-<h2>Example 1.5<a href="why.html#example-1.5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="why.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading relevant libraries</span></span>
-<span id="cb1-2"><a href="why.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggmap)</span>
-<span id="cb1-3"><a href="why.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sp)</span>
-<span id="cb1-4"><a href="why.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgdal)</span>
-<span id="cb1-5"><a href="why.html#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="why.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load Meuse river </span></span>
-<span id="cb1-7"><a href="why.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(meuse)</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="why.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign a reference system used in the Netherlands</span></span>
-<span id="cb2-2"><a href="why.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coordinates</span>(meuse) <span class="ot">&lt;-</span> <span class="er">~</span> x <span class="sc">+</span> y</span>
-<span id="cb2-3"><a href="why.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">proj4string</span>(meuse) <span class="ot">&lt;-</span> <span class="fu">CRS</span>(<span class="st">&#39;+init=epsg:28992&#39;</span>) </span>
-<span id="cb2-4"><a href="why.html#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="why.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert it to latitude - longitude scale</span></span>
-<span id="cb2-6"><a href="why.html#cb2-6" aria-hidden="true" tabindex="-1"></a>meuse_ll <span class="ot">&lt;-</span> <span class="fu">spTransform</span>(meuse,<span class="fu">CRS</span>(<span class="st">&quot;+proj=longlat +datum=WGS84&quot;</span>))</span></code></pre></div>
-<pre><code>## Warning: PROJ support is provided by the sf and terra packages among others</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="why.html#cb4-1" aria-hidden="true" tabindex="-1"></a>meuse_ll_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(meuse_ll)</span>
-<span id="cb4-2"><a href="why.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the bounding box </span></span>
-<span id="cb4-3"><a href="why.html#cb4-3" aria-hidden="true" tabindex="-1"></a>latLongBox <span class="ot">=</span> <span class="fu">bbox</span>(meuse_ll)</span>
-<span id="cb4-4"><a href="why.html#cb4-4" aria-hidden="true" tabindex="-1"></a>location <span class="ot">=</span> <span class="fu">c</span>(latLongBox[<span class="dv">1</span>, <span class="dv">1</span>] <span class="sc">-</span> <span class="fl">0.01</span>,</span>
-<span id="cb4-5"><a href="why.html#cb4-5" aria-hidden="true" tabindex="-1"></a>             latLongBox[<span class="dv">2</span>, <span class="dv">1</span>] <span class="sc">-</span> <span class="fl">0.01</span>,</span>
-<span id="cb4-6"><a href="why.html#cb4-6" aria-hidden="true" tabindex="-1"></a>             latLongBox[<span class="dv">1</span>, <span class="dv">2</span>] <span class="sc">+</span> <span class="fl">0.01</span>,</span>
-<span id="cb4-7"><a href="why.html#cb4-7" aria-hidden="true" tabindex="-1"></a>             latLongBox[<span class="dv">2</span>, <span class="dv">2</span>] <span class="sc">+</span> <span class="fl">0.01</span>)</span>
-<span id="cb4-8"><a href="why.html#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="why.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create map with location dots marked on it in</span></span>
-<span id="cb4-10"><a href="why.html#cb4-10" aria-hidden="true" tabindex="-1"></a>MeuseMap <span class="ot">&lt;-</span></span>
-<span id="cb4-11"><a href="why.html#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_stamenmap</span>(</span>
-<span id="cb4-12"><a href="why.html#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">bbox =</span>  location,</span>
-<span id="cb4-13"><a href="why.html#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">zoom =</span> <span class="dv">14</span></span>
-<span id="cb4-14"><a href="why.html#cb4-14" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<pre><code>## ℹ Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="why.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggmap</span>(MeuseMap) <span class="sc">+</span> <span class="fu">geom_point</span>(</span>
-<span id="cb6-2"><a href="why.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> meuse_ll_df,</span>
-<span id="cb6-3"><a href="why.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(</span>
-<span id="cb6-4"><a href="why.html#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> x,</span>
-<span id="cb6-5"><a href="why.html#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> y, </span>
-<span id="cb6-6"><a href="why.html#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;red&quot;</span></span>
-<span id="cb6-7"><a href="why.html#cb6-7" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span> <span class="fu">theme_void</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>)</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/Ex%201.5%20coordinates%20and%20map-1.png" width="672" /></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="why.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finally we write the result that can be read by Google maps</span></span>
-<span id="cb7-2"><a href="why.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">writeOGR</span>(meuse_ll, <span class="st">&quot;meuse.kml&quot;</span>, <span class="st">&quot;meuse&quot;</span>, <span class="at">driver=</span><span class="st">&quot;KML&quot;</span>)</span></code></pre></div>
+<p>This book provides a comprehensive treatment of methods for spatio-temporal modelling and their use in epidemiological studies. Throughout the book, we present examples of spatio-temporal modelling within a Bayesian framework and describe how data can be used to update knowledge, together with in-depth consideration of the role of uncertainty.</p>
+<p>Throughout the book we will use the <a href="https://www.r-project.org/">R</a> statistical software. <a href="https://www.r-project.org/">R</a> is an object-orientated programming language and provides an integrated suite of software facilities for data manipulation, calculation and graphical display. It provides an environment within which almost all classical and modern statistical techniques are available. <a href="https://www.r-project.org/">R</a> can be used in a variety of ways, including directly from the command line or from within other programming environments. For many of the examples in this book we use , an integrated development environment (IDE) for <a href="https://www.r-project.org/">R</a>. It includes a console, syntax-highlighting editor that supports direct code execution, as well as tools for plotting, history, debugging and workspace management. Both <a href="https://www.r-project.org/">R</a> (cran.r-project.org) and <a href="https://posit.co/products/open-source/rstudio/">RStudio</a> are open source and can be downloaded free of charge. They are both available for Windows, Mac OSX and Linux.</p>
+<p>The base <a href="https://www.r-project.org/">R</a> environment provides a rich set of functions with many thousands of functions with many more provided as additional packages, including those which allow the manipulation and visualization of spatio-temporal data, performing epidemiological analysis and advanced spatio-temporal analyses. These are available at The Comprehensive R Archive Network (CRAN) and can be downloaded from <a href="https://cran.r-project.org">cran.r-project.org</a>, a repository for <a href="https://www.r-project.org/">R</a> software. Additional packages need to be downloaded and installed.</p>
+<p>From this book, the reader will have gained an understanding of the following topics:</p>
+<ul>
+<li><p>The basic concepts of epidemiology and the estimation of risks associated with environmental hazards;</p></li>
+<li><p>The theory of spatial, temporal and spatio-temporal processes needed for environmental health risk analysis;</p></li>
+<li><p>Fundamental questions related to the nature and role of uncertainty in environmental epidemiology, and methods that may help answer those questions;</p></li>
+<li><p>How data can be used to update knowledge and reducing uncertainty;</p></li>
+<li><p>A history of data collection and how databases may be constructed and how data is formally represented through the sample space and associated formal constructs such as the sample space and sampling distributions;</p></li>
+<li><p>Important areas of application within environmental epidemiology, together with strategies for building the models that are needed and coping with challenges that arise;</p></li>
+<li><p>Computational methods for the analysis of complex data measured over both space and time and how they can be implemented using R;</p></li>
+<li><p>Areas of current and future research directions in spatio-temporal modelling;</p></li>
+<li><p>Examples of R code are given throughout the book and the code, together with data for the examples, are available online on the book’s GitHub site;</p></li>
+<li><p>The book contains a variety of exercises, both theoretical and practical, to assist in the development of the skills needed to perform spatio-temporal analyses.</p></li>
+</ul>
+<!--This chapter provides a overview of methods for spatio-temporal modelling and their use in epidemiological studies -->
+<!-- ## Example 1.5 {-} -->
+<!-- ```{r Ex 1.5 load data, message = FALSE, warning=FALSE, error=FALSE} -->
+<!-- # Loading relevant libraries -->
+<!-- library(ggmap) -->
+<!-- library(sp) -->
+<!-- library(rgdal) -->
+<!-- # Load Meuse river  -->
+<!-- data(meuse) -->
+<!-- ``` -->
+<!-- ```{r Ex 1.5 coordinates and map} -->
+<!-- # Assign a reference system used in the Netherlands -->
+<!-- coordinates(meuse) <- ~ x + y -->
+<!-- proj4string(meuse) <- CRS('+init=epsg:28992')  -->
+<!-- # Convert it to latitude - longitude scale -->
+<!-- meuse_ll <- spTransform(meuse,CRS("+proj=longlat +datum=WGS84")) -->
+<!-- meuse_ll_df <- as.data.frame(meuse_ll) -->
+<!-- # Specify the bounding box  -->
+<!-- latLongBox = bbox(meuse_ll) -->
+<!-- location = c(latLongBox[1, 1] - 0.01, -->
+<!--              latLongBox[2, 1] - 0.01, -->
+<!--              latLongBox[1, 2] + 0.01, -->
+<!--              latLongBox[2, 2] + 0.01) -->
+<!-- # Create map with location dots marked on it in -->
+<!-- MeuseMap <- -->
+<!--   get_stamenmap( -->
+<!--     bbox =  location, -->
+<!--     zoom = 14 -->
+<!--   ) -->
+<!-- ggmap(MeuseMap) + geom_point( -->
+<!--   data = meuse_ll_df, -->
+<!--   aes( -->
+<!--     x = x, -->
+<!--     y = y,  -->
+<!--     color = "red" -->
+<!--   )) + theme_void() + theme(legend.position="none") -->
+<!-- ``` -->
+<!-- ```{r Ex 1.5 write ogr data, eval = FALSE} -->
+<!-- # Finally we write the result that can be read by Google maps -->
+<!-- writeOGR(meuse_ll, "meuse.kml", "meuse", driver="KML") -->
+<!-- ``` -->
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="preface-2nd-edition.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="basics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -354,7 +390,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-Chpt1.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01-Chpt1.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -365,7 +401,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"download": ["_main.pdf", "_main.epub"],
 "search": {
 "engine": "fuse",
 "options": null

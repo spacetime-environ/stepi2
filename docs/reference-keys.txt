@@ -19,3 +19,10 @@ exposure
 causality
 monitoring
 frontiers
+example-9.6-fitting-a-leroux-model-using-nimble-stan-and-carbayes
+nimble-4
+stan-3
+carbayes
+example-10.8-spatial-prediction-of-no2-in-europe
+example-10.10-creating-a-mesh-black-smoke-monitoring-locations-in-the-uk
+example-10.12-plotting-directional-variograms-for-temperatures-in-california
