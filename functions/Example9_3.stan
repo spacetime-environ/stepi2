@@ -11,6 +11,7 @@ data {
 
 transformed data {
   vector[N] log_E = log(E);
+  
 }
 
 parameters {
@@ -22,6 +23,8 @@ parameters {
 
 transformed parameters {
   vector[N] b; // latent effect
+  real <lower=0> riskdep = exp(beta[1]);
+  
   b =  sigma_s*s;
 }
 
@@ -29,6 +32,7 @@ model {
   y ~ poisson_log(log_E + beta0 + X*beta + b); 
   // This is the prior for s! (up to proportionality)
   target += -0.5 * dot_self(s[node1] - s[node2]);
+  //soft sum-to-zero constraint
   sum(s) ~ normal(0, 0.001 * N); 
   
   beta0 ~ normal(0.0, 10.0);

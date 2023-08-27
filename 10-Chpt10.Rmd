@@ -115,10 +115,10 @@ ggmap(NYmap) + geom_point(
 ```
 
 
-## Example 10.6: Spatial prediction of temperatures in California {-}
+## Example 10.5: Spatial prediction of temperatures in California {-}
 
 
-```{r Ex 10.6 plot variogram}
+```{r Ex 10.5 plot variogram}
 
 # REVIEW: There is something wrong with this dataset, it is impossible to have this temperatures
 # most likely all the data has to be divided by 10
@@ -160,7 +160,7 @@ summary(CATemp.variofit)
 
 
 
-```{r Ex 10.6 grid predictions}
+```{r Ex 10.5 grid predictions}
 
 # Create the grid on which to make the spatial predictions
 CAPred.loci <- expand.grid(seq(-125, -115, 0.1), seq(32, 42, 0.1))
@@ -181,8 +181,9 @@ spplot(x["var1.var"], main = "ordinary kriging variance", sp.layout = list(monit
 
 ```
 
+## Example 10.6 Fitting a Bayesian exponential spatial model using NIMBLE
 
-## Example 10.8 Spatial prediction of NO2 in Europe {-}
+## Example 10.7 Spatial prediction of $PM_{2.5}$  in Europe {-}
 
 ```{r Ex 10.8 clean nimble, include = FALSE}
 rm(list = ls())
@@ -968,7 +969,7 @@ S_summary_df$village <-
 ## Supplementary Material {-}
 
 
-### Extra 10.1: Spatial patterns of benzene concentrations in Montreal, QC, Canada {-}
+### Example: Analysis of benzene concentrations across Montreal, QC, Canada {-}
 
 Map the locations of the monitoring stations in Montreal.
 

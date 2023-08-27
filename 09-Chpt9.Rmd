@@ -1,43 +1,67 @@
 # Disease-spatial patterns {#Disease}
 
-This chapter introduces disease mapping and contains the theory for spatial lattice processes and models for performing smoothing of risks over space. From this chapter, the reader will have gained an understanding of the following topics:
+This chapter contains an introduction to different types of spatial data, the theory of spatial lattice processes and introduces disease mapping and models for performing smoothing of risks over space. The  reader will have gained an understanding of the following topics:
 
-- Disease mapping, where we have seen how to improve estimates of risk by borrowing strength from adjacent regions which can reduce the instability inherent in risk estimates (SMRs) based on small expected numbers.
-- Seen how smoothing can be performed using either the empirical Bayes or fully Bayesian approaches.
-- Been introduced to computational methods for handling areal data.
-- Learned about Besag’s seminal contributions to the field of spatial statistics including the very important concept of a Markov random field.
-- Explored approaches to modelling a real data including the conditional auto regressive models.
-- Seen how Bayesian spatial models for lattice data use `nimble`, `stan`, `R` and `R–INLA`. 
-
+    - disease mapping and how to improve estimates of risk by borrowing strength from adjacent regions which can reduce the instability inherent in risk estimates based on small (expected) numbers;
+    - how smoothing can be performed using either the empirical Bayes  or fully Bayesian approaches;
+    - computational methods for handling areal data;
+    - Besag's seminal contributions to the field of spatial statistics including the very important concept  of a Markov random field;
+    - approaches to modelling  areal data including conditional autoregressive models;
+    -  how  Bayesian spatial models for lattice data can be fit using NIMBLE, RStan and R--INLA.
+    
+    
 ## Example 9.1: Empirical Bayes and Bayes smoothing of COPD mortality for 2010 {-}
 
+Here we consider hospitalization for a respiratory condition, chronic obstructive pulmonary disease (COPD), in England in 2010. There are $N_l=324$ local authority administrative areas  each with an observed, $Y_l $ and expected, $E_l$,  number of cases, $l=1,...,324$. As described in 
+Section 2.4 the expected numbers were calculated using indirect standardization by applying the 
+age--sex specific rates for the whole of England to the age--sex population profile of each of the areas.  In order to perform empirical Bayes smoothing, we will use the {\tt eBayes} function in the {\tt SpatialEpi} package. 
 This example uses the [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityobserved.csv), and
-[copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityexpected.csv) datasets from Chapter 6. 
+[copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityexpected.csv) datasets.
 
-### Nimble {-}
 
-Following Example 6.2 we look back at the hospital admission rates for COPD, in England for 2010. We can implement the same model we used on Example 6.2 using `nimble`.
+### Empirical Bayes estimate using {\tt SpatialEpi}
 
-```{r Ex 9.1 nimble load, message=FALSE, echo = TRUE, warning=FALSE, message= FALSE}
+```{r Ex 9.1 SpatialEpi, message=FALSE, echo=TRUE, warning=FALSE,message=FALSE}
 
-# Load nimble
-library(nimble)
-library(sf) # to read shapefile
-
-# Load data
-# Reading in borders
+# requires SpatialEpi package
+library (SpatialEpi)
+library(sf) # package used to read shapefiles
+# Laoding the borders of England
 england <- read_sf("data/copd/englandlocalauthority.shp")
-# Reading in data
+# Loading the data
 observed <-
   read.csv(file = "data/copd/copdmortalityobserved.csv", row.names = 1)
 expected <-
   read.csv(file = "data/copd/copdmortalityexpected.csv", row.names = 1)
+#observed data
+Y <- observed$Y2010
+# offset
+E <- expected$E2010
+
+RRs = eBayes (Y , E )
+plot ( RRs $ SMR , RRs $ RR , xlim = c (0 ,2) , ylim = c (0 ,2) , xlab = "
+SMRs " , ylab = " RRs " )
+abline ( a =0 , b =1 , col = " red " , lwd =3)
 
 ```
 
-The following is the code for the Poisson-Gamma model implemented in `nimble`.
+
+The smoothing can be seen with lower and higher SMRs being brought close to the overall average, $\mu$ which in this case is $\exp(-0.0309) =  0.9696$. Note that in this example, the areas are relatively large and would be expected to have substantial populations, so the effect of the smoothing is  limited. In this example, $\alpha$ was estimated to be 14.6.   For a fully Bayesian, rather than empirical Bayes, analysis we can use NIMBLE; and this is what we present next.
+
+### Nimble {-}
+
+<!--- ```{r Ex 9.1 nimble load, echo=TRUE, message=FALSE, warning=FALSE}
+
+# Load nimble
+library(nimble)
+library(sf) # package used to read shapefiles
+```
+--->
+
 
 ```{r Ex 9.1 nimble model, results='hide', warning=FALSE, message= FALSE, cache = TRUE}
+library(nimble)
+
 
 Example9_1Nimble <- nimbleCode({
   for (i in 1:N) {
@@ -101,12 +125,15 @@ mcmc.out <- nimbleMCMC(
 
 
 
-Show the WAIC, effective sample size, and trace plots for some of the parameters.
+Effective sample size is checked through the minimum value among all the samples available. This is to check if this minimum is acceptable. We also provide trace plots of the chains for some of the parameters. We provide the command to obtain WAIC in case model comparison will be performed in a later stage. <!---Show the WAIC, effective sample size, and trace plots for some of the parameters.--->
 
 ```{r Ex 9.1 nimble WAIC, ESS and traceplots}
 
-mcmc.out$WAIC
+
 min(coda::effectiveSize(mcmc.out$samples))
+mcmc.out$WAIC
+
+#storing the samples from the posterior distribution in mvSamples
 mvSamples <- mcmc.out$samples
 
 # trace plot of a
@@ -167,6 +194,8 @@ abline(a = 0, b = 1)
 
 ```
 
+Now we present the code for the same model in {\tt Stan}. We start by cleaning the ´R environment`. 
+
 ### Stan {-}
 
 ```{r Ex 9.1 clean, include = FALSE}
@@ -192,14 +221,14 @@ expected <-
 
 ```
 
-Write the `stan` model. This model is in a separate file called `Example8_1.stan` that will be called later.
+The `Stan` model is in a separate file called `Example9_1.stan` that will be called later.
 
 ```{r engine='bash', comment='', echo = FALSE}
 cat functions/Example9_1.stan
 ``` 
 
 
-Define the data for the model, similar to `nimble`. 
+Similarly to `NIMBLE`, we now define the different objects that will contain information about the data. 
 
 ```{r Ex 9.1 stan define data, error = FALSE, message = FALSE, results='hide', cache=TRUE}
 # observations
@@ -224,27 +253,34 @@ Ex9_1Stan <- stan(
   # QUESTION: should we explain this?
   control = list(adapt_delta = 0.8, max_treedepth = 15),
   init = "random",
-  pars = c("a", "theta", "log_lik", "yfit"),
+  pars = c("a","beta0","theta", "log_lik", "yfit"),
   include = TRUE
 )
 
 ```
 
-Compute the WAIC, show the trace plots and posterior summaries of the parameters.
+We now check the trace plots of some of the parameters, check the effective sample size. Once convergence has been checked we obtain the posterior summaries of some of the parameters. <!---Compute the WAIC, show the trace plots and posterior summaries of the parameters.--->
 
 ```{r Ex 9.1 stan waic and traceplots, message= FALSE, warning=FALSE}
 
+# traceplots of parameters a and b
+rstan::traceplot(Ex9_1Stan, pars = c("a","beta0"))
+# traceplots of parameter theta
+rstan::traceplot(Ex9_1Stan, pars = c("theta[1]", "theta[2]", "theta[3]"))
+# posterior summaries together with Rhat
+rstan::traceplot(Ex9_1Stan, pars = c("a","theta[1]", "theta[2]", "theta[3]"))
+rstan::summary(Ex9_1Stan, pars = c("a","theta[1]", "theta[2]", "theta[3]"))
+
+# To be able to compute the WAIC in Stan, we need to define the log_lik quantity in the generated quantities block
+# Compute WAIC
 loglik0 <- extract_log_lik(Ex9_1Stan)
 waic0 <- waic(loglik0)
 waic0
 
-# traceplots of parameters a and b
-rstan::traceplot(Ex9_1Stan, pars = c("a"))
-# traceplots of parameter theta
-rstan::traceplot(Ex9_1Stan, pars = c("theta[1]", "theta[2]", "theta[3]"))
 
 ```
 
+Note that the ´summary` function of a `RStan` object provides the effective sample size and Rhat. We now plot the posterior summaries of $\theta_i$ and each of the fitted values with their respective 95% posterior credible intervals.
 
 ```{r Ex 9.1 stan posterior summary}
 
@@ -289,19 +325,22 @@ for (i in 1:N)
 abline(a = 0, b = 1)
 ```
 
-## Example 9.3: Fitting a conditional spatial model in `nimble` and `stan` {-}
+## Example 9.3: Fitting a conditional spatial model in `NIMBLE` and `RStan` {-}
+
+In this example, we see how to fit the Poisson log--normal model seen in Section 9.4 with spatial random effects coming from  the ICAR model described in Section 9.3.1. 
 
 This example uses the [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityobserved.csv), and
-[copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityexpected.csv) datasets from Chapter 6. 
+[copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityexpected.csv) datasets. 
 
 ### Nimble {-}
 
-In this example we revisit the COPD data from example 6.3.
+In this example, we see how to fit the Poisson log--normal model seen in Section 9.4 with spatial random effects coming from  the ICAR model described in Section 9.3.1.
 
 ```{r Ex 9.3 nimble clean, include = FALSE}
 rm(list=ls())
 ```
 
+We start by loading some packages and the data.
 
 ```{r Ex 9.3 nimble load, message=FALSE, warning=FALSE, message= FALSE}
 
@@ -330,7 +369,7 @@ copd_df <-
 
 ```
 
-Analyze the relationship between COPD data and the average deprivation score which is a measure of the socioeconomic status of the patients. 
+The following command provides a scatter plot of the average deprivation score and the estimated SMR for 2010. The plot suggests that as deprivation increases so does the SMR for 2010.
 
 ```{r Ex 9.3 plot copd and avg score}
 
@@ -341,8 +380,8 @@ ggplot(copd_df) + geom_point(aes(x = Average.Score, y = SMR2010)) +
 
 ```
 
-
-Define a function to obtain the number of neighbors. 
+To fit the ICAR model in `Nimble` we need to obtain the neighborhood matrix $W$. We start by defining a function that computes the number of neighbors for each 
+area.
 
 ```{r Ex 9.3 nimble munge functions, echo = TRUE}
 
@@ -361,18 +400,19 @@ adjlist = function(W, N) {
 
 ```
 
-Define the adjacency matrix and indexes for `stan` using the `nb2mat` and `adjlist`
+Next we obtain the adjacency matrix, W,Define the adjacency matrix and indexes for `stan` using the functions `nb2mat` and `adjlist` from package `spdep`.
 
 ```{r Ex 9.3 nimble neighborhood}
 
 # Create the neighborhood
-W.nb <-
-  poly2nb(england, row.names = rownames(england))
+W.nb <-poly2nb(england, row.names = rownames(england))
 # Creates a matrix for following function call
 W.mat <- nb2mat(W.nb, style = "B")
 # Define the spatial structure to use in stan
 N <- length(unique(england$ID))
+#creating a vector listing the ID numbers of the adjacent areas for each area
 neigh  <- adjlist(W.mat, N)
+# computing a vector of length N (the total number of areas) giving the number of neighbors for each area.
 numneigh  <- apply(W.mat,2,sum)
 
 ```
@@ -391,6 +431,7 @@ Example9_3Nimble <- nimbleCode({
   beta1 ~ dnorm(0, sd = 1)
   b[1:N] ~ dcar_normal(adj[1:L], weights[1:L], num[1:N], tau, zero_mean = 1)
   tau <- 1 / (sigma_b ^ 2)
+  #prior for sigma_b is a half-normal distribution
   sigma_b ~ T(dnorm(0, sd = 1), 0,)
   # Fitted values and likelihood for WAIC
   for (i in 1:N) {
@@ -413,7 +454,7 @@ constants <- list(
 # data list
 ex.data <-
   list(y = copd_df$Y2010, 
-       x = as.vector(scale(copd_df$Average.Score))) # vector of covariates
+       x = as.vector(copd_df$Average.Score)) # vector of covariates
 inits <-  list(
   beta0 = rnorm(1),
   beta1 = rnorm(1),
@@ -431,7 +472,7 @@ mcmc.out <- nimbleMCMC(
   monitors = params,
   niter = 40000,
   nburnin = 20000,
-  thin = 80,
+  thin = 20,
   WAIC = TRUE,
   nchains = 2,
   summary = TRUE,
@@ -440,19 +481,19 @@ mcmc.out <- nimbleMCMC(
 
 ```
 
-Show the WAIC, effective sample size, and trace plots for some of the parameters.
+Next we double-check convergence of the chains through trace plots and the effective sample sizes for some of the parameters.
 
 
-```{r Ex 9.3 WAIC, ESS and traceplots }
+```{r Ex 9.3 ESS and traceplots }
 
-mcmc.out$WAIC
-# min(coda::effectiveSize(mcmc.out$samples))
-# plot(mcmc.out$samples[, c("beta0")], bty = "n", main = "beta0")
-# plot(mcmc.out$samples[, c("beta1")], bty = "n")
-# plot(mcmc.out$samples[, c("b[2]")], bty = "n")
-# plot(mcmc.out$samples[, c("tau")], bty = "n")
+ min(coda::effectiveSize(mcmc.out$samples))
+ plot(mcmc.out$samples[, c("beta0")], bty = "n", main = "beta0")
+ plot(mcmc.out$samples[, c("beta1")], bty = "n")
+ plot(mcmc.out$samples[, c("b[2]")], bty = "n")
+ plot(mcmc.out$samples[, c("tau")], bty = "n")
 ```
 
+Posterior summaries of the intercept, the fixed effect for average deprivation index and the precision of the ICAR prior distribution.
 
 ```{r Ex 9.3 nimble CAR summary, echo = TRUE}
 
@@ -463,7 +504,7 @@ summary_CAR_nimble[variables,]
 
 ```
 
-Map the mean of the posterior estimate for the latent effect.
+Map of the posterior mean of the latent effects.
 
 ```{r Ex 9.3 plot map nimble, eval=FALSE}
 
@@ -476,18 +517,14 @@ ggplot() +
   # Choose spatial object and column for plotting
   geom_sf(data = CAR_nimble_merge, aes(fill = Mean)) +
   # Change legend's label
-  labs(fill = 'Latent effects nimble') +
+  labs(fill = 'Latent effects under Nimble') +
   # Clear background and plot borders
  theme_void()
 ```
 
+Now we perform the same analysis using `Stan`. Note that, different from `Nimble`, the sum-to-zero constraint in `Stan` is a soft one.
 
 ### Stan {-}
-
-Here, we implement the CAR model using `stan`.
-
-This example uses the [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityobserved.csv), and
-[copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityexpected.csv) datasets from Chapter 6. 
 
 
 ```{r Ex 9.3 stan clean, include = FALSE}
@@ -498,11 +535,11 @@ rm(list=ls())
 ```{r Ex 9.3 stan load, message=FALSE, echo = FALSE, warning=FALSE, message= FALSE}
 
 library(ggplot2)
-library(loo) # To calculate WAIC and loo later
+library(loo) # To compute WAIC and loo later
 library(rstan) 
 library(spdep) 
 
-# Additional settings for stan
+# Additional settings for Stan
 options(mc.cores = parallel::detectCores())
 rstan_options(auto_write = TRUE)
 
@@ -527,8 +564,7 @@ copd_df <-
 
 ```
 
-
-We will need two functions to structure the matrix of neighbors that will be needed in `stan`.
+As `Stan` does not have a specific function for the ICAR prior we need to compute the neighborhood structure through the following functions which were obtained from [this site](https://mc-stan.org/users/documentation/case-studies/icar_stan.html):
 
 ```{r Ex 9.3 stan munge functions, echo = TRUE}
 
@@ -576,14 +612,14 @@ mungeCARdata4stan = function(adjBUGS, numBUGS) {
 
 
 
-This model is in a separate file called `Example8_3.stan` that will be called later.
+This model is in a separate file called `Example9_3.stan` that will be called later.
 
 ```{r engine='bash', comment='', echo = FALSE}
 cat functions/Example9_3.stan
 ``` 
 <!-- REVIEW: I am missing the adjacency matrix but I calculated like they did for the CARBayes example, is that right? -->
 
-Define the adjacency matrix and indexes for `stan` using the `nb2mat` and `adjlist`
+Define the adjacency matrix and the set of indices of the neighboring areas using functions `nb2mat` and `adjlist`:
 
 
 ```{r Ex 9.3 stan car effects, warning=FALSE, results='hide', message = FALSE, cache=TRUE}
@@ -604,7 +640,7 @@ nbs <- mungeCARdata4stan(neigh, numneigh)
 # Define data and variables for Stan model
 y <- copd_df$Y2010
 E <- copd_df$E2010
-X <- as.numeric(scale(copd_df$Average.Score))
+X <- as.numeric(copd_df$Average.Score)
 
 ex.data <- list(
   N =  nbs$N,
@@ -620,32 +656,29 @@ ex.data <- list(
 Example9_3Stan  <- stan(
   file = "functions/Example9_3.stan",
   data = ex.data,
-  warmup = 10000,
-  iter = 20000,
+  warmup = 2000,
+  iter = 10000,
   chains = 2,
-  thin = 10,
-  pars = c("beta0", "beta","sigma_s", "b", "log_lik"),
+  thin = 8,
+  pars = c("beta0", "beta","sigma_s", "riskdep", "b", "log_lik"),
   include = TRUE
 )
 
 ```
 
 
-Show traceplots.
+Trace plots of the posterior samples for some of the parameters.
 
 ```{r Ex 9.3 stan CAR traceplots}
-#computing WAIC using the package loo
 
-loglikcar <- extract_log_lik(Example9_3Stan)
-waiccar <- waic(loglikcar)
-waiccar
-
+#traceplots of some parameters
 rstan::traceplot(Example9_3Stan, pars = c("beta0","beta","sigma_s"))
 
 ```
 
-Show the posterior summary for the parameters if interest. 
-Keep in mind that in the stan model the we are sampling the standard deviation of the random effect unlike `CARBayes` where the variance is obtained.
+We now obtain the posterior summaries of the intercept, the fixed effect associated with the deprivation score and the standard deviation of the random effect. The quantity `riskdep` shows the relative risk associated with an one unit increase in deprivation.
+<!---Show the posterior summary for the parameters if interest. 
+Keep in mind that in the stan model the we are sampling the standard deviation of the random effect unlike `CARBayes` where the variance is obtained.--->
 
 ```{r Ex 9.3 stan CAR results, echo = TRUE}
 
@@ -653,7 +686,7 @@ Keep in mind that in the stan model the we are sampling the standard deviation o
 summary_CAR_stan <-
   summary(
     Example9_3Stan,
-    pars = c("beta0", "beta","sigma_s"),
+    pars = c("beta0", "beta","sigma_s","riskdep"),
     probs = c(0.025, 0.975)
   )
 
@@ -661,9 +694,10 @@ summary_CAR_stan$summary
 
 ```
 
+ The result suggests that an one unit increase in deprivation, increases the relative risk by 2.2%. Recall that the standard deviation of the ICAR prior refers to the standard deviation of a conditional distribution.
 
 
-Map the mean of the posterior estimate for the latent effect.
+We now plot the posterior means of the latent effects
 
 ```{r Ex 9.3 plot map stan}
 
@@ -695,11 +729,15 @@ ggplot() +
 
 ## Example 9.4: Fitting a conditional spatial model using CARBayes {-}
 
+Here we consider fitting the Poisson log--normal model with spatial effects to the data for respiratory admissions seen in Example 9.3 using the R package `CARBayes`. The adjacency matrix is obtained using functions of the package `spdep`.
+
+`CARBayes` performs MCMC simulation similar to NIMBLE but has the distinct advantage that you just call specific functions to run the model.
+
+
 ```{r Ex 9.4 clean, include=FALSE}
 rm(list=ls())
 ```
 
-Load the necessary libraries and the COPD data:  [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityobserved.csv), and [copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityexpected.csv) datasets from Chapter 6. 
 
 
 ```{r Ex 9.4 carbayes load, message=FALSE, warning=FALSE, message= FALSE}
@@ -731,22 +769,19 @@ copd_df$Average.Score <- as.numeric(scale(copd_df$Average.Score))
 ```
 
 
-To calculate the smoother SMRs, we first need to create a *neighborhood* structure. The functions `poly2nb()` and `nb2mat()` from the `spdep` package can be used to create this
+Next we compute the neighborhood matrix through `poly2nb()` and `nb2mat()` from the `spdep`.
 
 ```{r Ex 9.4 carbayes neighborhood}
 
 # Create the neighborhood
-W.nb <-
-  poly2nb(england, row.names = rownames(england))
+W.nb <-poly2nb(england, row.names = rownames(england))
 
 # Creates a matrix for following function call
-W.mat <- nb2mat(W.nb, style = "B")
+W.mat <-  nb2mat(W.nb, style = "B")
 
 ```
 
-Here, we use *first neighbors* to define the structure, so any local authority sharing a border are considered neighbors.
-
-The function `S.CARleroux()` allows us to use the neighborhood structure and performs a Bayesian analysis to create a smoothed set of observed values.
+The function `S.CARleroux()` allows us to use the neighborhood structure and performs a Bayesian analysis assuming a CAR prior distribution to the random effects. This is obtained by setting the parameter rho equals 1 in the call of `S.CARleroux()`.
 
 
 ```{r Ex 9.4 carbayes run, results='hide', message = FALSE, cache = TRUE}
@@ -767,30 +802,15 @@ Ex9_4 <-
     # Number of MCMC samples
     n.sample = 100000,
     thin = 10,
+    #ICAR model given a 0-1 neighborhood structure
     rho = 1
   )
 
 ```
 
-We can extract the new smoother values from the model output and divide them by the expected values in order to compare both methods. 
 
 
-```{r Ex 9.4 carbayes smoothed SMRs, class.source = 'foldable' }
-
-# Creating a dataset with smoothed SMRs in 2010
-SMR2010 <- Ex9_4$fitted.values /  copd_df$E2010
-SMR_smooth <- as.data.frame(SMR2010, row.names = rownames(observed))
-# Printing first six rows of smoothed SMRs
-head(SMR_smooth)
-# Summarizing smoothed SMRs
-summary(SMR_smooth)
-# Summary of the parameters under the CAR model.
-Ex9_4$summary.results[]
-```
-
-<!-- QUESTION: What do we want the latent effect or the fitted values? -->
-
-Use `ggplot()` and `geom_sf()` to plot the map of the latent spatial effect.
+Using `ggplot()` and `geom_sf()` to plot the map of the latent spatial effects.
 
 ```{r Ex 9.4 carbayes map smoothed SMRs, class.source = 'foldable'}
 
@@ -815,8 +835,7 @@ ggplot() +
 
 ## Example 9.5: Fitting a conditional model using INLA {-}
 
-This example uses the [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityobserved.csv), and
-[copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityexpected.csv) datasets from Chapter 6. 
+Now we fit the Poisson log--normal model with spatial effects to the data for respiratory admissions seen in Example 9.3 using  `R-INLA`. Recall that `R-INLA` approximates the resultant posterior distribution using an integrated nested Laplace approximation. The call to fit the model using `R-INLA` is very similar to the one when fitting a `glm`. The latent effects are introduced through the function `f(.)`.
 
 
 ```{r Ex 9.5 clean, include = FALSE}
@@ -904,6 +923,7 @@ ggplot() +
 
 ```
 
+## Supplementary Example: Fitting a Leroux model to the COPD dataset using Nimble, Stan and CARBayes
 <!-- ## Example 9.6: Fitting a Leroux Model using Nimble, Stan and CARBayes -->
 
 <!-- This example uses the [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityobserved.csv), and -->
@@ -929,7 +949,7 @@ ggplot() +
 <!-- observed <- -->
 <!--   read.csv(file = "data/copd/copdmortalityobserved.csv", row.names = 1) -->
 <!-- expected <- -->
-<!--   read.csv(file = "data/copd/copdmortalityexpected.csv") -->
+<!--   read.csv(file = "data/copd/copd   mortalityexpected.csv") -->
 <!-- covariates <- read.csv(file = "data/copd/copdavgscore.csv") -->
 <!-- # Merge everything into one data frame -->
 <!-- copd_df <- -->

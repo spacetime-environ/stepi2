@@ -7,13 +7,14 @@ data {
 parameters {
   real<lower=0> theta[N];
   real<lower=0> a;
+  real beta0;
 }
 
 transformed parameters{
   real <lower=0> mu[N];
   
   for(i in 1:N){
-    mu[i]=E[i]*theta[i];
+    mu[i]=E[i]*theta[i]*exp(beta0);
   }
   
 }
@@ -25,6 +26,7 @@ model {
     theta[i]~gamma(a,a);
   }
   a~gamma(1, 1);
+  beta0~normal(0,10);
 }
 
 generated quantities {
