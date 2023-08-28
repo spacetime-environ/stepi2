@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Extracting information from data | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition</title>
+  <meta name="description" content="Chapter 4 Extracting information from data | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Extracting information from data | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/img/cover.jpg" />
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Extracting information from data | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition" />
+  
+  
+  <meta name="twitter:image" content="/img/cover.jpg" />
+
+<meta name="author" content="Gavin Shaddick, James V. Zidek, and Alexandra M. Schmidt" />
+
+
+<meta name="date" content="2023-08-28" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<link rel="prev" href="uncertainty.html"/>
+<link rel="next" href="embracing.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Spatio-temporal methods in environmental epidemiology</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="preface-to-second-edition.html"><a href="preface-to-second-edition.html"><i class="fa fa-check"></i>PREFACE TO SECOND EDITION</a></li>
+<li class="chapter" data-level="1" data-path="why.html"><a href="why.html"><i class="fa fa-check"></i><b>1</b> An overview of spatio-temporal epidemiology and knowledge discovery?</a></li>
+<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> An introduction to modelling health risks and impacts</a>
+<ul>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.7-estimating-the-smr-using-a-poisson-glm"><i class="fa fa-check"></i>Example 2.7: Estimating the SMR using a Poisson GLM</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.8-estimating-the-smr-using-quasi-likelihood"><i class="fa fa-check"></i>Example 2.8: Estimating the SMR using quasi-likelihood</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.9-modelling-differences-in-smrs-in-relation-to-differences-in-exposures"><i class="fa fa-check"></i>Example 2.9: Modelling differences in SMRs in relation to differences in exposures</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.10-modelling-the-risks-associated-with-lagged-effects-of-air-pollution"><i class="fa fa-check"></i>Example 2.10: Modelling the risks associated with lagged effects of air pollution</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.10-estimating-the-odds-ratio-in-a-case-control-study-using-a-logistic-model"><i class="fa fa-check"></i>Example 2.10: Estimating the odds ratio in a case-control study using a logistic model</a></li>
+<li class="chapter" data-level="" data-path="basics.html"><a href="basics.html#example-2.11-estimating-the-odds-ratio-of-asthma-associated-with-proximity-to-roads"><i class="fa fa-check"></i>Example 2.11: Estimating the odds ratio of asthma associated with proximity to roads</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="uncertainty.html"><a href="uncertainty.html"><i class="fa fa-check"></i><b>3</b> The importance of uncertainty: assessment and quantification</a>
+<ul>
+<li class="chapter" data-level="" data-path="uncertainty.html"><a href="uncertainty.html#supplementary-material"><i class="fa fa-check"></i>Supplementary Material</a>
+<ul>
+<li class="chapter" data-level="" data-path="uncertainty.html"><a href="uncertainty.html#more-on-qualitative-uncertainty"><i class="fa fa-check"></i>More on qualitative uncertainty</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>4</b> Extracting information from data</a>
+<ul>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#getting-to-know-the-structure-of-dataframes"><i class="fa fa-check"></i>Getting to know the structure of dataframes</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#extracting-and-creating-variables"><i class="fa fa-check"></i>Extracting and creating variables</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#simple-manipulations-using-tidyverse"><i class="fa fa-check"></i>Simple manipulations using Tidyverse</a>
+<ul>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#filter-rows-in-tidyverse"><i class="fa fa-check"></i>Filter rows in Tidyverse</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#sorting-rows-in-tidyverse"><i class="fa fa-check"></i>Sorting rows in Tidyverse</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#select-columns-in-tidyverse"><i class="fa fa-check"></i>Select columns in Tidyverse</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#adding-columns"><i class="fa fa-check"></i>Adding columns</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#pipes"><i class="fa fa-check"></i>Pipes</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#chaining-pipes"><i class="fa fa-check"></i>Chaining pipes</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#grouping-and-summarizing"><i class="fa fa-check"></i>Grouping and summarizing</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#summarize"><i class="fa fa-check"></i>Summarize</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#example-4.1-health-impacts-associated-with-outdoor-air-pollution"><i class="fa fa-check"></i>Example 4.1: Health impacts associated with outdoor air pollution</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#example-4.3.-mapping-cancer-incidence-in-southern-and-eastern-serbia"><i class="fa fa-check"></i>Example 4.3. Mapping cancer incidence in Southern and Eastern Serbia</a>
+<ul>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#creating-maps-of-southern-and-eastern-serbia"><i class="fa fa-check"></i>Creating maps of Southern and Eastern Serbia</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#example-4.4-cancer-in-bor"><i class="fa fa-check"></i>Example 4.4 Cancer in Bor</a></li>
+<li class="chapter" data-level="" data-path="data.html"><a href="data.html#calculating-smrs"><i class="fa fa-check"></i>Calculating SMRs</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="embracing.html"><a href="embracing.html"><i class="fa fa-check"></i><b>5</b> Embracing uncertainty: the Bayesian approach</a></li>
+<li class="chapter" data-level="6" data-path="computation.html"><a href="computation.html"><i class="fa fa-check"></i><b>6</b> Approaches to Bayesian Computation</a>
+<ul>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#example-6.2-gibbs-sampling-with-a-poisson-gamma-model---hospital-admissions-for-chronic-obstructive-pulmonary-disease-copd-for-england-between-2001-2010"><i class="fa fa-check"></i>Example 6.2: Gibbs sampling with a Poisson-Gamma model - hospital admissions for chronic obstructive pulmonary disease (COPD) for England between 2001-2010</a>
+<ul>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#modelling-the-raw-standardized-mortality-rates-smrs"><i class="fa fa-check"></i>Modelling the raw standardized mortality rates (SMRs)</a></li>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#mcmc-implementation-of-the-poisson-gamma-model-in-r"><i class="fa fa-check"></i>MCMC implementation of the Poisson-Gamma model in <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#code-for-the-poisson-gamma-model-in-nimble"><i class="fa fa-check"></i>Code for the Poisson-Gamma model in Nimble</a></li>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#example-6.3-fitting-a-poisson-regression-model"><i class="fa fa-check"></i>Example 6.3: Fitting a Poisson regression model</a>
+<ul>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#nimble"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="computation.html"><a href="computation.html#stan"><i class="fa fa-check"></i>Stan</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="Strategies.html"><a href="Strategies.html"><i class="fa fa-check"></i><b>7</b> Strategies for modelling</a>
+<ul>
+<li class="chapter" data-level="" data-path="Strategies.html"><a href="Strategies.html#example-7.6-variable-selection-in-land-use-regression-using-lasso-and-horseshoe-priors"><i class="fa fa-check"></i>Example 7.6 Variable selection in land use regression using lasso and horseshoe priors</a>
+<ul>
+<li class="chapter" data-level="" data-path="Strategies.html"><a href="Strategies.html#nimble-1"><i class="fa fa-check"></i>Nimble</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="trusted.html"><a href="trusted.html"><i class="fa fa-check"></i><b>8</b> The challenges of working with real-world data</a>
+<ul>
+<li class="chapter" data-level="" data-path="trusted.html"><a href="trusted.html#solutions-to-selected-exercises"><i class="fa fa-check"></i>Solutions to Selected Exercises</a>
+<ul>
+<li class="chapter" data-level="" data-path="trusted.html"><a href="trusted.html#placeholder-repeat-the-black-smoke-analysis-conducted-in-watson-et-al.-2019.-in-the-naive-model."><i class="fa fa-check"></i>PLACEHOLDER: Repeat the Black Smoke analysis conducted in Watson et al. 2019. in the “naive” model.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="Disease.html"><a href="Disease.html"><i class="fa fa-check"></i><b>9</b> Disease-spatial patterns</a>
+<ul>
+<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.1-empirical-bayes-and-bayes-smoothing-of-copd-mortality-for-2010"><i class="fa fa-check"></i>Example 9.1: Empirical Bayes and Bayes smoothing of COPD mortality for 2010</a>
+<ul>
+<li class="chapter" data-level="9.0.1" data-path="Disease.html"><a href="Disease.html#empirical-bayes-estimate-using-spatialepi"><i class="fa fa-check"></i><b>9.0.1</b> Empirical Bayes estimate using <code>SpatialEpi</code></a></li>
+<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#nimble-2"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#stan-1"><i class="fa fa-check"></i>Stan</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.3-fitting-a-conditional-spatial-model-in-nimble-and-rstan"><i class="fa fa-check"></i>Example 9.3: Fitting a conditional spatial model in <code>NIMBLE</code> and <code>RStan</code></a>
+<ul>
+<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#nimble-3"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#stan-2"><i class="fa fa-check"></i>Stan</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.4-fitting-a-conditional-spatial-model-using-carbayes"><i class="fa fa-check"></i>Example 9.4: Fitting a conditional spatial model using CARBayes</a></li>
+<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.5-fitting-a-conditional-model-using-inla"><i class="fa fa-check"></i>Example 9.5: Fitting a conditional model using INLA</a></li>
+<li class="chapter" data-level="9.1" data-path="Disease.html"><a href="Disease.html#supplementary-example-fitting-a-leroux-model-to-the-copd-dataset-using-nimble-stan-and-carbayes"><i class="fa fa-check"></i><b>9.1</b> Supplementary Example: Fitting a Leroux model to the COPD dataset using Nimble, Stan and CARBayes</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="hazards.html"><a href="hazards.html"><i class="fa fa-check"></i><b>10</b> Environmental hazards-spatial models</a>
+<ul>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.1-spatial-patterns-in-lead-concentrations-in-the-soil-of-the-meuse-river-flood-plain"><i class="fa fa-check"></i>Example 10.1 Spatial patterns in lead concentrations in the soil of the Meuse River flood plain</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.2-examining-the-log-concentrations-of-lead-in-the-meuse-river-flood-plain"><i class="fa fa-check"></i>Example 10.2: Examining the log concentrations of lead in the Meuse River flood plain</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.3-mapping-the-locations-of-ozone-monitoring-sites-in-new-york-state"><i class="fa fa-check"></i>Example 10.3: Mapping the locations of ozone monitoring sites in New York State</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.5-spatial-prediction-of-temperatures-in-california"><i class="fa fa-check"></i>Example 10.5: Spatial prediction of temperatures in California</a></li>
+<li class="chapter" data-level="10.1" data-path="hazards.html"><a href="hazards.html#example-10.6-fitting-a-bayesian-exponential-spatial-model-using-nimble"><i class="fa fa-check"></i><b>10.1</b> Example 10.6 Fitting a Bayesian exponential spatial model using NIMBLE</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.7-spatial-prediction-of-pm_2.5-in-europe"><i class="fa fa-check"></i>Example 10.7 Spatial prediction of <span class="math inline">\(PM_{2.5}\)</span> in Europe</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.10-creating-a-mesh-black-smoke-monitoring-locations-in-the-uk"><i class="fa fa-check"></i>Example 10.10 Creating a mesh: black smoke monitoring locations in the UK</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.12-plotting-directional-variograms-for-temperatures-in-california"><i class="fa fa-check"></i>Example 10.12 Plotting directional variograms for temperatures in California</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.14-spatial-modeling-of-malaria-in-gambia"><i class="fa fa-check"></i>Example 10.14: Spatial modeling of malaria in Gambia</a>
+<ul>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#nimble-4"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#stan-3"><i class="fa fa-check"></i>Stan</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#supplementary-material-1"><i class="fa fa-check"></i>Supplementary Material</a>
+<ul>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-analysis-of-benzene-concentrations-across-montreal-qc-canada"><i class="fa fa-check"></i>Example: Analysis of benzene concentrations across Montreal, QC, Canada</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.2-examining-the-log-concentrations-of-benzene-in-montreal"><i class="fa fa-check"></i>Extra 10.2: Examining the log concentrations of benzene in Montreal</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.5-variogram"><i class="fa fa-check"></i>Extra 10.5: Variogram</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.6-basic-spatial-modelling-and-prediction-of-benzene-in-montreal"><i class="fa fa-check"></i>Extra 10.6 Basic spatial modelling and prediction of benzene in Montreal</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.8-spatial-modelling-of-benzene-in-montreal"><i class="fa fa-check"></i>Extra 10.8 Spatial modelling of Benzene in Montreal</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.9-spatial-predictions"><i class="fa fa-check"></i>Extra 10.9: Spatial predictions</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.10-inla-creating-a-mesh"><i class="fa fa-check"></i>Extra 10.10: INLA, creating a mesh</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.12-fitting-an-spde-model-using-rinla-benzene-concentration-in-montreal"><i class="fa fa-check"></i>Extra 10.12: Fitting an SPDE model using R–INLA: benzene concentration in Montreal</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.13-directional-variograms"><i class="fa fa-check"></i>Extra 10.13: Directional variograms</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="Time.html"><a href="Time.html"><i class="fa fa-check"></i><b>11</b> Modelling temporal data: time series analysis and forecasting</a>
+<ul>
+<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.1-ground-level-ozone-concentrations"><i class="fa fa-check"></i>Example 11.1 Ground level ozone concentrations</a></li>
+<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.2-low-pass-filtering-of-ozone-levels-using-the-moving-average"><i class="fa fa-check"></i>Example 11.2 Low-pass filtering of ozone levels using the moving average</a></li>
+<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.12-forecasting-ozone-levels"><i class="fa fa-check"></i>Example 11.12 Forecasting ozone levels</a></li>
+<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.13-forecasting-volcanic-ash"><i class="fa fa-check"></i>Example 11.13 Forecasting volcanic ash</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="exposure.html"><a href="exposure.html"><i class="fa fa-check"></i><b>12</b> Exposure assessment-over space and time</a>
+<ul>
+<li class="chapter" data-level="" data-path="exposure.html"><a href="exposure.html#example-idk-spatio-temporal-model-for-the-uk-ozone-data"><i class="fa fa-check"></i>Example IDK: Spatio-temporal model for the UK ozone data</a>
+<ul>
+<li class="chapter" data-level="" data-path="exposure.html"><a href="exposure.html#nimble-7"><i class="fa fa-check"></i>Nimble</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="causality.html"><a href="causality.html"><i class="fa fa-check"></i><b>13</b> Causality-roadblocks on the way to it</a>
+<ul>
+<li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#solutions-to-selected-exercises-1"><i class="fa fa-check"></i>Solutions to Selected Exercises</a>
+<ul>
+<li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#question-13.16-load-the-italy-and-china-data-described-in-example-13.3-and-included-in-the-supplementary-bookdown-material-into-r."><i class="fa fa-check"></i>Question 13.16: Load the Italy and China data, described in Example 13.3, and included in the supplementary Bookdown material into R.</a></li>
+<li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#question-13.17-using-the-italy-and-china-data-stratified-by-the-age-groups-70-and-geq-70-obtain-empirical-estimates-of-p_1-and-p_2-as-defined-in-an-sdis.-in-the-following-questions-assume-that-p_1-and-p_2-are-the-population-values."><i class="fa fa-check"></i>Question 13.17: Using the Italy and China data stratified by the age groups <span class="math inline">\(&lt;70\)</span> and <span class="math inline">\(\geq 70\)</span>, obtain empirical estimates of <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span>, as defined in an SDis. In the following questions, assume that <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span> are the population values.</a></li>
+<li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#question-13.18-stratify-the-italy-and-china-data-by-the-age-groups-50-and-geq-50.-display-the-corresponding-contingency-tables."><i class="fa fa-check"></i>Question 13.18: Stratify the Italy and China data by the age groups <span class="math inline">\(&lt;50\)</span> and <span class="math inline">\(\geq 50\)</span>. Display the corresponding contingency tables.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="monitoring.html"><a href="monitoring.html"><i class="fa fa-check"></i><b>14</b> Better monitoring network design-getting better measurements</a></li>
+<li class="chapter" data-level="15" data-path="frontiers.html"><a href="frontiers.html"><i class="fa fa-check"></i><b>15</b> Current frontiers</a></li>
+<li class="chapter" data-level="" data-path="course.html"><a href="course.html"><i class="fa fa-check"></i>Course</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Extracting information from data<a href="data.html#data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>There is a rich history of collecting environmental data and recently there has been an explosion in quantity and complexity of data related to the environment, from monitoring, satellite remote sensing, numerical modelling and many other sources. This chapter provides an introduction to the variety of different sources of data that are available and methods for obtaining, manipulating and processing data using the <a href="https://www.tidyverse.org/">Tidyverse</a> in R so that it is a form that can be readily used for analysis. The reader will have gained an understanding of the following topics:</p>
+<ul>
+<li><p>How the Tidyverse can be used for data wrangling;</p></li>
+<li><p>The importance of visualization in communication and understanding;</p></li>
+<li><p>How R can be used to summarize and visualize data;</p></li>
+<li><p>The use of shape files to produce maps in R;</p></li>
+<li><p>How to calculate expected numbers and SMRs in practice;</p></li>
+<li><p>How to perform health impact analysis.</p></li>
+</ul>
+<div id="getting-to-know-the-structure-of-dataframes" class="section level2 unnumbered hasAnchor">
+<h2>Getting to know the structure of dataframes<a href="data.html#getting-to-know-the-structure-of-dataframes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Once a dataframe has been loaded into R we can examine it and perform analysis. Initially, we can understand our dataset by finding
+the number of observations and variables in data frames by using the
+and functions, respectively.</p>
+<p>We will load and analyse data from the World Health Organization’s
+Global Air Pollution database. The data is open source and can be
+downloaded from the WHO’s website in format. It contains
+over 11,000 measurements of fine particulate matter air pollution (PM2.5
+and PM10) for the years 2010-2019 and details of the locations of
+monitoring sites. We can import this into R and convert it to a
+dataframe either by using the </p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="data.html#cb14-1" tabindex="-1"></a><span class="co"># import the dataset from a .csv file</span></span>
+<span id="cb14-2"><a href="data.html#cb14-2" tabindex="-1"></a>WHO_GM_Database <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/WHOGMDatabase.csv&quot;</span>)</span>
+<span id="cb14-3"><a href="data.html#cb14-3" tabindex="-1"></a><span class="co"># Viewing the structure of the variables within the WHO Air Pollution dataset</span></span>
+<span id="cb14-4"><a href="data.html#cb14-4" tabindex="-1"></a><span class="fu">str</span>(WHO_GM_Database)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    65428 obs. of  34 variables:
+##  $ ISO3                : chr  &quot;AFG&quot; &quot;AFG&quot; &quot;AFG&quot; &quot;ALB&quot; ...
+##  $ CountryName         : chr  &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Albania&quot; ...
+##  $ Year                : chr  &quot;2009&quot; &quot;2009&quot; &quot;2019&quot; &quot;2015&quot; ...
+##  $ StationID           : chr  &quot;AFG1&quot; &quot;AFG2&quot; &quot;AFG3&quot; &quot;ALB1&quot; ...
+##  $ StationIDOrig       : chr  NA NA &quot;[US Diplomatic Post: Kabul]&quot; &quot;AL0205A&quot; ...
+##  $ StationIDOldDatabase: int  1 1 0 1 1 1 1 1 1 1 ...
+##  $ City                : chr  &quot;Mazar-e Sharif&quot; &quot;Kabul&quot; &quot;[Kabul]&quot; NA ...
+##  $ CityReverseGeocoded : chr  &quot;Mazar-i-Sharif&quot; &quot;Kabul&quot; &quot;Kabul&quot; &quot;Durrës&quot; ...
+##  $ CityGiulia          : chr  NA NA NA NA ...
+##  $ CityClean           : chr  &quot;Mazar-e Sharif&quot; &quot;Kabul&quot; &quot;Kabul&quot; &quot;Durrës&quot; ...
+##  $ Longitude           : num  67.1 69.2 69.2 19.4 19.4 ...
+##  $ Latitude            : num  36.7 34.5 34.5 41.3 41.3 ...
+##  $ PM25                : num  68 86 119.8 NA 14.3 ...
+##  $ PM25PercCoverage    : num  0.0384 0.0384 0.18 NA 0.7533 ...
+##  $ PM25Grading         : int  3 3 3 NA 1 NA NA NA 1 1 ...
+##  $ PM10                : num  334 260 NA 17.6 24.6 ...
+##  $ PM10PercCoverage    : num  NA NA NA 0.794 0.839 ...
+##  $ PM10Grading         : int  4 4 NA 1 1 1 1 1 NA 1 ...
+##  $ LocationInfo        : chr  &quot;NA, NA&quot; &quot;NA, NA&quot; NA &quot;AL0205A, NA&quot; ...
+##  $ Source              : chr  &quot;Magnusson et al., Broad Exposure Screening of Air Pollutants in the Occupational Environment of Swedish Soldier&quot;| __truncated__ &quot;Magnusson et al., Broad Exposure Screening of Air Pollutants in the Occupational Environment of Swedish Soldier&quot;| __truncated__ &quot;OpenAQ&quot; &quot;European Environment Agency (EEA)&quot; ...
+##  $ MonitorType         : chr  &quot;Urban&quot; &quot;Urban&quot; &quot;Unknown&quot; &quot;Traffic&quot; ...
+##  $ MonitorTypeOrig     : chr  &quot;urban&quot; &quot;urban&quot; NA &quot;Traffic&quot; ...
+##  $ PM25Conv            : int  0 0 0 1 0 1 1 1 0 0 ...
+##  $ UnspecifiedType     : int  0 0 1 0 0 0 0 0 0 0 ...
+##  $ WebLink             : chr  NA NA &quot;[[[\&quot;EPA AirNow DOS\&quot;,\&quot;http://airnow.gov/index.cfm?action=airnow.global_summary\&quot;]]]&quot; &quot;https://www.eea.europa.eu/data-and-maps/Data/aqereporting-2&quot; ...
+##  $ Version             : chr  &quot;2016 Release&quot; &quot;2016 Release&quot; &quot;2021 Release&quot; &quot;Redownloaded for 2021 Release, replacing 2018 Release&quot; ...
+##  $ WHOStatus           : chr  &quot;Member state&quot; &quot;Member state&quot; &quot;Member state&quot; &quot;Member state&quot; ...
+##  $ WHORegion           : chr  &quot;EMR&quot; &quot;EMR&quot; &quot;EMR&quot; &quot;EUR&quot; ...
+##  $ WHOIncomeRegion     : chr  &quot;EMR LMI&quot; &quot;EMR LMI&quot; &quot;EMR LMI&quot; &quot;EUR LMI&quot; ...
+##  $ SDG1Region          : chr  &quot;Central Asia and Southern Asia&quot; &quot;Central Asia and Southern Asia&quot; &quot;Central Asia and Southern Asia&quot; &quot;Northern America and Europe&quot; ...
+##  $ SDG2Region          : chr  &quot;Southern Asia&quot; &quot;Southern Asia&quot; &quot;Southern Asia&quot; &quot;Europe&quot; ...
+##  $ SDG3Region          : chr  &quot;Southern Asia&quot; &quot;Southern Asia&quot; &quot;Southern Asia&quot; &quot;Southern Europe&quot; ...
+##  $ GBDRegion           : chr  &quot;Asia, South&quot; &quot;Asia, South&quot; &quot;Asia, South&quot; &quot;Europe, Central&quot; ...
+##  $ GBDSuperRegion      : chr  &quot;South Asia&quot; &quot;South Asia&quot; &quot;South Asia&quot; &quot;Central Europe, Eastern Europe and Central Asia&quot; ...</code></pre>
+<p>A quick way of viewing the dataset to see the data are using the names(), str() and head() functions. The names() function will display the variable names within a dataframe. The str() function will display the structure of the dataset, and the head() function will display the first 6 rows in the dataframe</p>
+</div>
+<div id="extracting-and-creating-variables" class="section level2 unnumbered hasAnchor">
+<h2>Extracting and creating variables<a href="data.html#extracting-and-creating-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="data.html#cb16-1" tabindex="-1"></a><span class="co"># Extracting the variable Year from WHO_GM_Database and assign to a new variable called Year</span></span>
+<span id="cb16-2"><a href="data.html#cb16-2" tabindex="-1"></a>YearOfMeasurement <span class="ot">&lt;-</span> WHO_GM_Database[,<span class="st">&#39;Year&#39;</span>]</span>
+<span id="cb16-3"><a href="data.html#cb16-3" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="data.html#cb16-4" tabindex="-1"></a><span class="co"># show the first 5 entries in YearOfMeasurement</span></span>
+<span id="cb16-5"><a href="data.html#cb16-5" tabindex="-1"></a>YearOfMeasurement[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;2009&quot; &quot;2009&quot; &quot;2019&quot; &quot;2015&quot; &quot;2016&quot;</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="data.html#cb18-1" tabindex="-1"></a><span class="co"># Extracting the row (or observation) from WHO_GM_Database and assign to a new variable called FirstRow</span></span>
+<span id="cb18-2"><a href="data.html#cb18-2" tabindex="-1"></a>FirstRow <span class="ot">&lt;-</span> WHO_GM_Database[<span class="dv">1</span>,]</span>
+<span id="cb18-3"><a href="data.html#cb18-3" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="data.html#cb18-4" tabindex="-1"></a><span class="co"># Show the first 10 entries in FirstRow</span></span>
+<span id="cb18-5"><a href="data.html#cb18-5" tabindex="-1"></a>FirstRow[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<pre><code>##   ISO3 CountryName Year StationID StationIDOrig StationIDOldDatabase
+## 1  AFG Afghanistan 2009      AFG1          &lt;NA&gt;                    1
+##             City CityReverseGeocoded CityGiulia      CityClean
+## 1 Mazar-e Sharif      Mazar-i-Sharif       &lt;NA&gt; Mazar-e Sharif</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="data.html#cb20-1" tabindex="-1"></a><span class="co"># Extracting the 3rd row for Year from WHO_GM_Database</span></span>
+<span id="cb20-2"><a href="data.html#cb20-2" tabindex="-1"></a>WHO_GM_Database[<span class="dv">3</span>,<span class="st">&#39;Year&#39;</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;2019&quot;</code></pre>
+<p>Alternatively, you can extract variables from the dataframes by using the
+operator. We first specify the dataset, then give the name of
+the variable that we want. Let’s extract the variable from
+.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="data.html#cb22-1" tabindex="-1"></a><span class="co"># Extracting the variable a from WHO_GM_Database, and show the first 3 entries</span></span>
+<span id="cb22-2"><a href="data.html#cb22-2" tabindex="-1"></a>WHO_GM_Database<span class="sc">$</span>Year[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;2009&quot; &quot;2009&quot; &quot;2019&quot;</code></pre>
+<p>Creating a new variable within a data frame is straightforward. Let’s
+create a variable within which is the difference between and 2010. For this we ex- tract the variable from and subtract 2010. In the dataframe, is a character variable (which you can see using ) and we will need to convert this to a numeric variable before performing the calculation.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="data.html#cb24-1" tabindex="-1"></a><span class="co"># convert Year to a numeric variable</span></span>
+<span id="cb24-2"><a href="data.html#cb24-2" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="data.html#cb24-3" tabindex="-1"></a>WHO_GM_Database<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(WHO_GM_Database<span class="sc">$</span>Year)</span></code></pre></div>
+<pre><code>## Warning: NAs introduced by coercion</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="data.html#cb26-1" tabindex="-1"></a><span class="co"># Extracting Year a from WHO_GM_Database,subtract 2000 and make a new variable in the WHO_GM_Database dataframe. For clarity, we will only show the first 3 entries</span></span>
+<span id="cb26-2"><a href="data.html#cb26-2" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="data.html#cb26-3" tabindex="-1"></a>WHO_GM_Database<span class="sc">$</span>TimeSince2010 <span class="ot">&lt;-</span> WHO_GM_Database<span class="sc">$</span>Year <span class="sc">-</span> <span class="dv">2000</span></span>
+<span id="cb26-4"><a href="data.html#cb26-4" tabindex="-1"></a>WHO_GM_Database<span class="sc">$</span>TimeSince2010[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
+<pre><code>## [1]  9  9 19</code></pre>
+</div>
+<div id="simple-manipulations-using-tidyverse" class="section level2 unnumbered hasAnchor">
+<h2>Simple manipulations using Tidyverse<a href="data.html#simple-manipulations-using-tidyverse" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Again, we will use the data frame and will start by looking at some basic operations, such as subsetting, sorting and adding new columns.</p>
+<p>One operation we often want to do is to extract a subset of rows according to some criterion. For example, we may want to extract all rows of the iris dataset that correspond to the versicolor species. In Tidyverse, we can use a function called . For clarity, we will show the first 3 rows of the output</p>
+<div id="filter-rows-in-tidyverse" class="section level3 unnumbered hasAnchor">
+<h3>Filter rows in Tidyverse<a href="data.html#filter-rows-in-tidyverse" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="data.html#cb28-1" tabindex="-1"></a><span class="fu">require</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
+<pre><code>## Loading required package: tidyverse</code></pre>
+<pre><code>## ── Attaching packages ───────────────────────── tidyverse 1.3.2 ──
+## ✔ ggplot2 3.4.1      ✔ purrr   0.3.5 
+## ✔ tibble  3.1.8      ✔ dplyr   1.0.10
+## ✔ tidyr   1.2.1      ✔ stringr 1.5.0 
+## ✔ readr   2.1.3      ✔ forcats 0.5.2</code></pre>
+<pre><code>## Warning: package &#39;stringr&#39; was built under R version 4.2.3</code></pre>
+<pre><code>## ── Conflicts ──────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="data.html#cb33-1" tabindex="-1"></a><span class="fu">filter</span>(WHO_GM_Database, Year <span class="sc">==</span> <span class="dv">2019</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,]</span></code></pre></div>
+<pre><code>##   ISO3          CountryName Year StationID               StationIDOrig
+## 1  AFG          Afghanistan 2019      AFG3 [US Diplomatic Post: Kabul]
+## 2  ALB              Albania 2019      ALB2                     AL0204A
+## 3  ARE United Arab Emirates 2019     ARE22               Hamdan Street
+##   StationIDOldDatabase      City CityReverseGeocoded CityGiulia CityClean
+## 1                    0   [Kabul]               Kabul       &lt;NA&gt;     Kabul
+## 2                    1      &lt;NA&gt;               Vlorë       &lt;NA&gt;     Vlorë
+## 3                    0 Abu dhabi           Abu Dhabi       &lt;NA&gt; Abu dhabi
+##   Longitude Latitude      PM25 PM25PercCoverage PM25Grading PM10
+## 1  69.19051 34.53581 119.77360        0.1800000           3   NA
+## 2  19.48620 40.40309  10.31525        0.7510274           1   NA
+## 3  54.37730 24.45390        NA               NA          NA  100
+##   PM10PercCoverage PM10Grading                                   LocationInfo
+## 1               NA          NA                                           &lt;NA&gt;
+## 2               NA          NA                                    AL0204A, NA
+## 3               NA           4 Hamdan Street, Abu dhabi, United Arab Emirates
+##                                                              Source MonitorType
+## 1                                                            OpenAQ     Unknown
+## 2                                 European Environment Agency (EEA)  Background
+## 3 Statistics Center - Abu Dhabi from Environment Agency - Abu Dhabi       Urban
+##   MonitorTypeOrig PM25Conv UnspecifiedType
+## 1            &lt;NA&gt;        0               1
+## 2      Background        0               0
+## 3         traffic        1               0
+##                                                                             WebLink
+## 1 [[[&quot;EPA AirNow DOS&quot;,&quot;http://airnow.gov/index.cfm?action=airnow.global_summary&quot;]]]
+## 2                       https://www.eea.europa.eu/data-and-maps/Data/aqereporting-2
+## 3                                                                              &lt;NA&gt;
+##                                                 Version    WHOStatus WHORegion
+## 1                                          2021 Release Member state       EMR
+## 2 Redownloaded for 2021 Release, replacing 2018 Release Member state       EUR
+## 3                                          2021 Release Member state       EMR
+##   WHOIncomeRegion                       SDG1Region    SDG2Region
+## 1         EMR LMI   Central Asia and Southern Asia Southern Asia
+## 2         EUR LMI      Northern America and Europe        Europe
+## 3          EMR HI Western Asia and Northern Africa  Western Asia
+##        SDG3Region                  GBDRegion
+## 1   Southern Asia                Asia, South
+## 2 Southern Europe            Europe, Central
+## 3    Western Asia North Africa / Middle East
+##                                    GBDSuperRegion TimeSince2010
+## 1                                      South Asia            19
+## 2 Central Europe, Eastern Europe and Central Asia            19
+## 3                      North Africa / Middle East            19</code></pre>
+</div>
+<div id="sorting-rows-in-tidyverse" class="section level3 unnumbered hasAnchor">
+<h3>Sorting rows in Tidyverse<a href="data.html#sorting-rows-in-tidyverse" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The function will sort the data by (alphabetically) and then by (numerically). Again, for
+clarify we will show only the first few rows of the data (9 rows)</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="data.html#cb35-1" tabindex="-1"></a><span class="fu">arrange</span>(WHO_GM_Database,CountryName, Year)[<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>,]</span></code></pre></div>
+<pre><code>##   ISO3 CountryName Year StationID               StationIDOrig
+## 1  AFG Afghanistan 2009      AFG1                        &lt;NA&gt;
+## 2  AFG Afghanistan 2009      AFG2                        &lt;NA&gt;
+## 3  AFG Afghanistan 2019      AFG3 [US Diplomatic Post: Kabul]
+## 4  ALB     Albania 2011      ALB4                     AL0201A
+## 5  ALB     Albania 2011      ALB5                     AL0202A
+## 6  ALB     Albania 2012      ALB4                     AL0201A
+## 7  ALB     Albania 2012      ALB5                     AL0202A
+## 8  ALB     Albania 2013      ALB4                     AL0201A
+## 9  ALB     Albania 2014      ALB2                     AL0204A
+##   StationIDOldDatabase           City CityReverseGeocoded CityGiulia
+## 1                    1 Mazar-e Sharif      Mazar-i-Sharif       &lt;NA&gt;
+## 2                    1          Kabul               Kabul       &lt;NA&gt;
+## 3                    0        [Kabul]               Kabul       &lt;NA&gt;
+## 4                    1           &lt;NA&gt;              Tirana       &lt;NA&gt;
+## 5                    1           &lt;NA&gt;              Tirana       &lt;NA&gt;
+## 6                    1           &lt;NA&gt;              Tirana       &lt;NA&gt;
+## 7                    1           &lt;NA&gt;              Tirana       &lt;NA&gt;
+## 8                    1           &lt;NA&gt;              Tirana       &lt;NA&gt;
+## 9                    1           &lt;NA&gt;               Vlorë       &lt;NA&gt;
+##        CityClean Longitude Latitude      PM25 PM25PercCoverage PM25Grading
+## 1 Mazar-e Sharif  67.11667 36.70000  68.00000       0.03835616           3
+## 2          Kabul  69.19128 34.53076  86.00000       0.03835616           3
+## 3          Kabul  69.19051 34.53581 119.77360       0.18000000           3
+## 4         Tirana  19.82177 41.33027  27.53000       0.97991000           1
+## 5         Tirana  19.85167 41.34560  37.49400       0.94475000           1
+## 6         Tirana  19.82177 41.33027  20.20700       0.97359000           1
+## 7         Tirana  19.85167 41.34560  24.52900       0.97848000           1
+## 8         Tirana  19.82177 41.33027  16.06237       0.77477169           1
+## 9          Vlorë  19.48620 40.40309        NA               NA          NA
+##        PM10 PM10PercCoverage PM10Grading LocationInfo
+## 1 334.00000               NA           4       NA, NA
+## 2 260.00000               NA           4       NA, NA
+## 3        NA               NA          NA         &lt;NA&gt;
+## 4  52.36900        0.9847000           1  AL0201A, NA
+## 5 112.44400        0.9172400           1  AL0202A, NA
+## 6  33.99500        0.9833800           1  AL0201A, NA
+## 7  37.85900        0.9788300           1  AL0202A, NA
+## 8  31.61542        0.7990868           1  AL0201A, NA
+## 9  15.25370        0.8649543           1  AL0204A, NA
+##                                                                                                                                                                          Source
+## 1 Magnusson et al., Broad Exposure Screening of Air Pollutants in the Occupational Environment of Swedish Soldiers Deployed in Afghanistan; MILITARY MEDICINE, 177, 3:318, 2012
+## 2 Magnusson et al., Broad Exposure Screening of Air Pollutants in the Occupational Environment of Swedish Soldiers Deployed in Afghanistan; MILITARY MEDICINE, 177, 3:318, 2012
+## 3                                                                                                                                                                        OpenAQ
+## 4                                                                                                                                             European Environment Agency (EEA)
+## 5                                                                                                                                             European Environment Agency (EEA)
+## 6                                                                                                                                             European Environment Agency (EEA)
+## 7                                                                                                                                             European Environment Agency (EEA)
+## 8                                                                                                                                             European Environment Agency (EEA)
+## 9                                                                                                                                             European Environment Agency (EEA)
+##   MonitorType MonitorTypeOrig PM25Conv UnspecifiedType
+## 1       Urban           urban        0               0
+## 2       Urban           urban        0               0
+## 3     Unknown            &lt;NA&gt;        0               1
+## 4     Traffic         Traffic        0               0
+## 5     Traffic         Traffic        0               0
+## 6     Traffic         Traffic        0               0
+## 7     Traffic         Traffic        0               0
+## 8     Traffic         Traffic        0               0
+## 9  Background      Background        1               0
+##                                                                             WebLink
+## 1                                                                              &lt;NA&gt;
+## 2                                                                              &lt;NA&gt;
+## 3 [[[&quot;EPA AirNow DOS&quot;,&quot;http://airnow.gov/index.cfm?action=airnow.global_summary&quot;]]]
+## 4                       https://www.eea.europa.eu/data-and-maps/Data/aqereporting-2
+## 5                       https://www.eea.europa.eu/data-and-maps/Data/aqereporting-2
+## 6                       https://www.eea.europa.eu/data-and-maps/Data/aqereporting-2
+## 7                       https://www.eea.europa.eu/data-and-maps/Data/aqereporting-2
+## 8                       https://www.eea.europa.eu/data-and-maps/Data/aqereporting-2
+## 9                       https://www.eea.europa.eu/data-and-maps/Data/aqereporting-2
+##                                                 Version    WHOStatus WHORegion
+## 1                                          2016 Release Member state       EMR
+## 2                                          2016 Release Member state       EMR
+## 3                                          2021 Release Member state       EMR
+## 4 Redownloaded for 2021 Release, replacing 2018 Release Member state       EUR
+## 5 Redownloaded for 2021 Release, replacing 2018 Release Member state       EUR
+## 6 Redownloaded for 2021 Release, replacing 2018 Release Member state       EUR
+## 7 Redownloaded for 2021 Release, replacing 2018 Release Member state       EUR
+## 8 Redownloaded for 2021 Release, replacing 2018 Release Member state       EUR
+## 9 Redownloaded for 2021 Release, replacing 2018 Release Member state       EUR
+##   WHOIncomeRegion                     SDG1Region    SDG2Region      SDG3Region
+## 1         EMR LMI Central Asia and Southern Asia Southern Asia   Southern Asia
+## 2         EMR LMI Central Asia and Southern Asia Southern Asia   Southern Asia
+## 3         EMR LMI Central Asia and Southern Asia Southern Asia   Southern Asia
+## 4         EUR LMI    Northern America and Europe        Europe Southern Europe
+## 5         EUR LMI    Northern America and Europe        Europe Southern Europe
+## 6         EUR LMI    Northern America and Europe        Europe Southern Europe
+## 7         EUR LMI    Northern America and Europe        Europe Southern Europe
+## 8         EUR LMI    Northern America and Europe        Europe Southern Europe
+## 9         EUR LMI    Northern America and Europe        Europe Southern Europe
+##         GBDRegion                                  GBDSuperRegion TimeSince2010
+## 1     Asia, South                                      South Asia             9
+## 2     Asia, South                                      South Asia             9
+## 3     Asia, South                                      South Asia            19
+## 4 Europe, Central Central Europe, Eastern Europe and Central Asia            11
+## 5 Europe, Central Central Europe, Eastern Europe and Central Asia            11
+## 6 Europe, Central Central Europe, Eastern Europe and Central Asia            12
+## 7 Europe, Central Central Europe, Eastern Europe and Central Asia            12
+## 8 Europe, Central Central Europe, Eastern Europe and Central Asia            13
+## 9 Europe, Central Central Europe, Eastern Europe and Central Asia            14</code></pre>
+</div>
+<div id="select-columns-in-tidyverse" class="section level3 unnumbered hasAnchor">
+<h3>Select columns in Tidyverse<a href="data.html#select-columns-in-tidyverse" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now let’s say that we wish to select just the , and columns from the data set and assign it to a new dataset, . In Tidyverse we can use the function:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="data.html#cb37-1" tabindex="-1"></a>WHO_GM_Database_selectcolumns <span class="ot">&lt;-</span> <span class="fu">select</span>(WHO_GM_Database, CountryName, Year, PM25)</span>
+<span id="cb37-2"><a href="data.html#cb37-2" tabindex="-1"></a><span class="fu">head</span>(WHO_GM_Database_selectcolumns)</span></code></pre></div>
+<pre><code>##   CountryName Year      PM25
+## 1 Afghanistan 2009  68.00000
+## 2 Afghanistan 2009  86.00000
+## 3 Afghanistan 2019 119.77360
+## 4     Albania 2015        NA
+## 5     Albania 2016  14.32325
+## 6     Albania 2014        NA</code></pre>
+<p>There is even a set of functions to help extract columns based on
+pattern matching, e.g.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="data.html#cb39-1" tabindex="-1"></a>WHO_GM_Database_selectcolumns2 <span class="ot">&lt;-</span> <span class="fu">select</span>(WHO_GM_Database, <span class="fu">starts_with</span>(<span class="st">&quot;Country&quot;</span>))</span>
+<span id="cb39-2"><a href="data.html#cb39-2" tabindex="-1"></a><span class="fu">head</span>(WHO_GM_Database_selectcolumns2)</span></code></pre></div>
+<pre><code>##   CountryName
+## 1 Afghanistan
+## 2 Afghanistan
+## 3 Afghanistan
+## 4     Albania
+## 5     Albania
+## 6     Albania</code></pre>
+<p>Note that we can also remove columns using an operator, e.g.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="data.html#cb41-1" tabindex="-1"></a>WHO_GM_Database_selectcolumns3 <span class="ot">&lt;-</span> <span class="fu">select</span>(WHO_GM_Database, <span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;SDG&quot;</span>))</span>
+<span id="cb41-2"><a href="data.html#cb41-2" tabindex="-1"></a><span class="fu">head</span>(WHO_GM_Database_selectcolumns3)</span></code></pre></div>
+<pre><code>##   ISO3 CountryName Year StationID               StationIDOrig
+## 1  AFG Afghanistan 2009      AFG1                        &lt;NA&gt;
+## 2  AFG Afghanistan 2009      AFG2                        &lt;NA&gt;
+## 3  AFG Afghanistan 2019      AFG3 [US Diplomatic Post: Kabul]
+## 4  ALB     Albania 2015      ALB1                     AL0205A
+## 5  ALB     Albania 2016      ALB1                     AL0205A
+## 6  ALB     Albania 2014      ALB2                     AL0204A
+##   StationIDOldDatabase           City CityReverseGeocoded CityGiulia
+## 1                    1 Mazar-e Sharif      Mazar-i-Sharif       &lt;NA&gt;
+## 2                    1          Kabul               Kabul       &lt;NA&gt;
+## 3                    0        [Kabul]               Kabul       &lt;NA&gt;
+## 4                    1           &lt;NA&gt;              Durrës       &lt;NA&gt;
+## 5                    1           &lt;NA&gt;              Durrës       &lt;NA&gt;
+## 6                    1           &lt;NA&gt;               Vlorë       &lt;NA&gt;
+##        CityClean Longitude Latitude      PM25 PM25PercCoverage PM25Grading
+## 1 Mazar-e Sharif  67.11667 36.70000  68.00000       0.03835616           3
+## 2          Kabul  69.19128 34.53076  86.00000       0.03835616           3
+## 3          Kabul  69.19051 34.53581 119.77360       0.18000000           3
+## 4         Durrës  19.44920 41.31990        NA               NA          NA
+## 5         Durrës  19.44920 41.31990  14.32325       0.75330146           1
+## 6          Vlorë  19.48620 40.40309        NA               NA          NA
+##       PM10 PM10PercCoverage PM10Grading LocationInfo
+## 1 334.0000               NA           4       NA, NA
+## 2 260.0000               NA           4       NA, NA
+## 3       NA               NA          NA         &lt;NA&gt;
+## 4  17.6483        0.7937215           1  AL0205A, NA
+## 5  24.5591        0.8385701           1  AL0205A, NA
+## 6  15.2537        0.8649543           1  AL0204A, NA
+##                                                                                                                                                                          Source
+## 1 Magnusson et al., Broad Exposure Screening of Air Pollutants in the Occupational Environment of Swedish Soldiers Deployed in Afghanistan; MILITARY MEDICINE, 177, 3:318, 2012
+## 2 Magnusson et al., Broad Exposure Screening of Air Pollutants in the Occupational Environment of Swedish Soldiers Deployed in Afghanistan; MILITARY MEDICINE, 177, 3:318, 2012
+## 3                                                                                                                                                                        OpenAQ
+## 4                                                                                                                                             European Environment Agency (EEA)
+## 5                                                                                                                                             European Environment Agency (EEA)
+## 6                                                                                                                                             European Environment Agency (EEA)
+##   MonitorType MonitorTypeOrig PM25Conv UnspecifiedType
+## 1       Urban           urban        0               0
+## 2       Urban           urban        0               0
+## 3     Unknown            &lt;NA&gt;        0               1
+## 4     Traffic         Traffic        1               0
+## 5     Traffic         Traffic        0               0
+## 6  Background      Background        1               0
+##                                                                             WebLink
+## 1                                                                              &lt;NA&gt;
+## 2                                                                              &lt;NA&gt;
+## 3 [[[&quot;EPA AirNow DOS&quot;,&quot;http://airnow.gov/index.cfm?action=airnow.global_summary&quot;]]]
+## 4                       https://www.eea.europa.eu/data-and-maps/Data/aqereporting-2
+## 5                       https://www.eea.europa.eu/data-and-maps/Data/aqereporting-2
+## 6                       https://www.eea.europa.eu/data-and-maps/Data/aqereporting-2
+##                                                 Version    WHOStatus WHORegion
+## 1                                          2016 Release Member state       EMR
+## 2                                          2016 Release Member state       EMR
+## 3                                          2021 Release Member state       EMR
+## 4 Redownloaded for 2021 Release, replacing 2018 Release Member state       EUR
+## 5 Redownloaded for 2021 Release, replacing 2018 Release Member state       EUR
+## 6 Redownloaded for 2021 Release, replacing 2018 Release Member state       EUR
+##   WHOIncomeRegion       GBDRegion
+## 1         EMR LMI     Asia, South
+## 2         EMR LMI     Asia, South
+## 3         EMR LMI     Asia, South
+## 4         EUR LMI Europe, Central
+## 5         EUR LMI Europe, Central
+## 6         EUR LMI Europe, Central
+##                                    GBDSuperRegion TimeSince2010
+## 1                                      South Asia             9
+## 2                                      South Asia             9
+## 3                                      South Asia            19
+## 4 Central Europe, Eastern Europe and Central Asia            15
+## 5 Central Europe, Eastern Europe and Central Asia            16
+## 6 Central Europe, Eastern Europe and Central Asia            14</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="data.html#cb43-1" tabindex="-1"></a>WHO_GM_Database_selectcolumns4 <span class="ot">&lt;-</span> <span class="fu">select</span>(WHO_GM_Database, <span class="sc">-</span>SDG1Region, <span class="sc">-</span>SDG2Region, SDG3Region)</span>
+<span id="cb43-2"><a href="data.html#cb43-2" tabindex="-1"></a><span class="fu">head</span>(WHO_GM_Database_selectcolumns4)</span></code></pre></div>
+<pre><code>##   ISO3 CountryName Year StationID               StationIDOrig
+## 1  AFG Afghanistan 2009      AFG1                        &lt;NA&gt;
+## 2  AFG Afghanistan 2009      AFG2                        &lt;NA&gt;
+## 3  AFG Afghanistan 2019      AFG3 [US Diplomatic Post: Kabul]
+## 4  ALB     Albania 2015      ALB1                     AL0205A
+## 5  ALB     Albania 2016      ALB1                     AL0205A
+## 6  ALB     Albania 2014      ALB2                     AL0204A
+##   StationIDOldDatabase           City CityReverseGeocoded CityGiulia
+## 1                    1 Mazar-e Sharif      Mazar-i-Sharif       &lt;NA&gt;
+## 2                    1          Kabul               Kabul       &lt;NA&gt;
+## 3                    0        [Kabul]               Kabul       &lt;NA&gt;
+## 4                    1           &lt;NA&gt;              Durrës       &lt;NA&gt;
+## 5                    1           &lt;NA&gt;              Durrës       &lt;NA&gt;
+## 6                    1           &lt;NA&gt;               Vlorë       &lt;NA&gt;
+##        CityClean Longitude Latitude      PM25 PM25PercCoverage PM25Grading
+## 1 Mazar-e Sharif  67.11667 36.70000  68.00000       0.03835616           3
+## 2          Kabul  69.19128 34.53076  86.00000       0.03835616           3
+## 3          Kabul  69.19051 34.53581 119.77360       0.18000000           3
+## 4         Durrës  19.44920 41.31990        NA               NA          NA
+## 5         Durrës  19.44920 41.31990  14.32325       0.75330146           1
+## 6          Vlorë  19.48620 40.40309        NA               NA          NA
+##       PM10 PM10PercCoverage PM10Grading LocationInfo
+## 1 334.0000               NA           4       NA, NA
+## 2 260.0000               NA           4       NA, NA
+## 3       NA               NA          NA         &lt;NA&gt;
+## 4  17.6483        0.7937215           1  AL0205A, NA
+## 5  24.5591        0.8385701           1  AL0205A, NA
+## 6  15.2537        0.8649543           1  AL0204A, NA
+##                                                                                                                                                                          Source
+## 1 Magnusson et al., Broad Exposure Screening of Air Pollutants in the Occupational Environment of Swedish Soldiers Deployed in Afghanistan; MILITARY MEDICINE, 177, 3:318, 2012
+## 2 Magnusson et al., Broad Exposure Screening of Air Pollutants in the Occupational Environment of Swedish Soldiers Deployed in Afghanistan; MILITARY MEDICINE, 177, 3:318, 2012
+## 3                                                                                                                                                                        OpenAQ
+## 4                                                                                                                                             European Environment Agency (EEA)
+## 5                                                                                                                                             European Environment Agency (EEA)
+## 6                                                                                                                                             European Environment Agency (EEA)
+##   MonitorType MonitorTypeOrig PM25Conv UnspecifiedType
+## 1       Urban           urban        0               0
+## 2       Urban           urban        0               0
+## 3     Unknown            &lt;NA&gt;        0               1
+## 4     Traffic         Traffic        1               0
+## 5     Traffic         Traffic        0               0
+## 6  Background      Background        1               0
+##                                                                             WebLink
+## 1                                                                              &lt;NA&gt;
+## 2                                                                              &lt;NA&gt;
+## 3 [[[&quot;EPA AirNow DOS&quot;,&quot;http://airnow.gov/index.cfm?action=airnow.global_summary&quot;]]]
+## 4                       https://www.eea.europa.eu/data-and-maps/Data/aqereporting-2
+## 5                       https://www.eea.europa.eu/data-and-maps/Data/aqereporting-2
+## 6                       https://www.eea.europa.eu/data-and-maps/Data/aqereporting-2
+##                                                 Version    WHOStatus WHORegion
+## 1                                          2016 Release Member state       EMR
+## 2                                          2016 Release Member state       EMR
+## 3                                          2021 Release Member state       EMR
+## 4 Redownloaded for 2021 Release, replacing 2018 Release Member state       EUR
+## 5 Redownloaded for 2021 Release, replacing 2018 Release Member state       EUR
+## 6 Redownloaded for 2021 Release, replacing 2018 Release Member state       EUR
+##   WHOIncomeRegion      SDG3Region       GBDRegion
+## 1         EMR LMI   Southern Asia     Asia, South
+## 2         EMR LMI   Southern Asia     Asia, South
+## 3         EMR LMI   Southern Asia     Asia, South
+## 4         EUR LMI Southern Europe Europe, Central
+## 5         EUR LMI Southern Europe Europe, Central
+## 6         EUR LMI Southern Europe Europe, Central
+##                                    GBDSuperRegion TimeSince2010
+## 1                                      South Asia             9
+## 2                                      South Asia             9
+## 3                                      South Asia            19
+## 4 Central Europe, Eastern Europe and Central Asia            15
+## 5 Central Europe, Eastern Europe and Central Asia            16
+## 6 Central Europe, Eastern Europe and Central Asia            14</code></pre>
+</div>
+<div id="adding-columns" class="section level3 unnumbered hasAnchor">
+<h3>Adding columns<a href="data.html#adding-columns" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Finally, let’s add a new column representing the different between and 2000 as before, but using the . To avoid over-riding the first version we will call it and for clarity will only show the first
+three rows.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="data.html#cb45-1" tabindex="-1"></a>WHO_GM_Database<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(WHO_GM_Database<span class="sc">$</span>Year)</span>
+<span id="cb45-2"><a href="data.html#cb45-2" tabindex="-1"></a><span class="fu">mutate</span>(WHO_GM_Database, <span class="at">TimeSince2010_tidy =</span> Year <span class="sc">-</span> <span class="dv">2000</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,]</span></code></pre></div>
+<pre><code>##   ISO3 CountryName Year StationID StationIDOrig StationIDOldDatabase
+## 1  AFG Afghanistan 2009      AFG1          &lt;NA&gt;                    1
+## 2  AFG Afghanistan 2009      AFG2          &lt;NA&gt;                    1
+##             City CityReverseGeocoded CityGiulia      CityClean Longitude
+## 1 Mazar-e Sharif      Mazar-i-Sharif       &lt;NA&gt; Mazar-e Sharif  67.11667
+## 2          Kabul               Kabul       &lt;NA&gt;          Kabul  69.19128
+##   Latitude PM25 PM25PercCoverage PM25Grading PM10 PM10PercCoverage PM10Grading
+## 1 36.70000   68       0.03835616           3  334               NA           4
+## 2 34.53076   86       0.03835616           3  260               NA           4
+##   LocationInfo
+## 1       NA, NA
+## 2       NA, NA
+##                                                                                                                                                                          Source
+## 1 Magnusson et al., Broad Exposure Screening of Air Pollutants in the Occupational Environment of Swedish Soldiers Deployed in Afghanistan; MILITARY MEDICINE, 177, 3:318, 2012
+## 2 Magnusson et al., Broad Exposure Screening of Air Pollutants in the Occupational Environment of Swedish Soldiers Deployed in Afghanistan; MILITARY MEDICINE, 177, 3:318, 2012
+##   MonitorType MonitorTypeOrig PM25Conv UnspecifiedType WebLink      Version
+## 1       Urban           urban        0               0    &lt;NA&gt; 2016 Release
+## 2       Urban           urban        0               0    &lt;NA&gt; 2016 Release
+##      WHOStatus WHORegion WHOIncomeRegion                     SDG1Region
+## 1 Member state       EMR         EMR LMI Central Asia and Southern Asia
+## 2 Member state       EMR         EMR LMI Central Asia and Southern Asia
+##      SDG2Region    SDG3Region   GBDRegion GBDSuperRegion TimeSince2010
+## 1 Southern Asia Southern Asia Asia, South     South Asia             9
+## 2 Southern Asia Southern Asia Asia, South     South Asia             9
+##   TimeSince2010_tidy
+## 1                  9
+## 2                  9</code></pre>
+</div>
+<div id="pipes" class="section level3 unnumbered hasAnchor">
+<h3>Pipes<a href="data.html#pipes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Piping comes from Unix scripting, and simply means a chain of commands, such that
+the results from each command feed into the next one. It can be helpful in making
+code more succinct, and uses the pipe operator %&gt;% to chain functions together.</p>
+<p>For example, the following will filter the dataframe to extract rows when the year
+is 2019 and then how the first 6 rows using the head function.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="data.html#cb47-1" tabindex="-1"></a>WHO_GM_Database <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Year <span class="sc">==</span> <span class="dv">2019</span>) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>##   ISO3          CountryName Year StationID               StationIDOrig
+## 1  AFG          Afghanistan 2019      AFG3 [US Diplomatic Post: Kabul]
+## 2  ALB              Albania 2019      ALB2                     AL0204A
+## 3  ARE United Arab Emirates 2019     ARE22               Hamdan Street
+## 4  ARE United Arab Emirates 2019     ARE22             Khadejah School
+## 5  ARE United Arab Emirates 2019     ARE22              Khalifa School
+## 6  ARE United Arab Emirates 2019     ARE22                    Al Maqta
+##   StationIDOldDatabase      City CityReverseGeocoded CityGiulia CityClean
+## 1                    0   [Kabul]               Kabul       &lt;NA&gt;     Kabul
+## 2                    1      &lt;NA&gt;               Vlorë       &lt;NA&gt;     Vlorë
+## 3                    0 Abu dhabi           Abu Dhabi       &lt;NA&gt; Abu dhabi
+## 4                    0 Abu dhabi           Abu Dhabi       &lt;NA&gt; Abu dhabi
+## 5                    0 Abu dhabi           Abu Dhabi       &lt;NA&gt; Abu dhabi
+## 6                    0 Abu dhabi           Abu Dhabi       &lt;NA&gt; Abu dhabi
+##   Longitude Latitude      PM25 PM25PercCoverage PM25Grading   PM10
+## 1  69.19051 34.53581 119.77360        0.1800000           3     NA
+## 2  19.48620 40.40309  10.31525        0.7510274           1     NA
+## 3  54.37730 24.45390        NA               NA          NA 100.00
+## 4  54.37730 24.45390        NA               NA          NA 102.29
+## 5  54.37730 24.45390        NA               NA          NA 104.69
+## 6  54.37730 24.45390        NA               NA          NA 112.58
+##   PM10PercCoverage PM10Grading                                     LocationInfo
+## 1               NA          NA                                             &lt;NA&gt;
+## 2               NA          NA                                      AL0204A, NA
+## 3               NA           4   Hamdan Street, Abu dhabi, United Arab Emirates
+## 4               NA           4 Khadejah School, Abu dhabi, United Arab Emirates
+## 5               NA           4  Khalifa School, Abu dhabi, United Arab Emirates
+## 6               NA           4        Al Maqta, Abu dhabi, United Arab Emirates
+##                                                              Source MonitorType
+## 1                                                            OpenAQ     Unknown
+## 2                                 European Environment Agency (EEA)  Background
+## 3 Statistics Center - Abu Dhabi from Environment Agency - Abu Dhabi       Urban
+## 4 Statistics Center - Abu Dhabi from Environment Agency - Abu Dhabi       Urban
+## 5 Statistics Center - Abu Dhabi from Environment Agency - Abu Dhabi       Urban
+## 6 Statistics Center - Abu Dhabi from Environment Agency - Abu Dhabi       Urban
+##     MonitorTypeOrig PM25Conv UnspecifiedType
+## 1              &lt;NA&gt;        0               1
+## 2        Background        0               0
+## 3           traffic        1               0
+## 4         down town        1               0
+## 5 Urban/Residential        1               0
+## 6 Urban/Residential        1               0
+##                                                                             WebLink
+## 1 [[[&quot;EPA AirNow DOS&quot;,&quot;http://airnow.gov/index.cfm?action=airnow.global_summary&quot;]]]
+## 2                       https://www.eea.europa.eu/data-and-maps/Data/aqereporting-2
+## 3                                                                              &lt;NA&gt;
+## 4                                                                              &lt;NA&gt;
+## 5                                                                              &lt;NA&gt;
+## 6                                                                              &lt;NA&gt;
+##                                                 Version    WHOStatus WHORegion
+## 1                                          2021 Release Member state       EMR
+## 2 Redownloaded for 2021 Release, replacing 2018 Release Member state       EUR
+## 3                                          2021 Release Member state       EMR
+## 4                                          2021 Release Member state       EMR
+## 5                                          2021 Release Member state       EMR
+## 6                                          2021 Release Member state       EMR
+##   WHOIncomeRegion                       SDG1Region    SDG2Region
+## 1         EMR LMI   Central Asia and Southern Asia Southern Asia
+## 2         EUR LMI      Northern America and Europe        Europe
+## 3          EMR HI Western Asia and Northern Africa  Western Asia
+## 4          EMR HI Western Asia and Northern Africa  Western Asia
+## 5          EMR HI Western Asia and Northern Africa  Western Asia
+## 6          EMR HI Western Asia and Northern Africa  Western Asia
+##        SDG3Region                  GBDRegion
+## 1   Southern Asia                Asia, South
+## 2 Southern Europe            Europe, Central
+## 3    Western Asia North Africa / Middle East
+## 4    Western Asia North Africa / Middle East
+## 5    Western Asia North Africa / Middle East
+## 6    Western Asia North Africa / Middle East
+##                                    GBDSuperRegion TimeSince2010
+## 1                                      South Asia            19
+## 2 Central Europe, Eastern Europe and Central Asia            19
+## 3                      North Africa / Middle East            19
+## 4                      North Africa / Middle East            19
+## 5                      North Africa / Middle East            19
+## 6                      North Africa / Middle East            19</code></pre>
+</div>
+<div id="chaining-pipes" class="section level3 unnumbered hasAnchor">
+<h3>Chaining pipes<a href="data.html#chaining-pipes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pipes can be chained together multiple times. For example:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="data.html#cb49-1" tabindex="-1"></a>WHO_GM_Database<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(WHO_GM_Database<span class="sc">$</span>Year)</span>
+<span id="cb49-2"><a href="data.html#cb49-2" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="data.html#cb49-3" tabindex="-1"></a>WHO_GM_Database <span class="sc">%&gt;%</span></span>
+<span id="cb49-4"><a href="data.html#cb49-4" tabindex="-1"></a><span class="fu">filter</span>(Year <span class="sc">==</span> <span class="dv">2019</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(CountryName, Year, PM25, <span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;SDG&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">TimeSince2010_tidy =</span> Year <span class="sc">-</span> <span class="dv">2000</span>) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(CountryName, Year) <span class="sc">%&gt;%</span></span>
+<span id="cb49-5"><a href="data.html#cb49-5" tabindex="-1"></a><span class="fu">head</span>()</span></code></pre></div>
+<pre><code>##   CountryName Year      PM25 TimeSince2010_tidy
+## 1 Afghanistan 2019 119.77360                 19
+## 2     Albania 2019  10.31525                 19
+## 3     Algeria 2019  21.53338                 19
+## 4   Australia 2019        NA                 19
+## 5   Australia 2019        NA                 19
+## 6   Australia 2019        NA                 19</code></pre>
+</div>
+<div id="grouping-and-summarizing" class="section level3 unnumbered hasAnchor">
+<h3>Grouping and summarizing<a href="data.html#grouping-and-summarizing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A common thing we might want to do is to produce summaries of some
+variable for different subsets of the data. For example, we might want
+the mean values of for each . The
+dplyr package (within ) provides a function
+group_by() that allows us to group data, and summarize() that allows us
+to summarize data.</p>
+<p>In this case, we can think of what we want to do as the
+data by and then averaging the values
+within each group. Note that there are missing values in
+as in some locations only is measured, and vice-versa. We
+use to exclude missing values when
+calculating the mean.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="data.html#cb51-1" tabindex="-1"></a>WHO_GM_Database <span class="sc">%&gt;%</span> </span>
+<span id="cb51-2"><a href="data.html#cb51-2" tabindex="-1"></a>  <span class="fu">group_by</span>(CountryName) <span class="sc">%&gt;%</span></span>
+<span id="cb51-3"><a href="data.html#cb51-3" tabindex="-1"></a><span class="fu">summarize</span>(<span class="at">mn =</span> <span class="fu">mean</span>(PM25, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 127 × 2
+##    CountryName    mn
+##    &lt;chr&gt;       &lt;dbl&gt;
+##  1 Afghanistan 91.3 
+##  2 Albania     22.3 
+##  3 Algeria     21.5 
+##  4 Andorra     11.0 
+##  5 Argentina   10.2 
+##  6 Australia    8.11
+##  7 Austria     14.2 
+##  8 Bahamas      4.16
+##  9 Bahrain     55.4 
+## 10 Bangladesh  76.8 
+## # ℹ 117 more rows</code></pre>
+</div>
+<div id="summarize" class="section level3 unnumbered hasAnchor">
+<h3>Summarize<a href="data.html#summarize" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The summarize() function applies a function to a dataframe or subsets of a
+data frame. For example, we can produce a table of estimates for the mean and variance of both PM25 lengths and PM10, within each CountryName.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="data.html#cb53-1" tabindex="-1"></a>WHO_GM_Database <span class="sc">%&gt;%</span> </span>
+<span id="cb53-2"><a href="data.html#cb53-2" tabindex="-1"></a>  <span class="fu">group_by</span>(CountryName) <span class="sc">%&gt;%</span></span>
+<span id="cb53-3"><a href="data.html#cb53-3" tabindex="-1"></a><span class="fu">summarize</span>(<span class="at">MeanPM25 =</span> <span class="fu">mean</span>(PM25, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">MeanPM10 =</span> <span class="fu">mean</span>(PM10, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">VarPM25 =</span> <span class="fu">var</span>(PM25, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="at">VarPM10 =</span> <span class="fu">var</span>(PM10, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 127 × 5
+##    CountryName MeanPM25 MeanPM10  VarPM25 VarPM10
+##    &lt;chr&gt;          &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Afghanistan    91.3    297    691.     2738   
+##  2 Albania        22.3     36.4   77.9     655.  
+##  3 Algeria        21.5    NaN     NA        NA   
+##  4 Andorra        11.0     19.2    0.276     1.09
+##  5 Argentina      10.2     27.4    0.0103    1.45
+##  6 Australia       8.11    17.7   54.2      58.4 
+##  7 Austria        14.2     20.4   11.2      25.8 
+##  8 Bahamas         4.16     4.65   1.04      1.19
+##  9 Bahrain        55.4    176.   103.     4844.  
+## 10 Bangladesh     76.8    142.   690.     1784.  
+## # ℹ 117 more rows</code></pre>
+</div>
+</div>
+<div id="example-4.1-health-impacts-associated-with-outdoor-air-pollution" class="section level2 unnumbered hasAnchor">
+<h2>Example 4.1: Health impacts associated with outdoor air pollution<a href="data.html#example-4.1-health-impacts-associated-with-outdoor-air-pollution" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We now demonstrate how using dataframes and the can
+allow us to perform a health impact analysis of air pollution very
+efficiently. We will be calculating the annual number of deaths
+attributable to PM<span class="math inline">\(_{2.5}\)</span>.</p>
+<p>We wish to estimate the annual number of deaths attributable to
+PM<span class="math inline">\(_{2.5}\)</span> air pollution. In order to do this, we need</p>
+<ul>
+<li><p>a relative risk (RR),</p></li>
+<li><p>the population at risk for the areas of interest,</p></li>
+<li><p>the overall mortality rate (OMR), and</p></li>
+<li><p>a baseline value for air pollution (for which there is no associated increase in risk).</p></li>
+</ul>
+<p>In this example, we use a RR of 1.06 per 10<span class="math inline">\(\mu gm^{-3}\)</span>, the
+population at risk is 1 million and an overall mortality rate of 80 per
+10000. We first enter this information into by assigning
+these values to a series of variables. We first enter this
+information into R by assigning these values to a series of variables.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="data.html#cb55-1" tabindex="-1"></a><span class="co"># Relative Risk</span></span>
+<span id="cb55-2"><a href="data.html#cb55-2" tabindex="-1"></a>RR <span class="ot">&lt;-</span> <span class="fl">1.06</span></span>
+<span id="cb55-3"><a href="data.html#cb55-3" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="data.html#cb55-4" tabindex="-1"></a><span class="co"># Size of population</span></span>
+<span id="cb55-5"><a href="data.html#cb55-5" tabindex="-1"></a>Population <span class="ot">&lt;-</span> <span class="dv">1000000</span></span>
+<span id="cb55-6"><a href="data.html#cb55-6" tabindex="-1"></a></span>
+<span id="cb55-7"><a href="data.html#cb55-7" tabindex="-1"></a><span class="co"># Unit for the Relative Risk</span></span>
+<span id="cb55-8"><a href="data.html#cb55-8" tabindex="-1"></a>RR_unit <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb55-9"><a href="data.html#cb55-9" tabindex="-1"></a></span>
+<span id="cb55-10"><a href="data.html#cb55-10" tabindex="-1"></a><span class="co"># Overall mortality count, used for calculating the overall mortality rate</span></span>
+<span id="cb55-11"><a href="data.html#cb55-11" tabindex="-1"></a>OMR_count <span class="ot">&lt;-</span> <span class="dv">80</span></span>
+<span id="cb55-12"><a href="data.html#cb55-12" tabindex="-1"></a></span>
+<span id="cb55-13"><a href="data.html#cb55-13" tabindex="-1"></a><span class="co"># Denominator (population at risk), used for calculating the overall mortality rate. </span></span>
+<span id="cb55-14"><a href="data.html#cb55-14" tabindex="-1"></a>OMR_pop <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb55-15"><a href="data.html#cb55-15" tabindex="-1"></a></span>
+<span id="cb55-16"><a href="data.html#cb55-16" tabindex="-1"></a><span class="co"># Mortality rate</span></span>
+<span id="cb55-17"><a href="data.html#cb55-17" tabindex="-1"></a>OMR <span class="ot">=</span> OMR_count<span class="sc">/</span>OMR_pop</span>
+<span id="cb55-18"><a href="data.html#cb55-18" tabindex="-1"></a>OMR</span></code></pre></div>
+<pre><code>## [1] 0.008</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="data.html#cb57-1" tabindex="-1"></a><span class="co"># Baseline value of PM2.5 for which there is no increased risk</span></span>
+<span id="cb57-2"><a href="data.html#cb57-2" tabindex="-1"></a>baseline <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb57-3"><a href="data.html#cb57-3" tabindex="-1"></a></span>
+<span id="cb57-4"><a href="data.html#cb57-4" tabindex="-1"></a><span class="co"># Population attributable fraction</span></span>
+<span id="cb57-5"><a href="data.html#cb57-5" tabindex="-1"></a><span class="co">#PAF = (Proportion of population exposed*(RR-1))/(Proportion of population exposed*(RR-1)+1). </span></span>
+<span id="cb57-6"><a href="data.html#cb57-6" tabindex="-1"></a><span class="co">#In this case the proportion of the population exposed is one. </span></span>
+<span id="cb57-7"><a href="data.html#cb57-7" tabindex="-1"></a></span>
+<span id="cb57-8"><a href="data.html#cb57-8" tabindex="-1"></a>PAF <span class="ot">=</span> (RR<span class="dv">-1</span>)<span class="sc">/</span>RR</span>
+<span id="cb57-9"><a href="data.html#cb57-9" tabindex="-1"></a>PAF</span></code></pre></div>
+<pre><code>## [1] 0.05660377</code></pre>
+<p>In this example, we will calculate the attributable deaths for
+increments of 10<span class="math inline">\(\mu gm^{-3}\)</span>, however the following code is general
+and will work for any increments.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="data.html#cb59-1" tabindex="-1"></a><span class="co"># PM2.5 categories</span></span>
+<span id="cb59-2"><a href="data.html#cb59-2" tabindex="-1"></a>PM2.<span class="fl">5.</span>cats <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">15</span>,<span class="dv">25</span>,<span class="dv">35</span>,<span class="dv">45</span>,<span class="dv">55</span>,<span class="dv">65</span>,<span class="dv">75</span>,<span class="dv">85</span>,<span class="dv">95</span>,<span class="dv">105</span>)</span>
+<span id="cb59-3"><a href="data.html#cb59-3" tabindex="-1"></a></span>
+<span id="cb59-4"><a href="data.html#cb59-4" tabindex="-1"></a><span class="co"># Create a dataframe containing the PM2.5 categoriess</span></span>
+<span id="cb59-5"><a href="data.html#cb59-5" tabindex="-1"></a>Impacts <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(PM2.<span class="fl">5.</span>cats)</span></code></pre></div>
+<p>We now calculate the increases in risk for each category of
+PM<span class="math inline">\(_{2.5}\)</span>. For each category, we find the increase in risk compared
+to the baseline.</p>
+<p>For the second category, with PM<span class="math inline">\(_{2.5}\)</span> = 15, the risk will be 1.06
+(the original RR) as this is 10<span class="math inline">\(\mu gm^{-3}\)</span> (one unit) greater than
+the baseline.</p>
+<p>For the next category, PM<span class="math inline">\(_{2.5}\)</span> is 10<span class="math inline">\(\mu\)</span>gm<span class="math inline">\(^{-3}\)</span> higher than
+the previous category (one unit in terms of the RR) and so the risk in
+that category again be increased by a factor of 1.06 (on that of the
+previous category). In this case, the relative risk (with respect to
+baseline) is therefore .</p>
+<p>For the next category, PM<span class="math inline">\(_{2.5}\)</span> = 25 which is again
+10<span class="math inline">\(\mu\)</span>gm<span class="math inline">\(^{-3}\)</span> (one unit in terms of the RR) higher, and so the
+relative risk is 1.06 multiplies by the previous value,
+i.e.~.</p>
+<p>We can calculate the relative risks for each category (relative to
+baseline) in . For each category, we find the number of units
+from baseline and repeatedly multiply the RR by this number. This is
+equivalent to raising the RR to the power of (Category-Baseline)/Units,
+e.g.
+<span class="math display">\[\mbox{RR}^{\left( \frac{\mbox{Category-Baseline}}{\mbox{Units}}\right)}\]</span></p>
+<p>We add another column to the Impacts dataframe containing these values.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="data.html#cb60-1" tabindex="-1"></a><span class="co"># Calculating Relative Risks </span></span>
+<span id="cb60-2"><a href="data.html#cb60-2" tabindex="-1"></a>Impacts <span class="ot">&lt;-</span> <span class="fu">mutate</span>(Impacts, <span class="at">RR =</span> RR<span class="sc">^</span>((Impacts<span class="sc">$</span>PM2.<span class="fl">5.</span>cats <span class="sc">-</span> baseline)<span class="sc">/</span>RR_unit))</span></code></pre></div>
+<p>Once we have the RR for each pollution level, we can calculate the rate
+for each category. This is found by applying the risks to the overall
+rate. Again, we add these numbers to the Impacts dataframe as an
+additional column using . To use this function, we need
+to add columns which contains replications of the and
+.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="data.html#cb61-1" tabindex="-1"></a><span class="co"># Create an additional column containing replication of the OMR</span></span>
+<span id="cb61-2"><a href="data.html#cb61-2" tabindex="-1"></a>Impacts<span class="sc">$</span>OMR <span class="ot">&lt;-</span> <span class="fu">rep</span>(OMR, <span class="fu">nrow</span>(Impacts))</span>
+<span id="cb61-3"><a href="data.html#cb61-3" tabindex="-1"></a>Impacts<span class="sc">$</span>Population <span class="ot">&lt;-</span> <span class="fu">rep</span>(Population, <span class="fu">nrow</span>(Impacts))</span>
+<span id="cb61-4"><a href="data.html#cb61-4" tabindex="-1"></a><span class="co"># Calculating the rates in each category</span></span>
+<span id="cb61-5"><a href="data.html#cb61-5" tabindex="-1"></a>Impacts <span class="ot">&lt;-</span> <span class="fu">mutate</span>(Impacts, <span class="at">Rate =</span> RR <span class="sc">*</span> OMR)</span>
+<span id="cb61-6"><a href="data.html#cb61-6" tabindex="-1"></a><span class="co"># Add the PAFs for each category</span></span>
+<span id="cb61-7"><a href="data.html#cb61-7" tabindex="-1"></a>Impacts <span class="ot">&lt;-</span> <span class="fu">mutate</span>(Impacts, <span class="at">PAF =</span> RR <span class="sc">*</span> (RR<span class="dv">-1</span>)<span class="sc">/</span>RR)</span>
+<span id="cb61-8"><a href="data.html#cb61-8" tabindex="-1"></a><span class="co"># Add the number of (expected) deaths  per year for each category</span></span>
+<span id="cb61-9"><a href="data.html#cb61-9" tabindex="-1"></a>Impacts <span class="ot">&lt;-</span> <span class="fu">mutate</span>(Impacts, <span class="at">DeathsPerYear =</span> Rate <span class="sc">*</span> Population)</span></code></pre></div>
+<p>For each category, we need to calculate the extra deaths (with reference to the overall rate). The number of deaths for the reference category is the first number in the column.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="data.html#cb62-1" tabindex="-1"></a><span class="co"># The reference number of deaths</span></span>
+<span id="cb62-2"><a href="data.html#cb62-2" tabindex="-1"></a>Impacts<span class="sc">$</span>DeathsPerYear[<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## [1] 8000</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="data.html#cb64-1" tabindex="-1"></a><span class="co"># make into a vector by using the rep (replicate) function and add to the dataframe</span></span>
+<span id="cb64-2"><a href="data.html#cb64-2" tabindex="-1"></a>Impacts<span class="sc">$</span>ReferenceDeaths <span class="ot">&lt;-</span> <span class="fu">rep</span>(Impacts<span class="sc">$</span>DeathsPerYear[<span class="dv">1</span>], <span class="fu">nrow</span>(Impacts))</span>
+<span id="cb64-3"><a href="data.html#cb64-3" tabindex="-1"></a></span>
+<span id="cb64-4"><a href="data.html#cb64-4" tabindex="-1"></a><span class="co"># We can then calculate the excess numbers of deaths for each category</span></span>
+<span id="cb64-5"><a href="data.html#cb64-5" tabindex="-1"></a>Impacts <span class="ot">&lt;-</span> <span class="fu">mutate</span>(Impacts, <span class="at">ExtraDeaths =</span> DeathsPerYear <span class="sc">-</span> ReferenceDeaths)</span></code></pre></div>
+<p>For each category, we then want to calculate the number of deaths
+gained. These are the difference between the values in each category. We can find these using the function. This will produce a set of differences for which the length is one less than the number of rows in our Impacts dataframe. We need to add a zero to this to ensure that they line up when we add them as another column.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="data.html#cb65-1" tabindex="-1"></a><span class="co"># Calculate the number of deaths gained</span></span>
+<span id="cb65-2"><a href="data.html#cb65-2" tabindex="-1"></a><span class="fu">diff</span>(Impacts<span class="sc">$</span>ExtraDeaths)</span></code></pre></div>
+<pre><code>##  [1] 480.0000 508.8000 539.3280 571.6877 605.9889 642.3483 680.8892 721.7425
+##  [9] 765.0471 810.9499</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="data.html#cb67-1" tabindex="-1"></a><span class="co"># We can now add these gains to the main Impacts dataframe</span></span>
+<span id="cb67-2"><a href="data.html#cb67-2" tabindex="-1"></a>Impacts<span class="sc">$</span>Gain <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">diff</span>(Impacts<span class="sc">$</span>ExtraDeaths))</span>
+<span id="cb67-3"><a href="data.html#cb67-3" tabindex="-1"></a></span>
+<span id="cb67-4"><a href="data.html#cb67-4" tabindex="-1"></a><span class="co"># Show the results </span></span>
+<span id="cb67-5"><a href="data.html#cb67-5" tabindex="-1"></a>Impacts</span></code></pre></div>
+<pre><code>##    PM2.5.cats       RR   OMR Population        Rate       PAF DeathsPerYear
+## 1           5 1.000000 0.008      1e+06 0.008000000 0.0000000      8000.000
+## 2          15 1.060000 0.008      1e+06 0.008480000 0.0600000      8480.000
+## 3          25 1.123600 0.008      1e+06 0.008988800 0.1236000      8988.800
+## 4          35 1.191016 0.008      1e+06 0.009528128 0.1910160      9528.128
+## 5          45 1.262477 0.008      1e+06 0.010099816 0.2624770     10099.816
+## 6          55 1.338226 0.008      1e+06 0.010705805 0.3382256     10705.805
+## 7          65 1.418519 0.008      1e+06 0.011348153 0.4185191     11348.153
+## 8          75 1.503630 0.008      1e+06 0.012029042 0.5036303     12029.042
+## 9          85 1.593848 0.008      1e+06 0.012750785 0.5938481     12750.785
+## 10         95 1.689479 0.008      1e+06 0.013515832 0.6894790     13515.832
+## 11        105 1.790848 0.008      1e+06 0.014326782 0.7908477     14326.782
+##    ReferenceDeaths ExtraDeaths     Gain
+## 1             8000       0.000   0.0000
+## 2             8000     480.000 480.0000
+## 3             8000     988.800 508.8000
+## 4             8000    1528.128 539.3280
+## 5             8000    2099.816 571.6877
+## 6             8000    2705.805 605.9889
+## 7             8000    3348.153 642.3483
+## 8             8000    4029.042 680.8892
+## 9             8000    4750.785 721.7425
+## 10            8000    5515.832 765.0471
+## 11            8000    6326.782 810.9499</code></pre>
+</div>
+<div id="example-4.3.-mapping-cancer-incidence-in-southern-and-eastern-serbia" class="section level2 unnumbered hasAnchor">
+<h2>Example 4.3. Mapping cancer incidence in Southern and Eastern Serbia<a href="data.html#example-4.3.-mapping-cancer-incidence-in-southern-and-eastern-serbia" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this example, we will see how to use to create maps and
+then map the values of data within a dataframe. We will create a map of
+South and East Serbia. and creating expected number of cases and SIRs of
+cancer in City of Bor. To create maps, we use something called
+`shapefiles’. Shapefiles contain location, shape, and attributes of
+geographic features such as country borders. The files SE_Serbia.shp,
+and SE_Serbia.dbf contain the location, shape, and attributes of South
+and East Serbia by district. These were obtained from
+. On this website you can download
+administrative boundaries for almost every country in the world.</p>
+<p>We will use the following files:</p>
+<ul>
+<li>shapefiles and information for South and East Serbia split by administrative district (, )</li>
+<li>population counts and density for South and East Serbia split by administrative district ()</li>
+<li>population counts and incidence rates of all cancers, by age group and sex in City of Bor (),</li>
+<li>observed counts of all cancers cancer, by age group and sex in City of
+Bor ()</li>
+</ul>
+<p>These need to be in the working directory, which can be set using the
+function.</p>
+<p>For this example, we need the following packages:</p>
+<ul>
+<li>: Package to use spatial objects.</li>
+<li>: Package to use spatial objects.</li>
+<li>: Package to load and manipulate spatial data.</li>
+<li>: Package to fit spatial GLMMs which contains some useful functions for manipulating spatial data</li>
+<li>: Package to give scaled colours for plots.</li>
+<li>: Package to work with rasters.</li>
+<li>: Package to plot maps.</li>
+</ul>
+<p>Use the function or the packages window in
+the bottom right pane of RStudio to download and install the packages
+that we need. We use the function to load the
+required packages into the library.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="data.html#cb69-1" tabindex="-1"></a><span class="co"># Loading required packages</span></span>
+<span id="cb69-2"><a href="data.html#cb69-2" tabindex="-1"></a><span class="fu">library</span>(spdep)</span></code></pre></div>
+<pre><code>## Loading required package: sp</code></pre>
+<pre><code>## Loading required package: spData</code></pre>
+<pre><code>## To access larger datasets in this package, install the spDataLarge
+## package with: `install.packages(&#39;spDataLarge&#39;,
+## repos=&#39;https://nowosad.github.io/drat/&#39;, type=&#39;source&#39;)`</code></pre>
+<pre><code>## Loading required package: sf</code></pre>
+<pre><code>## Linking to GEOS 3.9.3, GDAL 3.5.2, PROJ 8.2.1; sf_use_s2() is TRUE</code></pre>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="data.html#cb75-1" tabindex="-1"></a><span class="fu">library</span>(shapefiles)</span></code></pre></div>
+<pre><code>## Loading required package: foreign</code></pre>
+<pre><code>## 
+## Attaching package: &#39;shapefiles&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:foreign&#39;:
+## 
+##     read.dbf, write.dbf</code></pre>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="data.html#cb79-1" tabindex="-1"></a><span class="fu">library</span>(sp)</span>
+<span id="cb79-2"><a href="data.html#cb79-2" tabindex="-1"></a><span class="fu">library</span>(CARBayes)</span></code></pre></div>
+<pre><code>## Loading required package: MASS</code></pre>
+<pre><code>## 
+## Attaching package: &#39;MASS&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     select</code></pre>
+<pre><code>## Loading required package: Rcpp</code></pre>
+<pre><code>## Registered S3 method overwritten by &#39;GGally&#39;:
+##   method from   
+##   +.gg   ggplot2</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="data.html#cb85-1" tabindex="-1"></a><span class="fu">library</span>(rgdal)</span></code></pre></div>
+<pre><code>## Please note that rgdal will be retired during 2023,
+## plan transition to sf/stars/terra functions using GDAL and PROJ
+## at your earliest convenience.
+## See https://r-spatial.org/r/2022/04/12/evolution.html and https://github.com/r-spatial/evolution
+## rgdal: version: 1.6-2, (SVN revision 1183)
+## Geospatial Data Abstraction Library extensions to R successfully loaded
+## Loaded GDAL runtime: GDAL 3.5.2, released 2022/09/02
+## Path to GDAL shared files: C:/Users/saraz/AppData/Local/R/win-library/4.2/rgdal/gdal
+## GDAL binary built with GEOS: TRUE 
+## Loaded PROJ runtime: Rel. 8.2.1, January 1st, 2022, [PJ_VERSION: 821]
+## Path to PROJ shared files: C:/Users/saraz/AppData/Local/R/win-library/4.2/rgdal/proj
+## PROJ CDN enabled: FALSE
+## Linking to sp version:1.5-1
+## To mute warnings of possible GDAL/OSR exportToProj4() degradation,
+## use options(&quot;rgdal_show_exportToProj4_warnings&quot;=&quot;none&quot;) before loading sp or rgdal.</code></pre>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="data.html#cb87-1" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb87-2"><a href="data.html#cb87-2" tabindex="-1"></a><span class="fu">library</span>(raster)</span></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;raster&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:MASS&#39;:
+## 
+##     select</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     select</code></pre>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="data.html#cb91-1" tabindex="-1"></a><span class="fu">library</span>(rworldmap)</span></code></pre></div>
+<pre><code>## Warning: package &#39;rworldmap&#39; was built under R version 4.2.3</code></pre>
+<pre><code>## Please note that &#39;maptools&#39; will be retired during October 2023,
+## plan transition at your earliest convenience (see
+## https://r-spatial.org/r/2023/05/15/evolution4.html and earlier blogs
+## for guidance);some functionality will be moved to &#39;sp&#39;.
+##  Checking rgeos availability: TRUE</code></pre>
+<pre><code>## ### Welcome to rworldmap ###</code></pre>
+<pre><code>## For a short introduction type :   vignette(&#39;rworldmap&#39;)</code></pre>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="data.html#cb96-1" tabindex="-1"></a><span class="co"># a function from a previous version of CARBayes that we use here</span></span>
+<span id="cb96-2"><a href="data.html#cb96-2" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;./functions/combine.data.shapefile.R&quot;</span>)</span></code></pre></div>
+<div id="creating-maps-of-southern-and-eastern-serbia" class="section level3 unnumbered hasAnchor">
+<h3>Creating maps of Southern and Eastern Serbia<a href="data.html#creating-maps-of-southern-and-eastern-serbia" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To create maps, we use something called `shapefiles’. Shapefiles contain
+location, shape, and attributes of geographic features such as country
+borders. The files , and
+contain the location, shape, and attributes of South and East Serbia by
+district. These were obtained from . The
+functions and will read these
+shapefiles into .</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="data.html#cb97-1" tabindex="-1"></a><span class="co"># Reading in borders</span></span>
+<span id="cb97-2"><a href="data.html#cb97-2" tabindex="-1"></a>shp_Serbia <span class="ot">&lt;-</span> <span class="fu">read.shp</span>(<span class="at">shp.name =</span> <span class="st">&quot;./data/SE_Serbia.shp&quot;</span>)</span>
+<span id="cb97-3"><a href="data.html#cb97-3" tabindex="-1"></a>dbf_Serbia <span class="ot">&lt;-</span> <span class="fu">read.dbf</span>(<span class="at">dbf.name =</span> <span class="st">&quot;./data/SE_Serbia.dbf&quot;</span>)</span>
+<span id="cb97-4"><a href="data.html#cb97-4" tabindex="-1"></a><span class="co"># Read population data for Serbia </span></span>
+<span id="cb97-5"><a href="data.html#cb97-5" tabindex="-1"></a>pop_Serbia <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&#39;./data/SE_Serbia.csv&#39;</span>)</span></code></pre></div>
+<p>To check that the data has been read into correctly, we can
+use the and function, which prints the first six rows of
+a dataset.</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="data.html#cb98-1" tabindex="-1"></a><span class="co"># Printing first six rows</span></span>
+<span id="cb98-2"><a href="data.html#cb98-2" tabindex="-1"></a><span class="fu">head</span>(pop_Serbia)</span></code></pre></div>
+<pre><code>##   CountryName ISO3  District Area_KM2 Pop_2011 Pop_Per_KM2_2011
+## 1      Serbia  SRB       Bor     3510   124992         35.61026
+## 2      Serbia  SRB Branicevo     3865   183625         47.50970
+## 3      Serbia  SRB Jablanica     2770   216304         78.08809
+## 4      Serbia  SRB    Nisava     2727   376319        137.99743
+## 5      Serbia  SRB    Pcinja     3520   159081         45.19347
+## 6      Serbia  SRB     Pirot     2761    92479         33.49475</code></pre>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="data.html#cb100-1" tabindex="-1"></a><span class="co"># Combining population data and the shapefile</span></span>
+<span id="cb100-2"><a href="data.html#cb100-2" tabindex="-1"></a>Serbia <span class="ot">&lt;-</span> <span class="fu">combine.data.shapefile</span> ( <span class="at">data =</span> pop_Serbia , <span class="co">#Dataset to attach</span></span>
+<span id="cb100-3"><a href="data.html#cb100-3" tabindex="-1"></a><span class="at">shp =</span> shp_Serbia,<span class="co">#Shapefile</span></span>
+<span id="cb100-4"><a href="data.html#cb100-4" tabindex="-1"></a><span class="at">dbf =</span> dbf_Serbia ) <span class="co">#Database file</span></span>
+<span id="cb100-5"><a href="data.html#cb100-5" tabindex="-1"></a></span>
+<span id="cb100-6"><a href="data.html#cb100-6" tabindex="-1"></a><span class="co"># Scaling population counts ( to 1000 s )</span></span>
+<span id="cb100-7"><a href="data.html#cb100-7" tabindex="-1"></a>Serbia <span class="sc">$</span> Pop_2011 <span class="ot">&lt;-</span> Serbia<span class="sc">$</span>Pop_2011 <span class="sc">/</span> <span class="dv">1000</span></span>
+<span id="cb100-8"><a href="data.html#cb100-8" tabindex="-1"></a></span>
+<span id="cb100-9"><a href="data.html#cb100-9" tabindex="-1"></a><span class="co"># Creating map of population counts in Serbia</span></span>
+<span id="cb100-10"><a href="data.html#cb100-10" tabindex="-1"></a><span class="fu">spplot</span> (<span class="at">obj =</span> Serbia , <span class="co"># Spatial object to be plotted</span></span>
+<span id="cb100-11"><a href="data.html#cb100-11" tabindex="-1"></a><span class="at">zcol =</span> <span class="fu">c</span> ( <span class="st">&quot;Pop_2011&quot;</span> ) , <span class="co"># Choice of the column the object you are plotting .</span></span>
+<span id="cb100-12"><a href="data.html#cb100-12" tabindex="-1"></a><span class="at">main =</span> <span class="st">&quot; Population ( in 1000 s ) &quot;</span> , <span class="co"># Plot title</span></span>
+<span id="cb100-13"><a href="data.html#cb100-13" tabindex="-1"></a><span class="at">at=</span> <span class="fu">seq</span> (<span class="dv">0</span> ,<span class="dv">400</span> , <span class="at">length.out =</span><span class="dv">20</span>), <span class="co"># Break points for legend</span></span>
+<span id="cb100-14"><a href="data.html#cb100-14" tabindex="-1"></a><span class="at">col =</span> <span class="st">&#39;black&#39;</span>, <span class="co"># Colour for borders</span></span>
+<span id="cb100-15"><a href="data.html#cb100-15" tabindex="-1"></a><span class="at">col.regions =</span> <span class="fu">colorRampPalette</span>(<span class="fu">brewer.pal</span>(<span class="dv">9</span>, <span class="st">&#39;Blues&#39;</span>))(<span class="dv">20</span>)) <span class="co"># Create a set of colours</span></span></code></pre></div>
+<p><img src="_main_files/figure-html/Example4.3-2-1.png" width="672" /></p>
+</div>
+<div id="example-4.4-cancer-in-bor" class="section level3 unnumbered hasAnchor">
+<h3>Example 4.4 Cancer in Bor<a href="data.html#example-4.4-cancer-in-bor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We will work through an example of creating expected counts and a standarized morbidity ratio (SMR) using data on all types of cancer (except skin) in the Muncipality of Bor, Serbia between 2001 and 2015.</p>
+<p>###Expected Numbers {-}</p>
+<p>In order to calculate SMRs, we need to estimate the number of cases we expect in Bor per year, based on their age-sex profiles. To calculate expected numbers, we use indirect standardization.</p>
+<p>For indirect standardization, we take the age and sex-specific rates
+from the reference population (in this example, Serbia) and convert them into the mortality rate we would observe if those reference rates were true for the age and sex-structure of the population of interest (in this example, Bor). Therefore, we require</p>
+<ul>
+<li>population counts by age and sex for Bor</li>
+<li>the age and sex-specific incidence rates for cancer in Serbia.</li>
+</ul>
+<p>The file contain the populations and incidence rates required by age and sex. These are in csv format, so we use the function.</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="data.html#cb101-1" tabindex="-1"></a><span class="co"># Reading in observed numbers of hospital admissions in England by local authority</span></span>
+<span id="cb101-2"><a href="data.html#cb101-2" tabindex="-1"></a>Bor_Rates <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file=</span><span class="st">&quot;./data/Bor_Rates.csv&quot;</span>)</span></code></pre></div>
+<p>To check that the data has been read into correctly, and to
+familiarise ourselves with the data, we can summarize it using the
+function. This will allow us to check for anomalies
+in our data.\</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="data.html#cb102-1" tabindex="-1"></a><span class="co"># Summarising first six rows of the Rates and populations of Bor</span></span>
+<span id="cb102-2"><a href="data.html#cb102-2" tabindex="-1"></a><span class="fu">summary</span>(Bor_Rates)</span></code></pre></div>
+<pre><code>##      City               Sex              AgeGroup              Pop        
+##  Length:32          Length:32          Length:32          Min.   : 506.0  
+##  Class :character   Class :character   Class :character   1st Qu.: 853.5  
+##  Mode  :character   Mode  :character   Mode  :character   Median :1101.0  
+##                                                           Mean   :1067.5  
+##                                                           3rd Qu.:1232.0  
+##                                                           Max.   :1482.0  
+##  Incidence_Serbia    Incidence_SE_Serbia
+##  Min.   :0.0001243   Min.   :0.0001088  
+##  1st Qu.:0.0002873   1st Qu.:0.0002470  
+##  Median :0.0015951   Median :0.0015305  
+##  Mean   :0.0044163   Mean   :0.0039337  
+##  3rd Qu.:0.0080899   3rd Qu.:0.0072949  
+##  Max.   :0.0173886   Max.   :0.0149553</code></pre>
+<p>We can see that has the following variables:</p>
+<ul>
+<li> - Name of City,</li>
+<li> - Sex category,</li>
+<li> - Age categories, in 5-yearly groups,</li>
+<li> - Population count,</li>
+<li> - Incidence rates of cancer in per year</li>
+<li> - Incidence rates of cancer in per year</li>
+</ul>
+<p>Now that we have read in the population and the incidence rates required, we calculate the expected number as follows <span class="math display">\[E = \sum_{k}N_k \times r_k\]</span> where <span class="math inline">\(r_k\)</span> are the age- and sex-specific rates of obtaining cancer in Serbia and <span class="math inline">\(N_k\)</span> are the
+population counts by age and sex in Bor.</p>
+<p>In we can calculate each of the <span class="math inline">\(N_k \times r_k\)</span> by multiplying the columns containing the Serbian incidence rates and the population profile of Bor. We add another column to the dataframe containing these values. Remember that to extract and assign columns in a dataframe we use the
+operator.</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="data.html#cb104-1" tabindex="-1"></a><span class="co"># Calculating the expected number by Settlement, age and sex </span></span>
+<span id="cb104-2"><a href="data.html#cb104-2" tabindex="-1"></a><span class="co"># using the Serbian incidence rates and Bor population profiles</span></span>
+<span id="cb104-3"><a href="data.html#cb104-3" tabindex="-1"></a>Bor_Rates<span class="sc">$</span>Expected <span class="ot">&lt;-</span> Bor_Rates<span class="sc">$</span>Incidence_Serbia <span class="sc">*</span> Bor_Rates<span class="sc">$</span>Pop</span></code></pre></div>
+</div>
+<div id="calculating-smrs" class="section level3 unnumbered hasAnchor">
+<h3>Calculating SMRs<a href="data.html#calculating-smrs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The observed number of cases of cancer by sex in the Municipality of Bor
+need to be read into . These are in csv format, so we use the
+function.</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="data.html#cb105-1" tabindex="-1"></a><span class="co"># Reading in observed numbers of hospital admissions in England by local authority</span></span>
+<span id="cb105-2"><a href="data.html#cb105-2" tabindex="-1"></a>Bor_Observed <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file=</span><span class="st">&quot;./data/Bor_Observed.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning in read.table(file = file, header = header, sep = sep, quote = quote, :
+## incomplete final line found by readTableHeader on &#39;./data/Bor_Observed.csv&#39;</code></pre>
+<p>To check that the data has been read into correctly, we can use the function, which prints the first six rows of a dataset.</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="data.html#cb107-1" tabindex="-1"></a><span class="co"># Printing first six rows of the observed counts </span></span>
+<span id="cb107-2"><a href="data.html#cb107-2" tabindex="-1"></a><span class="fu">head</span>(Bor_Observed)</span></code></pre></div>
+<pre><code>##   City     Sex Observed
+## 1  Bor   Males     1581
+## 2  Bor Females     1540</code></pre>
+<p>We can see that has the following variables:</p>
+<ul>
+<li> - Name of City,</li>
+<li> - Sex category,</li>
+<li> - Observed number of cases of cancer between 2001 and 2015</li>
+</ul>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="data.html#cb109-1" tabindex="-1"></a><span class="co"># Summing all expected cases by Settlement and Sex</span></span>
+<span id="cb109-2"><a href="data.html#cb109-2" tabindex="-1"></a>Bor_Expected <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(Expected <span class="sc">~</span> City <span class="sc">+</span> Sex, <span class="co"># Variable to sum over ~ Variables to Stratify by</span></span>
+<span id="cb109-3"><a href="data.html#cb109-3" tabindex="-1"></a>                          <span class="at">data =</span> Bor_Rates, <span class="co"># Dataset name</span></span>
+<span id="cb109-4"><a href="data.html#cb109-4" tabindex="-1"></a>                          sum) <span class="co"># Function to summarize over </span></span></code></pre></div>
+<p>Remember, we calculated expected numbers for one specific year, whereas
+the observed counts are over 10 years (2001-2015). For the SMRs, we
+assume that the population remains the same across that time period and
+multiply the expected cases by 15.</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="data.html#cb110-1" tabindex="-1"></a><span class="co"># Multiplying the number of cases by 15 to obtain expected cases between 2001 and 2015</span></span>
+<span id="cb110-2"><a href="data.html#cb110-2" tabindex="-1"></a>Bor_Expected<span class="sc">$</span>Expected <span class="ot">&lt;-</span> <span class="dv">15</span> <span class="sc">*</span> Bor_Expected<span class="sc">$</span>Expected  </span></code></pre></div>
+<p>To compare the observed and expected counts, we need to merge the two datasets and together. We do this using the function.</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="data.html#cb111-1" tabindex="-1"></a><span class="co"># Merging files together </span></span>
+<span id="cb111-2"><a href="data.html#cb111-2" tabindex="-1"></a>Bor <span class="ot">&lt;-</span> <span class="fu">merge</span>(Bor_Expected, <span class="co"># First file to merge</span></span>
+<span id="cb111-3"><a href="data.html#cb111-3" tabindex="-1"></a>             Bor_Observed, <span class="co"># Second file to merge</span></span>
+<span id="cb111-4"><a href="data.html#cb111-4" tabindex="-1"></a>             <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&#39;City&#39;</span>,<span class="st">&#39;Sex&#39;</span>)) <span class="co"># Variables to merge</span></span></code></pre></div>
+<p>Now that we have observed and expected numbers of cancer cases, we can calculate raw SMRs. Remember that
+<span class="math display">\[
+\mbox{SMR} = \frac{\mbox{observed}}{\mbox{expected}}
+\]</span>
+We add another column to the dataframe containing these values.</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="data.html#cb112-1" tabindex="-1"></a><span class="co"># Calculating SMR by sex</span></span>
+<span id="cb112-2"><a href="data.html#cb112-2" tabindex="-1"></a>Bor<span class="sc">$</span>SMR <span class="ot">&lt;-</span> Bor<span class="sc">$</span>Observed <span class="sc">/</span> Bor<span class="sc">$</span>Expected</span>
+<span id="cb112-3"><a href="data.html#cb112-3" tabindex="-1"></a></span>
+<span id="cb112-4"><a href="data.html#cb112-4" tabindex="-1"></a><span class="co"># Printing the results </span></span>
+<span id="cb112-5"><a href="data.html#cb112-5" tabindex="-1"></a>Bor</span></code></pre></div>
+<pre><code>##   City     Sex Expected Observed      SMR
+## 1  Bor Females 1024.503     1540 1.503167
+## 2  Bor   Males 1071.878     1581 1.474982</code></pre>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="uncertainty.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="embracing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/04-Chpt4.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

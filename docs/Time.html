@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 11 Time-why it also matters | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition</title>
-  <meta name="description" content="Chapter 11 Time-why it also matters | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition" />
+  <title>Chapter 11 Modelling temporal data: time series analysis and forecasting | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition</title>
+  <meta name="description" content="Chapter 11 Modelling temporal data: time series analysis and forecasting | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition" />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 11 Time-why it also matters | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition" />
+  <meta property="og:title" content="Chapter 11 Modelling temporal data: time series analysis and forecasting | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/img/cover.jpg" />
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 11 Time-why it also matters | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition" />
+  <meta name="twitter:title" content="Chapter 11 Modelling temporal data: time series analysis and forecasting | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition" />
   
   
   <meta name="twitter:image" content="/img/cover.jpg" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Gavin Shaddick, James V. Zidek, and Alexandra M. Schmidt" />
 
 
-<meta name="date" content="2023-08-21" />
+<meta name="date" content="2023-08-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -211,24 +211,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.1-empirical-bayes-and-bayes-smoothing-of-copd-mortality-for-2010"><i class="fa fa-check"></i>Example 9.1: Empirical Bayes and Bayes smoothing of COPD mortality for 2010</a>
 <ul>
+<li class="chapter" data-level="9.0.1" data-path="Disease.html"><a href="Disease.html#empirical-bayes-estimate-using-spatialepi"><i class="fa fa-check"></i><b>9.0.1</b> Empirical Bayes estimate using <code>SpatialEpi</code></a></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#nimble-2"><i class="fa fa-check"></i>Nimble</a></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#stan-1"><i class="fa fa-check"></i>Stan</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.3-fitting-a-conditional-spatial-model-in-nimble-and-stan"><i class="fa fa-check"></i>Example 9.3: Fitting a conditional spatial model in <code>nimble</code> and <code>stan</code></a>
+<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.3-fitting-a-conditional-spatial-model-in-nimble-and-rstan"><i class="fa fa-check"></i>Example 9.3: Fitting a conditional spatial model in <code>NIMBLE</code> and <code>RStan</code></a>
 <ul>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#nimble-3"><i class="fa fa-check"></i>Nimble</a></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#stan-2"><i class="fa fa-check"></i>Stan</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.4-fitting-a-conditional-spatial-model-using-carbayes"><i class="fa fa-check"></i>Example 9.4: Fitting a conditional spatial model using CARBayes</a></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.5-fitting-a-conditional-model-using-inla"><i class="fa fa-check"></i>Example 9.5: Fitting a conditional model using INLA</a></li>
+<li class="chapter" data-level="9.1" data-path="Disease.html"><a href="Disease.html#supplementary-example-fitting-a-leroux-model-to-the-copd-dataset-using-nimble-stan-and-carbayes"><i class="fa fa-check"></i><b>9.1</b> Supplementary Example: Fitting a Leroux model to the COPD dataset using Nimble, Stan and CARBayes</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="hazards.html"><a href="hazards.html"><i class="fa fa-check"></i><b>10</b> Environmental hazards-spatial models</a>
 <ul>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.1-spatial-patterns-in-lead-concentrations-in-the-soil-of-the-meuse-river-flood-plain"><i class="fa fa-check"></i>Example 10.1 Spatial patterns in lead concentrations in the soil of the Meuse River flood plain</a></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.2-examining-the-log-concentrations-of-lead-in-the-meuse-river-flood-plain"><i class="fa fa-check"></i>Example 10.2: Examining the log concentrations of lead in the Meuse River flood plain</a></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.3-mapping-the-locations-of-ozone-monitoring-sites-in-new-york-state"><i class="fa fa-check"></i>Example 10.3: Mapping the locations of ozone monitoring sites in New York State</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.6-spatial-prediction-of-temperatures-in-california"><i class="fa fa-check"></i>Example 10.6: Spatial prediction of temperatures in California</a></li>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.8-spatial-prediction-of-no2-in-europe"><i class="fa fa-check"></i>Example 10.8 Spatial prediction of NO2 in Europe</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.5-spatial-prediction-of-temperatures-in-california"><i class="fa fa-check"></i>Example 10.5: Spatial prediction of temperatures in California</a></li>
+<li class="chapter" data-level="10.1" data-path="hazards.html"><a href="hazards.html#example-10.6-fitting-a-bayesian-exponential-spatial-model-using-nimble"><i class="fa fa-check"></i><b>10.1</b> Example 10.6 Fitting a Bayesian exponential spatial model using NIMBLE</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.7-spatial-prediction-of-pm_2.5-in-europe"><i class="fa fa-check"></i>Example 10.7 Spatial prediction of <span class="math inline">\(PM_{2.5}\)</span> in Europe</a></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.10-creating-a-mesh-black-smoke-monitoring-locations-in-the-uk"><i class="fa fa-check"></i>Example 10.10 Creating a mesh: black smoke monitoring locations in the UK</a></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.12-plotting-directional-variograms-for-temperatures-in-california"><i class="fa fa-check"></i>Example 10.12 Plotting directional variograms for temperatures in California</a></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.14-spatial-modeling-of-malaria-in-gambia"><i class="fa fa-check"></i>Example 10.14: Spatial modeling of malaria in Gambia</a>
@@ -238,7 +241,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#supplementary-material-1"><i class="fa fa-check"></i>Supplementary Material</a>
 <ul>
-<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.1-spatial-patterns-of-benzene-concentrations-in-montreal-qc-canada"><i class="fa fa-check"></i>Extra 10.1: Spatial patterns of benzene concentrations in Montreal, QC, Canada</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-analysis-of-benzene-concentrations-across-montreal-qc-canada"><i class="fa fa-check"></i>Example: Analysis of benzene concentrations across Montreal, QC, Canada</a></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.2-examining-the-log-concentrations-of-benzene-in-montreal"><i class="fa fa-check"></i>Extra 10.2: Examining the log concentrations of benzene in Montreal</a></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.5-variogram"><i class="fa fa-check"></i>Extra 10.5: Variogram</a></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.6-basic-spatial-modelling-and-prediction-of-benzene-in-montreal"><i class="fa fa-check"></i>Extra 10.6 Basic spatial modelling and prediction of benzene in Montreal</a></li>
@@ -249,12 +252,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#extra-10.13-directional-variograms"><i class="fa fa-check"></i>Extra 10.13: Directional variograms</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="Time.html"><a href="Time.html"><i class="fa fa-check"></i><b>11</b> Time-why it also matters</a>
+<li class="chapter" data-level="11" data-path="Time.html"><a href="Time.html"><i class="fa fa-check"></i><b>11</b> Modelling temporal data: time series analysis and forecasting</a>
 <ul>
 <li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.1-ground-level-ozone-concentrations"><i class="fa fa-check"></i>Example 11.1 Ground level ozone concentrations</a></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.2-low-pass-filtering-of-carbon-monoxide-levels-using-the-moving-average"><i class="fa fa-check"></i>Example 11.2 Low-pass filtering of carbon monoxide levels using the moving average</a></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.13-forecasting-ozone-levels"><i class="fa fa-check"></i>Example 11.13 Forecasting ozone levels</a></li>
-<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.14-forecasting-volcanic-ash"><i class="fa fa-check"></i>Example 11.14 Forecasting volcanic ash</a></li>
+<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.2-low-pass-filtering-of-ozone-levels-using-the-moving-average"><i class="fa fa-check"></i>Example 11.2 Low-pass filtering of ozone levels using the moving average</a></li>
+<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.12-forecasting-ozone-levels"><i class="fa fa-check"></i>Example 11.12 Forecasting ozone levels</a></li>
+<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.13-forecasting-volcanic-ash"><i class="fa fa-check"></i>Example 11.13 Forecasting volcanic ash</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="exposure.html"><a href="exposure.html"><i class="fa fa-check"></i><b>12</b> Exposure assessment-over space and time</a>
 <ul>
@@ -297,215 +300,246 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="Time" class="section level1 hasAnchor" number="11">
-<h1><span class="header-section-number">Chapter 11</span> Time-why it also matters<a href="Time.html#Time" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>The chapter contains the theory required for handling time series data. From this chapter, the reader will have gained an understanding of the following topics:</p>
+<h1><span class="header-section-number">Chapter 11</span> Modelling temporal data: time series analysis and forecasting<a href="Time.html#Time" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The chapter contains the theory required for handling time series data. The reader will have gained an understanding of the following topics:</p>
 <ul>
-<li>That a temporal process consists of both low and high frequency components, the former playing a key role in determining long-term trends while the latter may be associated with shorter-term changes.</li>
-<li>Techniques for the exploratory analysis of the data generated by the temporal process, including the ACF (correlogram) and PACF (periodogram).</li>
-<li>Models for irregular (high frequency) components after the regular components (trend) have been removed.</li>
-<li>Methods for forecasting, including exponential smoothing and ARIMA modelling.</li>
-<li>The state space modelling approach, which sits naturally within a Bayesian setting and which provides a general framework for most of the classical time series models and many more besides.</li>
-<li>Implementing time series processes within a Bayesian hierarchical framework.</li>
+<li>that a temporal process consists of both low and high frequency components, the former playing a key role in determining long-term trends while the latter may be associated with shorter-term changes;</li>
+<li>techniques for the exploratory analysis of the data generated by the temporal process, including the ACF (correlogram) and PACF (periodogram);</li>
+<li>models for irregular (high frequency) components after the regular components (trend) have been removed;</li>
+<li>methods for forecasting, including exponential smoothing and ARIMA modelling;</li>
+<li>state space modelling approach, which sits naturally within a Bayesian setting and provides a general framework within which a wide class of models, including many classical time series models, can be expressed.</li>
 </ul>
 <div id="example-11.1-ground-level-ozone-concentrations" class="section level2 unnumbered hasAnchor">
 <h2>Example 11.1 Ground level ozone concentrations<a href="Time.html#example-11.1-ground-level-ozone-concentrations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Load the daily and hourly data for one site.</p>
-<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="Time.html#cb460-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb460-2"><a href="Time.html#cb460-2" tabindex="-1"></a></span>
-<span id="cb460-3"><a href="Time.html#cb460-3" tabindex="-1"></a><span class="co"># Load data for one site</span></span>
-<span id="cb460-4"><a href="Time.html#cb460-4" tabindex="-1"></a>site_daily <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/ozone/LA_ozone_daily.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb460-5"><a href="Time.html#cb460-5" tabindex="-1"></a></span>
-<span id="cb460-6"><a href="Time.html#cb460-6" tabindex="-1"></a><span class="co"># change the format of the date column</span></span>
-<span id="cb460-7"><a href="Time.html#cb460-7" tabindex="-1"></a>site_daily<span class="sc">$</span>date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(site_daily<span class="sc">$</span>date, <span class="st">&quot;%m/%d/%Y&quot;</span>)</span>
-<span id="cb460-8"><a href="Time.html#cb460-8" tabindex="-1"></a></span>
-<span id="cb460-9"><a href="Time.html#cb460-9" tabindex="-1"></a><span class="co"># load hourly data from that same site</span></span>
-<span id="cb460-10"><a href="Time.html#cb460-10" tabindex="-1"></a>site_hourly <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/ozone/LA_ozone_hourly.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<p>Plot the daily and hourly time series.</p>
-<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="Time.html#cb461-1" tabindex="-1"></a><span class="co"># Plot daily data</span></span>
-<span id="cb461-2"><a href="Time.html#cb461-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> site_daily) <span class="sc">+</span></span>
-<span id="cb461-3"><a href="Time.html#cb461-3" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> max.ozone, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb461-4"><a href="Time.html#cb461-4" tabindex="-1"></a>  <span class="co"># draw a line at the first data</span></span>
-<span id="cb461-5"><a href="Time.html#cb461-5" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2013-01-01&quot;</span>), <span class="at">color =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
-<span id="cb461-6"><a href="Time.html#cb461-6" tabindex="-1"></a>  <span class="co"># 8 hour regulatory standard of 0.075 (ppm)</span></span>
-<span id="cb461-7"><a href="Time.html#cb461-7" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.075</span>, <span class="at">color =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
-<span id="cb461-8"><a href="Time.html#cb461-8" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Day in 2013 at Los Angeles Site 060379033&quot;</span>) <span class="sc">+</span></span>
-<span id="cb461-9"><a href="Time.html#cb461-9" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Max Daily 8hr Ozone Level (ppm)&quot;</span>) <span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/Ex%2011.1%20plot%20time%20series-1.png" width="672" /></p>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="Time.html#cb462-1" tabindex="-1"></a><span class="co"># Plot hourly data</span></span>
-<span id="cb462-2"><a href="Time.html#cb462-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> site_hourly,) <span class="sc">+</span></span>
-<span id="cb462-3"><a href="Time.html#cb462-3" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> ozone, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb462-4"><a href="Time.html#cb462-4" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
-<span id="cb462-5"><a href="Time.html#cb462-5" tabindex="-1"></a>   <span class="co"># 8 hour regulatory standard of 0.075 (ppm).</span></span>
-<span id="cb462-6"><a href="Time.html#cb462-6" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.075</span>, <span class="at">color =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
-<span id="cb462-7"><a href="Time.html#cb462-7" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Hour in 2013&#39;s ozone season&quot;</span>) <span class="sc">+</span></span>
-<span id="cb462-8"><a href="Time.html#cb462-8" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Hourly Ozone Concentration (ppm)&quot;</span>) <span class="sc">+</span>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/Ex%2011.1%20plot%20time%20series-2.png" width="672" /></p>
+<p>Ozone is a colorless gas produced through a combination of photochemistry, sunlight, high temperatures, oxides of nitrogen, NO<span class="math inline">\(_x\)</span>,<br />
+emitted by motor vehicles. Levels are especially high during morning and evening commute hours
+in urban areas. It is one of the criteria pollutants regulated by the US Clean Air Act (1970)
+because of a substantial body of literature that shows a strong association with human morbidity, notably respiratory diseases such as
+asthma, emphysema, and chronic obstructive pulmonary disorder (COPD) (EPA, 2005). Periods of high ozone concentrations can lead to acute asthma attacks leading to increased numbers of deaths, hospital admissions, and school absences. High levels of ozone concentrations can also lead to reduced
+lung capacity.</p>
+<p>Let’s start by loading the daily and hourly data for one site.</p>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="Time.html#cb458-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb458-2"><a href="Time.html#cb458-2" tabindex="-1"></a></span>
+<span id="cb458-3"><a href="Time.html#cb458-3" tabindex="-1"></a><span class="co"># Load data for one site</span></span>
+<span id="cb458-4"><a href="Time.html#cb458-4" tabindex="-1"></a>site_daily <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/ozone/LA_ozone_daily.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb458-5"><a href="Time.html#cb458-5" tabindex="-1"></a></span>
+<span id="cb458-6"><a href="Time.html#cb458-6" tabindex="-1"></a><span class="co"># change the format of the date column</span></span>
+<span id="cb458-7"><a href="Time.html#cb458-7" tabindex="-1"></a>site_daily<span class="sc">$</span>date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(site_daily<span class="sc">$</span>date, <span class="st">&quot;%m/%d/%Y&quot;</span>)</span>
+<span id="cb458-8"><a href="Time.html#cb458-8" tabindex="-1"></a></span>
+<span id="cb458-9"><a href="Time.html#cb458-9" tabindex="-1"></a><span class="co"># load hourly data from that same site</span></span>
+<span id="cb458-10"><a href="Time.html#cb458-10" tabindex="-1"></a>site_hourly <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/ozone/LA_ozone_hourly.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>The following plot shows daily concentrations
+of ozone measured at sites located in the geographical region of Los Angeles, California.
+Clear seasonal patterns can be observed due to the higher temperatures in summer.</p>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="Time.html#cb459-1" tabindex="-1"></a><span class="co"># Plot daily data</span></span>
+<span id="cb459-2"><a href="Time.html#cb459-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> site_daily) <span class="sc">+</span></span>
+<span id="cb459-3"><a href="Time.html#cb459-3" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> max.ozone, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb459-4"><a href="Time.html#cb459-4" tabindex="-1"></a>  <span class="co"># draw a line at the first data</span></span>
+<span id="cb459-5"><a href="Time.html#cb459-5" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">as.Date</span>(<span class="st">&quot;2013-01-01&quot;</span>), <span class="at">color =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
+<span id="cb459-6"><a href="Time.html#cb459-6" tabindex="-1"></a>  <span class="co"># 8 hour regulatory standard of 0.075 (ppm)</span></span>
+<span id="cb459-7"><a href="Time.html#cb459-7" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.075</span>, <span class="at">color =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
+<span id="cb459-8"><a href="Time.html#cb459-8" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Day in 2013 at Los Angeles Site 060379033&quot;</span>) <span class="sc">+</span></span>
+<span id="cb459-9"><a href="Time.html#cb459-9" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Max Daily 8hr Ozone Level (ppm)&quot;</span>) <span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%2011.1a%20plot%20time%20series-1.png" width="672" /></p>
+<p>And the next plot depicts the same series
+at the hourly level, but restricted to the so-called `ozone season’, which is taken to be May 1 – Sep 30. Here a clear 24-hour daily cycle can be seen
+along with a period of missing data. The latter
+is likely due to the monitoring systems being checked each night by the injection of a calibrated sample of air. If the instrument reports the ozone incorrectly, an alert is sounded and that instrument
+is taken off-line until it is repaired. This can lead to gaps in the series, as seen around hour 1100.</p>
+<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="Time.html#cb460-1" tabindex="-1"></a><span class="co"># Plot hourly data</span></span>
+<span id="cb460-2"><a href="Time.html#cb460-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> site_hourly,) <span class="sc">+</span></span>
+<span id="cb460-3"><a href="Time.html#cb460-3" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> ozone, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb460-4"><a href="Time.html#cb460-4" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
+<span id="cb460-5"><a href="Time.html#cb460-5" tabindex="-1"></a>   <span class="co"># 8 hour regulatory standard of 0.075 (ppm).</span></span>
+<span id="cb460-6"><a href="Time.html#cb460-6" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.075</span>, <span class="at">color =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
+<span id="cb460-7"><a href="Time.html#cb460-7" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Hour in 2013&#39;s ozone season&quot;</span>) <span class="sc">+</span></span>
+<span id="cb460-8"><a href="Time.html#cb460-8" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Hourly Ozone Concentration (ppm)&quot;</span>) <span class="sc">+</span>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%2011.1b%20plot%20time%20series-1.png" width="672" /></p>
 </div>
-<div id="example-11.2-low-pass-filtering-of-carbon-monoxide-levels-using-the-moving-average" class="section level2 unnumbered hasAnchor">
-<h2>Example 11.2 Low-pass filtering of carbon monoxide levels using the moving average<a href="Time.html#example-11.2-low-pass-filtering-of-carbon-monoxide-levels-using-the-moving-average" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="example-11.2-low-pass-filtering-of-ozone-levels-using-the-moving-average" class="section level2 unnumbered hasAnchor">
+<h2>Example 11.2 Low-pass filtering of ozone levels using the moving average<a href="Time.html#example-11.2-low-pass-filtering-of-ozone-levels-using-the-moving-average" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We use the Ozone data of example 11.1 to look at moving averages of daily as done for carbon monoxide in example 11.3 discussed in the book.</p>
 <p>For this example we will use the TTR package (Technical Trading Rules). This allow us to manipulate objects like time series for forecasting.</p>
-<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="Time.html#cb463-1" tabindex="-1"></a><span class="fu">library</span>(TTR)</span>
-<span id="cb463-2"><a href="Time.html#cb463-2" tabindex="-1"></a><span class="co"># Load daily data</span></span>
-<span id="cb463-3"><a href="Time.html#cb463-3" tabindex="-1"></a>site_daily <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/ozone/LA_ozone_daily.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb463-4"><a href="Time.html#cb463-4" tabindex="-1"></a><span class="co"># add an identifier column for each day in the sample</span></span>
-<span id="cb463-5"><a href="Time.html#cb463-5" tabindex="-1"></a>site_daily<span class="sc">$</span>day <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(site_daily)</span></code></pre></div>
-<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="Time.html#cb464-1" tabindex="-1"></a><span class="co"># Add loess smooth</span></span>
-<span id="cb464-2"><a href="Time.html#cb464-2" tabindex="-1"></a><span class="co"># Single day</span></span>
-<span id="cb464-3"><a href="Time.html#cb464-3" tabindex="-1"></a>ozone.loess <span class="ot">&lt;-</span> <span class="fu">loess</span>(max.ozone <span class="sc">~</span> day, <span class="at">span =</span> <span class="fl">0.75</span>, <span class="at">data =</span> site_daily[,<span class="fu">c</span>(<span class="st">&quot;max.ozone&quot;</span>, <span class="st">&quot;day&quot;</span>)])</span>
-<span id="cb464-4"><a href="Time.html#cb464-4" tabindex="-1"></a>ozone.predict <span class="ot">&lt;-</span> <span class="fu">predict</span>(ozone.loess, <span class="fu">data.frame</span>(<span class="at">day =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(site_daily)))</span>
-<span id="cb464-5"><a href="Time.html#cb464-5" tabindex="-1"></a>ozone.predict_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">day =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(site_daily),</span>
-<span id="cb464-6"><a href="Time.html#cb464-6" tabindex="-1"></a>                               <span class="at">ozone.prediction =</span> ozone.predict)</span>
-<span id="cb464-7"><a href="Time.html#cb464-7" tabindex="-1"></a></span>
-<span id="cb464-8"><a href="Time.html#cb464-8" tabindex="-1"></a>plot_SMA1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> site_daily) <span class="sc">+</span></span>
-<span id="cb464-9"><a href="Time.html#cb464-9" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> max.ozone, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb464-10"><a href="Time.html#cb464-10" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> ozone.predict_df, <span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> ozone.predict)) <span class="sc">+</span></span>
-<span id="cb464-11"><a href="Time.html#cb464-11" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Day in 2013 at LA Site 060379033&quot;</span>) <span class="sc">+</span></span>
-<span id="cb464-12"><a href="Time.html#cb464-12" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Ozone Level (ppm)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb464-13"><a href="Time.html#cb464-13" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Single day&quot;</span>) <span class="sc">+</span></span>
-<span id="cb464-14"><a href="Time.html#cb464-14" tabindex="-1"></a> <span class="fu">theme_classic</span>()</span>
-<span id="cb464-15"><a href="Time.html#cb464-15" tabindex="-1"></a><span class="co"># Three days</span></span>
-<span id="cb464-16"><a href="Time.html#cb464-16" tabindex="-1"></a>ozone_SMA3 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">sma =</span> <span class="fu">SMA</span>(site_daily<span class="sc">$</span>max.ozone, <span class="at">n =</span> <span class="dv">3</span>),</span>
-<span id="cb464-17"><a href="Time.html#cb464-17" tabindex="-1"></a>                         <span class="at">day =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(site_daily))</span>
-<span id="cb464-18"><a href="Time.html#cb464-18" tabindex="-1"></a></span>
-<span id="cb464-19"><a href="Time.html#cb464-19" tabindex="-1"></a>plot_SMA3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> ozone_SMA3) <span class="sc">+</span></span>
-<span id="cb464-20"><a href="Time.html#cb464-20" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> sma, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb464-21"><a href="Time.html#cb464-21" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> ozone.predict_df, <span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> ozone.predict)) <span class="sc">+</span></span>
-<span id="cb464-22"><a href="Time.html#cb464-22" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Day in 2013 at LA Site 060379033&quot;</span>) <span class="sc">+</span></span>
-<span id="cb464-23"><a href="Time.html#cb464-23" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Ozone Level (ppm)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb464-24"><a href="Time.html#cb464-24" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Three days&quot;</span>) <span class="sc">+</span></span>
-<span id="cb464-25"><a href="Time.html#cb464-25" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb464-26"><a href="Time.html#cb464-26" tabindex="-1"></a></span>
-<span id="cb464-27"><a href="Time.html#cb464-27" tabindex="-1"></a></span>
-<span id="cb464-28"><a href="Time.html#cb464-28" tabindex="-1"></a><span class="co"># Six days</span></span>
-<span id="cb464-29"><a href="Time.html#cb464-29" tabindex="-1"></a>ozone_SMA6 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">sma =</span> <span class="fu">SMA</span>(site_daily<span class="sc">$</span>max.ozone, <span class="at">n =</span> <span class="dv">6</span>),</span>
-<span id="cb464-30"><a href="Time.html#cb464-30" tabindex="-1"></a>                         <span class="at">day =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(site_daily))</span>
-<span id="cb464-31"><a href="Time.html#cb464-31" tabindex="-1"></a></span>
-<span id="cb464-32"><a href="Time.html#cb464-32" tabindex="-1"></a>plot_SMA6 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> ozone_SMA6) <span class="sc">+</span></span>
-<span id="cb464-33"><a href="Time.html#cb464-33" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> sma, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb464-34"><a href="Time.html#cb464-34" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> ozone.predict_df, <span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> ozone.predict)) <span class="sc">+</span></span>
-<span id="cb464-35"><a href="Time.html#cb464-35" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Day in 2013 at LA Site 060379033&quot;</span>) <span class="sc">+</span></span>
-<span id="cb464-36"><a href="Time.html#cb464-36" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Ozone Level (ppm)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb464-37"><a href="Time.html#cb464-37" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Six days&quot;</span>) <span class="sc">+</span></span>
-<span id="cb464-38"><a href="Time.html#cb464-38" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb464-39"><a href="Time.html#cb464-39" tabindex="-1"></a></span>
-<span id="cb464-40"><a href="Time.html#cb464-40" tabindex="-1"></a></span>
-<span id="cb464-41"><a href="Time.html#cb464-41" tabindex="-1"></a><span class="co"># Twelve days</span></span>
-<span id="cb464-42"><a href="Time.html#cb464-42" tabindex="-1"></a>ozone_SMA12 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">sma =</span> <span class="fu">SMA</span>(site_daily<span class="sc">$</span>max.ozone, <span class="at">n =</span> <span class="dv">12</span>),</span>
-<span id="cb464-43"><a href="Time.html#cb464-43" tabindex="-1"></a>                         <span class="at">day =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(site_daily))</span>
-<span id="cb464-44"><a href="Time.html#cb464-44" tabindex="-1"></a></span>
-<span id="cb464-45"><a href="Time.html#cb464-45" tabindex="-1"></a>plot_SMA12 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> ozone_SMA12) <span class="sc">+</span></span>
-<span id="cb464-46"><a href="Time.html#cb464-46" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> sma, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb464-47"><a href="Time.html#cb464-47" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> ozone.predict_df, <span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> ozone.predict)) <span class="sc">+</span></span>
-<span id="cb464-48"><a href="Time.html#cb464-48" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Day in 2013 at LA Site 060379033&quot;</span>) <span class="sc">+</span></span>
-<span id="cb464-49"><a href="Time.html#cb464-49" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Ozone Level (ppm)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb464-50"><a href="Time.html#cb464-50" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Twelve days&quot;</span>) <span class="sc">+</span></span>
-<span id="cb464-51"><a href="Time.html#cb464-51" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb464-52"><a href="Time.html#cb464-52" tabindex="-1"></a></span>
-<span id="cb464-53"><a href="Time.html#cb464-53" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(plot_SMA1, plot_SMA3, plot_SMA6, plot_SMA12, <span class="at">labels =</span> <span class="st">&quot;auto&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="Time.html#cb461-1" tabindex="-1"></a><span class="fu">library</span>(TTR)</span>
+<span id="cb461-2"><a href="Time.html#cb461-2" tabindex="-1"></a><span class="co"># Load daily data</span></span>
+<span id="cb461-3"><a href="Time.html#cb461-3" tabindex="-1"></a>site_daily <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/ozone/LA_ozone_daily.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb461-4"><a href="Time.html#cb461-4" tabindex="-1"></a><span class="co"># add an identifier column for each day in the sample</span></span>
+<span id="cb461-5"><a href="Time.html#cb461-5" tabindex="-1"></a>site_daily<span class="sc">$</span>day <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(site_daily)</span></code></pre></div>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="Time.html#cb462-1" tabindex="-1"></a><span class="co"># Add loess smooth</span></span>
+<span id="cb462-2"><a href="Time.html#cb462-2" tabindex="-1"></a><span class="co"># Single day moving average</span></span>
+<span id="cb462-3"><a href="Time.html#cb462-3" tabindex="-1"></a>ozone.loess <span class="ot">&lt;-</span> <span class="fu">loess</span>(max.ozone <span class="sc">~</span> day, <span class="at">span =</span> <span class="fl">0.75</span>, <span class="at">data =</span> site_daily[,<span class="fu">c</span>(<span class="st">&quot;max.ozone&quot;</span>, <span class="st">&quot;day&quot;</span>)])</span>
+<span id="cb462-4"><a href="Time.html#cb462-4" tabindex="-1"></a>ozone.predict <span class="ot">&lt;-</span> <span class="fu">predict</span>(ozone.loess, <span class="fu">data.frame</span>(<span class="at">day =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(site_daily)))</span>
+<span id="cb462-5"><a href="Time.html#cb462-5" tabindex="-1"></a>ozone.predict_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">day =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(site_daily),</span>
+<span id="cb462-6"><a href="Time.html#cb462-6" tabindex="-1"></a>                               <span class="at">ozone.prediction =</span> ozone.predict)</span>
+<span id="cb462-7"><a href="Time.html#cb462-7" tabindex="-1"></a></span>
+<span id="cb462-8"><a href="Time.html#cb462-8" tabindex="-1"></a>plot_SMA1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> site_daily) <span class="sc">+</span></span>
+<span id="cb462-9"><a href="Time.html#cb462-9" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> max.ozone, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb462-10"><a href="Time.html#cb462-10" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> ozone.predict_df, <span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> ozone.predict)) <span class="sc">+</span></span>
+<span id="cb462-11"><a href="Time.html#cb462-11" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Day in 2013 at LA Site 060379033&quot;</span>) <span class="sc">+</span></span>
+<span id="cb462-12"><a href="Time.html#cb462-12" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Ozone Level (ppm)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb462-13"><a href="Time.html#cb462-13" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Single day&quot;</span>) <span class="sc">+</span></span>
+<span id="cb462-14"><a href="Time.html#cb462-14" tabindex="-1"></a> <span class="fu">theme_classic</span>()</span>
+<span id="cb462-15"><a href="Time.html#cb462-15" tabindex="-1"></a><span class="co"># Three day moving average</span></span>
+<span id="cb462-16"><a href="Time.html#cb462-16" tabindex="-1"></a>ozone_SMA3 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">sma =</span> <span class="fu">SMA</span>(site_daily<span class="sc">$</span>max.ozone, <span class="at">n =</span> <span class="dv">3</span>),</span>
+<span id="cb462-17"><a href="Time.html#cb462-17" tabindex="-1"></a>                         <span class="at">day =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(site_daily))</span>
+<span id="cb462-18"><a href="Time.html#cb462-18" tabindex="-1"></a></span>
+<span id="cb462-19"><a href="Time.html#cb462-19" tabindex="-1"></a>plot_SMA3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> ozone_SMA3) <span class="sc">+</span></span>
+<span id="cb462-20"><a href="Time.html#cb462-20" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> sma, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb462-21"><a href="Time.html#cb462-21" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> ozone.predict_df, <span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> ozone.predict)) <span class="sc">+</span></span>
+<span id="cb462-22"><a href="Time.html#cb462-22" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Day in 2013 at LA Site 060379033&quot;</span>) <span class="sc">+</span></span>
+<span id="cb462-23"><a href="Time.html#cb462-23" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Ozone Level (ppm)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb462-24"><a href="Time.html#cb462-24" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Three days&quot;</span>) <span class="sc">+</span></span>
+<span id="cb462-25"><a href="Time.html#cb462-25" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb462-26"><a href="Time.html#cb462-26" tabindex="-1"></a></span>
+<span id="cb462-27"><a href="Time.html#cb462-27" tabindex="-1"></a></span>
+<span id="cb462-28"><a href="Time.html#cb462-28" tabindex="-1"></a><span class="co"># Six day moving average</span></span>
+<span id="cb462-29"><a href="Time.html#cb462-29" tabindex="-1"></a>ozone_SMA6 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">sma =</span> <span class="fu">SMA</span>(site_daily<span class="sc">$</span>max.ozone, <span class="at">n =</span> <span class="dv">6</span>),</span>
+<span id="cb462-30"><a href="Time.html#cb462-30" tabindex="-1"></a>                         <span class="at">day =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(site_daily))</span>
+<span id="cb462-31"><a href="Time.html#cb462-31" tabindex="-1"></a></span>
+<span id="cb462-32"><a href="Time.html#cb462-32" tabindex="-1"></a>plot_SMA6 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> ozone_SMA6) <span class="sc">+</span></span>
+<span id="cb462-33"><a href="Time.html#cb462-33" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> sma, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb462-34"><a href="Time.html#cb462-34" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> ozone.predict_df, <span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> ozone.predict)) <span class="sc">+</span></span>
+<span id="cb462-35"><a href="Time.html#cb462-35" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Day in 2013 at LA Site 060379033&quot;</span>) <span class="sc">+</span></span>
+<span id="cb462-36"><a href="Time.html#cb462-36" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Ozone Level (ppm)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb462-37"><a href="Time.html#cb462-37" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Six days&quot;</span>) <span class="sc">+</span></span>
+<span id="cb462-38"><a href="Time.html#cb462-38" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb462-39"><a href="Time.html#cb462-39" tabindex="-1"></a></span>
+<span id="cb462-40"><a href="Time.html#cb462-40" tabindex="-1"></a></span>
+<span id="cb462-41"><a href="Time.html#cb462-41" tabindex="-1"></a><span class="co"># Twelve day moving average</span></span>
+<span id="cb462-42"><a href="Time.html#cb462-42" tabindex="-1"></a>ozone_SMA12 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">sma =</span> <span class="fu">SMA</span>(site_daily<span class="sc">$</span>max.ozone, <span class="at">n =</span> <span class="dv">12</span>),</span>
+<span id="cb462-43"><a href="Time.html#cb462-43" tabindex="-1"></a>                         <span class="at">day =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(site_daily))</span>
+<span id="cb462-44"><a href="Time.html#cb462-44" tabindex="-1"></a></span>
+<span id="cb462-45"><a href="Time.html#cb462-45" tabindex="-1"></a>plot_SMA12 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> ozone_SMA12) <span class="sc">+</span></span>
+<span id="cb462-46"><a href="Time.html#cb462-46" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> sma, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb462-47"><a href="Time.html#cb462-47" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> ozone.predict_df, <span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> ozone.predict)) <span class="sc">+</span></span>
+<span id="cb462-48"><a href="Time.html#cb462-48" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Day in 2013 at LA Site 060379033&quot;</span>) <span class="sc">+</span></span>
+<span id="cb462-49"><a href="Time.html#cb462-49" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Ozone Level (ppm)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb462-50"><a href="Time.html#cb462-50" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Twelve days&quot;</span>) <span class="sc">+</span></span>
+<span id="cb462-51"><a href="Time.html#cb462-51" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb462-52"><a href="Time.html#cb462-52" tabindex="-1"></a></span>
+<span id="cb462-53"><a href="Time.html#cb462-53" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(plot_SMA1, plot_SMA3, plot_SMA6, plot_SMA12, <span class="at">labels =</span> <span class="st">&quot;auto&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/Ex%2011.2%20moving%20averages%20plot-1.png" width="672" /></p>
 </div>
-<div id="example-11.13-forecasting-ozone-levels" class="section level2 unnumbered hasAnchor">
-<h2>Example 11.13 Forecasting ozone levels<a href="Time.html#example-11.13-forecasting-ozone-levels" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="Time.html#cb465-1" tabindex="-1"></a><span class="fu">library</span>(TTR)</span>
-<span id="cb465-2"><a href="Time.html#cb465-2" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
-<span id="cb465-3"><a href="Time.html#cb465-3" tabindex="-1"></a><span class="co"># Load hourly data for site 060379033</span></span>
-<span id="cb465-4"><a href="Time.html#cb465-4" tabindex="-1"></a>site_hourly <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/ozone/LA_ozone_hourly.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb465-5"><a href="Time.html#cb465-5" tabindex="-1"></a><span class="co"># one night hour per day missing for instrument calibration - imputed for simplicity</span></span>
-<span id="cb465-6"><a href="Time.html#cb465-6" tabindex="-1"></a>imputeNA <span class="ot">&lt;-</span> <span class="fu">mean</span>(site_hourly<span class="sc">$</span>ozone, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb465-7"><a href="Time.html#cb465-7" tabindex="-1"></a>site_hourly<span class="sc">$</span>ozone[<span class="fu">is.na</span>(site_hourly<span class="sc">$</span>ozone)] <span class="ot">&lt;-</span> imputeNA</span></code></pre></div>
-<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="Time.html#cb466-1" tabindex="-1"></a><span class="co"># Select the first seven days in july</span></span>
-<span id="cb466-2"><a href="Time.html#cb466-2" tabindex="-1"></a><span class="co"># days_pattern contains the dates for the first seven days</span></span>
-<span id="cb466-3"><a href="Time.html#cb466-3" tabindex="-1"></a>days_pattern <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;^2013070&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="at">collapse=</span><span class="st">&quot;|&quot;</span>)</span>
-<span id="cb466-4"><a href="Time.html#cb466-4" tabindex="-1"></a></span>
-<span id="cb466-5"><a href="Time.html#cb466-5" tabindex="-1"></a><span class="co"># select all the rows that follow that pattern using grepl</span></span>
-<span id="cb466-6"><a href="Time.html#cb466-6" tabindex="-1"></a>july_seven_days <span class="ot">&lt;-</span> site_hourly[<span class="fu">grepl</span>(days_pattern, site_hourly<span class="sc">$</span>datetime),]</span>
-<span id="cb466-7"><a href="Time.html#cb466-7" tabindex="-1"></a>july_seven_days<span class="sc">$</span>hours <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(july_seven_days)</span>
-<span id="cb466-8"><a href="Time.html#cb466-8" tabindex="-1"></a></span>
-<span id="cb466-9"><a href="Time.html#cb466-9" tabindex="-1"></a><span class="co"># Holt-Winters model fitting</span></span>
-<span id="cb466-10"><a href="Time.html#cb466-10" tabindex="-1"></a><span class="co"># Turn this into a time series object to use Holt-Winters forecast</span></span>
-<span id="cb466-11"><a href="Time.html#cb466-11" tabindex="-1"></a>level_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(july_seven_days<span class="sc">$</span>ozone,</span>
-<span id="cb466-12"><a href="Time.html#cb466-12" tabindex="-1"></a>               <span class="at">frequency =</span> <span class="dv">24</span>,</span>
-<span id="cb466-13"><a href="Time.html#cb466-13" tabindex="-1"></a>               <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1</span>))</span>
-<span id="cb466-14"><a href="Time.html#cb466-14" tabindex="-1"></a>ozone_forecast <span class="ot">&lt;-</span> <span class="fu">HoltWinters</span>(level_ts)</span>
-<span id="cb466-15"><a href="Time.html#cb466-15" tabindex="-1"></a></span>
-<span id="cb466-16"><a href="Time.html#cb466-16" tabindex="-1"></a><span class="co"># Plot using the default function</span></span>
-<span id="cb466-17"><a href="Time.html#cb466-17" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb466-18"><a href="Time.html#cb466-18" tabindex="-1"></a>  ozone_forecast,</span>
-<span id="cb466-19"><a href="Time.html#cb466-19" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Hours - First Week -July 2013&quot;</span>,</span>
-<span id="cb466-20"><a href="Time.html#cb466-20" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;O3 (ppm)&quot;</span>,</span>
-<span id="cb466-21"><a href="Time.html#cb466-21" tabindex="-1"></a>  <span class="at">col.predicted =</span> <span class="dv">1</span>,</span>
-<span id="cb466-22"><a href="Time.html#cb466-22" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb466-23"><a href="Time.html#cb466-23" tabindex="-1"></a>  <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>,</span>
-<span id="cb466-24"><a href="Time.html#cb466-24" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">2</span></span>
-<span id="cb466-25"><a href="Time.html#cb466-25" tabindex="-1"></a>)</span></code></pre></div>
+<div id="example-11.12-forecasting-ozone-levels" class="section level2 unnumbered hasAnchor">
+<h2>Example 11.12 Forecasting ozone levels<a href="Time.html#example-11.12-forecasting-ozone-levels" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We return to Example 11.1 with the objective of forecasting ozone concentrations for the next twenty-four hours. These forecasts are based
+on measured concentrations in Los Angeles from the first week of July 2013. We first fit the Holt – Winters model and see the results in the first panel of the next Figure. The plot that follows shows the twenty-four-hour ahead forecast on day eight.\</p>
+<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="Time.html#cb463-1" tabindex="-1"></a><span class="fu">library</span>(TTR)</span>
+<span id="cb463-2"><a href="Time.html#cb463-2" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb463-3"><a href="Time.html#cb463-3" tabindex="-1"></a><span class="co"># Load hourly data for site 060379033</span></span>
+<span id="cb463-4"><a href="Time.html#cb463-4" tabindex="-1"></a>site_hourly <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/ozone/LA_ozone_hourly.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb463-5"><a href="Time.html#cb463-5" tabindex="-1"></a><span class="co"># one night hour per day missing for instrument calibration - imputed for simplicity</span></span>
+<span id="cb463-6"><a href="Time.html#cb463-6" tabindex="-1"></a>imputeNA <span class="ot">&lt;-</span> <span class="fu">mean</span>(site_hourly<span class="sc">$</span>ozone, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb463-7"><a href="Time.html#cb463-7" tabindex="-1"></a>site_hourly<span class="sc">$</span>ozone[<span class="fu">is.na</span>(site_hourly<span class="sc">$</span>ozone)] <span class="ot">&lt;-</span> imputeNA</span></code></pre></div>
+<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="Time.html#cb464-1" tabindex="-1"></a><span class="co"># Select the first seven days in july</span></span>
+<span id="cb464-2"><a href="Time.html#cb464-2" tabindex="-1"></a><span class="co"># days_pattern contains the dates for the first seven days</span></span>
+<span id="cb464-3"><a href="Time.html#cb464-3" tabindex="-1"></a>days_pattern <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;^2013070&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="at">collapse=</span><span class="st">&quot;|&quot;</span>)</span>
+<span id="cb464-4"><a href="Time.html#cb464-4" tabindex="-1"></a></span>
+<span id="cb464-5"><a href="Time.html#cb464-5" tabindex="-1"></a><span class="co"># select all the rows that follow that pattern using grepl</span></span>
+<span id="cb464-6"><a href="Time.html#cb464-6" tabindex="-1"></a>july_seven_days <span class="ot">&lt;-</span> site_hourly[<span class="fu">grepl</span>(days_pattern, site_hourly<span class="sc">$</span>datetime),]</span>
+<span id="cb464-7"><a href="Time.html#cb464-7" tabindex="-1"></a>july_seven_days<span class="sc">$</span>hours <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(july_seven_days)</span>
+<span id="cb464-8"><a href="Time.html#cb464-8" tabindex="-1"></a></span>
+<span id="cb464-9"><a href="Time.html#cb464-9" tabindex="-1"></a><span class="co"># Holt-Winters model fitting</span></span>
+<span id="cb464-10"><a href="Time.html#cb464-10" tabindex="-1"></a><span class="co"># Turn this into a time series object to use Holt-Winters forecast</span></span>
+<span id="cb464-11"><a href="Time.html#cb464-11" tabindex="-1"></a>level_ts <span class="ot">&lt;-</span> <span class="fu">ts</span>(july_seven_days<span class="sc">$</span>ozone,</span>
+<span id="cb464-12"><a href="Time.html#cb464-12" tabindex="-1"></a>               <span class="at">frequency =</span> <span class="dv">24</span>,</span>
+<span id="cb464-13"><a href="Time.html#cb464-13" tabindex="-1"></a>               <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1</span>))</span>
+<span id="cb464-14"><a href="Time.html#cb464-14" tabindex="-1"></a>ozone_forecast <span class="ot">&lt;-</span> <span class="fu">HoltWinters</span>(level_ts)</span>
+<span id="cb464-15"><a href="Time.html#cb464-15" tabindex="-1"></a></span>
+<span id="cb464-16"><a href="Time.html#cb464-16" tabindex="-1"></a><span class="co"># Plot using the default function</span></span>
+<span id="cb464-17"><a href="Time.html#cb464-17" tabindex="-1"></a><span class="fu">plot</span>(ozone_forecast,</span>
+<span id="cb464-18"><a href="Time.html#cb464-18" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Hours - First Week -July 2013&quot;</span>,</span>
+<span id="cb464-19"><a href="Time.html#cb464-19" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;O3 (ppm)&quot;</span>,</span>
+<span id="cb464-20"><a href="Time.html#cb464-20" tabindex="-1"></a>  <span class="at">col.predicted =</span> <span class="dv">1</span>,</span>
+<span id="cb464-21"><a href="Time.html#cb464-21" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb464-22"><a href="Time.html#cb464-22" tabindex="-1"></a>  <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>,</span>
+<span id="cb464-23"><a href="Time.html#cb464-23" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">2</span></span>
+<span id="cb464-24"><a href="Time.html#cb464-24" tabindex="-1"></a>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/Ex%2011.13%20data%20munge-1.png" width="672" /></p>
-<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="Time.html#cb467-1" tabindex="-1"></a><span class="co"># Holt- Winters 24 ahead forast on Day 8</span></span>
-<span id="cb467-2"><a href="Time.html#cb467-2" tabindex="-1"></a><span class="co"># no need to specify Holt-Winters forecast as the object is already HoltWinters class</span></span>
-<span id="cb467-3"><a href="Time.html#cb467-3" tabindex="-1"></a>ozoneforecast_day8 <span class="ot">&lt;-</span> <span class="fu">forecast</span>(ozone_forecast, <span class="at">h=</span><span class="dv">24</span>)</span>
-<span id="cb467-4"><a href="Time.html#cb467-4" tabindex="-1"></a></span>
-<span id="cb467-5"><a href="Time.html#cb467-5" tabindex="-1"></a><span class="co"># Plot using default function</span></span>
-<span id="cb467-6"><a href="Time.html#cb467-6" tabindex="-1"></a><span class="fu">plot</span>(ozoneforecast_day8, <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="Time.html#cb465-1" tabindex="-1"></a><span class="co"># Holt- Winters 24 ahead forast on Day 8</span></span>
+<span id="cb465-2"><a href="Time.html#cb465-2" tabindex="-1"></a><span class="co"># no need to specify Holt-Winters forecast as the object is already HoltWinters class</span></span>
+<span id="cb465-3"><a href="Time.html#cb465-3" tabindex="-1"></a>ozoneforecast_day8 <span class="ot">&lt;-</span> <span class="fu">forecast</span>(ozone_forecast, <span class="at">h=</span><span class="dv">24</span>)</span>
+<span id="cb465-4"><a href="Time.html#cb465-4" tabindex="-1"></a></span>
+<span id="cb465-5"><a href="Time.html#cb465-5" tabindex="-1"></a><span class="co"># Plot using default function</span></span>
+<span id="cb465-6"><a href="Time.html#cb465-6" tabindex="-1"></a><span class="fu">plot</span>(ozoneforecast_day8, <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/Ex%2011.13%20data%20munge-2.png" width="672" /></p>
 </div>
-<div id="example-11.14-forecasting-volcanic-ash" class="section level2 unnumbered hasAnchor">
-<h2>Example 11.14 Forecasting volcanic ash<a href="Time.html#example-11.14-forecasting-volcanic-ash" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="example-11.13-forecasting-volcanic-ash" class="section level2 unnumbered hasAnchor">
+<h2>Example 11.13 Forecasting volcanic ash<a href="Time.html#example-11.13-forecasting-volcanic-ash" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Volcanic ash is not a substance that is commonly encountered in
+environmental epidemiology, however it can be widely distributed by winds
+and it can be a significant health hazard. A study<br />
+of the Mount St. Helens volcanic eruption in May and June 1980 reports thirty-five deaths due to the
+initial blast and landslide. Others are reported to have died from asphyxiation from
+ash inhalation (Baxter et al., 1981). The respirable portion of the ash was found to contain a small percentage of crystalline free silica, a potential pneumoconiosis hazard, and a number of acute health effects were found in those visiting emergency rooms including asthma, bronchitis
+and ash-related eye problems.</p>
 <p>The data in this example consists of atmospheric levels of volcanic ash from 1500AD to 2000AD.</p>
-<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="Time.html#cb468-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb468-2"><a href="Time.html#cb468-2" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
-<span id="cb468-3"><a href="Time.html#cb468-3" tabindex="-1"></a><span class="fu">library</span>(TTR)</span>
-<span id="cb468-4"><a href="Time.html#cb468-4" tabindex="-1"></a></span>
-<span id="cb468-5"><a href="Time.html#cb468-5" tabindex="-1"></a><span class="co"># Load volcano dust data</span></span>
-<span id="cb468-6"><a href="Time.html#cb468-6" tabindex="-1"></a><span class="do">## REVIEW: Data source: Hyndman, R.J.  Time Series Data Library, http://data.is/TSDLdemo</span></span>
-<span id="cb468-7"><a href="Time.html#cb468-7" tabindex="-1"></a><span class="co"># Data cover the period from 1500AD to 2000AD</span></span>
-<span id="cb468-8"><a href="Time.html#cb468-8" tabindex="-1"></a>volcano_dust <span class="ot">&lt;-</span></span>
-<span id="cb468-9"><a href="Time.html#cb468-9" tabindex="-1"></a>  <span class="fu">scan</span>(<span class="st">&quot;https://robjhyndman.com/tsdldata/annual/dvi.dat&quot;</span>, <span class="at">skip =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="Time.html#cb466-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb466-2"><a href="Time.html#cb466-2" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb466-3"><a href="Time.html#cb466-3" tabindex="-1"></a><span class="fu">library</span>(TTR)</span>
+<span id="cb466-4"><a href="Time.html#cb466-4" tabindex="-1"></a></span>
+<span id="cb466-5"><a href="Time.html#cb466-5" tabindex="-1"></a><span class="co"># Load volcano dust data</span></span>
+<span id="cb466-6"><a href="Time.html#cb466-6" tabindex="-1"></a><span class="do">## REVIEW: Data source: Hyndman, R.J.  Time Series Data Library, http://data.is/TSDLdemo</span></span>
+<span id="cb466-7"><a href="Time.html#cb466-7" tabindex="-1"></a><span class="co"># Data cover the period from 1500AD to 2000AD</span></span>
+<span id="cb466-8"><a href="Time.html#cb466-8" tabindex="-1"></a>volcano_dust <span class="ot">&lt;-</span></span>
+<span id="cb466-9"><a href="Time.html#cb466-9" tabindex="-1"></a>  <span class="fu">scan</span>(<span class="st">&quot;https://robjhyndman.com/tsdldata/annual/dvi.dat&quot;</span>, <span class="at">skip =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p>The following figure shows the plot of the original time series.</p>
-<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="Time.html#cb469-1" tabindex="-1"></a><span class="co"># Turn data into data frame to plot it in ggplot</span></span>
-<span id="cb469-2"><a href="Time.html#cb469-2" tabindex="-1"></a>volcano_dust_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">year =</span> <span class="dv">1500</span><span class="sc">:</span>(<span class="dv">1500</span><span class="sc">+</span><span class="fu">length</span>(volcano_dust)<span class="sc">-</span><span class="dv">1</span>),</span>
-<span id="cb469-3"><a href="Time.html#cb469-3" tabindex="-1"></a>                              <span class="at">dust =</span> volcano_dust)</span>
-<span id="cb469-4"><a href="Time.html#cb469-4" tabindex="-1"></a></span>
-<span id="cb469-5"><a href="Time.html#cb469-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> volcano_dust_df) <span class="sc">+</span></span>
-<span id="cb469-6"><a href="Time.html#cb469-6" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> dust, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb469-7"><a href="Time.html#cb469-7" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Year&quot;</span>) <span class="sc">+</span></span>
-<span id="cb469-8"><a href="Time.html#cb469-8" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Atmospheric levels of volcanic ash&quot;</span>) <span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="Time.html#cb467-1" tabindex="-1"></a><span class="co"># Turn data into data frame to plot it in ggplot</span></span>
+<span id="cb467-2"><a href="Time.html#cb467-2" tabindex="-1"></a>volcano_dust_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">year =</span> <span class="dv">1500</span><span class="sc">:</span>(<span class="dv">1500</span><span class="sc">+</span><span class="fu">length</span>(volcano_dust)<span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb467-3"><a href="Time.html#cb467-3" tabindex="-1"></a>                              <span class="at">dust =</span> volcano_dust)</span>
+<span id="cb467-4"><a href="Time.html#cb467-4" tabindex="-1"></a></span>
+<span id="cb467-5"><a href="Time.html#cb467-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> volcano_dust_df) <span class="sc">+</span></span>
+<span id="cb467-6"><a href="Time.html#cb467-6" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> dust, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb467-7"><a href="Time.html#cb467-7" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Year&quot;</span>) <span class="sc">+</span></span>
+<span id="cb467-8"><a href="Time.html#cb467-8" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Atmospheric levels of volcanic ash&quot;</span>) <span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code></pre></div>
 <p><img src="_main_files/figure-html/Ex%2011.14%20plot%20time%20series%20ACF%20and%20PACF-1.png" width="672" /></p>
-<p>We can also plot the autocorrelogram (ACF) and partial autocorrelogram (PACF) to identify any autocorrelation in the time series.</p>
-<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="Time.html#cb470-1" tabindex="-1"></a><span class="co"># convert data into a time series object</span></span>
-<span id="cb470-2"><a href="Time.html#cb470-2" tabindex="-1"></a>volcano_dust_series <span class="ot">&lt;-</span> <span class="fu">ts</span>(volcano_dust, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1500</span>))</span>
-<span id="cb470-3"><a href="Time.html#cb470-3" tabindex="-1"></a><span class="co"># Compute autocorrelogram with max lag 20</span></span>
-<span id="cb470-4"><a href="Time.html#cb470-4" tabindex="-1"></a><span class="fu">acf</span>(</span>
-<span id="cb470-5"><a href="Time.html#cb470-5" tabindex="-1"></a>  volcano_dust_series,</span>
-<span id="cb470-6"><a href="Time.html#cb470-6" tabindex="-1"></a>  <span class="at">lag.max =</span> <span class="dv">20</span>,</span>
-<span id="cb470-7"><a href="Time.html#cb470-7" tabindex="-1"></a>  <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>,</span>
-<span id="cb470-8"><a href="Time.html#cb470-8" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Autocorrelogram volcano dust&quot;</span></span>
-<span id="cb470-9"><a href="Time.html#cb470-9" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/Ex%2011.14%20acf%20and%20pacf-1.png" width="672" /></p>
-<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="Time.html#cb471-1" tabindex="-1"></a><span class="co"># Compute the partial autocorrelogram with max lag 20</span></span>
-<span id="cb471-2"><a href="Time.html#cb471-2" tabindex="-1"></a><span class="fu">pacf</span>(</span>
-<span id="cb471-3"><a href="Time.html#cb471-3" tabindex="-1"></a>  volcano_dust_series,</span>
-<span id="cb471-4"><a href="Time.html#cb471-4" tabindex="-1"></a>  <span class="at">lag.max =</span> <span class="dv">20</span>,</span>
-<span id="cb471-5"><a href="Time.html#cb471-5" tabindex="-1"></a>  <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>,</span>
-<span id="cb471-6"><a href="Time.html#cb471-6" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Partial autocorrelogram volcano dust&quot;</span></span>
-<span id="cb471-7"><a href="Time.html#cb471-7" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/Ex%2011.14%20acf%20and%20pacf-2.png" width="672" /></p>
-<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="Time.html#cb472-1" tabindex="-1"></a><span class="co"># Finding an ARIMA model</span></span>
-<span id="cb472-2"><a href="Time.html#cb472-2" tabindex="-1"></a><span class="fu">auto.arima</span>(volcano_dust_series, <span class="at">ic =</span> <span class="st">&quot;aic&quot;</span>)</span></code></pre></div>
+<p>From the plot of the time series a complex pattern can be seen which is the result of eruptions occurring at random times. The large spikes suggest the possibility of moving average components, this is a way that the ARMA process has of incorporating
+shocks that abate over the period following
+their occurrence.</p>
+<p>There are no obvious regular components in the series that would induce autocorrelation, so we turn to analysis of the ACF and PACF.</p>
+<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="Time.html#cb468-1" tabindex="-1"></a><span class="co"># convert data into a time series object</span></span>
+<span id="cb468-2"><a href="Time.html#cb468-2" tabindex="-1"></a>volcano_dust_series <span class="ot">&lt;-</span> <span class="fu">ts</span>(volcano_dust, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1500</span>))</span>
+<span id="cb468-3"><a href="Time.html#cb468-3" tabindex="-1"></a><span class="co"># Compute autocorrelogram with max lag 20</span></span>
+<span id="cb468-4"><a href="Time.html#cb468-4" tabindex="-1"></a><span class="fu">acf</span>(</span>
+<span id="cb468-5"><a href="Time.html#cb468-5" tabindex="-1"></a>  volcano_dust_series,</span>
+<span id="cb468-6"><a href="Time.html#cb468-6" tabindex="-1"></a>  <span class="at">lag.max =</span> <span class="dv">20</span>,</span>
+<span id="cb468-7"><a href="Time.html#cb468-7" tabindex="-1"></a>  <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>,</span>
+<span id="cb468-8"><a href="Time.html#cb468-8" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Autocorrelogram volcano dust&quot;</span></span>
+<span id="cb468-9"><a href="Time.html#cb468-9" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%2011.13%20acf%20and%20pacf-1.png" width="672" /></p>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="Time.html#cb469-1" tabindex="-1"></a><span class="co"># Compute the partial autocorrelogram with max lag 20</span></span>
+<span id="cb469-2"><a href="Time.html#cb469-2" tabindex="-1"></a><span class="fu">pacf</span>(</span>
+<span id="cb469-3"><a href="Time.html#cb469-3" tabindex="-1"></a>  volcano_dust_series,</span>
+<span id="cb469-4"><a href="Time.html#cb469-4" tabindex="-1"></a>  <span class="at">lag.max =</span> <span class="dv">20</span>,</span>
+<span id="cb469-5"><a href="Time.html#cb469-5" tabindex="-1"></a>  <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>,</span>
+<span id="cb469-6"><a href="Time.html#cb469-6" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Partial autocorrelogram volcano dust&quot;</span></span>
+<span id="cb469-7"><a href="Time.html#cb469-7" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/Ex%2011.13%20acf%20and%20pacf-2.png" width="672" /></p>
+<p>The correlogram is the first panel and it points
+to a significant autocorrelation at lag three and the possibility of an ARMA(0,3) model to capture the persistence in the ash level following a shock, and hence an MA(3) component or a mixture of an AR and MA model, might be considered. The PACF plot suggests a
+significant lag 2 effect, suggesting an
+ARMA(2,0) model.</p>
+<p>The lack of obvious regular components, together with the correlogram plots, suggests the ARIMA approach differences may be used to achieve a
+stationary process. The <code>auto.arima</code> function in the
+R <code>forecast</code> library gives the following results (using the BIC criterion).</p>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="Time.html#cb470-1" tabindex="-1"></a><span class="co"># Finding an ARIMA model</span></span>
+<span id="cb470-2"><a href="Time.html#cb470-2" tabindex="-1"></a><span class="fu">auto.arima</span>(volcano_dust_series, <span class="at">ic =</span> <span class="st">&quot;bic&quot;</span>)</span></code></pre></div>
 <pre><code>## Series: volcano_dust_series 
-## ARIMA(1,0,2) with non-zero mean 
+## ARIMA(2,0,0) with non-zero mean 
 ## 
 ## Coefficients:
-##          ar1     ma1     ma2     mean
-##       0.4723  0.2694  0.1279  57.5178
-## s.e.  0.0936  0.0969  0.0752   8.4883
+##          ar1      ar2     mean
+##       0.7533  -0.1268  57.5274
+## s.e.  0.0457   0.0458   8.5958
 ## 
-## sigma^2 = 4897:  log likelihood = -2661.84
-## AIC=5333.68   AICc=5333.81   BIC=5354.45</code></pre>
-<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="Time.html#cb474-1" tabindex="-1"></a><span class="co"># fitting the ARIMA(2,0,0) model</span></span>
-<span id="cb474-2"><a href="Time.html#cb474-2" tabindex="-1"></a>volcano_dust_arima <span class="ot">&lt;-</span> <span class="fu">arima</span>(volcano_dust_series, <span class="at">order =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
-<span id="cb474-3"><a href="Time.html#cb474-3" tabindex="-1"></a></span>
-<span id="cb474-4"><a href="Time.html#cb474-4" tabindex="-1"></a><span class="co"># forecast 31 years with the ARIMA(2,0,0) model</span></span>
-<span id="cb474-5"><a href="Time.html#cb474-5" tabindex="-1"></a>volcano_dust_forecast <span class="ot">&lt;-</span> <span class="fu">forecast</span>(volcano_dust_arima, <span class="at">h =</span> <span class="dv">31</span>)</span>
-<span id="cb474-6"><a href="Time.html#cb474-6" tabindex="-1"></a><span class="fu">plot</span>(volcano_dust_forecast, <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+## sigma^2 = 4901:  log likelihood = -2662.54
+## AIC=5333.09   AICc=5333.17   BIC=5349.7</code></pre>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="Time.html#cb472-1" tabindex="-1"></a><span class="co"># fitting the ARIMA(2,0,0) model</span></span>
+<span id="cb472-2"><a href="Time.html#cb472-2" tabindex="-1"></a>volcano_dust_arima <span class="ot">&lt;-</span> <span class="fu">arima</span>(volcano_dust_series, <span class="at">order =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb472-3"><a href="Time.html#cb472-3" tabindex="-1"></a></span>
+<span id="cb472-4"><a href="Time.html#cb472-4" tabindex="-1"></a><span class="co"># forecast 31 years with the ARIMA(2,0,0) model</span></span>
+<span id="cb472-5"><a href="Time.html#cb472-5" tabindex="-1"></a>volcano_dust_forecast <span class="ot">&lt;-</span> <span class="fu">forecast</span>(volcano_dust_arima, <span class="at">h =</span> <span class="dv">31</span>)</span>
+<span id="cb472-6"><a href="Time.html#cb472-6" tabindex="-1"></a><span class="fu">plot</span>(volcano_dust_forecast, <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/Ex%2011.14%20arima%20model-1.png" width="672" /></p>
 <!-- :::: {.blackbox data-latex=""} -->
 <!-- ::: {.center data-latex=""} -->

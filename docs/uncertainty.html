@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Embracing uncertainty: the Bayesian approach | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition</title>
-  <meta name="description" content="Chapter 5 Embracing uncertainty: the Bayesian approach | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition" />
+  <title>Chapter 3 The importance of uncertainty: assessment and quantification | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition</title>
+  <meta name="description" content="Chapter 3 The importance of uncertainty: assessment and quantification | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition" />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 Embracing uncertainty: the Bayesian approach | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition" />
+  <meta property="og:title" content="Chapter 3 The importance of uncertainty: assessment and quantification | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/img/cover.jpg" />
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Embracing uncertainty: the Bayesian approach | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition" />
+  <meta name="twitter:title" content="Chapter 3 The importance of uncertainty: assessment and quantification | Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition" />
   
   
   <meta name="twitter:image" content="/img/cover.jpg" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<link rel="prev" href="data.html"/>
-<link rel="next" href="computation.html"/>
+<link rel="prev" href="basics.html"/>
+<link rel="next" href="data.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -299,25 +299,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="embracing" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">Chapter 5</span> Embracing uncertainty: the Bayesian approach<a href="embracing.html#embracing" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This chapter introduces the Bayesian approach, which provides a natural framework for dealing with uncertainty and also for fitting the models that will be encountered later in the book. The reader will have gained an understanding of the following topics:</p>
+<div id="uncertainty" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> The importance of uncertainty: assessment and quantification<a href="uncertainty.html#uncertainty" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This chapter contains a discussion of uncertainty, both in terms of statistical modelling and quantification, but also in the wider setting of sources of uncertainty outside those normally encountered in statistics. From this chapter, the reader will have gained an understanding of the following topics:</p>
 <ul>
-<li>use of prior distributions to capture beliefs before data are observed;</li>
-<li>combining prior beliefs and information from data to obtain posterior beliefs;</li>
-<li>manipulation of prior distributions with likelihoods to formulate posterior distributions and why conjugate priors are useful in this regard;</li>
-<li>the differences between informative and non-informative priors;</li>
-<li>use of the posterior distribution for inference and methods for calculating summary measures.</li>
+<li>Uncertainty can be dichotomized as either qualitative or quantitative, with the former allowing consideration of a wide variety of sources of uncertainty that would be difficult, if not impossible, to quantify mathematically.</li>
+<li>Quantitative uncertainty can be thought of as comprising both aleatory and epistemic components, the former representing stochastic uncertainty and the latter subjective uncertainty.</li>
+<li>Methods for assessing uncertainty including eliciting prior information from experts and sensitivity analysis.</li>
+<li>Indexing quantitative uncertainty using the variance and entropy of the distribution of a random quantity.</li>
+<li>Uncertainty in post-normal science derives from a wide variety of issues and can lead to high levels of that uncertainty with serious consequences. Understanding uncertainty is therefore a vital feature of modern environmental epidemiology.</li>
 </ul>
+<div id="supplementary-material" class="section level2 unnumbered hasAnchor">
+<h2>Supplementary Material<a href="uncertainty.html#supplementary-material" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="more-on-qualitative-uncertainty" class="section level3 unnumbered hasAnchor">
+<h3>More on qualitative uncertainty<a href="uncertainty.html#more-on-qualitative-uncertainty" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The NUSAP matrix consists of five columns, each of which represents one of five generic assessment criteria . The first three of these refer mainly to quantitative elements involved in generating the
+knowledge base: (i) numerical; (ii) units and (ii) spread. The latter two primarily represent qualitative uncertainty: (iv) assessment and (v) pedigree. Each row of the matrix contains the basic objects involved in the uncertainty analysis. Entries under (i) numerical might for example, the relative risk associated with short–term changes in air pollution for instance with the appropriate units given in (ii) the unit column. Spread is a measure of uncertainty in an estimate or prediction for the quantity defined in columns (i) and (ii) , and in the air pollution example might be the standard error or confidence interval associated with the risk estimate. Columns (i), (ii) and (iii) therefore capture the information that is available from standard statistical approaches.</p>
+<p>The final two columns act as an aid to recording this more general uncertainty with entries in the (iv) assessment column usually be a numerical quantity summarizing the result of a pedigree analysis. This pedigree analysis would consist of an organized discussion amongst experts, possibly from a wide variety of subject areas and interests, charged with determining the uncertainty in the relevant knowledge base related to the overall objectives of the analysis.</p>
+<div class="blackbox">
+<div class="center">
+<p><strong>Example S.1: The health impact of VOCs</strong></p>
+</div>
+<p>The NUSAP matrix would be designed created to fit the specific context and process component being assessed, for example the quality of the data or the quality of a complex model. Here we will focus on the pedigree and assessment in an example of the health impact of VOCS. We concentrate on the pedigree analysis and show how the example of
+such a consultation can itself be expressed as a pedigree matrix.</p>
+<p>Based on interest in emissions of volatile organic compound (VOC) emissions from paint, a study was undertaken to assess the uncertainties associated with annual emissions in the Netherlands, . As part of this study a pedigree matrix was
+used in order to allow qualitative uncertainties to be incorporated into the assessment of monitoring data. An abbreviated version of the pedigree matrix appears in <strong>Table 1</strong> which shows how scores are to be assigned by experts according to four different pedigree criteria when considering a particular type of paint. In this case, ‘Proxy’ might relate to inference of VOC emissions based on national paint sales, ‘Empirical’ to the degree to which direct measurements were used for the assessment, ‘Method’ to methodological rigour in making the measurements and ‘validation’ the comparison between measurements over a long time frame.</p>
+<p>Differences in emissions will arise from the different uses of paint, which can be classified into five categories including SHI for ship construction and DIY for do–it–yourself (DIY) construction. There will also be variations based on whether paint is produced locally or imported. In addition, thinner which is added to the paint is also a source of emissions and will thus lead to differences in emissions. This would lead to four emission estimates for each class for which for SHI and DIY have an annual VOC totals for 1998 of 2.4 and 11.3 ktonnes respectively with the total across the five classes being 32.2 ktonnes of emissions from paint purchased nationally. The overall sum of annual VOC emission for both national and imported paints is 51.6 ktonnes.</p>
+<p>However the components of these total emissions are found in a variety of ways and some will be more certain than others and here the pedigree analysis can help in assessing the relative uncertainties and how they might combine in the aggregation. For example, calculations made on national sales data of VOC emissions for paint resulting in an estimate of 6.6 ktonnes. In this case a uncertainty score of 4 was assigned for Method reflecting the relative robustness of this approach. In contrast the estimate of the proportion of paint that had thinner added, 28%, in DIY construction was imputed rather than measured and was scored only 2 for Method since the value was considered to be no more than an educated guess.</p>
+<p>Such an analysis was done for each each source of VOCs for a total of fifteen pedigree analyses on each of the four pedigree criteria above. There were only fifteen and not 5 × 4 = 20 since ten of the twenty fell into into just six categories. The result was a 15 × 4 (pedigree) matrix with a number between 0 and 4 appearing in each cell. Expressing the row columns as a percentage of the maximum value of 16 gives a measure of the overall strength of evidence for each the categories . In this analysis, National-DIY category got the highest score of 0.8 with the National-SHI getting a lower score of 0.7.</p>
+<p>The results led to a number of conclusions. For example the assumed VOC percentage for imported paint had one of the two weakest uncertainty assessments pointing to a lack of requisite knowledge and the need for improvements in the way these VOC emissions are assessed.</p>
+<p>Diagnostic analyses of the scores are also possible. The diagnostic diagram is one tool for doing this. It aims to compare qualitative and quantitative uncertainties in a search for discrepancies. More precisely, it plots sensitivity to inputs against strengths. Each input parameter was randomly varied around its specified value, independently of the other parameters, and for each simulation the contribution of the component VOC’s contribution to a paint class’s total VOC was determined. It was found that the contribution from the imported VOC percentage was by far the greatest at 82.0%. When plotted against its strength score of 0.3, it indicated a strong outlier and singled out this component as needing further information and analysis. Overall the NUSAP analysis led to a number of important insights into the paint monitoring program.</p>
+<div class="figure">
+<img src="img/Table1SMChpt3.png" alt="The pedigree matrix for the VOC data. It gives the scoring criteria based on evaluators’ assessments with respect to the various criteria." width="100%" />
+<p class="caption">
+(#fig:Table 1)The pedigree matrix for the VOC data. It gives the scoring criteria based on evaluators’ assessments with respect to the various criteria.
+</p>
+</div>
+</div>
 
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="computation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="basics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -348,7 +377,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/05-Chpt5.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/03-Chpt3.Rmd",
 "text": "Edit"
 },
 "history": {

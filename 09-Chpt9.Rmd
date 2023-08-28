@@ -2,24 +2,25 @@
 
 This chapter contains an introduction to different types of spatial data, the theory of spatial lattice processes and introduces disease mapping and models for performing smoothing of risks over space. The  reader will have gained an understanding of the following topics:
 
-    - disease mapping and how to improve estimates of risk by borrowing strength from adjacent regions which can reduce the instability inherent in risk estimates based on small (expected) numbers;
-    - how smoothing can be performed using either the empirical Bayes  or fully Bayesian approaches;
-    - computational methods for handling areal data;
-    - Besag's seminal contributions to the field of spatial statistics including the very important concept  of a Markov random field;
-    - approaches to modelling  areal data including conditional autoregressive models;
-    -  how  Bayesian spatial models for lattice data can be fit using NIMBLE, RStan and R--INLA.
+  disease mapping and how to improve estimates of risk by borrowing strength from adjacent regions which can reduce the instability inherent in risk estimates based on small (expected) numbers;
+
+- how smoothing can be performed using either the empirical Bayes  or fully Bayesian approaches;
+- computational methods for handling areal data;
+- Besag's seminal contributions to the field of spatial statistics including the very important concept  of a Markov random field;
+- approaches to modelling  areal data including conditional autoregressive models;
+-  how  Bayesian spatial models for lattice data can be fit using NIMBLE, RStan and R--INLA.
     
     
 ## Example 9.1: Empirical Bayes and Bayes smoothing of COPD mortality for 2010 {-}
 
-Here we consider hospitalization for a respiratory condition, chronic obstructive pulmonary disease (COPD), in England in 2010. There are $N_l=324$ local authority administrative areas  each with an observed, $Y_l $ and expected, $E_l$,  number of cases, $l=1,...,324$. As described in 
+Here we consider hospitalization for a respiratory condition, chronic obstructive pulmonary disease (COPD), in England in 2010. There are $N_l=324$ local authority administrative areas  each with an observed, $Y_l$ and expected, $E_l$,  number of cases, $l=1,...,324$. As described in 
 Section 2.4 the expected numbers were calculated using indirect standardization by applying the 
-age--sex specific rates for the whole of England to the age--sex population profile of each of the areas.  In order to perform empirical Bayes smoothing, we will use the {\tt eBayes} function in the {\tt SpatialEpi} package. 
+age--sex specific rates for the whole of England to the age--sex population profile of each of the areas.  In order to perform empirical Bayes smoothing, we will use the `eBayes` function in the `SpatialEpi` package. 
 This example uses the [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityobserved.csv), and
 [copdmortalityexpected.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityexpected.csv) datasets.
 
 
-### Empirical Bayes estimate using {\tt SpatialEpi}
+### Empirical Bayes estimate using `SpatialEpi`
 
 ```{r Ex 9.1 SpatialEpi, message=FALSE, echo=TRUE, warning=FALSE,message=FALSE}
 
