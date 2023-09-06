@@ -242,7 +242,8 @@ After running the MCMC, check convergence of the chains using trace plots, autoc
 # Number of burn in samples and thinning
 burnin <- 10000
 thin <- 10
-# MCMC samples
+
+# MCMC samples, setting the burnin and thinning
 seqaux <- seq(burnin, L, by = thin)
 
 # Trace-plots of the parameters
@@ -277,18 +278,18 @@ paste0("ESS b: ", coda::effectiveSize(b[seqaux]))
 paste0("ESS theta[1]: ", coda::effectiveSize(theta[seqaux, 1]))
 paste0("ESS theta[10]: ",coda::effectiveSize(theta[seqaux, 10]))
 ```
-Clearly, from the trace-plots and the ESS the sampled values for parameters `a` and `b` have resulted in poor convergence. The MCMC should be run again and the variance of the proposal of `a` should be tuned.
+From the trace-plots and the ESS of the sampled values for parameters `a` and `b` it looks like the sampled values are highly auto-correlated. We can run the MCMC longer to get a bigger or ESS, or we can tune the variance of the proposal of `a` to decrease the auto-correlation among sampled values. To this end, we use the algorithm proposed by [Roberts and Rosenthal (2001)](https://projecteuclid.org/journals/statistical-science/volume-16/issue-4/Optimal-scaling-for-various-Metropolis-Hastings-algorithms/10.1214/ss/1015346320.full)
 
 
-```{r Ex 6.2 MCMC tuning, cache = TRUE }
+```{r Ex 6.2 MCMC tuning, cache = TRUE,results='hide'}
 # observations
 y <- observed$Y2010
 # offset
 E <- expected$E2010
 # Number of MCMC iterations
-L <- 20000
-burnin<-5000
-check<-100
+L <- 30000
+burnin<-10000
+check<-50
 attempt<-0
 accept<-0
 
@@ -310,7 +311,7 @@ lambda_a <- 1
 # Parameter of exponential prior for b
 lambda_b <- 1
 # standard deviation of the proposal distribution of log a
-u <- 0.5 
+u <- 0.1
 # Initialize theta
 theta[1, ] <- y / E
 # Initial value sampled from the prior for a
@@ -319,6 +320,7 @@ a <- rexp(1, lambda_a)
 # Initial value sampled from the prior for b
 b <- rexp(1, lambda_b) 
 fitted[1, ] <- rpois(N, E * theta[1, ])
+k<-0
 
 # Once all the constants and initial values are set we can run the MCMC. 
 # The following code shows the MCMC implementation of a Poisson-Gamma model using only `R`.
@@ -354,20 +356,55 @@ for(l in 2:L) {
   }
   # TUNING!
   if(l<burnin & attempt==check){
+    K<-k+1
     print(paste0("Can sd of ", round(u,3),
                    " for a gave acc rate ",accept/attempt)) 
-      if(accept/attempt<0.2){u<-u*0.8}
-      if(accept/attempt>0.6){u<-u*1.2}
-      accept <- attempt <- 0  
+    delta<-min(0.01,1/sqrt(k+1))
+    if(accept/attempt>0.44){u<-u*exp(delta)}
+    if(accept/attempt<0.44){u<-u*exp(-delta)}
+    accept <- attempt <- 0  
+   #   if(accept/attempt<0.2){u<-u*0.8}
+  #    if(accept/attempt>0.6){u<-u*1.2}
+  #    accept <- attempt <- 0  
     }
   fitted[l,] <- rpois(N, E * theta[l,])
 }
 
 ```
 
+```{r Ex 6.2 ESS and Rhat-tuned}
+# Number of burn in samples and thinning
+burnin <- 10000
+thin <- 1
 
+# MCMC samples, setting the burnin and thinning
+seqaux <- seq(burnin, L, by = thin)
 
-Now that we have guaranteed the convergence of the chains, we can look at the posterior summaries.
+# Trace-plots of the parameters
+xx <- seq(0, 20, length = 3000)
+
+par(mfrow = c(3, 2),pty="m")
+# Plot for "a"
+#traceplot for the posterior sample of parameters 'a' and 'b'
+plot(a[seqaux], type = "l", bty = "n",xlab="Iterations",ylab="a")
+plot(b[seqaux], type = "l", bty = "n",xlab="Iterations",ylab="b")
+#histogram of the posterior distribution of parameter 'a'
+hist(a[seqaux], prob = 1, main = "",)
+#prior distribution of parameter "a'
+lines(xx, dexp(xx, lambda_a), col = 2, lwd = 2)
+hist(b[seqaux], prob = 1, main = "")
+#autocorrelation function of the sampled values of parameter 'a'
+acf(a[seqaux],main="ACF for a")
+acf(b[seqaux],main="ACF for b")
+
+#prior distr
+paste0("ESS a: ", coda::effectiveSize(a[seqaux]))
+paste0("ESS b: ", coda::effectiveSize(b[seqaux]))
+paste0("ESS theta[1]: ", coda::effectiveSize(theta[seqaux, 1]))
+paste0("ESS theta[10]: ",coda::effectiveSize(theta[seqaux, 10]))
+```
+
+The ESS of `a` and `b` have increased a bit. Another way to increase the ESS is to run the algorithm for multiple chains starting from different values.
 
 ```{r Ex 6.2 MCMC posterior summary, fig.align = 'center', fig.align = 'center'}
 
@@ -421,6 +458,8 @@ abline(a = 0, b = 1)
 
 ```
 
+We now show how to run the same model using Nimble. 
+
 ## Code for the Poisson-Gamma model in Nimble {-}
 ```{r Ex 6.2 model nimble, results='hide', results='hide', message = FALSE, warning = FALSE, cache = TRUE}
 require("nimble")
@@ -428,7 +467,7 @@ require("nimble")
 Example6_2Code <- nimbleCode({
   for (i in 1:N) {
     Y[i] ~ dpois(mu[i])
-    log(mu[i]) <- log(E[i]) + theta[i]
+    mu[i] <- log(E[i]) * theta[i]
     theta[i] ~ dgamma(a,b)
   }
   
