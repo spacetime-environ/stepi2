@@ -1,39 +1,158 @@
 ---
-editor_options: 
-  markdown: 
+editor_options:
+  markdown:
     wrap: 72
 ---
 
 # Course {.unnumbered}
 
-The following is an example of a structure for a course that might be
-delivered to epidemiologists with an intermediate level of statistics or
-statistics students who had an interest in epidemiological analysis.
+## Course description: Spatio-temporal methods in environmental epidemiology {.unnumbered}
 
-Reference is given to the material in the chapters in the book together
-with suggested times that might be dedicated to that material.
+**Description:**  This course will emphasize the spatio-temporal methods used in environmental epidemiology to characterize the distribution of morbidity and mortality over space and time. The course relies mainly on the first edition that was published after the course was given, as it lays the groundwork for the second edition. 
 
-+--------------------------------+----------------+-----------------+
-| Chapter                        | Sections       | Suggested       |
-|                                |                | timing          |
-+================================+================+=================+
-| Chapter 1: Why spatio-temporal | All            | 0.5 Week plus   |
-| epidemiology?                  |                | background      |
-|                                |                | reading         |
-+--------------------------------+----------------+-----------------+
-| Chapter 2: Modelling health    | All excluding  | ```             |
-| risks                          | 2.6-2.7        |   1 Week        |
-|                                |                | ```             |
-+--------------------------------+----------------+-----------------+
-| Chapter 3: The importance of   | 3.1-3.4        | 0.5 Week        |
-| uncertainty                    | inclusive      |                 |
-+--------------------------------+----------------+-----------------+
-| Chapter 4: Embracing           | 4.1-4.5        | 0.5 Week        |
-| uncertainty: the Bayesian      | inclusive      |                 |
-| approach                       |                |                 |
-+--------------------------------+----------------+-----------------+
-| Chapter 5: The Bayesian        | 5.1-5.3 5.7,   | ```             |
-| approach in practice           | 5.8            |  2 Weeks        |
-|                                |                | ```             |
-+--------------------------------+----------------+-----------------+
+Some of the methods that are described in the course, involve a single area and look at variations in the health responses over time in relation to those of predictors, including environmental hazards. Some involve a single time period in which case, it’s the variations over space that can help identify relationships between these responses and possible explanatory variables.  However the scale of modern investigation involves means those relationships over time and space must be both be handled leading to the need for sophisticated methods whose development is an active area of risk in statistical science.
+
+The course does assume a solid background in statistics although the required material  will be briefly reviewed. These include but are not limited to: likelihood methods; linear and logistic regression; Bayesian methods; the generalized linear model.  Other topics will be developed from first principles including: Poisson regression; quasi likelihood.
+
+The course will not assume a background in epidemiology however. Thus the relevant building blocks from that subject will be described including all necessary definitions and terminology.  In particular, 
+we will give an overview of: types of study; rates and standardization; measures of risk; the role of confounders and the problem of causation.
+
+Statistics and epidemiology come together when we address important special topics including, disease mapping, ecological analysis, disease clustering, infectious disease modelling, depending on the interests of those enrolled in the course and time available. 
+
+Labs and projects for the course are being included in the GitHub site for Reference 2
+https://spacetime-environ.github.io/stepi2
+
+**References:**
+
+1.	Le, N.D. and Zidek, J.V. Statistics Analysis of Environmental Space-Time Processes. New York: Springer. (2006)
+
+2.	Shaddick, G. and Zidek, J.V. Spatio-temporal methods for environmental epidemiology.  London: Chapman and Hall/CRC (2015)
+
+3.	Shaddick, G. and Zidek, J.V and Schmidt, A.,  Spatio–Temporal Methods in Environmental Epidemiology with R: Second Edition (2023)
+
+4.	Sudipto Banerjee, Alan E. Gelfand and Bradley P. Carlin (2005). Hierarchical Modeling and Analysis for Spatial Data. Chapman & Hall/CRC Monographs on Statistics & Applied Probability.
+
+5.	Noel Cressie and Christopher K Wikle (2011). Statistics for spatio-temporal data. Wiley Series in Probability and Statistics. 
+
+6.	Peter J. Diggle (2002). Statistical analysis of spatial point patterns, Second Edition. Hodder Education
+
+7.	Peter J. Diggle and Paulo J. Ribeiro Jr. (2007). Model-based geostatistics. Springer series in Statistics.
+
+8.	Andrew B. Lawson (2006). Statistical Methods in Spatial Epidemiology, Second Edition. Wiley Series in Probability and Statistics.
+
+9.	Nhu D. Le and James V. Zidek (2006).  Statistical Analysis of Environmental Space-Time Processes. Springer Series in Statistics
+10.	Duncan Thomas (2009).  Statistical Methods in Environmental Epidemiology. Oxford University Press
+
+## Course lectures {.unnumbered}
+
+The following shows some suggested course material for instructors. These are based on the first edition of the book but might be still suitable for anyone teaching a course on Environmental epidemiology.
+
+### Lecture 1: Introduction {.unnumbered}
+
+<iframe src="pdf/SZSLecture1.rev.pdf" width="100%" height="500px"></iframe>
+
+### Lecture 2: Spatial Epidemiology {.unnumbered}
+
+<iframe src="pdf/SZSLecture2.rev.pdf" width="100%" height="500px"></iframe>
+
+### Lectures 3 and 4: Disease Mapping {.unnumbered}
+
+<iframe src="pdf/SZSLecture3_4.rev.pdf" width="100%" height="500px"></iframe>
+
+
+### Lectures 5 and 6: Diseases spatial-patterns {.unnumbered}
+
+<iframe src="pdf/SZSLecture5_6.rev copy.pdf" width="100%" height="500px"></iframe>
+
+
+###  Lectures 7 and 8: Spatial models {.unnumbered}
+
+<iframe src="pdf/SZSLectures7_8.rev.pdf" width="100%" height="500px"></iframe>
+
+###  Lectures 9 and 11: Spatio and temporal processes {.unnumbered}
+
+<iframe src="pdf/SZSLectures9_11.rev.pdf" width="100%" height="500px"></iframe>
+
+###  Lecture 12: Spatio-temporal processes {.unnumbered}
+
+<iframe src="pdf/SZSLectures12.rev.pdf" width="100%" height="500px"></iframe>
+
+###  Lectures 13 and 14: Spatio-temporal processes cont. {.unnumbered}
+
+<iframe src="pdf/SZSLectures13_14.rev.pdf" width="100%" height="500px"></iframe>
+
+###  Lecture 15: Introduction to Bayesian Analysis and WinBUGS {.unnumbered}
+
+<iframe src="pdf/SZSLecture15.rev.pdf" width="100%" height="500px"></iframe>
+
+
+###  Lecture 16: Bayesian Methods {.unnumbered}
+
+<iframe src="pdf/SZSLecture16.rev.pdf" width="100%" height="500px"></iframe>
+
+###  Lecture 17: Why is computation important? {.unnumbered}
+
+<iframe src="pdf/SZSLecture17.rev.pdf" width="100%" height="500px"></iframe>
+
+###  Lecture 18: Generalised Linear regression Models {.unnumbered}
+
+<iframe src="pdf/SZSLecture18.rev.pdf" width="100%" height="500px"></iframe>
+
+###  Lecture 19: Time series epidemiology {.unnumbered}
+
+<iframe src="pdf/SZSLecture19.rev.pdf" width="100%" height="500px"></iframe>
+
+###  Lecture 20: Spatio-temporal modelling of exposures {.unnumbered}
+
+<iframe src="pdf/SZSLecture20.rev.pdf" width="100%" height="500px"></iframe>
+
+###  Lecture 21: Environmental health risk assessment {.unnumbered}
+
+<iframe src="pdf/SZSLectures21.rev.pdf" width="100%" height="500px"></iframe>
+
+###  Lecture 22: Measurement error {.unnumbered}
+
+<iframe src="pdf/SZSLectures22.rev.pdf" width="100%" height="500px"></iframe>
+
+###  Lecture 23: Designing good monitoring networks {.unnumbered}
+
+<iframe src="pdf/SZSLecture23.rev.pdf" width="100%" height="500px"></iframe>
+
+###  Lecture 24: Dealing with high dimensional data {.unnumbered}
+
+<iframe src="pdf/SZSlecture24.rev.pdf" width="100%" height="500px"></iframe>
+
+
+<!-- ## Course structure {.unnumbered} -->
+
+<!-- The following is an example of a structure for a course that might be -->
+<!-- delivered to epidemiologists with an intermediate level of statistics or -->
+<!-- statistics students who had an interest in epidemiological analysis. -->
+
+<!-- Reference is given to the material in the chapters in the book together -->
+<!-- with suggested times that might be dedicated to that material. -->
+
+<!-- +--------------------------------+----------------+-----------------+ -->
+<!-- | Chapter                        | Sections       | Suggested       | -->
+<!-- |                                |                | timing          | -->
+<!-- +================================+================+=================+ -->
+<!-- | Chapter 1: Why spatio-temporal | All            | 0.5 Week plus   | -->
+<!-- | epidemiology?                  |                | background      | -->
+<!-- |                                |                | reading         | -->
+<!-- +--------------------------------+----------------+-----------------+ -->
+<!-- | Chapter 2: Modelling health    | All excluding  | ```             | -->
+<!-- | risks                          | 2.6-2.7        |   1 Week        | -->
+<!-- |                                |                | ```             | -->
+<!-- +--------------------------------+----------------+-----------------+ -->
+<!-- | Chapter 3: The importance of   | 3.1-3.4        | 0.5 Week        | -->
+<!-- | uncertainty                    | inclusive      |                 | -->
+<!-- +--------------------------------+----------------+-----------------+ -->
+<!-- | Chapter 4: Embracing           | 4.1-4.5        | 0.5 Week        | -->
+<!-- | uncertainty: the Bayesian      | inclusive      |                 | -->
+<!-- | approach                       |                |                 | -->
+<!-- +--------------------------------+----------------+-----------------+ -->
+<!-- | Chapter 5: The Bayesian        | 5.1-5.3 5.7,   | ```             | -->
+<!-- | approach in practice           | 5.8            |  2 Weeks        | -->
+<!-- |                                |                | ```             | -->
+<!-- +--------------------------------+----------------+-----------------+ -->
 

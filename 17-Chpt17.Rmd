@@ -1,0 +1,68 @@
+---
+editor_options:
+  markdown:
+    wrap: 72
+---
+
+# Suggested projects {.unnumbered}
+
+## Project 1 {.unnumbered}
+
+### Introduction {.unnumbered}
+
+ For this exercise you should perform an analysis of  the spatial distribution of lung cancer in Ohio between 1968-1988.  For each county in Ohio the number of lung cancer deaths and people at risk are given conditioned on county, year, sex, age category and race.
+
+You are to perform both non-spatial and spatial analyses of the data and to compare the results between the different approaches. You should consider the best of dealing with data over multiple years. You should pay special consideration to how the results are most meaningfully presented, both in terms of visual representation and in choosing appropriate methods of summarizing risk.  
+
+### The Problem {.unnumbered}
+
+The following is a list of pointers to consider:
+
+1. You should clearly state a non-spatial model that is suitable for this analysis and fit it in R. You should describe clearly the results and present them in an informative way. Explain any potential deficiencies in adopting this approach. 
+
+2. Explain why a spatial smoothing approach might be more applicable in this case. Define clearly how an empirical Bayes approach which might be used in this case, explaining clearly what it adds to the analyses.
+
+3. Fit your spatial model using R and present the resulting smoothed relative risks in a meaningful way. 
+
+4. Investigate the effects of the negative binomial dispersion parameter on the smoothed risks you obtain. 
+
+5. Consider alternative outputs which might be useful, in addition to relative risks, and write a report of your findings collating the information gained from all of your analyses.
+
+The OhioMap function on the course webpage can be used as a basis for presenting the results of your analyses. 
+
+### Solution {.unnumbered}
+
+<iframe src="pdf/p1_Solution1_1.pdf" width="100%" height="500px"></iframe>
+
+
+## Project 2 {.unnumbered}
+
+### Introduction {.unnumbered}
+
+ This exercise is about visualization, important for spatial statistics. R provides a variety of options for plotting data on maps. 
+An individual has described a selection of these in the project folder called ``examples``. 
+A vignette can also be found for one of these at
+http://cran.r-project.org/web/packages/plotGoogleMaps/
+vignettes/plotGoogleMaps-intro.pdf
+for one of these packages.  
+The data for this part of the exercise were produced by the MURI group at the U of Washington (www.probcast.washington.edu) and provide amongst other things temperature (degrees Kelvin) for a large number of sites in the Pacific NW (with spatial coordinates).  Consider the one labelled  ``phase1.temp.txt``, that gives (for GMT) temperatures (in the "obs" column) for the period January 12, 2000 to June 30, 2000. The data are incomplete since not all sites collect data on the same day.  We will focus on Apr 1, 2000 and stations located in Oregon State. You can use Google Earth (setting spatial coordinates to be given in decimal form) to determine coordinates of sites that lie in Oregon. Those coordinates can also be used to construct a ``bounding box`` for Oregon.
+
+### The Problem {.unnumbered}
+
+1. Using a package of your choice, plot the points for sites active on Apr 1 on a map of Oregon.
+
+2. Create a regular grid of spatial points that cover Oregon. Using a method of your choice, predict for Apr 1, values of temperature at the points of intersection in your lattice. 
+
+3. Construct a contour plot of temperature in Oregon on Apr 1, 2000.
+
+4. Add any other informative features to your plot that you deem useful.
+
+### Solution {.unnumbered}
+
+<iframe src="pdf/p1_Solution1_2.pdf" width="100%" height="500px"></iframe>
+
+
+
+
+
+
