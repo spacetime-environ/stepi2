@@ -31,7 +31,7 @@ Below we read the data and plot the monitoring locations with solid circles prop
 library(dplyr)
 library(geoR)
 library(GGally)
-library(ggmap)
+library(leaflet)
 library(ggplot2)
 library(sp)
 library(spdep)
@@ -42,29 +42,30 @@ ethylbenzene <- read.csv("data/montreal_ethylbenzene.csv")
 
 We start by mapping the locations of the monitoring sites across Montreal. The diameter of the circles are proportional to the observed concentration of ethylbenzene.
 
-```{r Example 7.6 map data, message = FALSE, warning=FALSE, error=FALSE}
-# create a new variable in "sp" format and define coordinates
-ethylbenzene_geo <- ethylbenzene
-coordinates(ethylbenzene_geo) <- ~ lon + lat
-proj4string(ethylbenzene_geo) <- CRS("+proj=longlat +datum=WGS84")
-# specify the bounding box
-latLongBox = bbox(ethylbenzene_geo)
-location = c(latLongBox[1, 1] - 0.05,
-             latLongBox[2, 1] - 0.05,
-             latLongBox[1, 2] + 0.1,
-             latLongBox[2, 2] + 0.05)
-# create map with location dots marked on it in
-MontrelEthylbenzeneMap <-
-  get_stamenmap(bbox =  location,
-                zoom = 10)
-ggmap(MontrelEthylbenzeneMap) + geom_point(
-  data = ethylbenzene,
-  aes(x = lon,
-      y = lat,
-      size = log(Ethylbenzene)),
-  col = "#011f4b",
-  alpha = 0.45
-) + theme_void()
+
+```{r Example 7.6 plot map with leaflet, message=FALSE, warning=FALSE, error = FALSE}
+range_values <- range(log(ethylbenzene$Ethylbenzene))
+
+# Define bins based on the range of values
+mybins <- seq(range_values[1], range_values[2], length.out = 5)
+
+mypalette <- colorBin(palette="inferno", domain=ethylbenzene$Ethylbenzene,
+                      na.color="transparent", bins=mybins)
+
+leaflet( data = ethylbenzene) |> 
+  addTiles()  |> 
+  addProviderTiles("Esri.WorldImagery")  |>
+  addCircleMarkers(
+    ~ lon,
+    ~ lat,
+    fillOpacity = 0.8, color="orange",
+    fillColor = ~ mypalette(log(Ethylbenzene)),
+    opacity = 5,
+    radius = ~log(Ethylbenzene)*4,
+    stroke = FALSE) |> 
+  addLegend( pal=mypalette, values=~log(Ethylbenzene), 
+             opacity=0.9, title = "log(Ethylbenzene)", position = "bottomright" )
+
 
 ```
 

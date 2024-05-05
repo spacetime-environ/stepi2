@@ -306,899 +306,911 @@ plot(volcano_dust_forecast, bty = "n")
 ```
 
 
-<!-- :::: {.blackbox data-latex=""} -->
-<!-- ::: {.center data-latex=""} -->
-<!-- **NOTE** -->
-<!-- ::: -->
+:::: {.blackbox data-latex=""}
+::: {.center data-latex=""}
+**NOTE**
+:::
 
-<!-- The code for the implementation of DLMs in Stan and Nimble was developed by Paritosh Kumar Roy. This code and other more complex DLM structures are available through his [github](https://github.com/paritoshkroy).  -->
+The code for the implementation of DLMs in Stan and Nimble was developed by Paritosh Kumar Roy. This code and other more complex DLM structures are available through his [github](https://github.com/paritoshkroy).
 
-<!-- :::: -->
+::::
 
 
-<!-- ## Example 11.16 Implementation of a dynamic linear model: UK ozone data {-} -->
+## Example 11.17 Implementation of a dynamic linear model: UK ozone data {-}
 
-<!-- In this section we analyze the ozone concentration at one monitoring site in Aberdeen, UK from March to November 2017. -->
+In this section we analyze the ozone concentration at one monitoring site in Aberdeen, UK from March to November 2017.
 
-<!-- ### Nimble {-} -->
+### Nimble {-}
 
-<!-- ```{r Ex 11.16 o3 clean nimble, include = FALSE} -->
-<!-- rm(list = ls()) -->
-<!-- ``` -->
+```{r Ex 11.17 o3 clean nimble, include = FALSE}
+rm(list = ls())
+```
 
-<!-- ```{r Ex 11.16 o3 nimble load, message=FALSE, echo = TRUE, warning=FALSE} -->
+```{r Ex 11.16 o3 nimble load, message=FALSE, echo = TRUE, warning=FALSE}
 
-<!-- library(coda) -->
-<!-- library(dplyr) -->
-<!-- #library(sf) -->
-<!-- library(ggplot2) -->
-<!-- library(nimble, warn.conflicts = FALSE) -->
-<!-- library(nleqslv) -->
-<!-- library(tidybayes) -->
-<!-- library(tidyverse) -->
+library(coda)
+library(dplyr)
+#library(sf)
+library(ggplot2)
+library(nimble, warn.conflicts = FALSE)
+library(nleqslv)
+library(tidybayes)
+library(tidyverse)
 
-<!-- source("functions/FFBS_functions_nimble.R") -->
+source("functions/FFBS_functions_nimble.R")
 
-<!-- UK_ozone <- read.csv("data/ozone/uk_ozone_one_site.csv") -->
-<!-- head(UK_ozone) -->
-<!-- ``` -->
+UK_ozone <- read.csv("data/ozone/uk_ozone_one_site.csv")
+head(UK_ozone)
+```
 
-
-<!-- ```{r o3 nimble model} -->
-
-<!-- Example11_16_O3_Nimble <- nimbleCode({ -->
-<!--   tau ~ T(dt(mu = 0, sigma = 1, df = 1), 0, Inf) -->
-<!--   for (t in 1:Tt) { -->
-<!--     Vt[t] <- tau ^ 2 -->
-<!--   } -->
-
-<!--    for (j in 1:p) { -->
-<!--     sqrt_Wt_diag[j] ~ T(dt(mu = 0, sigma = 1, df = 1), 0, Inf) -->
-<!--   } -->
-
-<!--   Wt[1:p, 1:p] <- nim_diag(x = sqrt_Wt_diag[1:p] ^ 2) -->
-
-<!--   mt[1:p, 1] <- m0[1:p] -->
-<!--   Ct[1:p, 1:p, 1] <- C0[1:p, 1:p] -->
-
-<!--   for (t in 1:Tt) { -->
-<!--     at[1:p, t] <- (Gt[1:p, 1:p] %*% mt[1:p, t])[1:p, 1] -->
-<!--     Rt[1:p, 1:p, t] <- -->
-<!--       Gt[1:p, 1:p] %*% Ct[1:p, 1:p, t] %*% t(Gt[1:p, 1:p]) + Wt[1:p, 1:p] -->
-<!--     ft[t] <- (t(Ft[1:p, t]) %*% at[1:p, t])[1, 1] -->
-<!--     Qt[t] <- -->
-<!--       (t(Ft[1:p, t]) %*% Rt[1:p, 1:p, t] %*% Ft[1:p, t] + Vt[t])[1, 1] -->
-<!--     yt[t] ~ dnorm(mean = ft[t], var = Qt[t]) -->
-<!--     At[1:p, t] <- (Rt[1:p, 1:p, t] %*% Ft[1:p, t])[1:p, 1] / Qt[t] -->
-<!--     mt[1:p, t + 1] <- at[1:p, t] + (At[1:p, t] * (yt[t] - ft[t])) -->
-<!--     Ct[1:p, 1:p, t + 1] <- -->
-<!--       Rt[1:p, 1:p, t] - (At[1:p, t] %*% t(At[1:p, t])) * Qt[t] -->
-<!--   } -->
-
-<!--   theta[1:p, 1:(Tt + 1)] <- -->
-<!--     nim_bsample( -->
-<!--       mt = mt[1:p, 1:(Tt + 1)], -->
-<!--       Ct = Ct[1:p, 1:p, 1:(Tt + 1)], -->
-<!--       at = at[1:p, 1:Tt], -->
-<!--       Gt = Gt[1:p, 1:p], -->
-<!--       Rt = Rt[1:p, 1:p, 1:Tt] -->
-<!--     ) -->
-
-<!-- }) -->
-
-<!-- ``` -->
-
-<!-- #### Time-varying level model {-} -->
-
-<!-- We first fit a time-varying level model such that, -->
-
-<!-- $$\begin{aligned} Y_t &= F_t\theta_t + v_t, \qquad &v_t \sim \mathcal{N}(0, \tau^2) \\ \theta_t &= G_t\theta_{t-1} + \omega_t  \qquad &\omega_t \sim \mathcal{N}(0, W^2) \end{aligned}$$ -->
-<!-- For the time-varying mean model $F_t = (1, \ wind_t, \ temp_t)$, and $G_t = I_3$. -->
-
-
-<!-- ```{r run o3 nimble model, warning = FALSE, error = FALSE, message = FALSE, results='hide', cache=TRUE} -->
-
-<!-- # Model specification -->
-<!-- yt <- sqrt(UK_ozone$ozone) -->
-<!-- temp <- UK_ozone$temp -->
-<!-- wind <- UK_ozone$wind -->
-
-<!-- Tt <- length(yt) -->
-<!-- p <- 3 # (intercept, wind, temp) -->
-
-<!-- Ft <- array(0, dim = c( p, Tt)) -->
-<!-- Ft[ 1,] <- 1 -->
-<!-- Ft[ 2,] <- (wind[1:Tt] - mean(wind[1:Tt])) / sd(wind[1:Tt]) -->
-<!-- Ft[ 3,] <- (temp[1:Tt] - mean(temp[1:Tt])) / sd(temp[1:Tt]) -->
-
-<!-- Gt <- diag(x = 1, nrow = p, ncol = p) -->
-<!-- m0 <- c(mean(yt), 0, 0) -->
-<!-- C0 <- diag(x = 1, nrow = p, ncol = p) -->
-
-
-<!-- const_list <- list(Tt = Tt, -->
-<!--                    p = p) -->
-<!-- dat_list <- list( -->
-<!--   yt = yt, -->
-<!--   Ft = Ft, -->
-<!--   Gt = Gt, -->
-<!--   m0 = m0, -->
-<!--   C0 = C0 -->
-<!-- ) -->
-<!-- init_list <- list(tau = 0.01, sqrt_Wt_diag = sqrt(rep(0.1, p))) -->
-
-<!-- Rmodel <- -->
-<!--   nimbleModel( -->
-<!--     Example11_16_O3_Nimble, -->
-<!--     constants = const_list, -->
-<!--     data = dat_list, -->
-<!--     inits = init_list -->
-<!--   ) -->
-<!-- Rmodel$initializeInfo() -->
-<!-- Rmodel$calculate() -->
-<!-- Cmodel <- compileNimble(Rmodel, showCompilerOutput = FALSE) -->
-<!-- conf <- -->
-<!--   configureMCMC(Rmodel, monitors = c("tau", "sqrt_Wt_diag", "theta", "ft")) -->
-
-<!-- Rmcmc <- buildMCMC(conf) -->
-<!-- Cmcmc <- -->
-<!--   compileNimble( -->
-<!--     Rmcmc, -->
-<!--     project = Cmodel, -->
-<!--     resetFunctions = TRUE, -->
-<!--     showCompilerOutput = FALSE -->
-<!--   ) -->
-<!-- niter <- 10000 -->
-<!-- nburnin <- 0.5 * niter -->
-<!-- nthin <- 1 -->
-<!-- nchains <- 2 -->
-<!-- start_time <- Sys.time() -->
-<!-- post_samples <- -->
-<!--   runMCMC( -->
-<!--     Cmcmc, -->
-<!--     niter = niter, -->
-<!--     nburnin = nburnin, -->
-<!--     thin = nthin, -->
-<!--     nchains = nchains, -->
-<!--     samplesAsCodaMCMC = TRUE -->
-<!--   ) -->
-<!-- end_time <- Sys.time() -->
-<!-- run_time <- end_time - start_time -->
-<!-- run_time -->
-
-
-<!-- ``` -->
-
-<!-- ```{r Ex 11.16 o3 nimble traceplots} -->
-
-<!-- post_summary <- nimSummary(post_samples) -->
-<!-- tidy_post_samples <- post_samples |> tidy_draws() -->
-
-<!-- tidy_post_samples |> -->
-<!--    dplyr::select( -->
-<!--     .chain, -->
-<!--     .iteration, -->
-<!--     .draw, -->
-<!--     'tau', -->
-<!--     'sqrt_Wt_diag[1]', -->
-<!--     'sqrt_Wt_diag[2]', -->
-<!--     'sqrt_Wt_diag[3]' -->
-<!--   ) |> -->
-<!--   gather(vars, value, -.chain, -.iteration, -.draw) |> -->
-<!--   ggplot(aes(x = .iteration, y = value)) + -->
-<!--   geom_path(aes(color = factor(.chain)), linewidth = 0.25, -->
-<!--             show.legend = FALSE) + -->
-<!--   facet_wrap( ~ vars, scales = "free", nrow = 2) + -->
-<!--   theme_classic() + -->
-<!--   theme(panel.grid = element_blank(), -->
-<!--         strip.background = element_blank()) -->
-
-
-
-<!-- ``` -->
-
-<!-- ```{r Ex 11.16 o3 nimble posterior summary} -->
-
-<!-- post_summary[c('tau', -->
-<!--                'sqrt_Wt_diag[1]', -->
-<!--                'sqrt_Wt_diag[2]', -->
-<!--                'sqrt_Wt_diag[3]'), ] -->
-
-<!-- post_sum_theta <- -->
-<!--   as.data.frame(post_summary) |>  rownames_to_column() |> -->
-<!--   filter(str_detect(rowname, "theta")) |> -->
-<!--   dplyr::select(rowname, q2.5, q50, q97.5) |> -->
-<!--   separate(rowname, into = c("x1", "x2"), sep = ",") |> -->
-<!--   mutate(component = as.numeric(gsub(".*?([0-9]+).*", "\\1", x1))) |> -->
-<!--   mutate(time = as.numeric(gsub(".*?([0-9]+).*", "\\1", x2))) |> -->
-<!--   dplyr::select(component, time, q2.5, q50, q97.5) -->
-
-<!-- ggplot(data = post_sum_theta, aes(x = time)) + -->
-<!--   geom_ribbon(aes(ymin = q2.5, ymax = q97.5), -->
-<!--               fill = "lightgray", -->
-<!--               alpha = 0.7) + -->
-<!--   geom_path(aes(y = q50), col = "blue", linewidth = 0.4) + -->
-<!--   facet_wrap( -->
-<!--     ~ component, -->
-<!--     nrow = 2, -->
-<!--     scales = "free", -->
-<!--     labeller = label_bquote(theta[.(component)]) -->
-<!--   ) + -->
-<!--   ylab("") + xlab("Time") + -->
-<!--   theme_classic()  -->
-
-
-<!-- ``` -->
-
-
-
-<!-- ```{r Ex 11.16 o3  nimble fitted values} -->
-
-<!-- npsample <- floor((niter - nburnin)/nthin) -->
-<!-- # str(tidy_post_samples) -->
-
-<!-- Cnim_postfit_uoms <- compileNimble(nim_postfit_uoms, showCompilerOutput = FALSE) -->
-
-<!-- post_tau <- tidy_post_samples$tau -->
-<!-- post_sqrt_Wt_diag <- -->
-<!--   tidy_post_samples  |>  select(starts_with("sqrt_Wt_diag")) |>  -->
-<!--   as.matrix()|>  unname() -->
-
-<!-- post_ft_list <- lapply(1:(nchains*npsample), function(i) { -->
-<!--   post_Vt <- post_tau[i]^2 -->
-<!--   post_Wt <- nim_diag(post_sqrt_Wt_diag[i,]^2) -->
-<!--   post_ft <- Cnim_postfit_uoms(yt = dat_list$yt,  -->
-<!--                                Ft = dat_list$Ft,  -->
-<!--                                Vt = post_Vt, -->
-<!--                                Gt = dat_list$Gt,  -->
-<!--                                Wt = post_Wt, -->
-<!--                                m0 = dat_list$m0,  -->
-<!--                                C0 = dat_list$C0) -->
-<!--   post_ft <- data.frame(ft = post_ft) |> mutate(time = row_number()) -->
-<!--   return(post_ft) -->
-<!-- }) -->
-
-<!-- tidy_post_ft <- do.call("rbind", post_ft_list) -->
-<!-- str(tidy_post_ft) -->
-<!-- head(tidy_post_ft) -->
-
-<!-- ## posterior summaries of ft -->
-<!-- head(tidy_post_ft) -->
-<!-- post_sum_ft <- tidy_post_ft |> group_by(time) |>  -->
-<!--   summarise(post.mean = mean(ft), -->
-<!--             post.sd = sd(ft), -->
-<!--             q2.5 = quantile(ft, prob = 0.025), -->
-<!--             q50 = quantile(ft, prob = 0.50), -->
-<!--             q97.5 = quantile(ft, prob = 0.975)) |> -->
-<!--   ungroup() -->
-<!-- str(post_sum_ft) -->
-<!-- post_sum_ft |> head() -->
-
-<!-- ggplot(data = post_sum_ft, aes(x = time)) +  -->
-<!--   geom_ribbon(aes(ymin = q2.5,ymax = q97.5), fill = "lightgray") + -->
-<!--   geom_path(aes(y = post.mean),  linewidth = 0.25) + -->
-<!--   geom_point(aes(y=yt), size = 0.25) + -->
-<!--   ylab("Ozone Level (ppm)") + -->
-<!--   xlab("Time") + ggtitle("Fitted values Ozone level UK") + -->
-<!--   theme_classic()  -->
-
-
-<!-- # Residuals plot -->
-<!-- res <- post_sum_ft$post.mean - dat_list$yt -->
-<!-- acf(res, lag.max = 35,bty = "n") -->
-
-<!-- ``` -->
-
-<!-- #### Trend model {-} -->
-
-<!-- In this case we include a trend then, $F_t = (1, 0, \ wind_t, \ temp_t)$ and $G_t = \begin{pmatrix} 1 & 1 \\ 0 & 1\end{pmatrix}$. -->
-
-<!-- ```{r run o3 nimble trend model, warning = FALSE, error = FALSE, message = FALSE, results='hide', cache = TRUE} -->
-
-<!-- # Model specification -->
-<!-- yt <- sqrt(UK_ozone$ozone) -->
-<!-- temp <- UK_ozone$temp -->
-<!-- wind <- UK_ozone$wind -->
-
-<!-- Tt <- length(yt) -->
-<!-- p <- 4 # (intercept, trend, wind, temp) -->
-
-<!-- Ft <- array(0, dim = c( p, Tt)) -->
-<!-- Ft[1,] <- 1 -->
-<!-- Ft[2,] <- 0 -->
-<!-- Ft[3,] <- (wind[1:Tt] - mean(wind[1:Tt])) / sd(wind[1:Tt]) -->
-<!-- Ft[4,] <- (temp[1:Tt] - mean(temp[1:Tt])) / sd(temp[1:Tt]) -->
-
-
-<!-- Gt <- diag(x = 1, nrow = p, ncol = p) -->
-<!-- Gt[1, 2] <- 1  -->
-
-<!-- m0 <- c(mean(yt), 0, 0, 0) -->
-<!-- C0 <- diag(x = 1, nrow = p, ncol = p) -->
-
-<!-- const_list <- list(Tt = Tt, -->
-<!--                    p = p) -->
-<!-- dat_list <- list( -->
-<!--   yt = yt, -->
-<!--   Ft = Ft, -->
-<!--   Gt = Gt, -->
-<!--   m0 = m0, -->
-<!--   C0 = C0 -->
-<!-- ) -->
-<!-- init_list <- list(tau = 0.01, sqrt_Wt_diag = sqrt(rep(0.1, p))) -->
-
-<!-- Rmodel <- -->
-<!--   nimbleModel( -->
-<!--     Example11_16_O3_Nimble, -->
-<!--     constants = const_list, -->
-<!--     data = dat_list, -->
-<!--     inits = init_list -->
-<!--   ) -->
-<!-- Rmodel$initializeInfo() -->
-<!-- Rmodel$calculate() -->
-<!-- Cmodel <- compileNimble(Rmodel, showCompilerOutput = FALSE) -->
-<!-- conf <- -->
-<!--   configureMCMC(Rmodel, monitors = c("tau", "sqrt_Wt_diag", "theta", "ft")) -->
-
-<!-- Rmcmc <- buildMCMC(conf) -->
-<!-- Cmcmc <- -->
-<!--   compileNimble( -->
-<!--     Rmcmc, -->
-<!--     project = Cmodel, -->
-<!--     resetFunctions = TRUE, -->
-<!--     showCompilerOutput = FALSE -->
-<!--   ) -->
-<!-- niter <- 10000 -->
-<!-- nburnin <- 0.5 * niter -->
-<!-- nthin <- 1 -->
-<!-- nchains <- 2 -->
-<!-- start_time <- Sys.time() -->
-<!-- post_samples <- -->
-<!--   runMCMC( -->
-<!--     Cmcmc, -->
-<!--     niter = niter, -->
-<!--     nburnin = nburnin, -->
-<!--     thin = nthin, -->
-<!--     nchains = nchains, -->
-<!--     samplesAsCodaMCMC = TRUE -->
-<!--   ) -->
-<!-- end_time <- Sys.time() -->
-<!-- run_time <- end_time - start_time -->
-<!-- run_time -->
-
-
-<!-- ``` -->
-
-<!-- ```{r Ex 11.16 o3 nimble trend traceplots} -->
-
-<!-- post_summary <- nimSummary(post_samples) -->
-<!-- tidy_post_samples <- post_samples |> tidy_draws() -->
-
-<!-- tidy_post_samples |> -->
-<!--    dplyr::select( -->
-<!--     .chain, -->
-<!--     .iteration, -->
-<!--     .draw, -->
-<!--     'tau', -->
-<!--     'sqrt_Wt_diag[1]', -->
-<!--     'sqrt_Wt_diag[2]', -->
-<!--     'sqrt_Wt_diag[3]', -->
-<!--     'sqrt_Wt_diag[4]' -->
-
-<!--   ) |> -->
-<!--   gather(vars, value, -.chain, -.iteration, -.draw) |> -->
-<!--   ggplot(aes(x = .iteration, y = value)) + -->
-<!--   geom_path(aes(color = factor(.chain)), linewidth = 0.25, -->
-<!--             show.legend = FALSE) + -->
-<!--   facet_wrap( ~ vars, scales = "free", nrow = 2) + -->
-<!--   theme_classic() + -->
-<!--   theme(panel.grid = element_blank(), -->
-<!--         strip.background = element_blank()) -->
-
-
-
-<!-- ``` -->
-
-<!-- ```{r Ex 11.16 o3 nimble trend posterior summary} -->
-
-<!-- post_summary[c('tau', -->
-<!--                'sqrt_Wt_diag[1]', -->
-<!--                'sqrt_Wt_diag[2]', -->
-<!--                'sqrt_Wt_diag[3]', -->
-<!--                'sqrt_Wt_diag[4]'), ] -->
-
-<!-- post_sum_theta <- -->
-<!--   as.data.frame(post_summary) |>  rownames_to_column() |> -->
-<!--   filter(str_detect(rowname, "theta")) |> -->
-<!--   dplyr::select(rowname, q2.5, q50, q97.5) |> -->
-<!--   separate(rowname, into = c("x1", "x2"), sep = ",") |> -->
-<!--   mutate(component = as.numeric(gsub(".*?([0-9]+).*", "\\1", x1))) |> -->
-<!--   mutate(time = as.numeric(gsub(".*?([0-9]+).*", "\\1", x2))) |> -->
-<!--   dplyr::select(component, time, q2.5, q50, q97.5) -->
-
-<!-- ggplot(data = post_sum_theta, aes(x = time)) + -->
-<!--   geom_ribbon(aes(ymin = q2.5, ymax = q97.5), -->
-<!--               fill = "lightgray", -->
-<!--               alpha = 0.7) + -->
-<!--   geom_path(aes(y = q50), col = "blue", linewidth = 0.4) + -->
-<!--   facet_wrap( -->
-<!--     ~ component, -->
-<!--     nrow = 2, -->
-<!--     scales = "free", -->
-<!--     labeller = label_bquote(theta[.(component)]) -->
-<!--   ) + -->
-<!--   ylab("") + -->
-<!--   xlab("Time") + -->
-<!--   theme_classic()  -->
-
-<!-- ``` -->
-
-<!-- ```{r  Ex 11.16 nimble trend fitted values, cache=TRUE, messages = FALSE} -->
-
-<!-- npsample <- floor((niter - nburnin)/nthin) -->
-
-<!-- Cnim_postfit_uoms <- compileNimble(nim_postfit_uoms, showCompilerOutput = FALSE) -->
-
-<!-- post_tau <- tidy_post_samples$tau -->
-<!-- post_sqrt_Wt_diag <- -->
-<!--   tidy_post_samples  |>  dplyr::select(starts_with("sqrt_Wt_diag")) |>  -->
-<!--   as.matrix()|>  unname() -->
-
-<!-- post_ft_list <- lapply(1:(nchains*npsample), function(i) { -->
-<!--   post_Vt <- post_tau[i]^2 -->
-<!--   post_Wt <- nim_diag(post_sqrt_Wt_diag[i,]^2) -->
-<!--   post_ft <- Cnim_postfit_uoms(yt = dat_list$yt,  -->
-<!--                                Ft = dat_list$Ft,  -->
-<!--                                Vt = post_Vt, -->
-<!--                                Gt = dat_list$Gt,  -->
-<!--                                Wt = post_Wt, -->
-<!--                                m0 = dat_list$m0,  -->
-<!--                                C0 = dat_list$C0) -->
-<!--   post_ft <- data.frame(ft = post_ft) |> mutate(time = row_number()) -->
-<!--   return(post_ft) -->
-<!-- }) -->
-
-<!-- tidy_post_ft <- do.call("rbind", post_ft_list) -->
-
-<!-- ## posterior summaries of ft -->
-<!-- post_sum_ft <- tidy_post_ft |> group_by(time) |>   -->
-<!--   summarise(post.mean = mean(ft), -->
-<!--             post.sd = sd(ft), -->
-<!--             q2.5 = quantile(ft, prob = 0.025), -->
-<!--             q50 = quantile(ft, prob = 0.50), -->
-<!--             q97.5 = quantile(ft, prob = 0.975)) |>  -->
-<!--   ungroup() -->
-
-
-<!-- ggplot(data = post_sum_ft, aes(x = time)) +  -->
-<!--   geom_ribbon(aes(ymin = q2.5,ymax = q97.5), fill = "lightgray") + -->
-<!--   geom_path(aes(y = post.mean),  size = 0.25) + -->
-<!--   geom_point(aes(y=yt), size = 0.25) + -->
-<!--   ylab("Ozone Level (ppm)") + -->
-<!--   xlab("Time") + ggtitle("Fitted values Ozone level UK") + -->
-<!--   theme_classic()  -->
-
-
-<!-- # Residuals plot -->
-<!-- res <- post_sum_ft$post.mean - dat_list$yt -->
-<!-- acf(res, lag.max = 35,bty = "n") -->
-
-
-<!-- ``` -->
-
-<!-- ### Stan {-} -->
-
-<!-- ```{r Ex 11.16 ozone clean stan, include = FALSE} -->
-<!-- rm(list = ls()) -->
-<!-- ``` -->
-
-
-<!-- ```{r  Ex 11.16 ozone stan load, message=FALSE, echo = TRUE, warning=FALSE, message= FALSE} -->
-<!-- library(coda) -->
-<!-- library(ggplot2) -->
-<!-- library(gridExtra) -->
-<!-- library(rstan) -->
-<!-- library(tidyverse) -->
-
-<!-- options(mc.cores = parallel::detectCores()) -->
-<!-- rstan_options(auto_write = TRUE) -->
-
-<!-- # Load data for RW case -->
-<!-- UK_ozone <- read.csv("data/ozone/uk_ozone_one_site.csv") -->
-
-<!-- ``` -->
-
-<!-- #### Time-varying level model {-} -->
-
-<!-- ```{r  Ex 11.16 o3 prepare data stan} -->
-<!-- y <- sqrt(UK_ozone$ozone) -->
-<!-- temp <- UK_ozone$temp -->
-<!-- wind <- UK_ozone$wind -->
-
-<!-- Tt <- length(y) -->
-<!-- p <- 3 # (intercept, wind, temp) -->
-
-<!-- Ft <- array(0, dim = c(Tt, p)) -->
-<!-- Ft[, 1] <- 1 -->
-<!-- Ft[, 2] <- (wind[1:Tt] - mean(wind[1:Tt])) / sd(wind[1:Tt]) -->
-<!-- Ft[, 3] <- (temp[1:Tt] - mean(temp[1:Tt])) / sd(temp[1:Tt]) -->
-
-<!-- Gt <- diag(x = 1, nrow = p, ncol = p) -->
-<!-- m0 <- c(mean(y), 0, 0) -->
-<!-- C0 <- diag(x = 1, nrow = p, ncol = p) -->
-
-<!-- stan_data <- list(T = Tt, p = p, y = y, F = Ft, G = Gt, m0= m0, C0 = C0) -->
-
-<!-- ``` -->
-
-<!-- ```{r engine='bash', comment='', echo = FALSE} -->
-<!-- cat functions/Example11_16_UK.stan -->
-<!-- ```  -->
-
-<!-- ```{r Ex 11.16 o3 run stan, cache = TRUE} -->
-<!-- Example11_16_UK_Stan  <- stan( -->
-<!--   file = "functions/Example11_16_UK.stan", -->
-<!--   data = stan_data, -->
-<!--   warmup = 5000, -->
-<!--   iter = 10000, -->
-<!--   chains = 3, -->
-<!--   include = TRUE -->
-<!-- ) -->
-
-<!-- ``` -->
-
-
-<!-- ```{r Ex 11.16 o3 post summaries stan} -->
-
-<!-- rstan::traceplot(Example11_16_UK_Stan, -->
-<!--                  pars = c("tau", "sqrt_W_diag", "theta[1,1]")) -->
-<!-- rstan::traceplot(Example11_16_UK_Stan,  -->
-<!--                  pars = paste0("theta[", sample.int(Tt, size = 4, replace = FALSE), ",1]")) -->
-<!-- rstan::traceplot(Example11_16_UK_Stan,  -->
-<!--                  pars = paste0("theta[", sample.int(Tt, size = 4, replace = FALSE), ",2]")) -->
-<!-- rstan::traceplot(Example11_16_UK_Stan,  -->
-<!--                  pars = paste0("theta[", sample.int(Tt, size = 4, replace = FALSE), ",3]")) -->
-
-
-<!-- fixedpars_summary <- -->
-<!--   summary(Example11_16_UK_Stan, pars = c("tau", "sqrt_W_diag"))$summary -->
-<!-- fixedpars_summary -->
-
-<!-- theta_summary <- -->
-<!--   summary(Example11_16_UK_Stan, pars = c("theta"))$summary -->
-
-<!-- yfit_summary <- -->
-<!--   summary(Example11_16_UK_Stan, pars = c("yfit"))$summary -->
-
-<!-- p1 <- data.frame(theta_summary) |> -->
-<!--   rownames_to_column() |> -->
-<!--   filter(rowname %in% paste0("theta[", 1:Tt, ",1]")) |> -->
-<!--   mutate(date = as.Date(UK_ozone$date[1:Tt])) |> -->
-<!--   ggplot(aes(x = date, group = 1)) + -->
-<!--   geom_path(aes(y = mean), color = "blue", linewidth = 0.6) + -->
-<!--   geom_ribbon(aes(ymin = X2.5., ymax = X97.5.), -->
-<!--               alpha = 0.25, -->
-<!--               col = "lightgray") + -->
-<!--   ggtitle("Intercept") + theme_classic() + -->
-<!--   theme(plot.title = element_text(hjust = 0.5)) -->
-
-<!-- p2 <- data.frame(theta_summary) |> -->
-<!--   rownames_to_column() |> -->
-<!--   filter(rowname %in% paste0("theta[", 1:Tt, ",2]")) |> -->
-<!--   mutate(date = as.Date(UK_ozone$date[1:Tt])) |> -->
-<!--   ggplot(aes(x = date)) + -->
-<!--   geom_path(aes(y = mean), color = "blue", linewidth = 0.6) + -->
-<!--   geom_ribbon(aes(ymin = X2.5., ymax = X97.5.), -->
-<!--               alpha = 0.25, -->
-<!--               col = "lightgray") + -->
-<!--   ggtitle("Wind") +  theme_classic() + -->
-<!--   theme(plot.title = element_text(hjust = 0.5)) -->
-
-
-<!-- p3 <- data.frame(theta_summary) |> -->
-<!--   rownames_to_column() |> -->
-<!--   filter(rowname %in% paste0("theta[", 1:Tt, ",3]")) |> -->
-<!--   mutate(date = as.Date(UK_ozone$date[1:Tt])) |> -->
-<!--   ggplot(aes(x = date)) + -->
-<!--   geom_path(aes(y = mean), color = "blue", linewidth = 0.6) + -->
-<!--   geom_ribbon(aes(ymin = X2.5., ymax = X97.5.), -->
-<!--               alpha = 0.25, -->
-<!--               col = "lightgray") + -->
-<!--   ggtitle("Temperature") +  theme_classic() + -->
-<!--   theme(plot.title = element_text(hjust = 0.5)) -->
-
-<!-- grid.arrange(p1,p2,p3, ncol = 2) -->
-
-<!-- # Fitted values -->
-<!-- yfit_summary_dt <- data.frame(yfit_summary) |> -->
-<!--   rownames_to_column() |> -->
-<!--   mutate(time = as.numeric(gsub(".*?([0-9]+).*", "\\1", rowname))) -->
-
-<!-- ggplot(yfit_summary_dt, aes(x = time)) + -->
-<!--   geom_ribbon(aes(ymin = X2.5., ymax = X97.5.), -->
-<!--               alpha = 0.25, -->
-<!--               col = "gray99") + -->
-<!--   geom_point(aes(y = y)) + -->
-<!--   geom_path(aes(y = mean), linewidth = 0.1, size = 1) +  -->
-<!--  ylab("Ozone Level (ppm)") + -->
-<!--   xlab("Time") + ggtitle("Fitted values Ozone level UK") + -->
-<!--   theme_classic() -->
-<!-- ``` -->
-
-
-<!-- #### Trend model {-} -->
-
-<!-- ```{r  Ex 11.16 o3 trend data stan, cache = TRUE} -->
-<!-- y <- sqrt(UK_ozone$ozone) -->
-<!-- temp <- UK_ozone$temp -->
-<!-- wind <- UK_ozone$wind -->
-
-<!-- Tt <- length(y) -->
-<!-- p <- 4 # (intercept, trend, wind, temp) -->
-
-<!-- Ft <- array(0, dim = c(Tt, p)) -->
-<!-- Ft[, 1] <- 1 -->
-<!-- Ft[, 2] <- 0 -->
-<!-- Ft[, 3] <- (wind[1:Tt] - mean(wind[1:Tt])) / sd(wind[1:Tt]) -->
-<!-- Ft[, 4] <- (temp[1:Tt] - mean(temp[1:Tt])) / sd(temp[1:Tt]) -->
-
-<!-- Gt <- diag(x = 1, nrow = p, ncol = p) -->
-<!-- Gt[1, 2] <- 1  -->
-
-
-<!-- m0 <- c(mean(y), 0, 0, 0) -->
-<!-- C0 <- diag(x = 1, nrow = p, ncol = p) -->
-
-<!-- stan_data_trend <- list( -->
-<!--   T = Tt, -->
-<!--   p = p, -->
-<!--   y = y, -->
-<!--   F = Ft, -->
-<!--   G = Gt, -->
-<!--   m0 = m0, -->
-<!--   C0 = C0 -->
-<!-- ) -->
-
-<!-- Example11_16_UK_trend_Stan  <- stan( -->
-<!--   file = "functions/Example11_16_UK.stan", -->
-<!--   data = stan_data_trend, -->
-<!--   warmup = 5000, -->
-<!--   iter = 10000, -->
-<!--   chains = 3, -->
-<!--   include = TRUE -->
-<!-- ) -->
-
-<!-- ``` -->
-
-<!-- ```{r  Ex 11.16 o3 traceplots trend stan} -->
-<!-- rstan::traceplot(Example11_16_UK_trend_Stan, -->
-<!--                  pars = c("tau", "sqrt_W_diag", "theta[1,1]")) -->
-<!-- rstan::traceplot(Example11_16_UK_trend_Stan,  -->
-<!--                  pars = paste0("theta[", sample.int(Tt, size = 4, replace = FALSE), ",1]")) -->
-<!-- rstan::traceplot(Example11_16_UK_trend_Stan,  -->
-<!--                  pars = paste0("theta[", sample.int(Tt, size = 4, replace = FALSE), ",2]")) -->
-<!-- rstan::traceplot(Example11_16_UK_trend_Stan,  -->
-<!--                  pars = paste0("theta[", sample.int(Tt, size = 4, replace = FALSE), ",3]")) -->
-<!-- rstan::traceplot(Example11_16_UK_trend_Stan,  -->
-<!--                  pars = paste0("theta[", sample.int(Tt, size = 4, replace = FALSE), ",4]")) -->
-
-<!-- ``` -->
-
-
-<!-- ```{r Ex 11.16 o3 post summaries trend stan} -->
-
-<!-- fixedpars_summary <- -->
-<!--   summary(Example11_16_UK_trend_Stan, pars = c("tau", "sqrt_W_diag"))$summary -->
-<!-- fixedpars_summary -->
-
-<!-- theta_summary <- -->
-<!--   summary(Example11_16_UK_trend_Stan, pars = c("theta"))$summary -->
-
-<!-- yfit_summary <- -->
-<!--   summary(Example11_16_UK_trend_Stan, pars = c("yfit"))$summary -->
-
-
-<!-- p1 <- data.frame(theta_summary) |> -->
-<!--   rownames_to_column() |> -->
-<!--   filter(rowname %in% paste0("theta[", 1:Tt, ",1]")) |> -->
-<!--   mutate(date = as.Date(UK_ozone$date[1:Tt])) |> -->
-<!--   ggplot(aes(x = date, group = 1)) + -->
-<!--   geom_path(aes(y = mean), color = "blue", linewidth = 0.6) + -->
-<!--   geom_ribbon(aes(ymin = X2.5., ymax = X97.5.), -->
-<!--               alpha = 0.25, -->
-<!--               col = "lightgray") + -->
-<!--   ggtitle("Intercept") + theme_classic() + -->
-<!--   theme(plot.title = element_text(hjust = 0.5)) -->
-
-<!-- p2 <- data.frame(theta_summary) |> -->
-<!--   rownames_to_column() |> -->
-<!--   filter(rowname %in% paste0("theta[", 1:Tt, ",4]")) |> -->
-<!--   mutate(date = as.Date(UK_ozone$date[1:Tt])) |> -->
-<!--   ggplot(aes(x = date)) + -->
-<!--   geom_path(aes(y = mean), color = "blue", linewidth = 0.6) + -->
-<!--   geom_ribbon(aes(ymin = X2.5., ymax = X97.5.), -->
-<!--               alpha = 0.25, -->
-<!--               col = "lightgray") + -->
-<!--   ggtitle("Trend") +  theme_classic() + -->
-<!--   theme(plot.title = element_text(hjust = 0.5)) -->
-
-<!-- p3 <- data.frame(theta_summary) |> -->
-<!--   rownames_to_column() |> -->
-<!--   filter(rowname %in% paste0("theta[", 1:Tt, ",2]")) |> -->
-<!--   mutate(date = as.Date(UK_ozone$date[1:Tt])) |> -->
-<!--   ggplot(aes(x = date)) + -->
-<!--   geom_path(aes(y = mean), color = "blue", linewidth = 0.6) + -->
-<!--   geom_ribbon(aes(ymin = X2.5., ymax = X97.5.), -->
-<!--               alpha = 0.25, -->
-<!--               col = "lightgray") + -->
-<!--   ggtitle("Wind") +  theme_classic() + -->
-<!--   theme(plot.title = element_text(hjust = 0.5)) -->
-
-
-<!-- p4 <- data.frame(theta_summary) |> -->
-<!--   rownames_to_column() |> -->
-<!--   filter(rowname %in% paste0("theta[", 1:Tt, ",3]")) |> -->
-<!--   mutate(date = as.Date(UK_ozone$date[1:Tt])) |> -->
-<!--   ggplot(aes(x = date)) + -->
-<!--   geom_path(aes(y = mean), color = "blue", linewidth = 0.6) + -->
-<!--   geom_ribbon(aes(ymin = X2.5., ymax = X97.5.), -->
-<!--               alpha = 0.25, -->
-<!--               col = "lightgray") + -->
-<!--   ggtitle("Temperature") +  theme_classic() + -->
-<!--   theme(plot.title = element_text(hjust = 0.5)) -->
-
-
-
-<!-- grid.arrange(p1,p2,p3, p4, ncol = 2) -->
-
-<!-- # Fitted values -->
-<!-- yfit_summary_dt <- data.frame(yfit_summary) |> -->
-<!--   rownames_to_column() |> -->
-<!--   mutate(time = as.numeric(gsub(".*?([0-9]+).*", "\\1", rowname))) -->
-
-<!-- ggplot(yfit_summary_dt, aes(x = time)) + -->
-<!--   geom_ribbon(aes(ymin = X2.5., ymax = X97.5.), -->
-<!--               alpha = 0.25, -->
-<!--               col = "gray99") + -->
-<!--   geom_point(aes(y = y)) + -->
-<!--   geom_path(aes(y = mean), linewidth = 0.1, size = 1) +  -->
-<!--  ylab("Ozone Level (ppm)") + -->
-<!--   xlab("Time") + ggtitle("Fitted values Ozone level UK") + -->
-<!--   theme_classic() -->
-
-<!-- ``` -->
-
-
-
-<!-- ## Solutions to Selected Exercises {-} -->
-
-<!-- ## Exercise 11.11 {-} -->
-
-<!-- The joint distribution of $\mathbf{\gamma} = \{\gamma_1, \gamma_2, \dots, \gamma_{N_T}\}$ can be written as: -->
-<!-- $$ -->
-<!-- p(\mathbf{\gamma}) = p(\gamma_1) \prod_{t=1}^{N_T-1}p(\gamma_{t+1}\mid\gamma)\\ -->
-<!-- = p(\gamma_1)(2\pi\sigma_w^2)^{-(N_T-1)/2}\exp\{- \frac{1}{2\sigma_w^2} \sum_{t=1}^{N_T-1} (\gamma_{t+1} - \gamma)^2) \}\\ -->
-<!-- \propto p(\gamma_1) \exp\{-\frac{1}{2\sigma_w^2}\mathbf{\gamma}^\top M \mathbf{\gamma}\}, -->
-<!-- $$ -->
-<!-- where the entries of $M$ are: -->
-<!-- $$ -->
-<!-- M_{ij} = \begin{cases} -->
-<!-- 1, & i = j = 1, N_T\\ -->
-<!-- 2, & i = j = 2, 3, \dots, N_T - 1 \\ -->
-<!-- -1 & i = (j-1), \text{where } j = 2, 3, \dots, N_T\\ -->
-<!-- -1 & i = (j+1), \text{where } j = 1, 2, \dots, N_T - 1 \\ -->
-<!-- 0 & \text{else} -->
-<!-- \end{cases}. -->
-<!-- $$ -->
-<!-- Now, if we assume that $p(\gamma_1) \propto 1$, i.e., an uninformative, improper prior, we have that  -->
-<!-- $$ -->
-<!-- p(\mathbf{\gamma}) \propto \exp\{-\frac{1}{2\sigma_w^2}\mathbf{\gamma}^\top M \mathbf{\gamma}\}, -->
-<!-- $$ -->
-<!-- which implies that, for any $t$, by Bayes rule, -->
-
-<!-- $$ -->
-<!-- p(\gamma_t|\mathbf{\gamma}_{-t}) = \frac{p(\mathbf{\gamma})}{p(\mathbf{\gamma}_{-t})} \propto p(\mathbf{\gamma}). -->
-<!-- $$ -->
-
-<!-- Eliminating terms in the joint distribution $P(\gamma)$ not related to $\gamma_t$, we obtain -->
-
-<!-- $$ -->
-<!-- p(\gamma_t|\mathbf{\gamma}_{-t}) \propto  -->
-<!-- \begin{cases} -->
-<!-- \exp\{-\frac{1}{2\sigma_w^2}(\gamma_t^2 - 2\gamma_t\gamma_{t+1})\}, & t = 1\\ -->
-<!-- \exp\{-\frac{1}{2\sigma_w^2}(2\gamma_t^2 - 2\gamma_t\gamma_{t+1} - 2\gamma_{t-1}\gamma_t)\}, & t = 2, 3, \dots, N_T-1 \\ -->
-<!-- \exp\{-\frac{1}{2\sigma_w^2}(\gamma_t^2 - 2\gamma_{t-1}\gamma_{t})\}, & t = N_T -->
-<!-- \end{cases}. -->
-<!-- $$ -->
-
-<!-- The proportional form implies that these are Normal densities. By completing the square, we can obtain  -->
-
-<!-- $$ -->
-<!-- p(\gamma|\gamma_{-t}) \propto \begin{cases} -->
-<!-- N(\gamma_{t+1}, \sigma_w^2), & t = 1 \\ -->
-<!-- N(\frac{\gamma_{t-1}+\gamma_{t+1}}{2}, \sigma^2_w/2), & t = 2, 3 \dots, N_T-1 \\ -->
-<!-- N(\gamma_{t-1}, \sigma_w^2), & t = N_T -->
-<!-- \end{cases}, -->
-<!-- $$ -->
-<!-- as required. A necessary assumption for this conclusion was that $p(\gamma_1) \propto 1$.  -->
-<!-- ## Exercise 11.12 {-} -->
-
-<!-- The joint density of $\gamma_t$ and $\tau_w$, given $\gamma_{t-1}$ is given by -->
-<!-- $$ -->
-<!-- p(\gamma_t, \tau_w \mid \gamma_{t-1}) = \frac{\tau_w^{1/2}}{\sqrt{2\pi}}\exp \left(-\frac{\tau(\gamma_t - \gamma_{t-1})^2}{2} \right) \frac{b^a}{\Gamma(a)}\tau_w^{a-1}\exp(-b\tau_w). -->
-<!-- $$ -->
-<!-- Marginalizing $\tau_w$ gives -->
-<!-- $$ -->
-<!-- p(\gamma_t \mid \gamma_{t-1}) = \int_{0}^{\infty} \frac{\tau_2^{1/2}}{\sqrt{2\pi}}\exp \left(-\frac{\tau(\gamma_t - \gamma_{t-1})^2}{2} \right) \frac{b^a}{\Gamma(a)}\tau_w^{a-1}\exp(-b\tau_w) d\tau_w \\ -->
-<!-- = \frac{b^2}{\Gamma(a)\sqrt{2\pi}} \int_{0}^\infty \tau_w^{a-0.5} \exp \left(-\tau_w \left[ \frac{(\gamma_t - \gamma_{t-1})^2}{2} + b\right] \right) d\tau_w \\ -->
-<!-- = \frac{b^a \Gamma(a+0.5)}{\gamma(a)\sqrt{2\pi} ((\gamma_t - \gamma_{t-1})^2/2+b)^{a+0.5}} \int_{0}^\infty \frac{(\gamma_t - \gamma_{t-1})^2/2+b)^{a+0.5}}{\Gamma(a+0.5)} \tau_w^{(a +0.5) - 1} \exp\left( -\tau_w \left[ \frac{(\gamma_t - \gamma_{t-1})^2}{2} + b\right]\right)\\  -->
-<!-- = \frac{b^a \Gamma(a+0.5)}{\gamma(a)\sqrt{2\pi} ((\gamma_t - \gamma_{t-1})^2/2+b)^{a+0.5}}, -->
-<!-- $$ -->
-<!-- where the last equality follows because the integrand was the density of a Gamma distribution. Now, by Bayes rule, we have the following expression for the posterior: -->
-<!-- $$ -->
-<!-- p(\tau_{w}|\gamma_t, \gamma_{t-1}) = \frac{p(\gamma_t, \tau_w \mid \gamma_{t-1})}{p(\gamma_t \mid \gamma_{t-1}) } = \frac{((\gamma_t - \gamma_{t-1})^2/2+b)^{a+0.5}}{\Gamma(a + 0.5)}\tau^{(a+0.5)-1} \exp \left(-\tau_w \left[\frac{(\gamma_t - \gamma_{t-1})^2}{2} + b \right] \right), -->
-<!-- $$ -->
-<!-- which is the density function of the $Ga(a + 0.5, (\gamma_t - \gamma_{t-1})^2/2 + b)$ distribution. The shape parameter of the posterior is the prior shape parameter shifted by $0.5$, and the rate parameter is the prior rate parameter shifted by the term $(\gamma_t - \gamma_{t-1})^2/2$.  -->
-
-<!-- ## Exercise 11.13 {-} -->
-<!-- We use the `rjags` package here, as it most closely resembles WinBUGS, but is compatible with all operating systems.  -->
-
-<!-- ```{r  Exercise 11.13 load libraries, results='hide', message = FALSE, warnings = FALSE} -->
-<!-- library(rjags) -->
-<!-- library(tidyverse) -->
-<!-- ``` -->
-
-
-<!-- ```{r Exercise 11.13, cache = TRUE} -->
-<!-- data <- source("data/pm_london/pm10_London.txt") -->
-<!-- inits1 <- source("data/pm_london/11_13_model1_inits1.txt") -->
-<!-- model_ar <- jags.model(file = "data/pm_london/11_13_model1.txt", -->
-<!--                     data = data$value, -->
-<!--                     inits = inits1$value, -->
-<!--                     n.chains = 3) -->
-<!-- update(model_ar, 5000) ## burn in -->
-<!-- samples_sigmas <- coda.samples(model_ar,  -->
-<!--                            variable.names = c( -->
-<!--                                               "sigma.v", -->
-<!--                                               "sigma.w" -->
-<!--                                               ), -->
-<!--                            n.iter = 2000,  -->
-<!--                            thin = 2) -->
-<!-- plot(samples_sigmas) -->
-<!-- apply(samples_sigmas[[1]], 2, quantile) -->
-<!-- samples_gamma <- coda.samples(model_ar,  -->
-<!--                               variable.names = c( -->
-<!--                                 "gamma", -->
-<!--                                 "y" -->
-<!--                               ), -->
-<!--                               n.iter = 2000,  -->
-<!--                               thin = 1) -->
-<!-- missings <- which(is.na(data$value$y)) -->
-<!-- nonmissing <- tibble(var = "y", time = as.double(seq(1, length(data$value$y))), -->
-<!--                          value = data$value$y) |> -->
-<!--   filter(!(time %in% missings)) -->
-<!-- plot_df <- data.frame(samples_gamma[[1]]) -->
-<!-- plot_df <- plot_df |> pivot_longer(cols = everything(), -->
-<!--                                    names_to = "variable") |> -->
-<!--   separate(variable, c("var", "time")) |> -->
-<!--   mutate(time = as.numeric(time)) |> -->
-<!--   filter(!(var == "y" & !(time %in% missings))) |> -->
-<!--   rbind(nonmissing) |> -->
-<!--   group_by(var, time) |>  -->
-<!--   summarise(q025 = quantile(value, prob = 0.025), -->
-<!--             q975 = quantile(value, prob = 0.975), -->
-<!--             median = median(value))|> -->
-<!--   mutate(range = q975-q025) -->
-<!-- plot_scatter_df <- plot_df |> select(var, time, median) |> -->
-<!--   pivot_wider(names_from = var, values_from = median) -->
-<!-- plot_scatter <- ggplot(plot_scatter_df, aes(x = y, y = gamma)) + -->
-<!--   geom_point(alpha = 0.5) -->
-<!-- plot_scatter -->
-<!-- plot <- ggplot(filter(plot_df, var == "gamma"), aes(x = time)) +  -->
-<!--   geom_line(aes(y = median), alpha = 0.5) +  -->
-<!--   geom_line(aes(y = q025), alpha = 0.5, linetype = "dashed")+  -->
-<!--   geom_line(aes(y = q975), alpha = 0.5, linetype = "dashed")+ -->
-<!--   geom_point(data = filter(plot_df, (var == "y" & time %in% missings)),  -->
-<!--              aes(x = time, y = 0), color = "blue") -->
-<!-- plot -->
-<!-- ``` -->
+
+```{r o3 nimble model}
+
+Example11_16_O3_Nimble <- nimbleCode({
+  tau ~ T(dt(mu = 0, sigma = 1, df = 1), 0, Inf)
+  for (t in 1:Tt) {
+    Vt[t] <- tau ^ 2
+  }
+
+   for (j in 1:p) {
+    sqrt_Wt_diag[j] ~ T(dt(mu = 0, sigma = 1, df = 1), 0, Inf)
+  }
+
+  Wt[1:p, 1:p] <- nim_diag(x = sqrt_Wt_diag[1:p] ^ 2)
+
+  mt[1:p, 1] <- m0[1:p]
+  Ct[1:p, 1:p, 1] <- C0[1:p, 1:p]
+
+  for (t in 1:Tt) {
+    at[1:p, t] <- (Gt[1:p, 1:p] %*% mt[1:p, t])[1:p, 1]
+    Rt[1:p, 1:p, t] <-
+      Gt[1:p, 1:p] %*% Ct[1:p, 1:p, t] %*% t(Gt[1:p, 1:p]) + Wt[1:p, 1:p]
+    ft[t] <- (t(Ft[1:p, t]) %*% at[1:p, t])[1, 1]
+    Qt[t] <-
+      (t(Ft[1:p, t]) %*% Rt[1:p, 1:p, t] %*% Ft[1:p, t] + Vt[t])[1, 1]
+    yt[t] ~ dnorm(mean = ft[t], var = Qt[t])
+    At[1:p, t] <- (Rt[1:p, 1:p, t] %*% Ft[1:p, t])[1:p, 1] / Qt[t]
+    mt[1:p, t + 1] <- at[1:p, t] + (At[1:p, t] * (yt[t] - ft[t]))
+    Ct[1:p, 1:p, t + 1] <-
+      Rt[1:p, 1:p, t] - (At[1:p, t] %*% t(At[1:p, t])) * Qt[t]
+  }
+
+  theta[1:p, 1:(Tt + 1)] <-
+    nim_bsample(
+      mt = mt[1:p, 1:(Tt + 1)],
+      Ct = Ct[1:p, 1:p, 1:(Tt + 1)],
+      at = at[1:p, 1:Tt],
+      Gt = Gt[1:p, 1:p],
+      Rt = Rt[1:p, 1:p, 1:Tt]
+    )
+
+})
+
+```
+
+#### Time-varying level model {-}
+
+We first fit a time-varying level model such that,
+
+$$\begin{aligned} Y_t &= F_t\theta_t + v_t, \qquad &v_t \sim \mathcal{N}(0, \tau^2) \\ \theta_t &= G_t\theta_{t-1} + \omega_t  \qquad &\omega_t \sim \mathcal{N}(0, W^2) \end{aligned}$$
+For the time-varying mean model $F_t = (1, \ wind_t, \ temp_t)$, and $G_t = I_3$.
+
+
+```{r run o3 nimble model, warning = FALSE, error = FALSE, message = FALSE, results='hide', cache=TRUE}
+
+# Model specification
+yt <- sqrt(UK_ozone$ozone)
+temp <- UK_ozone$temp
+wind <- UK_ozone$wind
+
+Tt <- length(yt)
+p <- 3 # (intercept, wind, temp)
+
+Ft <- array(0, dim = c( p, Tt))
+Ft[ 1,] <- 1
+Ft[ 2,] <- (wind[1:Tt] - mean(wind[1:Tt])) / sd(wind[1:Tt])
+Ft[ 3,] <- (temp[1:Tt] - mean(temp[1:Tt])) / sd(temp[1:Tt])
+
+Gt <- diag(x = 1, nrow = p, ncol = p)
+m0 <- c(mean(yt), 0, 0)
+C0 <- diag(x = 1, nrow = p, ncol = p)
+
+
+const_list <- list(Tt = Tt,
+                   p = p)
+dat_list <- list(
+  yt = yt,
+  Ft = Ft,
+  Gt = Gt,
+  m0 = m0,
+  C0 = C0
+)
+init_list <- list(tau = 0.01, sqrt_Wt_diag = sqrt(rep(0.1, p)))
+
+Rmodel <-
+  nimbleModel(
+    Example11_16_O3_Nimble,
+    constants = const_list,
+    data = dat_list,
+    inits = init_list
+  )
+Rmodel$initializeInfo()
+Rmodel$calculate()
+Cmodel <- compileNimble(Rmodel, showCompilerOutput = FALSE)
+conf <-
+  configureMCMC(Rmodel, monitors = c("tau", "sqrt_Wt_diag", "theta", "ft"))
+
+Rmcmc <- buildMCMC(conf)
+Cmcmc <-
+  compileNimble(
+    Rmcmc,
+    project = Cmodel,
+    resetFunctions = TRUE,
+    showCompilerOutput = FALSE
+  )
+niter <- 10000
+nburnin <- 0.5 * niter
+nthin <- 1
+nchains <- 2
+start_time <- Sys.time()
+post_samples <-
+  runMCMC(
+    Cmcmc,
+    niter = niter,
+    nburnin = nburnin,
+    thin = nthin,
+    nchains = nchains,
+    samplesAsCodaMCMC = TRUE
+  )
+end_time <- Sys.time()
+run_time <- end_time - start_time
+run_time
+
+
+```
+
+```{r Ex 11.16 o3 nimble traceplots}
+
+post_summary <- nimSummary(post_samples)
+tidy_post_samples <- post_samples |> tidy_draws()
+
+tidy_post_samples |>
+   dplyr::select(
+    .chain,
+    .iteration,
+    .draw,
+    'tau',
+    'sqrt_Wt_diag[1]',
+    'sqrt_Wt_diag[2]',
+    'sqrt_Wt_diag[3]'
+  ) |>
+  gather(vars, value, -.chain, -.iteration, -.draw) |>
+  ggplot(aes(x = .iteration, y = value)) +
+  geom_path(aes(color = factor(.chain)), linewidth = 0.25,
+            show.legend = FALSE) +
+  facet_wrap( ~ vars, scales = "free", nrow = 2) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+        strip.background = element_blank())
+
+
+
+```
+
+```{r Ex 11.16 o3 nimble posterior summary}
+
+post_summary[c('tau',
+               'sqrt_Wt_diag[1]',
+               'sqrt_Wt_diag[2]',
+               'sqrt_Wt_diag[3]'), ]
+
+post_sum_theta <-
+  as.data.frame(post_summary) |>  rownames_to_column() |>
+  filter(str_detect(rowname, "theta")) |>
+  dplyr::select(rowname, q2.5, q50, q97.5) |>
+  separate(rowname, into = c("x1", "x2"), sep = ",") |>
+  mutate(component = as.numeric(gsub(".*?([0-9]+).*", "\\1", x1))) |>
+  mutate(time = as.numeric(gsub(".*?([0-9]+).*", "\\1", x2))) |>
+  dplyr::select(component, time, q2.5, q50, q97.5)
+
+ggplot(data = post_sum_theta, aes(x = time)) +
+  geom_ribbon(aes(ymin = q2.5, ymax = q97.5),
+              fill = "lightgray",
+              alpha = 0.7) +
+  geom_path(aes(y = q50), col = "blue", linewidth = 0.4) +
+  facet_wrap(
+    ~ component,
+    nrow = 2,
+    scales = "free",
+    labeller = label_bquote(theta[.(component)])
+  ) +
+  ylab("") + xlab("Time") +
+  theme_classic()
+
+
+```
+
+
+
+```{r Ex 11.16 o3  nimble fitted values}
+
+npsample <- floor((niter - nburnin)/nthin)
+# str(tidy_post_samples)
+
+Cnim_postfit_uoms <- compileNimble(nim_postfit_uoms, showCompilerOutput = FALSE)
+
+post_tau <- tidy_post_samples$tau
+post_sqrt_Wt_diag <-
+  tidy_post_samples  |>  dplyr::select(starts_with("sqrt_Wt_diag")) |>
+  as.matrix()|>  unname()
+
+post_ft_list <- lapply(1:(nchains*npsample), function(i) {
+  post_Vt <- post_tau[i]^2
+  post_Wt <- nim_diag(post_sqrt_Wt_diag[i,]^2)
+  post_ft <- Cnim_postfit_uoms(yt = dat_list$yt,
+                               Ft = dat_list$Ft,
+                               Vt = post_Vt,
+                               Gt = dat_list$Gt,
+                               Wt = post_Wt,
+                               m0 = dat_list$m0,
+                               C0 = dat_list$C0)
+  post_ft <- data.frame(ft = post_ft) |> mutate(time = row_number())
+  return(post_ft)
+})
+
+tidy_post_ft <- do.call("rbind", post_ft_list)
+str(tidy_post_ft)
+head(tidy_post_ft)
+
+## posterior summaries of ft
+head(tidy_post_ft)
+post_sum_ft <- tidy_post_ft |> group_by(time) |>
+  summarise(post.mean = mean(ft),
+            post.sd = sd(ft),
+            q2.5 = quantile(ft, prob = 0.025),
+            q50 = quantile(ft, prob = 0.50),
+            q97.5 = quantile(ft, prob = 0.975)) |>
+  ungroup()
+str(post_sum_ft)
+post_sum_ft |> head()
+
+ggplot(data = post_sum_ft, aes(x = time)) +
+  geom_ribbon(aes(ymin = q2.5,ymax = q97.5), fill = "lightgray") +
+  geom_path(aes(y = post.mean),  linewidth = 0.25) +
+  geom_point(aes(y=yt), size = 0.25) +
+  ylab("Ozone Level (ppm)") +
+  xlab("Time") + ggtitle("Fitted values Ozone level UK") +
+  theme_classic()
+
+
+# Residuals plot
+res <- post_sum_ft$post.mean - dat_list$yt
+acf(res, lag.max = 35,bty = "n")
+
+```
+
+#### Trend model {-}
+
+In this case we include a trend then, $F_t = (1, 0, \ wind_t, \ temp_t)$ and $G_t = \begin{pmatrix} 1 & 1 \\ 0 & 1\end{pmatrix}$.
+
+```{r run o3 nimble trend model, warning = FALSE, error = FALSE, message = FALSE, results='hide', cache = TRUE}
+
+# Model specification
+yt <- sqrt(UK_ozone$ozone)
+temp <- UK_ozone$temp
+wind <- UK_ozone$wind
+
+Tt <- length(yt)
+p <- 4 # (intercept, trend, wind, temp)
+
+Ft <- array(0, dim = c( p, Tt))
+Ft[1,] <- 1
+Ft[2,] <- 0
+Ft[3,] <- (wind[1:Tt] - mean(wind[1:Tt])) / sd(wind[1:Tt])
+Ft[4,] <- (temp[1:Tt] - mean(temp[1:Tt])) / sd(temp[1:Tt])
+
+
+Gt <- diag(x = 1, nrow = p, ncol = p)
+Gt[1, 2] <- 1
+
+m0 <- c(mean(yt), 0, 0, 0)
+C0 <- diag(x = 1, nrow = p, ncol = p)
+
+const_list <- list(Tt = Tt,
+                   p = p)
+dat_list <- list(
+  yt = yt,
+  Ft = Ft,
+  Gt = Gt,
+  m0 = m0,
+  C0 = C0
+)
+init_list <- list(tau = 0.01, sqrt_Wt_diag = sqrt(rep(0.1, p)))
+
+Rmodel <-
+  nimbleModel(
+    Example11_16_O3_Nimble,
+    constants = const_list,
+    data = dat_list,
+    inits = init_list
+  )
+Rmodel$initializeInfo()
+Rmodel$calculate()
+Cmodel <- compileNimble(Rmodel, showCompilerOutput = FALSE)
+conf <-
+  configureMCMC(Rmodel, monitors = c("tau", "sqrt_Wt_diag", "theta", "ft"))
+
+Rmcmc <- buildMCMC(conf)
+Cmcmc <-
+  compileNimble(
+    Rmcmc,
+    project = Cmodel,
+    resetFunctions = TRUE,
+    showCompilerOutput = FALSE
+  )
+niter <- 10000
+nburnin <- 0.5 * niter
+nthin <- 1
+nchains <- 2
+start_time <- Sys.time()
+post_samples <-
+  runMCMC(
+    Cmcmc,
+    niter = niter,
+    nburnin = nburnin,
+    thin = nthin,
+    nchains = nchains,
+    samplesAsCodaMCMC = TRUE
+  )
+end_time <- Sys.time()
+run_time <- end_time - start_time
+run_time
+
+
+```
+
+```{r Ex 11.16 o3 nimble trend traceplots}
+
+post_summary <- nimSummary(post_samples)
+tidy_post_samples <- post_samples |> tidy_draws()
+
+tidy_post_samples |>
+   dplyr::select(
+    .chain,
+    .iteration,
+    .draw,
+    'tau',
+    'sqrt_Wt_diag[1]',
+    'sqrt_Wt_diag[2]',
+    'sqrt_Wt_diag[3]',
+    'sqrt_Wt_diag[4]'
+
+  ) |>
+  gather(vars, value, -.chain, -.iteration, -.draw) |>
+  ggplot(aes(x = .iteration, y = value)) +
+  geom_path(aes(color = factor(.chain)), linewidth = 0.25,
+            show.legend = FALSE) +
+  facet_wrap( ~ vars, scales = "free", nrow = 2) +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+        strip.background = element_blank())
+
+
+
+```
+
+```{r Ex 11.16 o3 nimble trend posterior summary}
+
+post_summary[c('tau',
+               'sqrt_Wt_diag[1]',
+               'sqrt_Wt_diag[2]',
+               'sqrt_Wt_diag[3]',
+               'sqrt_Wt_diag[4]'), ]
+
+post_sum_theta <-
+  as.data.frame(post_summary) |>  rownames_to_column() |>
+  filter(str_detect(rowname, "theta")) |>
+  dplyr::select(rowname, q2.5, q50, q97.5) |>
+  separate(rowname, into = c("x1", "x2"), sep = ",") |>
+  mutate(component = as.numeric(gsub(".*?([0-9]+).*", "\\1", x1))) |>
+  mutate(time = as.numeric(gsub(".*?([0-9]+).*", "\\1", x2))) |>
+  dplyr::select(component, time, q2.5, q50, q97.5)
+
+ggplot(data = post_sum_theta, aes(x = time)) +
+  geom_ribbon(aes(ymin = q2.5, ymax = q97.5),
+              fill = "lightgray",
+              alpha = 0.7) +
+  geom_path(aes(y = q50), col = "blue", linewidth = 0.4) +
+  facet_wrap(
+    ~ component,
+    nrow = 2,
+    scales = "free",
+    labeller = label_bquote(theta[.(component)])
+  ) +
+  ylab("") +
+  xlab("Time") +
+  theme_classic()
+
+```
+
+```{r  Ex 11.16 nimble trend fitted values, cache=TRUE, messages = FALSE}
+
+npsample <- floor((niter - nburnin)/nthin)
+
+Cnim_postfit_uoms <- compileNimble(nim_postfit_uoms, showCompilerOutput = FALSE)
+
+post_tau <- tidy_post_samples$tau
+post_sqrt_Wt_diag <-
+  tidy_post_samples  |>  dplyr::select(starts_with("sqrt_Wt_diag")) |>
+  as.matrix()|>  unname()
+
+post_ft_list <- lapply(1:(nchains*npsample), function(i) {
+  post_Vt <- post_tau[i]^2
+  post_Wt <- nim_diag(post_sqrt_Wt_diag[i,]^2)
+  post_ft <- Cnim_postfit_uoms(yt = dat_list$yt,
+                               Ft = dat_list$Ft,
+                               Vt = post_Vt,
+                               Gt = dat_list$Gt,
+                               Wt = post_Wt,
+                               m0 = dat_list$m0,
+                               C0 = dat_list$C0)
+  post_ft <- data.frame(ft = post_ft) |> mutate(time = row_number())
+  return(post_ft)
+})
+
+tidy_post_ft <- do.call("rbind", post_ft_list)
+
+## posterior summaries of ft
+post_sum_ft <- tidy_post_ft |> group_by(time) |>
+  summarise(post.mean = mean(ft),
+            post.sd = sd(ft),
+            q2.5 = quantile(ft, prob = 0.025),
+            q50 = quantile(ft, prob = 0.50),
+            q97.5 = quantile(ft, prob = 0.975)) |>
+  ungroup()
+
+
+ggplot(data = post_sum_ft, aes(x = time)) +
+  geom_ribbon(aes(ymin = q2.5,ymax = q97.5), fill = "lightgray") +
+  geom_path(aes(y = post.mean),  size = 0.25) +
+  geom_point(aes(y=yt), size = 0.25) +
+  ylab("Ozone Level (ppm)") +
+  xlab("Time") + ggtitle("Fitted values Ozone level UK") +
+  theme_classic()
+
+
+# Residuals plot
+res <- post_sum_ft$post.mean - dat_list$yt
+acf(res, lag.max = 35,bty = "n")
+
+
+```
+
+### Stan {-}
+
+```{r Ex 11.16 ozone clean stan, include = FALSE}
+rm(list = ls())
+```
+
+
+```{r  Ex 11.16 ozone stan load, message=FALSE, echo = TRUE, warning=FALSE, message= FALSE}
+library(coda)
+library(ggplot2)
+library(gridExtra)
+library(rstan)
+library(tidyverse)
+
+options(mc.cores = parallel::detectCores())
+rstan_options(auto_write = TRUE)
+
+# Load data for RW case
+UK_ozone <- read.csv("data/ozone/uk_ozone_one_site.csv")
+
+```
+
+#### Time-varying level model {-}
+
+```{r  Ex 11.16 o3 prepare data stan}
+y <- sqrt(UK_ozone$ozone)
+temp <- UK_ozone$temp
+wind <- UK_ozone$wind
+
+Tt <- length(y)
+p <- 3 # (intercept, wind, temp)
+
+Ft <- array(0, dim = c(Tt, p))
+Ft[, 1] <- 1
+Ft[, 2] <- (wind[1:Tt] - mean(wind[1:Tt])) / sd(wind[1:Tt])
+Ft[, 3] <- (temp[1:Tt] - mean(temp[1:Tt])) / sd(temp[1:Tt])
+
+Gt <- diag(x = 1, nrow = p, ncol = p)
+m0 <- c(mean(y), 0, 0)
+C0 <- diag(x = 1, nrow = p, ncol = p)
+
+stan_data <- list(T = Tt, p = p, y = y, F = Ft, G = Gt, m0= m0, C0 = C0)
+
+```
+
+```{r engine='bash', comment='', echo = FALSE}
+cat functions/Example11_16_UK.stan
+```
+
+```{r Ex 11.16 o3 run stan, cache = TRUE}
+Example11_16_UK_Stan  <- stan(
+  file = "functions/Example11_16_UK.stan",
+  data = stan_data,
+  warmup = 5000,
+  iter = 10000,
+  chains = 3,
+  include = TRUE
+)
+
+```
+
+
+```{r Ex 11.16 o3 post summaries stan}
+
+rstan::traceplot(Example11_16_UK_Stan,
+                 pars = c("tau", "sqrt_W_diag", "theta[1,1]"))
+rstan::traceplot(Example11_16_UK_Stan,
+                 pars = paste0("theta[", sample.int(Tt, size = 4, replace = FALSE), ",1]"))
+rstan::traceplot(Example11_16_UK_Stan,
+                 pars = paste0("theta[", sample.int(Tt, size = 4, replace = FALSE), ",2]"))
+rstan::traceplot(Example11_16_UK_Stan,
+                 pars = paste0("theta[", sample.int(Tt, size = 4, replace = FALSE), ",3]"))
+
+
+fixedpars_summary <-
+  summary(Example11_16_UK_Stan, pars = c("tau", "sqrt_W_diag"))$summary
+fixedpars_summary
+
+theta_summary <-
+  summary(Example11_16_UK_Stan, pars = c("theta"))$summary
+
+yfit_summary <-
+  summary(Example11_16_UK_Stan, pars = c("yfit"))$summary
+
+p1 <- data.frame(theta_summary) |>
+  rownames_to_column() |>
+  filter(rowname %in% paste0("theta[", 1:Tt, ",1]")) |>
+  mutate(date = as.Date(UK_ozone$date[1:Tt])) |>
+  ggplot(aes(x = date, group = 1)) +
+  geom_path(aes(y = mean), color = "blue", linewidth = 0.6) +
+  geom_ribbon(aes(ymin = X2.5., ymax = X97.5.),
+              alpha = 0.25,
+              col = "lightgray") +
+  ggtitle("Intercept") + theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5))
+
+p2 <- data.frame(theta_summary) |>
+  rownames_to_column() |>
+  filter(rowname %in% paste0("theta[", 1:Tt, ",2]")) |>
+  mutate(date = as.Date(UK_ozone$date[1:Tt])) |>
+  ggplot(aes(x = date)) +
+  geom_path(aes(y = mean), color = "blue", linewidth = 0.6) +
+  geom_ribbon(aes(ymin = X2.5., ymax = X97.5.),
+              alpha = 0.25,
+              col = "lightgray") +
+  ggtitle("Wind") +  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+p3 <- data.frame(theta_summary) |>
+  rownames_to_column() |>
+  filter(rowname %in% paste0("theta[", 1:Tt, ",3]")) |>
+  mutate(date = as.Date(UK_ozone$date[1:Tt])) |>
+  ggplot(aes(x = date)) +
+  geom_path(aes(y = mean), color = "blue", linewidth = 0.6) +
+  geom_ribbon(aes(ymin = X2.5., ymax = X97.5.),
+              alpha = 0.25,
+              col = "lightgray") +
+  ggtitle("Temperature") +  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5))
+
+grid.arrange(p1,p2,p3, ncol = 2)
+
+# Fitted values
+yfit_summary_dt <- data.frame(yfit_summary) |>
+  rownames_to_column() |>
+  mutate(time = as.numeric(gsub(".*?([0-9]+).*", "\\1", rowname)))
+
+ggplot(yfit_summary_dt, aes(x = time)) +
+  geom_ribbon(aes(ymin = X2.5., ymax = X97.5.),
+              alpha = 0.25,
+              col = "gray99") +
+  geom_point(aes(y = y)) +
+  geom_path(aes(y = mean), linewidth = 0.1, size = 1) +
+ ylab("Ozone Level (ppm)") +
+  xlab("Time") + ggtitle("Fitted values Ozone level UK") +
+  theme_classic()
+```
+
+
+#### Trend model {-}
+
+```{r  Ex 11.16 o3 trend data stan, cache = TRUE}
+y <- sqrt(UK_ozone$ozone)
+temp <- UK_ozone$temp
+wind <- UK_ozone$wind
+
+Tt <- length(y)
+p <- 4 # (intercept, trend, wind, temp)
+
+Ft <- array(0, dim = c(Tt, p))
+Ft[, 1] <- 1
+Ft[, 2] <- 0
+Ft[, 3] <- (wind[1:Tt] - mean(wind[1:Tt])) / sd(wind[1:Tt])
+Ft[, 4] <- (temp[1:Tt] - mean(temp[1:Tt])) / sd(temp[1:Tt])
+
+Gt <- diag(x = 1, nrow = p, ncol = p)
+Gt[1, 2] <- 1
+
+
+m0 <- c(mean(y), 0, 0, 0)
+C0 <- diag(x = 1, nrow = p, ncol = p)
+
+stan_data_trend <- list(
+  T = Tt,
+  p = p,
+  y = y,
+  F = Ft,
+  G = Gt,
+  m0 = m0,
+  C0 = C0
+)
+
+Example11_16_UK_trend_Stan  <- stan(
+  file = "functions/Example11_16_UK.stan",
+  data = stan_data_trend,
+  warmup = 5000,
+  iter = 10000,
+  chains = 3,
+  include = TRUE
+)
+
+```
+
+```{r  Ex 11.16 o3 traceplots trend stan}
+rstan::traceplot(Example11_16_UK_trend_Stan,
+                 pars = c("tau", "sqrt_W_diag", "theta[1,1]"))
+rstan::traceplot(Example11_16_UK_trend_Stan,
+                 pars = paste0("theta[", sample.int(Tt, size = 4, replace = FALSE), ",1]"))
+rstan::traceplot(Example11_16_UK_trend_Stan,
+                 pars = paste0("theta[", sample.int(Tt, size = 4, replace = FALSE), ",2]"))
+rstan::traceplot(Example11_16_UK_trend_Stan,
+                 pars = paste0("theta[", sample.int(Tt, size = 4, replace = FALSE), ",3]"))
+rstan::traceplot(Example11_16_UK_trend_Stan,
+                 pars = paste0("theta[", sample.int(Tt, size = 4, replace = FALSE), ",4]"))
+
+```
+
+
+```{r Ex 11.16 o3 post summaries trend stan}
+
+fixedpars_summary <-
+  summary(Example11_16_UK_trend_Stan, pars = c("tau", "sqrt_W_diag"))$summary
+fixedpars_summary
+
+theta_summary <-
+  summary(Example11_16_UK_trend_Stan, pars = c("theta"))$summary
+
+yfit_summary <-
+  summary(Example11_16_UK_trend_Stan, pars = c("yfit"))$summary
+
+
+p1 <- data.frame(theta_summary) |>
+  rownames_to_column() |>
+  filter(rowname %in% paste0("theta[", 1:Tt, ",1]")) |>
+  mutate(date = as.Date(UK_ozone$date[1:Tt])) |>
+  ggplot(aes(x = date, group = 1)) +
+  geom_path(aes(y = mean), color = "blue", linewidth = 0.6) +
+  geom_ribbon(aes(ymin = X2.5., ymax = X97.5.),
+              alpha = 0.25,
+              col = "lightgray") +
+  ggtitle("Intercept") + theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5))
+
+p2 <- data.frame(theta_summary) |>
+  rownames_to_column() |>
+  filter(rowname %in% paste0("theta[", 1:Tt, ",4]")) |>
+  mutate(date = as.Date(UK_ozone$date[1:Tt])) |>
+  ggplot(aes(x = date)) +
+  geom_path(aes(y = mean), color = "blue", linewidth = 0.6) +
+  geom_ribbon(aes(ymin = X2.5., ymax = X97.5.),
+              alpha = 0.25,
+              col = "lightgray") +
+  ggtitle("Trend") +  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5))
+
+p3 <- data.frame(theta_summary) |>
+  rownames_to_column() |>
+  filter(rowname %in% paste0("theta[", 1:Tt, ",2]")) |>
+  mutate(date = as.Date(UK_ozone$date[1:Tt])) |>
+  ggplot(aes(x = date)) +
+  geom_path(aes(y = mean), color = "blue", linewidth = 0.6) +
+  geom_ribbon(aes(ymin = X2.5., ymax = X97.5.),
+              alpha = 0.25,
+              col = "lightgray") +
+  ggtitle("Wind") +  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+p4 <- data.frame(theta_summary) |>
+  rownames_to_column() |>
+  filter(rowname %in% paste0("theta[", 1:Tt, ",3]")) |>
+  mutate(date = as.Date(UK_ozone$date[1:Tt])) |>
+  ggplot(aes(x = date)) +
+  geom_path(aes(y = mean), color = "blue", linewidth = 0.6) +
+  geom_ribbon(aes(ymin = X2.5., ymax = X97.5.),
+              alpha = 0.25,
+              col = "lightgray") +
+  ggtitle("Temperature") +  theme_classic() +
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+
+grid.arrange(p1,p2,p3, p4, ncol = 2)
+
+# Fitted values
+yfit_summary_dt <- data.frame(yfit_summary) |>
+  rownames_to_column() |>
+  mutate(time = as.numeric(gsub(".*?([0-9]+).*", "\\1", rowname)))
+
+ggplot(yfit_summary_dt, aes(x = time)) +
+  geom_ribbon(aes(ymin = X2.5., ymax = X97.5.),
+              alpha = 0.25,
+              col = "gray99") +
+  geom_point(aes(y = y)) +
+  geom_path(aes(y = mean), linewidth = 0.1, size = 1) +
+ ylab("Ozone Level (ppm)") +
+  xlab("Time") + ggtitle("Fitted values Ozone level UK") +
+  theme_classic()
+
+```
+
+## Example 11.18 Dynamic GLMs for daily counts of carbon monoxide on counts of infant deaths in São Paulo, Brazil
+
+
+This dataset was analyzed by Alves et al. (2010) and is related to daily
+counts of deaths of infants under 5 years old due to respiratory causes in
+São Paulo, Brazil. The sampling period is from January 1, 1994, until 31
+December 1997. We fit a simplified version of the model fitted in Alves et al.
+(2010),
+
+```{r}
+
+```
+
+
+## Solutions to Selected Exercises {-}
+
+## Exercise 11.11 {-}
+
+The joint distribution of $\mathbf{\gamma} = \{\gamma_1, \gamma_2, \dots, \gamma_{N_T}\}$ can be written as:
+$$
+p(\mathbf{\gamma}) = p(\gamma_1) \prod_{t=1}^{N_T-1}p(\gamma_{t+1}\mid\gamma)\\
+= p(\gamma_1)(2\pi\sigma_w^2)^{-(N_T-1)/2}\exp\{- \frac{1}{2\sigma_w^2} \sum_{t=1}^{N_T-1} (\gamma_{t+1} - \gamma)^2) \}\\
+\propto p(\gamma_1) \exp\{-\frac{1}{2\sigma_w^2}\mathbf{\gamma}^\top M \mathbf{\gamma}\},
+$$
+where the entries of $M$ are:
+$$
+M_{ij} = \begin{cases}
+1, & i = j = 1, N_T\\
+2, & i = j = 2, 3, \dots, N_T - 1 \\
+-1 & i = (j-1), \text{where } j = 2, 3, \dots, N_T\\
+-1 & i = (j+1), \text{where } j = 1, 2, \dots, N_T - 1 \\
+0 & \text{else}
+\end{cases}.
+$$
+Now, if we assume that $p(\gamma_1) \propto 1$, i.e., an uninformative, improper prior, we have that
+$$
+p(\mathbf{\gamma}) \propto \exp\{-\frac{1}{2\sigma_w^2}\mathbf{\gamma}^\top M \mathbf{\gamma}\},
+$$
+which implies that, for any $t$, by Bayes rule,
+
+$$
+p(\gamma_t|\mathbf{\gamma}_{-t}) = \frac{p(\mathbf{\gamma})}{p(\mathbf{\gamma}_{-t})} \propto p(\mathbf{\gamma}).
+$$
+
+Eliminating terms in the joint distribution $P(\gamma)$ not related to $\gamma_t$, we obtain
+
+$$
+p(\gamma_t|\mathbf{\gamma}_{-t}) \propto
+\begin{cases}
+\exp\{-\frac{1}{2\sigma_w^2}(\gamma_t^2 - 2\gamma_t\gamma_{t+1})\}, & t = 1\\
+\exp\{-\frac{1}{2\sigma_w^2}(2\gamma_t^2 - 2\gamma_t\gamma_{t+1} - 2\gamma_{t-1}\gamma_t)\}, & t = 2, 3, \dots, N_T-1 \\
+\exp\{-\frac{1}{2\sigma_w^2}(\gamma_t^2 - 2\gamma_{t-1}\gamma_{t})\}, & t = N_T
+\end{cases}.
+$$
+
+The proportional form implies that these are Normal densities. By completing the square, we can obtain
+
+$$
+p(\gamma|\gamma_{-t}) \propto \begin{cases}
+N(\gamma_{t+1}, \sigma_w^2), & t = 1 \\
+N(\frac{\gamma_{t-1}+\gamma_{t+1}}{2}, \sigma^2_w/2), & t = 2, 3 \dots, N_T-1 \\
+N(\gamma_{t-1}, \sigma_w^2), & t = N_T
+\end{cases},
+$$
+as required. A necessary assumption for this conclusion was that $p(\gamma_1) \propto 1$.
+## Exercise 11.12 {-}
+
+The joint density of $\gamma_t$ and $\tau_w$, given $\gamma_{t-1}$ is given by
+$$
+p(\gamma_t, \tau_w \mid \gamma_{t-1}) = \frac{\tau_w^{1/2}}{\sqrt{2\pi}}\exp \left(-\frac{\tau(\gamma_t - \gamma_{t-1})^2}{2} \right) \frac{b^a}{\Gamma(a)}\tau_w^{a-1}\exp(-b\tau_w).
+$$
+Marginalizing $\tau_w$ gives
+$$
+p(\gamma_t \mid \gamma_{t-1}) = \int_{0}^{\infty} \frac{\tau_2^{1/2}}{\sqrt{2\pi}}\exp \left(-\frac{\tau(\gamma_t - \gamma_{t-1})^2}{2} \right) \frac{b^a}{\Gamma(a)}\tau_w^{a-1}\exp(-b\tau_w) d\tau_w \\
+= \frac{b^2}{\Gamma(a)\sqrt{2\pi}} \int_{0}^\infty \tau_w^{a-0.5} \exp \left(-\tau_w \left[ \frac{(\gamma_t - \gamma_{t-1})^2}{2} + b\right] \right) d\tau_w \\
+= \frac{b^a \Gamma(a+0.5)}{\gamma(a)\sqrt{2\pi} ((\gamma_t - \gamma_{t-1})^2/2+b)^{a+0.5}} \int_{0}^\infty \frac{(\gamma_t - \gamma_{t-1})^2/2+b)^{a+0.5}}{\Gamma(a+0.5)} \tau_w^{(a +0.5) - 1} \exp\left( -\tau_w \left[ \frac{(\gamma_t - \gamma_{t-1})^2}{2} + b\right]\right)\\
+= \frac{b^a \Gamma(a+0.5)}{\gamma(a)\sqrt{2\pi} ((\gamma_t - \gamma_{t-1})^2/2+b)^{a+0.5}},
+$$
+where the last equality follows because the integrand was the density of a Gamma distribution. Now, by Bayes rule, we have the following expression for the posterior:
+$$
+p(\tau_{w}|\gamma_t, \gamma_{t-1}) = \frac{p(\gamma_t, \tau_w \mid \gamma_{t-1})}{p(\gamma_t \mid \gamma_{t-1}) } = \frac{((\gamma_t - \gamma_{t-1})^2/2+b)^{a+0.5}}{\Gamma(a + 0.5)}\tau^{(a+0.5)-1} \exp \left(-\tau_w \left[\frac{(\gamma_t - \gamma_{t-1})^2}{2} + b \right] \right),
+$$
+which is the density function of the $Ga(a + 0.5, (\gamma_t - \gamma_{t-1})^2/2 + b)$ distribution. The shape parameter of the posterior is the prior shape parameter shifted by $0.5$, and the rate parameter is the prior rate parameter shifted by the term $(\gamma_t - \gamma_{t-1})^2/2$.
+
+## Exercise 11.13 {-}
+We use the `rjags` package here, as it most closely resembles WinBUGS, but is compatible with all operating systems.
+
+```{r  Exercise 11.13 load libraries, results='hide', message = FALSE, warnings = FALSE}
+library(rjags)
+library(tidyverse)
+```
+
+
+```{r Exercise 11.13, cache = TRUE}
+data <- source("data/pm_london/pm10_London.txt")
+inits1 <- source("data/pm_london/11_13_model1_inits1.txt")
+model_ar <- jags.model(file = "data/pm_london/11_13_model1.txt",
+                    data = data$value,
+                    inits = inits1$value,
+                    n.chains = 3)
+update(model_ar, 5000) ## burn in
+samples_sigmas <- coda.samples(model_ar,
+                           variable.names = c(
+                                              "sigma.v",
+                                              "sigma.w"
+                                              ),
+                           n.iter = 2000,
+                           thin = 2)
+plot(samples_sigmas)
+apply(samples_sigmas[[1]], 2, quantile)
+samples_gamma <- coda.samples(model_ar,
+                              variable.names = c(
+                                "gamma",
+                                "y"
+                              ),
+                              n.iter = 2000,
+                              thin = 1)
+missings <- which(is.na(data$value$y))
+nonmissing <- tibble(var = "y", time = as.double(seq(1, length(data$value$y))),
+                         value = data$value$y) |>
+  filter(!(time %in% missings))
+plot_df <- data.frame(samples_gamma[[1]])
+plot_df <- plot_df |> pivot_longer(cols = everything(),
+                                   names_to = "variable") |>
+  separate(variable, c("var", "time")) |>
+  mutate(time = as.numeric(time)) |>
+  filter(!(var == "y" & !(time %in% missings))) |>
+  rbind(nonmissing) |>
+  group_by(var, time) |>
+  summarise(q025 = quantile(value, prob = 0.025),
+            q975 = quantile(value, prob = 0.975),
+            median = median(value))|>
+  mutate(range = q975-q025)
+plot_scatter_df <- plot_df |> dplyr::select(var, time, median) |>
+  pivot_wider(names_from = var, values_from = median)
+plot_scatter <- ggplot(plot_scatter_df, aes(x = y, y = gamma)) +
+  geom_point(alpha = 0.5)
+plot_scatter
+plot <- ggplot(filter(plot_df, var == "gamma"), aes(x = time)) +
+  geom_line(aes(y = median), alpha = 0.5) +
+  geom_line(aes(y = q025), alpha = 0.5, linetype = "dashed")+
+  geom_line(aes(y = q975), alpha = 0.5, linetype = "dashed")+
+  geom_point(data = filter(plot_df, (var == "y" & time %in% missings)),
+             aes(x = time, y = 0), color = "blue")
+plot
+```

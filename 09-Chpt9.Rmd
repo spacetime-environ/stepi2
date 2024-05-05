@@ -924,7 +924,9 @@ ggplot() +
 
 ```
 
-## Supplementary Example: Fitting a Leroux model to the COPD dataset using Nimble, Stan and CARBayes
+## Supplementary Example: Fitting a Leroux model to the COPD dataset using Nimble, Stan and CARBayes {-}
+
+
 <!-- ## Example 9.6: Fitting a Leroux Model using Nimble, Stan and CARBayes -->
 
 <!-- This example uses the [englandlocalauthority.shp](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/englandlocalauthority.shp), [copdmortalityobserved.csv](https://github.com/spacetime-environ/stepi2/blob/main/data/copd/copdmortalityobserved.csv), and -->

@@ -23,7 +23,7 @@
 <meta name="author" content="Gavin Shaddick, James V. Zidek, and Alexandra M. Schmidt" />
 
 
-<meta name="date" content="2023-08-28" />
+<meta name="date" content="2024-05-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,16 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
 
 
 <style type="text/css">
@@ -222,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.4-fitting-a-conditional-spatial-model-using-carbayes"><i class="fa fa-check"></i>Example 9.4: Fitting a conditional spatial model using CARBayes</a></li>
 <li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#example-9.5-fitting-a-conditional-model-using-inla"><i class="fa fa-check"></i>Example 9.5: Fitting a conditional model using INLA</a></li>
-<li class="chapter" data-level="9.1" data-path="Disease.html"><a href="Disease.html#supplementary-example-fitting-a-leroux-model-to-the-copd-dataset-using-nimble-stan-and-carbayes"><i class="fa fa-check"></i><b>9.1</b> Supplementary Example: Fitting a Leroux model to the COPD dataset using Nimble, Stan and CARBayes</a></li>
+<li class="chapter" data-level="" data-path="Disease.html"><a href="Disease.html#supplementary-example-fitting-a-leroux-model-to-the-copd-dataset-using-nimble-stan-and-carbayes"><i class="fa fa-check"></i>Supplementary Example: Fitting a Leroux model to the COPD dataset using Nimble, Stan and CARBayes</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="hazards.html"><a href="hazards.html"><i class="fa fa-check"></i><b>10</b> Environmental hazards-spatial models</a>
 <ul>
@@ -230,7 +240,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.2-examining-the-log-concentrations-of-lead-in-the-meuse-river-flood-plain"><i class="fa fa-check"></i>Example 10.2: Examining the log concentrations of lead in the Meuse River flood plain</a></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.3-mapping-the-locations-of-ozone-monitoring-sites-in-new-york-state"><i class="fa fa-check"></i>Example 10.3: Mapping the locations of ozone monitoring sites in New York State</a></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.5-spatial-prediction-of-temperatures-in-california"><i class="fa fa-check"></i>Example 10.5: Spatial prediction of temperatures in California</a></li>
-<li class="chapter" data-level="10.1" data-path="hazards.html"><a href="hazards.html#example-10.6-fitting-a-bayesian-exponential-spatial-model-using-nimble"><i class="fa fa-check"></i><b>10.1</b> Example 10.6 Fitting a Bayesian exponential spatial model using NIMBLE</a></li>
+<li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.6-fitting-a-bayesian-exponential-spatial-model-using-nimble"><i class="fa fa-check"></i>Example 10.6 Fitting a Bayesian exponential spatial model using NIMBLE</a></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.7-spatial-prediction-of-pm_2.5-in-europe"><i class="fa fa-check"></i>Example 10.7 Spatial prediction of <span class="math inline">\(PM_{2.5}\)</span> in Europe</a></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.10-creating-a-mesh-black-smoke-monitoring-locations-in-the-uk"><i class="fa fa-check"></i>Example 10.10 Creating a mesh: black smoke monitoring locations in the UK</a></li>
 <li class="chapter" data-level="" data-path="hazards.html"><a href="hazards.html#example-10.12-plotting-directional-variograms-for-temperatures-in-california"><i class="fa fa-check"></i>Example 10.12 Plotting directional variograms for temperatures in California</a></li>
@@ -258,17 +268,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.2-low-pass-filtering-of-ozone-levels-using-the-moving-average"><i class="fa fa-check"></i>Example 11.2 Low-pass filtering of ozone levels using the moving average</a></li>
 <li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.12-forecasting-ozone-levels"><i class="fa fa-check"></i>Example 11.12 Forecasting ozone levels</a></li>
 <li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.13-forecasting-volcanic-ash"><i class="fa fa-check"></i>Example 11.13 Forecasting volcanic ash</a></li>
+<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#example-11.17-implementation-of-a-dynamic-linear-model-uk-ozone-data"><i class="fa fa-check"></i>Example 11.17 Implementation of a dynamic linear model: UK ozone data</a>
+<ul>
+<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#nimble-7"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#stan-6"><i class="fa fa-check"></i>Stan</a></li>
+</ul></li>
+<li class="chapter" data-level="11.1" data-path="Time.html"><a href="Time.html#example-11.18-dynamic-glms-for-daily-counts-of-carbon-monoxide-on-counts-of-infant-deaths-in-são-paulo-brazil"><i class="fa fa-check"></i><b>11.1</b> Example 11.18 Dynamic GLMs for daily counts of carbon monoxide on counts of infant deaths in São Paulo, Brazil</a></li>
+<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#solutions-to-selected-exercises-1"><i class="fa fa-check"></i>Solutions to Selected Exercises</a></li>
+<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#exercise-11.11"><i class="fa fa-check"></i>Exercise 11.11</a></li>
+<li class="chapter" data-level="" data-path="Time.html"><a href="Time.html#exercise-11.13"><i class="fa fa-check"></i>Exercise 11.13</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="exposure.html"><a href="exposure.html"><i class="fa fa-check"></i><b>12</b> Exposure assessment-over space and time</a>
 <ul>
 <li class="chapter" data-level="" data-path="exposure.html"><a href="exposure.html#example-idk-spatio-temporal-model-for-the-uk-ozone-data"><i class="fa fa-check"></i>Example IDK: Spatio-temporal model for the UK ozone data</a>
 <ul>
-<li class="chapter" data-level="" data-path="exposure.html"><a href="exposure.html#nimble-7"><i class="fa fa-check"></i>Nimble</a></li>
+<li class="chapter" data-level="" data-path="exposure.html"><a href="exposure.html#nimble-8"><i class="fa fa-check"></i>Nimble</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="causality.html"><a href="causality.html"><i class="fa fa-check"></i><b>13</b> Causality-roadblocks on the way to it</a>
 <ul>
-<li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#solutions-to-selected-exercises-1"><i class="fa fa-check"></i>Solutions to Selected Exercises</a>
+<li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#solutions-to-selected-exercises-2"><i class="fa fa-check"></i>Solutions to Selected Exercises</a>
 <ul>
 <li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#question-13.16-load-the-italy-and-china-data-described-in-example-13.3-and-included-in-the-supplementary-bookdown-material-into-r."><i class="fa fa-check"></i>Question 13.16: Load the Italy and China data, described in Example 13.3, and included in the supplementary Bookdown material into R.</a></li>
 <li class="chapter" data-level="" data-path="causality.html"><a href="causality.html#question-13.17-using-the-italy-and-china-data-stratified-by-the-age-groups-70-and-geq-70-obtain-empirical-estimates-of-p_1-and-p_2-as-defined-in-an-sdis.-in-the-following-questions-assume-that-p_1-and-p_2-are-the-population-values."><i class="fa fa-check"></i>Question 13.17: Using the Italy and China data stratified by the age groups <span class="math inline">\(&lt;70\)</span> and <span class="math inline">\(\geq 70\)</span>, obtain empirical estimates of <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span>, as defined in an SDis. In the following questions, assume that <span class="math inline">\(P_1\)</span> and <span class="math inline">\(P_2\)</span> are the population values.</a></li>
@@ -277,7 +296,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="14" data-path="monitoring.html"><a href="monitoring.html"><i class="fa fa-check"></i><b>14</b> Better monitoring network design-getting better measurements</a></li>
 <li class="chapter" data-level="15" data-path="frontiers.html"><a href="frontiers.html"><i class="fa fa-check"></i><b>15</b> Current frontiers</a></li>
-<li class="chapter" data-level="" data-path="course.html"><a href="course.html"><i class="fa fa-check"></i>Course</a></li>
+<li class="chapter" data-level="" data-path="course.html"><a href="course.html"><i class="fa fa-check"></i>Course</a>
+<ul>
+<li class="chapter" data-level="" data-path="course.html"><a href="course.html#course-description-spatio-temporal-methods-in-environmental-epidemiology"><i class="fa fa-check"></i>Course description: Spatio-temporal methods in environmental epidemiology</a></li>
+<li class="chapter" data-level="" data-path="course.html"><a href="course.html#course-lectures"><i class="fa fa-check"></i>Course lectures</a>
+<ul>
+<li class="chapter" data-level="" data-path="course.html"><a href="course.html#lecture-1-introduction"><i class="fa fa-check"></i>Lecture 1: Introduction</a></li>
+<li class="chapter" data-level="" data-path="course.html"><a href="course.html#lecture-2-spatial-epidemiology"><i class="fa fa-check"></i>Lecture 2: Spatial Epidemiology</a></li>
+<li class="chapter" data-level="" data-path="course.html"><a href="course.html#lectures-3-and-4-disease-mapping"><i class="fa fa-check"></i>Lectures 3 and 4: Disease Mapping</a></li>
+<li class="chapter" data-level="" data-path="course.html"><a href="course.html#lectures-5-and-6-diseases-spatial-patterns"><i class="fa fa-check"></i>Lectures 5 and 6: Diseases spatial-patterns</a></li>
+<li class="chapter" data-level="" data-path="course.html"><a href="course.html#lectures-7-and-8-spatial-models"><i class="fa fa-check"></i>Lectures 7 and 8: Spatial models</a></li>
+<li class="chapter" data-level="" data-path="course.html"><a href="course.html#lectures-9-and-11-spatio-and-temporal-processes"><i class="fa fa-check"></i>Lectures 9 and 11: Spatio and temporal processes</a></li>
+<li class="chapter" data-level="" data-path="course.html"><a href="course.html#lecture-12-spatio-temporal-processes"><i class="fa fa-check"></i>Lecture 12: Spatio-temporal processes</a></li>
+<li class="chapter" data-level="" data-path="course.html"><a href="course.html#lectures-13-and-14-spatio-temporal-processes-cont."><i class="fa fa-check"></i>Lectures 13 and 14: Spatio-temporal processes cont.</a></li>
+<li class="chapter" data-level="" data-path="course.html"><a href="course.html#lecture-15-introduction-to-bayesian-analysis-and-winbugs"><i class="fa fa-check"></i>Lecture 15: Introduction to Bayesian Analysis and WinBUGS</a></li>
+<li class="chapter" data-level="" data-path="course.html"><a href="course.html#lecture-16-bayesian-methods"><i class="fa fa-check"></i>Lecture 16: Bayesian Methods</a></li>
+<li class="chapter" data-level="" data-path="course.html"><a href="course.html#lecture-17-why-is-computation-important"><i class="fa fa-check"></i>Lecture 17: Why is computation important?</a></li>
+<li class="chapter" data-level="" data-path="course.html"><a href="course.html#lecture-18-generalised-linear-regression-models"><i class="fa fa-check"></i>Lecture 18: Generalised Linear regression Models</a></li>
+<li class="chapter" data-level="" data-path="course.html"><a href="course.html#lecture-19-time-series-epidemiology"><i class="fa fa-check"></i>Lecture 19: Time series epidemiology</a></li>
+<li class="chapter" data-level="" data-path="course.html"><a href="course.html#lecture-20-spatio-temporal-modelling-of-exposures"><i class="fa fa-check"></i>Lecture 20: Spatio-temporal modelling of exposures</a></li>
+<li class="chapter" data-level="" data-path="course.html"><a href="course.html#lecture-21-environmental-health-risk-assessment"><i class="fa fa-check"></i>Lecture 21: Environmental health risk assessment</a></li>
+<li class="chapter" data-level="" data-path="course.html"><a href="course.html#lecture-22-measurement-error"><i class="fa fa-check"></i>Lecture 22: Measurement error</a></li>
+<li class="chapter" data-level="" data-path="course.html"><a href="course.html#lecture-23-designing-good-monitoring-networks"><i class="fa fa-check"></i>Lecture 23: Designing good monitoring networks</a></li>
+<li class="chapter" data-level="" data-path="course.html"><a href="course.html#lecture-24-dealing-with-high-dimensional-data"><i class="fa fa-check"></i>Lecture 24: Dealing with high dimensional data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="suggested-projects.html"><a href="suggested-projects.html"><i class="fa fa-check"></i>Suggested projects</a>
+<ul>
+<li class="chapter" data-level="" data-path="suggested-projects.html"><a href="suggested-projects.html#project-1"><i class="fa fa-check"></i>Project 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="suggested-projects.html"><a href="suggested-projects.html#introduction-1"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="suggested-projects.html"><a href="suggested-projects.html#the-problem"><i class="fa fa-check"></i>The Problem</a></li>
+<li class="chapter" data-level="" data-path="suggested-projects.html"><a href="suggested-projects.html#solution"><i class="fa fa-check"></i>Solution</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="suggested-projects.html"><a href="suggested-projects.html#project-2"><i class="fa fa-check"></i>Project 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="suggested-projects.html"><a href="suggested-projects.html#introduction-2"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="suggested-projects.html"><a href="suggested-projects.html#the-problem-1"><i class="fa fa-check"></i>The Problem</a></li>
+<li class="chapter" data-level="" data-path="suggested-projects.html"><a href="suggested-projects.html#solution-1"><i class="fa fa-check"></i>Solution</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -302,7 +360,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Spatio-Temporal Methods in Environmental Epidemiology with R. Second Edition</h1>
 <p class="author"><em>Gavin Shaddick, James V. Zidek, and Alexandra M. Schmidt</em></p>
-<p class="date"><em>2023-08-28</em></p>
+<p class="date"><em>2024-05-05</em></p>
 </div>
 <div id="introduction" class="section level1 unnumbered hasAnchor">
 <h1>Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>

@@ -15,7 +15,7 @@ This chapter contains the basic theory for spatial processes and a number of app
 
 ```{r Ex 10.1 meuse river, results='hide'}
 library(geoR)
-library(ggmap)
+library(leaflet)
 library(sp)
 
 # Load data
@@ -32,25 +32,31 @@ meuse_df <- as.data.frame(meuse_geo)
 
 Plot Figure 10.1 Bubble map
 
-```{r Figure 10.1 bubble map, cache = TRUE}
-latLongBox = bbox(meuse_geo)
-location = c(latLongBox[1, 1] - 0.01,
-             latLongBox[2, 1] - 0.01,
-             latLongBox[1, 2] + 0.01,
-             latLongBox[2, 2] + 0.01)
-# create map with location dots marked on it in
-MeuseMap <-
-  get_stamenmap(bbox =  location,
-                zoom = 14)
-ggmap(MeuseMap) + geom_point(
-  data = meuse_df,
-  aes(x = x,
-      y = y,
-      size = lead),
-  col = "#011f4b",
-  alpha = 0.45
-) + theme_void()
+
+```{r  Figure 10.1 bubble map, cache = TRUE}
+range_values <- range(meuse_df$lead)
+
+# Define bins based on the range of values
+mybins <- seq(range_values[1], range_values[2], length.out = 5)
+
+mypalette <- colorBin(palette="inferno", domain=meuse_df$lead,
+                      na.color="transparent", bins=mybins)
+
+leaflet( data = meuse_df) |> 
+  addTiles()  |> 
+  addProviderTiles("Esri.WorldImagery")  |>
+  addCircleMarkers(
+    ~ x,
+    ~ y,
+    fillOpacity = 0.8, color="orange",
+    fillColor = ~ mypalette(lead),
+    opacity = 5,
+    radius = ~lead/50,
+    stroke = FALSE) |> 
+  addLegend( pal=mypalette, values=~lead, 
+             opacity=0.9, title = "Lead", position = "bottomright" )
 ```
+
 
 ```{r Figure 10.2}
 
@@ -93,24 +99,17 @@ coordinates(ny_data_sp) <- ~ Longitude + Latitude
 # assign a reference system to ny_data_sp
 proj4string(ny_data_sp) <- CRS("+proj=longlat +ellps=WGS84")
 
-# We next specify a bounding box - a 2 x 2 matrix of corners of the geographic
-# area. Then specify the range of locations within the box.
-# Note:  location must be in left-bottom-right-top bounding box format
-latLongBox  <-  bbox(ny_data_sp)
-location <-  c(latLongBox [1, 1] - 0.2 ,
-               latLongBox [2, 1] - 0.2,
-               latLongBox [1, 2] + 0.2 ,
-               latLongBox [2, 2] + 0.2)
 
-# Now create the map with location dots
-NYmap <- get_stamenmap(bbox = location, zoom = 8)
-
-ggmap(NYmap) + geom_point(
-  data = ny_data,
-  aes(x = Longitude , y = Latitude),
-  size = 4,
-  color = "darkred"
-) + theme_void()
+leaflet( data = ny_data) |> 
+  addTiles()  |> 
+  addProviderTiles("Esri.WorldImagery")  |>
+  addCircleMarkers(
+    ~ Longitude,
+    ~ Latitude,
+    fillOpacity = 0.8, color="orange",
+    opacity = 5,
+    radius = 4,
+    stroke = FALSE) 
 
 ```
 
@@ -181,7 +180,7 @@ spplot(x["var1.var"], main = "ordinary kriging variance", sp.layout = list(monit
 
 ```
 
-## Example 10.6 Fitting a Bayesian exponential spatial model using NIMBLE
+## Example 10.6 Fitting a Bayesian exponential spatial model using NIMBLE {-}
 
 ## Example 10.7 Spatial prediction of $PM_{2.5}$  in Europe {-}
 
@@ -191,7 +190,7 @@ rm(list = ls())
 
 ```{r Ex 10.8 load libraries and read data, warning=FALSE, message = FALSE}
 library(gdata)
-library(ggmap)
+library(leaflet)
 library(gstat)
 library(nimble)
 library(sp)
@@ -224,15 +223,21 @@ summary_no2[order(summary_no2$total, decreasing = TRUE),]
 ```
 
 ```{r Ex 10.8 plot map, warning=FALSE, message = FALSE}
-europe_map <- get_stamenmap(c(left = -25, bottom = 30, right = 30, top = 70),
-                            zoom = 5)
 
+mypalette <- colorFactor(palette="inferno", domain=no2$Country)
 
-ggmap(europe_map, darken = c(0.25, "white")) +
-  geom_point(data = no2,
-             aes(x = Longitude, y = Latitude, color = Country),
-             size = 2) + ditch_the_axes +
-  labs(x = "", y = "") + theme(text = element_text(size = 15)) 
+leaflet( data = no2) |> 
+  addTiles()  |> 
+  addProviderTiles("Esri.WorldImagery")  |>
+  addCircleMarkers(
+    ~ Longitude,
+    ~ Latitude,
+    color = ~ mypalette(Country) ,
+    fillOpacity = 0.8,
+    opacity = 5,
+    radius = 2,
+    stroke = FALSE) 
+
 
 ```
 
@@ -253,11 +258,20 @@ no2_subsample <- no2_sample |> group_by(Country) |>  slice_sample(n = 128)
 dim(no2_subsample)
 
 
-ggmap(europe_map, darken = c(0.25, "white")) +
-  geom_point(data = no2_subsample,
-             aes(x = Longitude, y = Latitude, color = Country),
-             size = 2) + ditch_the_axes +
-  labs(x = "", y = "") + theme(text = element_text(size = 15)) 
+mypalette <- colorFactor(palette="inferno", domain=no2_subsample$Country)
+
+leaflet( data = no2_subsample) |> 
+  addTiles()  |> 
+  addProviderTiles("Esri.WorldImagery")  |>
+  addCircleMarkers(
+    ~ Longitude,
+    ~ Latitude,
+    color = ~ mypalette(Country) ,
+    fillOpacity = 0.8,
+    opacity = 5,
+    radius = 2,
+    stroke = FALSE) 
+
 
 ```
 
@@ -602,7 +616,7 @@ For this example we are using the same $\texttt{gambia}$ data set from the $\tex
 
 library(dplyr) # to manipulate the data
 library(geoR) # to get the dataset
-library(ggmap) # to plot the map
+library(leaflet) # to plot the map
 library(nimble) # for modeling
 #library(raster) # to get the environmental data
 library(rgdal) # for adding and transforming coordinates
@@ -649,24 +663,23 @@ malaria_geo <- spTransform(malaria_utm, CRS("+proj=longlat +datum=WGS84"))
 # add long lat coordinates to malaria dataframe
 malaria_village[, c("long", "lat")] <- coordinates(malaria_geo)
 
-# specify the bounding box
-latLongBox = bbox(malaria_geo)
-location = c(latLongBox[1, 1] - 0.05,
-             latLongBox[2, 1] - 0.05,
-             latLongBox[1, 2] + 0.05,
-             latLongBox[2, 2] + 0.05)
 
 # create map with location dots marked on it in
-GambiaMap <-
-  get_stamenmap(bbox =  location,
-                zoom = 11,
-                type = terrain-background)
 
-ggmap(GambiaMap) + geom_point(data = malaria_village,
-                              aes(x = long,
-                                  y = lat,
-                                  col = prev),
-                              size = 2) + scale_color_viridis() + theme_void()
+mypalette <- colorFactor(palette="inferno", domain=malaria_village$prev)
+
+leaflet( data = malaria_village) |> 
+  addTiles()  |> 
+  addProviderTiles("Esri.WorldImagery")  |>
+  addCircleMarkers(
+    ~ long,
+    ~ lat,
+    fillOpacity = 0.8,
+    color = ~ mypalette(prev),
+    radius = 4,
+    opacity = 5,
+    stroke = FALSE)
+
 
 ```
 
@@ -978,7 +991,7 @@ This example uses the [montreal_benzene_apr.csv](https://github.com/spacetime-en
 ```{r Extra 10.1 load data, message = FALSE, warning=FALSE, error=FALSE}
 library(cowplot)
 library(geoR)
-library(ggmap)
+library(leaflet)
 library(spdep)
 # Load data on benzene concentration in Montreal
 benzene <- read.csv("data/voc/montreal_benzene_apr.csv")
@@ -990,24 +1003,32 @@ benzene <- read.csv("data/voc/montreal_benzene_apr.csv")
 benzene_geo <- benzene
 coordinates(benzene_geo) <- ~ lon + lat
 proj4string(benzene_geo) <- CRS("+proj=longlat +datum=WGS84")
-# specify the bounding box
-latLongBox = bbox(benzene_geo)
-location = c(latLongBox[1, 1] - 0.05,
-             latLongBox[2, 1] - 0.05,
-             latLongBox[1, 2] + 0.1,
-             latLongBox[2, 2] + 0.05)
+
 # create map with location dots marked on it in
-MontrelBenzeneMap <-
-  get_stamenmap(bbox =  location,
-                zoom = 10)
-ggmap(MontrelBenzeneMap) + geom_point(
-  data = benzene,
-  aes(x = lon,
-      y = lat,
-      size = Benzene),
-  col = "#011f4b",
-  alpha = 0.45
-) + theme_void()
+
+
+range_values <- range(benzene$Benzene)
+
+mybins <- seq(range_values[1], range_values[2], length.out = 5)
+
+mypalette <- colorBin(palette="inferno", domain=benzene$Benzene,
+                      na.color="transparent", bins=mybins)
+
+leaflet( data = benzene) |> 
+  addTiles()  |> 
+  addProviderTiles("Esri.WorldImagery")  |>
+  addCircleMarkers(
+    ~ lon,
+    ~ lat,
+    fillOpacity = 0.8, color="orange",
+    fillColor = ~ mypalette(Benzene),
+    opacity = 5,
+    radius = ~Benzene*4,
+    stroke = FALSE) |> 
+  addLegend( pal=mypalette, values=~Benzene, 
+             opacity=0.9, title = "Benzene concentration", 
+             position = "bottomright" )
+
 
 ```
 

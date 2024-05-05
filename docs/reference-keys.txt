@@ -1,9 +1,9 @@
-tab:unnamed-chunk-7
-tab:unnamed-chunk-8
 tab:unnamed-chunk-9
 tab:unnamed-chunk-10
 tab:unnamed-chunk-11
 tab:unnamed-chunk-12
+tab:unnamed-chunk-13
+tab:unnamed-chunk-14
 why
 basics
 uncertainty
@@ -14,10 +14,9 @@ Strategies
 trusted
 Disease
 empirical-bayes-estimate-using-spatialepi
-supplementary-example-fitting-a-leroux-model-to-the-copd-dataset-using-nimble-stan-and-carbayes
 hazards
-example-10.6-fitting-a-bayesian-exponential-spatial-model-using-nimble
 Time
+example-11.18-dynamic-glms-for-daily-counts-of-carbon-monoxide-on-counts-of-infant-deaths-in-são-paulo-brazil
 exposure
 causality
 monitoring
