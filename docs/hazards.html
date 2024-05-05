@@ -995,8 +995,8 @@ If we explore the data frame we see that there are 2035 individuals at 65 villag
 <span id="cb353-2"><a href="hazards.html#cb353-2" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">n</span>(),</span>
 <span id="cb353-3"><a href="hazards.html#cb353-3" tabindex="-1"></a>            <span class="at">positive =</span> <span class="fu">sum</span>(pos),</span>
 <span id="cb353-4"><a href="hazards.html#cb353-4" tabindex="-1"></a>            <span class="at">prev =</span> positive <span class="sc">/</span> total) <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span></code></pre></div>
-<pre><code>## `summarise()` has grouped output by &#39;x&#39;. You can
-## override using the `.groups` argument.</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;x&#39;. You can override using the `.groups`
+## argument.</code></pre>
 <div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="hazards.html#cb355-1" tabindex="-1"></a><span class="fu">head</span>(malaria_village)</span></code></pre></div>
 <pre><code>##          x       y total positive      prev
 ## 1 349631.3 1458055    33       17 0.5151515
