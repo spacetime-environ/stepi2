@@ -30,9 +30,7 @@ The following is a list of pointers to consider:
 
 The OhioMap function on the course webpage can be used as a basis for presenting the results of your analyses. 
 
-### Solution {.unnumbered}
-
-<iframe src="pdf/p1_Solution1_1.pdf" width="100%" height="500px"></iframe>
+[Solution Project 1](https://github.com/spacetime-environ/stepi2/blob/main/pdf/p1_Solution1_1.pdf)
 
 
 ## Project 2 {.unnumbered}
@@ -59,7 +57,8 @@ The data for this part of the exercise were produced by the MURI group at the U 
 
 ### Solution {.unnumbered}
 
-<iframe src="pdf/p1_Solution1_2.pdf" width="100%" height="500px"></iframe>
+[Solution Project 2](https://github.com/spacetime-environ/stepi2/blob/main/pdf/p1_Solution1_2.pdf)
+
 
 
 

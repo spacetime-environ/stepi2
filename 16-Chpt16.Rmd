@@ -47,80 +47,46 @@ https://spacetime-environ.github.io/stepi2
 
 The following shows some suggested course material for instructors. These are based on the first edition of the book but might be still suitable for anyone teaching a course on Environmental epidemiology.
 
-### Lecture 1: Introduction {.unnumbered}
 
-<iframe src="pdf/SZSLecture1.rev.pdf" width="100%" height="500px"></iframe>
+- [Lecture 1: Introduction](https://github.com/spacetime-environ/stepi2/blob/main/pdf/SZSLecture1.rev.pdf)
 
-### Lecture 2: Spatial Epidemiology {.unnumbered}
+- [Lecture 2: Spatial epidemiology](https://github.com/spacetime-environ/stepi2/blob/main/pdf/SZSLecture2.rev.pdf)
 
-<iframe src="pdf/SZSLecture2.rev.pdf" width="100%" height="500px"></iframe>
+- [Lecture 3 and 4: Disease Mapping](https://github.com/spacetime-environ/stepi2/blob/main/pdf/SZSLecture3_4.rev.pdf)
 
-### Lectures 3 and 4: Disease Mapping {.unnumbered}
+- [Lecture 5 and 6: Diseases spatial-patterns](https://github.com/spacetime-environ/stepi2/blob/main/pdf/SZSLecture5_6.rev copy.pdf)
 
-<iframe src="pdf/SZSLecture3_4.rev.pdf" width="100%" height="500px"></iframe>
+- [Lecture 7 and 8: Spatial models ](https://github.com/spacetime-environ/stepi2/blob/main/pdf/SZSLectures7_8.rev.pdf)
+
+- [Lecture 9 and 11: Spatio and temporal processes ](https://github.com/spacetime-environ/stepi2/blob/main/pdf/SZSLectures9_11.rev.pdf)
+
+- [Lecture 12: Spatio-temporal processes ](https://github.com/spacetime-environ/stepi2/blob/main/pdf/SZSLectures12.rev.pdf)
+
+- [Lecture 13 and 14: Spatio-temporal processes cont. ](https://github.com/spacetime-environ/stepi2/blob/main/pdf/SZSLectures13_14.rev.pdf)
+
+- [Lecture 15: Introduction to Bayesian Analysis and WinBUGS ](https://github.com/spacetime-environ/stepi2/blob/main/pdf/SZSLecture15.rev.pdf)
+
+- [Lecture 16: Bayesian Methods ](https://github.com/spacetime-environ/stepi2/blob/main/pdf/SZSLecture16.rev.pdf)
+
+- [Lecture 17: Why is computation important? ](https://github.com/spacetime-environ/stepi2/blob/main/pdf/SZSLecture17.rev.pdf)
+
+- [Lecture 18: Generalised Linear regression Models  ](https://github.com/spacetime-environ/stepi2/blob/main/pdf/SZSLecture18.rev.pdf)
+
+- [Lecture 19: Time series epidemiology  ](https://github.com/spacetime-environ/stepi2/blob/main/pdf/SZSLecture19.rev.pdf)
+
+- [Lecture 20: Spatio-temporal modelling of exposures ](https://github.com/spacetime-environ/stepi2/blob/main/pdf/SZSLecture20.rev.pdf)
+
+- [Lecture 21: Environmental health risk assessment  ](https://github.com/spacetime-environ/stepi2/blob/main/pdf/SZSLectures21.rev.pdf)
+
+- [Lecture 22: Measurement error ](https://github.com/spacetime-environ/stepi2/blob/main/pdf/SZSLectures22.rev.pdf)
+
+- [Lecture 23: Designing good monitoring networks ](https://github.com/spacetime-environ/stepi2/blob/main/pdf/SZSLecture23.rev.pdf)
+
+- [Lecture 24: Dealing with high dimensional data ](https://github.com/spacetime-environ/stepi2/blob/main/pdf/SZSlecture24.rev.pdf)
 
 
-### Lectures 5 and 6: Diseases spatial-patterns {.unnumbered}
-
-<iframe src="pdf/SZSLecture5_6.rev copy.pdf" width="100%" height="500px"></iframe>
 
 
-###  Lectures 7 and 8: Spatial models {.unnumbered}
-
-<iframe src="pdf/SZSLectures7_8.rev.pdf" width="100%" height="500px"></iframe>
-
-###  Lectures 9 and 11: Spatio and temporal processes {.unnumbered}
-
-<iframe src="pdf/SZSLectures9_11.rev.pdf" width="100%" height="500px"></iframe>
-
-###  Lecture 12: Spatio-temporal processes {.unnumbered}
-
-<iframe src="pdf/SZSLectures12.rev.pdf" width="100%" height="500px"></iframe>
-
-###  Lectures 13 and 14: Spatio-temporal processes cont. {.unnumbered}
-
-<iframe src="pdf/SZSLectures13_14.rev.pdf" width="100%" height="500px"></iframe>
-
-###  Lecture 15: Introduction to Bayesian Analysis and WinBUGS {.unnumbered}
-
-<iframe src="pdf/SZSLecture15.rev.pdf" width="100%" height="500px"></iframe>
-
-
-###  Lecture 16: Bayesian Methods {.unnumbered}
-
-<iframe src="pdf/SZSLecture16.rev.pdf" width="100%" height="500px"></iframe>
-
-###  Lecture 17: Why is computation important? {.unnumbered}
-
-<iframe src="pdf/SZSLecture17.rev.pdf" width="100%" height="500px"></iframe>
-
-###  Lecture 18: Generalised Linear regression Models {.unnumbered}
-
-<iframe src="pdf/SZSLecture18.rev.pdf" width="100%" height="500px"></iframe>
-
-###  Lecture 19: Time series epidemiology {.unnumbered}
-
-<iframe src="pdf/SZSLecture19.rev.pdf" width="100%" height="500px"></iframe>
-
-###  Lecture 20: Spatio-temporal modelling of exposures {.unnumbered}
-
-<iframe src="pdf/SZSLecture20.rev.pdf" width="100%" height="500px"></iframe>
-
-###  Lecture 21: Environmental health risk assessment {.unnumbered}
-
-<iframe src="pdf/SZSLectures21.rev.pdf" width="100%" height="500px"></iframe>
-
-###  Lecture 22: Measurement error {.unnumbered}
-
-<iframe src="pdf/SZSLectures22.rev.pdf" width="100%" height="500px"></iframe>
-
-###  Lecture 23: Designing good monitoring networks {.unnumbered}
-
-<iframe src="pdf/SZSLecture23.rev.pdf" width="100%" height="500px"></iframe>
-
-###  Lecture 24: Dealing with high dimensional data {.unnumbered}
-
-<iframe src="pdf/SZSlecture24.rev.pdf" width="100%" height="500px"></iframe>
 
 
 <!-- ## Course structure {.unnumbered} -->
