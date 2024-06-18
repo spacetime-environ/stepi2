@@ -23,7 +23,7 @@
 <meta name="author" content="Gavin Shaddick, James V. Zidek, and Alexandra M. Schmidt" />
 
 
-<meta name="date" content="2024-05-06" />
+<meta name="date" content="2024-06-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -945,16 +945,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb346-2"><a href="hazards.html#cb346-2" tabindex="-1"></a><span class="fu">library</span>(geoR) <span class="co"># to get the dataset</span></span>
 <span id="cb346-3"><a href="hazards.html#cb346-3" tabindex="-1"></a><span class="fu">library</span>(leaflet) <span class="co"># to plot the map</span></span>
 <span id="cb346-4"><a href="hazards.html#cb346-4" tabindex="-1"></a><span class="fu">library</span>(nimble) <span class="co"># for modeling</span></span>
-<span id="cb346-5"><a href="hazards.html#cb346-5" tabindex="-1"></a><span class="co">#library(raster) # to get the environmental data</span></span>
-<span id="cb346-6"><a href="hazards.html#cb346-6" tabindex="-1"></a><span class="fu">library</span>(rgdal) <span class="co"># for adding and transforming coordinates</span></span>
-<span id="cb346-7"><a href="hazards.html#cb346-7" tabindex="-1"></a><span class="fu">library</span>(sf) <span class="co"># manipulate spatial data</span></span>
-<span id="cb346-8"><a href="hazards.html#cb346-8" tabindex="-1"></a><span class="fu">library</span>(sp) <span class="co"># for manipulating spatial data</span></span>
-<span id="cb346-9"><a href="hazards.html#cb346-9" tabindex="-1"></a><span class="fu">library</span>(stringr) <span class="co"># to analyze posterior</span></span>
-<span id="cb346-10"><a href="hazards.html#cb346-10" tabindex="-1"></a><span class="fu">library</span>(viridis) <span class="co"># for a more cheerful color palette</span></span>
-<span id="cb346-11"><a href="hazards.html#cb346-11" tabindex="-1"></a></span>
-<span id="cb346-12"><a href="hazards.html#cb346-12" tabindex="-1"></a><span class="co"># Note, we are using the same Gambia dataset as in the geoR package but an id_area</span></span>
-<span id="cb346-13"><a href="hazards.html#cb346-13" tabindex="-1"></a><span class="co"># attribute has been added using QGIS to a</span></span>
-<span id="cb346-14"><a href="hazards.html#cb346-14" tabindex="-1"></a>gambia <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/malaria_gambia/gambia_area.csv&quot;</span>) <span class="co"># gambia dataset from geoR package</span></span></code></pre></div>
+<span id="cb346-5"><a href="hazards.html#cb346-5" tabindex="-1"></a><span class="fu">library</span>(sf) <span class="co"># manipulate spatial data</span></span>
+<span id="cb346-6"><a href="hazards.html#cb346-6" tabindex="-1"></a><span class="fu">library</span>(sp) <span class="co"># for manipulating spatial data</span></span>
+<span id="cb346-7"><a href="hazards.html#cb346-7" tabindex="-1"></a><span class="fu">library</span>(stringr) <span class="co"># to analyze posterior</span></span>
+<span id="cb346-8"><a href="hazards.html#cb346-8" tabindex="-1"></a><span class="fu">library</span>(viridis) <span class="co"># for a more cheerful color palette</span></span>
+<span id="cb346-9"><a href="hazards.html#cb346-9" tabindex="-1"></a></span>
+<span id="cb346-10"><a href="hazards.html#cb346-10" tabindex="-1"></a><span class="co"># Note, we are using the same Gambia dataset as in the geoR package but an id_area</span></span>
+<span id="cb346-11"><a href="hazards.html#cb346-11" tabindex="-1"></a><span class="co"># attribute has been added using QGIS to a</span></span>
+<span id="cb346-12"><a href="hazards.html#cb346-12" tabindex="-1"></a>gambia <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/malaria_gambia/gambia_area.csv&quot;</span>) <span class="co"># gambia dataset from geoR package</span></span></code></pre></div>
 <p>Since the data is given at the individual level, we want to aggregate the malaria tests by village.
 If we explore the data frame we see that there are 2035 individuals at 65 villages.</p>
 <div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="hazards.html#cb347-1" tabindex="-1"></a><span class="fu">head</span>(gambia)</span></code></pre></div>
@@ -974,8 +972,8 @@ If we explore the data frame we see that there are 2035 individuals at 65 villag
 <span id="cb353-2"><a href="hazards.html#cb353-2" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">n</span>(),</span>
 <span id="cb353-3"><a href="hazards.html#cb353-3" tabindex="-1"></a>            <span class="at">positive =</span> <span class="fu">sum</span>(pos),</span>
 <span id="cb353-4"><a href="hazards.html#cb353-4" tabindex="-1"></a>            <span class="at">prev =</span> positive <span class="sc">/</span> total) <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span></code></pre></div>
-<pre><code>## `summarise()` has grouped output by &#39;x&#39;. You can override using
-## the `.groups` argument.</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;x&#39;. You can override using the `.groups`
+## argument.</code></pre>
 <div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="hazards.html#cb355-1" tabindex="-1"></a><span class="fu">head</span>(malaria_village)</span></code></pre></div>
 <pre><code>##          x       y total positive      prev
 ## 1 349631.3 1458055    33       17 0.5151515

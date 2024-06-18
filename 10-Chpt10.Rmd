@@ -618,8 +618,6 @@ library(dplyr) # to manipulate the data
 library(geoR) # to get the dataset
 library(leaflet) # to plot the map
 library(nimble) # for modeling
-#library(raster) # to get the environmental data
-library(rgdal) # for adding and transforming coordinates
 library(sf) # manipulate spatial data
 library(sp) # for manipulating spatial data
 library(stringr) # to analyze posterior
