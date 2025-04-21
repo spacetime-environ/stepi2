@@ -25,9 +25,9 @@ The authors remain indebted to all those individuals and institutions named abov
 
 - Ms Mariana Carmona Baez inspired the creation of the Bookdown format for the examples on the GitHub site associated with the second Edition;
 - Dr. Sara Zapata-Marin together with Mariana provided the code and analyses for the worked examples using Bookdown and helped develop the GitHub site they can be accessed;
-- Mr Paritosh Kumar Roy provided the code for the forward-filtering-backward-sampling algorithm discussed in Chapter 11;
+- Dr. Paritosh Kumar Roy provided the code for the forward-filtering-backward-sampling algorithm discussed in Chapter 11;
 - Mr. Johnny Li assisted with a number of software issues and assembled solutions for selected exercises;
-- Laís P. Freitas for her inspired graphic on the front cover, of spatio-temporal processes combined with their epidemiological impacts;
+- Dr. Laís P. Freitas for her inspired graphic on the front cover, of spatio-temporal processes combined with their epidemiological impacts;
 - Dr. Joe Watson for help in assembling his preferential sampling software for modelling the effect.
 - Dr. Matthew L. Thomas for providing code, models, data and ideas related to the examples based on the WHO air quality database and modeling air pollutants in Europe.
 
